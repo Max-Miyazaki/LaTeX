@@ -281,13 +281,13 @@ $\varphi$ については積分が
 \color{black}
 
   
-この積分はBessel関数を用いて表せるが \textcolor{blue}{(※僕の理解不足なため, 実際に Bessel 関数を用いた計算はパスします\dots)}, ここでは停留位相近似によって光円錐の外側遠方, 即ち $x^2 \gg t^2$ に於ける漸近的な振舞いを見ることにしよう. 指数関数の引数 $px - t\sqrt{p^2 + m^2}$ の定数倍を $\phi(p)$ とすれば, この関数は $p = imx / \sqrt{x^2 - t^2}$ に停留点を持つ. 従ってこの点を通るように積分経路を自由に動かすことができ, 停留点の表式を上式の $p$ に代入すれば, 確率振幅 $U(t)$ は $x$ と $t$ の有理関数：
+この積分はBessel関数を用いて表せるが \textcolor{blue}{(※僕の理解不足なため, 実際に Bessel 関数を用いた計算はパスします\dots)}, ここでは停留位相近似によって光円錐の外側遠方, 即ち $x^2 \gg t^2$ に於ける漸近的な振舞いを見ることにしよう. 指数関数の引数 $px - t\sqrt{p^2 + m^2}$ の定数倍を $\phi(p)$ とすれば, この関数は $p = imx / \sqrt{x^2 - t^2}$ に停留点を持つ. 従ってこの点を通るように積分経路を自由に動かすことができ, 停留点の表式を上式の $p$ に代入すれば, 確率振幅 $U(t)$ は $x$ と $t$ の有理関数をかけた形で
   
 \begin{equation*}
   U(t) \sim e^{-m\sqrt{x^2 - t^2}}
 \end{equation*}
   
-に帰着する. この確率振幅は光円錐の外側において小さいが $0$ でない値を取るため, 因果律は破れたままである.\par
+という形になることが分かる.\par
 \color{blue}
 この積分の評価方法を停留位相法といい, 振動積分 $\displaystyle \int_{-\infty}^{\infty} dp \, e^{i\lambda \phi(p)a(p)}$ のような形に対して, $\lambda \to \infty$ のときに,
 \begin{itemize}
@@ -370,57 +370,39 @@ Cauchy の定理から解析関数 $f(p)$ に対して, 閉曲線上 $\Gamma$ �
   \int_\Gamma dp \, f(p) = 0. \tag{2-1.c18}
 \end{equation*}
 
-つまり, 積分経路を複素平面に沿って変形しても, 被積分関数が解析的 (特異点を持たない) ならば積分値は変わらない. 今回のケースでは, 被積分関数 $f(p) = p \exp\left[i(pr - t\sqrt{p^2 + m^2})\right]$ は $p \in \mathbb{C}$ で branch cut (分岐線) を避ければ解析的である. 物理的に都合の良い branch cut の取り方は $[im, \infty)$ と $(-\infty, -im]$ の2本の直線である. branch point は $p = \pm im$ で 停留点 $p_s = imr/\sqrt{r^2 - t^2}$ はこの2本の直線の間にあるため特異点を含まないので Cauchy の定理が適用できる. \par
+つまり, 積分経路を複素平面に沿って変形しても, 被積分関数が解析的 (特異点を持たない) ならば積分値は変わらない. 今回のケースでは, 被積分関数 $f(p) = p \exp\left[i(pr - t\sqrt{p^2 + m^2})\right]$ は $p \in \mathbb{C}$ で branch cut (分岐線) を避ければ解析的である. 物理的に都合の良い branch cut の取り方は $[im, \infty)$ と $(-\infty, -im]$ の2本の直線である. branch point は $p = \pm im$ で 停留点 $p_s = imr/\sqrt{r^2 - t^2}$ はこの2本の直線の間にあるため特異点を含まないので Cauchy の定理が適用できる. 
+\vskip\baselineskip
 積分の主な寄与は停留点近傍からくるので, 積分全体は以下のように近似できる：
 
-\begin{equation*}
-  U(t) \sim \textrm{const} \cdot \exp\left[i(p_s r - t\sqrt{p_s^2 + m^2})\right] \tag{2-1.c19}
+\begin{equation*}\label{2-1.c19}
+  U(t) \sim A(r,t) \cdot \exp\left[i(p_s r - t\sqrt{p_s^2 + m^2})\right] \tag{2-1.c19}
 \end{equation*}
 
-$p_s r = imr^2/\sqrt{r^2 - t^2}$, $p_s^2 = -m^2 r^2/(r^2 - t^2)$ より,
-
-\begin{equation*}
-  \sqrt{p_s^2 + m^2} = \frac{mr}{\sqrt{r^2 - t^2}} \tag{2-1.c20}
-\end{equation*}
-
-よって,
+ここで $A(r,t)$ は振幅の前にかかるゆっくりと変化する係数 (有理関数) である.\par
+$p_s r = imr^2/\sqrt{r^2 - t^2}$, $p_s^2 = -m^2 r^2/(r^2 - t^2)$ より, \eqref{2-1.c19} は次のように計算される：
 
 \begin{align*}
-  U(t) &\sim \textrm{const} \cdot \exp\left[i\left( \frac{imr^2}{\sqrt{r^2 - t^2}} - t \sqrt{-\frac{m^2 r^2}{r^2 - t^2} + m^2} \right)\right] \tag{2-1.c21} \\
-  &= \textrm{const} \cdot \exp\left[i\left( \frac{imr^2}{\sqrt{r^2 - t^2}} - mt \sqrt{-\frac{ r^2}{r^2 - t^2} + 1} \right)\right] \tag{2-1.c22}\\
-  &= \textrm{const} \cdot \exp\left[i\left( \frac{imr^2}{\sqrt{r^2 - t^2}} - mt \sqrt{-\frac{ r^2}{r^2 - t^2} + \frac{r^2 - t^2}{r^2 - t^2}} \right)\right] \tag{2-1.c23}\\
-  &= \textrm{const} \cdot \exp\left[i\left( \frac{imr^2}{\sqrt{r^2 - t^2}} - mt \sqrt{\frac{-t^2}{r^2 - t^2}} \right)\right] \tag{2-1.c24}\\
-  &= \textrm{const} \cdot \exp\left[i\left( \frac{imr^2}{\sqrt{r^2 - t^2}} - \frac{imt^2}{\sqrt{r^2 - t^2}} \right)\right] \tag{2-1.c25}\\
-  &= \textrm{const} \cdot \exp\left[-m\left( \frac{r^2 - t^2}{\sqrt{r^2 - t^2}} \right)\right] \tag{2-1.c26}\\
-  &= \textrm{const} \cdot \exp\left[-m\left( \sqrt{r^2 - t^2} \right)\right] \tag{2-1.c27}
+  U(t) &\sim A(r,t) \cdot \exp\left[i\left( \frac{imr^2}{\sqrt{r^2 - t^2}} - t \sqrt{-\frac{m^2 r^2}{r^2 - t^2} + m^2} \right)\right] \tag{2-1.c21} \\
+  &= A(r,t) \cdot \exp\left[i\left( \frac{imr^2}{\sqrt{r^2 - t^2}} - mt \sqrt{-\frac{ r^2}{r^2 - t^2} + 1} \right)\right] \tag{2-1.c22}\\
+  &= A(r,t) \cdot \exp\left[i\left( \frac{imr^2}{\sqrt{r^2 - t^2}} - mt \sqrt{-\frac{ r^2}{r^2 - t^2} + \frac{r^2 - t^2}{r^2 - t^2}} \right)\right] \tag{2-1.c23}\\
+  &= A(r,t) \cdot \exp\left[i\left( \frac{imr^2}{\sqrt{r^2 - t^2}} - mt \sqrt{\frac{-t^2}{r^2 - t^2}} \right)\right] \tag{2-1.c24}\\
+  &= A(r,t) \cdot \exp\left[i\left( \frac{imr^2}{\sqrt{r^2 - t^2}} - \frac{imt^2}{\sqrt{r^2 - t^2}} \right)\right] \tag{2-1.c25}\\
+  &= A(r,t) \cdot \exp\left[-m\left( \frac{r^2 - t^2}{\sqrt{r^2 - t^2}} \right)\right] \tag{2-1.c26}\\
+  &= A(r,t) \cdot \exp\left[-m\left( \sqrt{r^2 - t^2} \right)\right]. \tag{2-1.c27}
 \end{align*}
 
-
-
-この点を通るように積分経路を自由に動かすことができ, 停留点の表式を上式の $p$ に代入すれば, 確率振幅 $U(t)$ は $x$ と $t$ の有理関数：
+$A(r,t)$ は積分の評価に関係ないので無視してしまって, $r$ は $\boldsymbol{x}_0$ と $\boldsymbol{x}$ の間の (space-like な) 距離として定義しただけなので, テキストに合わせて $x := r = \| \boldsymbol{x} - \boldsymbol{x}_0 \|$ と置くと, 確率振幅 $U(t)$ が次のように書けることが分かる：
 
 \begin{equation*}
-  U(t) \sim e^{-m\sqrt{x^2 - t^2}}
+  U(t) \sim e^{-m\sqrt{x^2 - t^2}}. \tag{2-1.c28}
 \end{equation*}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \end{proof}
 
 \color{black}
+
+この確率振幅は光円錐の外側において小さいが $0$ でない値を取るため, 因果律は破れたままである. \par
+\textcolor{blue}{※相対論的なエネルギーを用いても因果律が破れる. $\Longrightarrow$ 場の概念が出てくる. }
 
 \begin{figure}[H]
   \centering
