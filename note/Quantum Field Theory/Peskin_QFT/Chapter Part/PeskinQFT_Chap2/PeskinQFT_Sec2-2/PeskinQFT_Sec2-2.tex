@@ -1,0 +1,206 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{Chapter 2. The Klein-Gordon Field\\
+2-2. Elements of Classical Field Theory}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートはPeskin\&Schroederの``An Introduction to Quantum Field Theory''の第2章の2節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+
+
+
+\end{abstract}
+    
+    
+
+\newpage
+\section*{2.2 Elements of Classical Field Theory}
+\subsection*{Lagrangian Field Theory}
+
+\begin{itemize}
+    \item \textbf{作用} $S$: ラグランジアンの時間積分として定義される.
+    \begin{equation*}
+        S = \int L\,dt = \int \mathcal{L}(\phi, \partial_\mu \phi)\,d^4x \tag{2.1}
+    \end{equation*}
+
+    \item \textbf{Lagrangian 密度} $\mathcal{L}$: 場 $\phi(x)$ およびその導関数 $\partial_\mu \phi$ の関数.
+
+    \item \textbf{最小作用の原理}：物理系は作用 $S$ が極値（通常は最小）をとる経路に沿って変化.
+    
+    \begin{align*}
+        0 = \delta S 
+        &= \int d^4x \left\{ \frac{\partial \mathcal{L}}{\partial \phi} \, \delta \phi 
+        + \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \, \delta(\partial_\mu \phi) \right\} \\
+        &= \int d^4x \left\{ \frac{\partial \mathcal{L}}{\partial \phi} \, \delta \phi 
+        - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) \delta \phi 
+        + \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \delta \phi \right) \right\}. \tag{2.2}
+    \end{align*}
+        
+
+    \item \textbf{場に対するオイラー＝ラグランジュ方程式}:
+    \begin{equation}
+        \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) - \frac{\partial \mathcal{L}}{\partial \phi} = 0 \tag{2.3}
+    \end{equation}
+\end{itemize}
+
+\noindent Lagrangian に複数の場が含まれている場合, それぞれの場に対して同様の方程式が存在.
+
+\color{blue}
+
+\begin{proof}
+※場のオイラー＝ラグランジュ方程式を最小作用の原理から導出する.
+
+\begin{align*}
+    \delta S &= 0 \tag{2-2.a1} \\
+    \Rightarrow \delta S &= \int d^4x \left\{ \underline{\mathcal{L}(\phi + \delta \phi, \partial_\mu \phi + \delta \partial_\mu \phi)} - \mathcal{L}(\phi, \partial_\mu \phi) \right\} \tag{2-2.a2} \\
+    &\quad \hspace{1.7cm} \mathcal{L}(\phi, \partial_\mu \phi) 
+    + \delta \phi \frac{\partial \mathcal{L}}{\partial \phi} 
+    + \delta (\partial_\mu \phi) \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \tag{2-2.a3} \\
+    &= \int d^4x \left\{ 
+    \delta \phi \frac{\partial \mathcal{L}}{\partial \phi} 
+    + \underline{\delta (\partial_\mu \phi) \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)}} 
+    \right\} \tag{2-2.a4} \\
+    &\quad \hspace{1cm} \delta(\partial_\mu \phi)\frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)}+  \delta \phi \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) - \delta \phi \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) \tag{2-2.a5} \\
+    &\quad \hspace{1cm} \Leftrightarrow - \delta \phi \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) + \left\{ \underline{\delta(\partial_\mu \phi)}\, \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)} + \delta \phi \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) \right\} \tag{2-2.a6} \\
+    & \quad \hspace{4.7cm} \delta (\partial_\mu \phi) = \partial_\mu (\delta \phi) \tag{2-2.a7} \\
+    & \quad \hspace{1cm} \Leftrightarrow - \delta \phi \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) + \left\{ \partial_\mu(\delta \phi)\, \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)} + \delta \phi \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) \right\} \tag{2-2.a8} \\
+    & \quad \hspace{1cm} \Leftrightarrow - \delta \phi \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) + \partial_\mu \left( \delta \phi \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) \tag{2-2.a9} \\
+    &= \int d^4x \left\{ 
+    \delta \phi \frac{\partial \mathcal{L}}{\partial \phi} 
+    - \delta \phi \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right)
+    + \underline{\partial_\mu \left( \delta \phi \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right)}
+    \right\} \tag{2-2.a10} \\
+    &\quad \hspace{6.5cm} \to 0 \hspace{0.5cm}(\because \text{境界条件}\delta \phi_I = \delta \phi_F = 0) \\
+    &= \int d^4x  
+    \left[ \frac{\partial \mathcal{L}}{\partial \phi} 
+    - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right)
+    \right] \delta \phi. \tag{2-2.a11}
+\end{align*}
+
+この積分が任意の $\delta \phi$ に対してゼロであるためには括弧内がゼロである必要がある.\\
+以上により, 場に対するオイラー＝ラグランジュ方程式が得られる.
+
+\begin{equation*}
+    \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) - \frac{\partial \mathcal{L}}{\partial \phi} = 0 \tag{2-2.a12}
+\end{equation*}
+
+\end{proof}
+
+\color{black}
+
+場の運動は作用 $S$ が場の小さな変分に対して不変（すなわち極値を取る）となるように決定される. この条件からオイラー＝ラグランジュ方程式が導かれる.
+
+\subsection*{Hamiltonian Field Theory}
+
+ラグランジアン形式の場の理論は、すべての式が明示的にローレンツ不変となっているため、特に相対論的ダイナミクスに適している。しかし、本書の前半では量子力学への移行を容易にするためにハミルトニアン形式を用いる。
+
+離散的な系では、共役運動量 $p \equiv \partial L / \partial \dot{q}$ を各動的変数 $q$ に対して定義できる（ここで $\dot{q} = \partial q / \partial t$）。このときハミルトニアンは
+
+\[
+H \equiv \sum p \dot{q} - L
+\]
+
+と定義される。連続系への一般化は、空間点 $x$ を離散的に分けられた点であると仮定することで理解しやすくなる。
+
+\noindent 例えば、以下のように定義する：
+
+\begin{align}
+    p(x) &\equiv \frac{\partial \mathcal{L}}{\partial \dot{\phi}(x)}
+    = \frac{\partial}{\partial \dot{\phi}(x)} \int \mathcal{L}(\phi(y), \dot{\phi}(y))\, d^3y \notag \\
+    &\sim \frac{\partial}{\partial \dot{\phi}(x)} \sum_y \mathcal{L}(\phi(y), \dot{\phi}(y))\, d^3y \notag \\
+    &= \pi(x) d^3x,
+\end{align}
+
+ここで、
+
+\begin{equation}
+    \pi(x) \equiv \frac{\partial \mathcal{L}}{\partial \dot{\phi}(x)} \tag{2.4}
+\end{equation}
+
+は、$\phi(x)$ に共役な運動量密度（momentum density）と呼ばれる。
+
+このとき、ハミルトニアンは
+
+\begin{equation}
+    H = \sum_x p(x) \dot{\phi}(x) - L
+\end{equation}
+
+と書ける。これを連続極限に移すと、次のようになる：
+
+\begin{equation}
+    H = \int d^3x \left[ \pi(x) \dot{\phi}(x) - \mathcal{L} \right] 
+    \equiv \int d^3x\, \mathcal{H}. \tag{2.5}
+\end{equation}
+
+このセクションの後半では、別の方法を用いてこのハミルトニアン密度 $\mathcal{H}$ の表式を再導出する予定である。
+
+簡単な例として、単一の場 $\phi(x)$ によって記述される理論を考える。そのときのラグランジアンは以下の通り：
+
+\begin{align}
+    \mathcal{L} &= \frac{1}{2} \dot{\phi}^2 - \frac{1}{2} (\nabla \phi)^2 - \frac{1}{2} m^2 \phi^2 \notag \\
+    &= \frac{1}{2} (\partial_\mu \phi)^2 - \frac{1}{2} m^2 \phi^2. \tag{2.6}
+\end{align}
+
+
+
+
+
+
+
+\end{document}
