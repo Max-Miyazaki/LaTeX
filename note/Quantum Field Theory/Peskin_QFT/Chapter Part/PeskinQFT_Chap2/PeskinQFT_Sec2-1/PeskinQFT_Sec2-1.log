@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.11)  21 APR 2025 14:27
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.11)  25 APR 2025 18:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -727,10 +727,6 @@ LaTeX Font Info:    Kanji font shape `JY1/mc/m/it' undefined
 
 
 [6]
-
-LaTeX Warning: Reference `2.c5' on page 7 undefined on input line 334.
-
-
 Overfull \hbox (30.76396pt too wide) in paragraph at lines 373--374
 \JY1/mc/m/n/12 い\OT1/cmr/m/n/12 ) \JY1/mc/m/n/12 ならば積分値は変わらない\OT1/cmr/m/n/12 . \JY1/mc/m/n/12 今回のケ ースでは\OT1/cmr/m/n/12 , \JY1/mc/m/n/12 被積分関数 $\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 ) = \OML/cmm/m/it/12 p [] []$
  []
@@ -750,20 +746,16 @@ pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `PeskinQFT_Sec2-1.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 28206 strings out of 473836
- 577849 string characters out of 5731189
+ 28205 strings out of 473836
+ 577843 string characters out of 5731189
  1014499 words of memory out of 5000000
- 50977 multiletter control sequences out of 15000+600000
+ 50976 multiletter control sequences out of 15000+600000
  583335 words of font info for 131 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  84i,11n,96p,1225b,548s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PeskinQFT_Sec2-1.dvi (9 pages, 55884 bytes).
+Output written on PeskinQFT_Sec2-1.dvi (9 pages, 56012 bytes).

@@ -81,7 +81,7 @@
 \begin{itemize}
     \item $\phi$ は空間や時間の各点において定義される変数で, 例えば温度分布や電場のように『空間全体に広がった物理量』を表現する.
     \item 本節では, $\phi$ を \textbf{スカラー場（scalar field）} として扱う. つまり, 空間や時空の点ごとに \emph{ただ一つの実数値} をとる場を考える.
-    \item スカラー場の例としては, 宇宙背景放射の温度分布, あるいは量子場理論におけるヒッグス場などがある.
+    \item スカラー場の例としては, 宇宙背景放射の温度分布, あるいは場の量子論におけるヒッグス場などがある.
     \item より一般的にはベクトル場やスピノル場なども存在するが, 基本的な構造を理解するためにはスカラー場が最も扱いやすい.
 \end{itemize}
 
@@ -111,7 +111,7 @@
         
 
     \item \textbf{場に対する Euler-Lagrange 方程式}：
-    \begin{equation}
+    \begin{equation}\label{2.3}
         \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) - \frac{\partial \mathcal{L}}{\partial \phi} = 0 \tag{2.3}
     \end{equation}
 \end{itemize}
@@ -186,8 +186,33 @@ Answer： Hamiltonian 形式では『一時的に』 Lorentz 不変性を『明�
 \vskip\baselineskip
 
 理論物理の立場としては,\\
-『一時的に非共変になっても良く, 最終的に物理的結果が共変ならOK』\\
-Lagrangian 形式も Hamiltonian 形式も
+『一時的に非共変になっても良く, 最終的に物理的結果が共変ならOK』
+
+\vskip\baselineskip
+
+Lagrangian 形式も Hamiltonian 形式もそれぞれに利点があるため, 必要に応じてどちらの形式で議論するのか分けると良い.
+
+\color{blue}
+\begin{table}[h]
+    \color{blue}
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+    \textbf{ Lagrangian 形式の利点} & \textbf{ Hamiltonian 形式の利点} \\
+    \hline
+    Lorentz 共変性が明示的 & 状態の時間発展が記述しやすい \\
+    \hline
+    対称性・ゲージ理論に対して自然 & 正準量子化に適している \\
+    \hline
+    経路積分による量子化ができる & 演算子形式に基づいた定式化ができる \\
+    \hline
+    \end{tabular}
+    \caption{Lagrangian 形式と Hamiltonian 形式の利点の比較}
+\end{table}
+
+この理論は Lorentz 共変な Lagrangian $\mathcal{L}$ からスタートしているので, 理論の根本的な構造に Lorentz 対称性が組み込まれている. この辺の詳細な議論は \textit{Weinberg QFT Vol.1} や, 3.1 Lorentz Invariance in Wave Equations で言及するのでそちらを参照されたし.
+
 \color{black}
 
 \vskip\baselineskip
@@ -197,16 +222,14 @@ Lagrangian 形式も Hamiltonian 形式も
     H \equiv \sum p \dot{q} - L, \hspace{0.5cm} \left(\dot{q} = \frac{\partial q}{\partial t}\right)
 \end{equation*}
 
-連続系への一般化は, 空間点 $x$ を離散的に分けられた点であると仮定する.
+連続系への一般化は, 空間点 $x$ を離散的に離れてると考え, 次のように定義する.
 
-\noindent 例えば, 以下のように定義する：
-
-\begin{align}
+\begin{align*}
     p(x) &\equiv \frac{\partial L}{\partial \dot{\phi}(x)}
     = \frac{\partial}{\partial \dot{\phi}(x)} \int \mathcal{L}(\phi(y), \dot{\phi}(y))\, d^3y \notag \\
     &\sim \frac{\partial}{\partial \dot{\phi}(x)} \sum_y \mathcal{L}(\phi(y), \dot{\phi}(y))\, d^3y \notag \\
     &= \pi(x) d^3x,
-\end{align}
+\end{align*}
 
 ここで,
 
@@ -214,13 +237,18 @@ Lagrangian 形式も Hamiltonian 形式も
     \pi(x) \equiv \frac{\partial \mathcal{L}}{\partial \dot{\phi}(x)} \tag{2.4}
 \end{equation}
 
-は, $\phi(x)$ に共役な運動量密度（momentum density）と呼ばれる.
+は, $\phi(x)$ に共役な運動量密度（momentum density）と呼ばれる.\par
+\color{blue}
+※共役とは, ある物理量に対応して変化の影響や応答を定量化する対の量.\\
+今回の場合, $\pi$ は時間方向の変化に対する Lagrangian の応答を測るという意味で $\phi(x)$ に共役な量 (共役な運動量密度) になる.
+
+\color{black}
 
 このとき, ハミルトニアンは
 
-\begin{equation}
+\begin{equation*}
     H = \sum_x p(x) \dot{\phi}(x) - L
-\end{equation}
+\end{equation*}
 
 と書ける. これを連続極限に移すと, 次のようになる：
 
@@ -233,14 +261,246 @@ Lagrangian 形式も Hamiltonian 形式も
 
 簡単な例として, 単一の場 $\phi(x)$ によって記述される理論を考える. そのときのラグランジアンは以下の通り：
 
-\begin{align}
+\begin{align}\label{2.6}
     \mathcal{L} &= \frac{1}{2} \dot{\phi}^2 - \frac{1}{2} (\nabla \phi)^2 - \frac{1}{2} m^2 \phi^2 \notag \\
     &= \frac{1}{2} (\partial_\mu \phi)^2 - \frac{1}{2} m^2 \phi^2. \tag{2.6}
 \end{align}
 
+$\phi$：実スカラー場とする. $m$：パラメータ (§2.3 において質量として解釈される).\\
+このラグランジアンから運動方程式が得られる：
 
+\begin{equation*}\label{2.7}
+\left( \frac{\partial^2}{\partial t^2} - \nabla^2 + m^2 \right) \phi = 0
+\quad \text{または} \quad
+\left( \partial^\mu \partial_\mu + m^2 \right) \phi = 0, \tag{2.7}
+\end{equation*}
 
+\color{blue}
 
+\begin{proof}
+\eqref{2.7}式の導出.\\
+Euler-Lagrange 方程式 \eqref{2.3} に \eqref{2.6} の Lagrangian を入れて計算する.
+\begin{align*}
+    \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) - \frac{\partial \mathcal{L}}{\partial \phi} &= 0 \tag{2-2.b1}\\
+    \partial_\mu \left( \frac{\partial}{\partial (\partial_\mu \phi)} \left\{ \frac{1}{2} (\partial_\mu \phi)^2 - \frac{1}{2} m^2 \phi^2 \right\} \right) - \frac{\partial}{\partial \phi} \left( \frac{1}{2} (\partial_\mu \phi)^2 - \frac{1}{2} m^2 \phi^2 \right) &= 0 \tag{2-2.b2}\\
+    \partial_\mu \left( \frac{\partial}{\partial (\partial_\mu \phi)} \left\{ \frac{1}{2} g^{\mu\nu}(\partial_\mu \phi)(\partial_\nu \phi) - \frac{1}{2} m^2 \phi^2 \right\} \right) - \frac{\partial}{\partial \phi} \left( \frac{1}{2} (\partial_\mu \phi)^2 - \frac{1}{2} m^2 \phi^2 \right) &= 0 \tag{2-2.b2}\\
+    \partial_\mu \left( g^{\mu\nu}(\partial_\nu \phi) \right) - m^2 \phi &= 0 \tag{2-2.b3}\\
+    (\partial_\mu \partial^\mu -m^2) \phi &= 0 \tag{2-2.b4}
+\end{align*}
+
+\end{proof}
+
+\color{black}
+
+これはよく知られた Klein-Gordon 方程式.（この文脈では、これはMaxwell 方程式のような\textbf{古典的}場の方程式であり、量子力学的な波動方程式ではない）. $\phi(x)$ に共役な正準運動量密度が $\pi(x) = \dot{\phi}(x)$ であることに注意する.
+\vskip\baselineskip
+
+\color{blue}
+
+※急に $\phi$ の名称に『\textbf{正準}』共役運動量と変わったが, 正準とは一般的に『基本的な形に従っている』『標準的な構造を持つ』という意味で使われる.
+
+\begin{itemize}
+    \item 共役運動量の定義
+    スカラー場 $\phi$ に対して, 共役運動量 $\pi$ は次のように定義される：
+    \begin{equation*}
+        \pi = \frac{\partial \mathcal{L}}{\partial \dot{\phi}(x)}. \tag{2-2.c1}
+    \end{equation*}
+    これは単なる『共役運動量』である.
+    \item 正準共役運動量とは\\
+    $(\phi(x), \pi(x))$ が Poisson 括弧 $\{\phi(x), \pi(y)\} = \delta^3(x-y)$, 量子化後なら交換関係 $[\hat{\phi}(x), \hat{\pi}(y)] = i\delta^3(x-y)$ を満たすとき, $\pi(x)$ は $\phi(x)$ に対して正準共役であるという. わざわざ『正準』とつける理由は, 共役運動量を一般的に定義できても正準構造を満たさない場合がある(ゲージ場理論での拘束系など).
+\end{itemize}
+
+\color{black}
+
+そうすれば Hamiltonian も構成できる：
+
+\begin{equation*}
+H = \int d^3x\, \mathcal{H} = \int d^3x \left[ \frac{1}{2} \pi^2 + \frac{1}{2} (\nabla \phi)^2 + \frac{1}{2} m^2 \phi^2 \right]. \tag{2.8}
+\end{equation*}
+
+この3つの項はそれぞれ「時間方向の運動」に伴うエネルギー, 「空間方向の\textbf{ずれ}(shearing)」に伴うエネルギー, そして場がそこに存在すること自体にかかるエネルギーと解釈できる. この Hamiltonian については、セクション 2.3 および 2.4 においてさらに詳しく考察する.
+
+\section*{Noether's Theorem}
+
+古典的な場の理論における対称性と保存則の関係について議論する(Noether の定理).\\
+この定理は、場 $\phi$ に対する連続変換について述べており、この変換は無限小形では次のように表される：
+\begin{equation}\label{2.9}
+\phi(x) \to \phi'(x) = \phi(x) + \alpha \Delta \phi(x),
+\tag{2.9}
+\end{equation}
+ここで，$\alpha$ は無限小パラメータ(小さな量), $\Delta \phi$ は場の配位のある変形を表す.\\
+もし作用が \eqref{2.9} の変換に対して不変であるならば, 運動方程式が不変であるということで, この変換を対称変換という.
+より一般的には, 作用が表面項（表面積分に帰着する項）だけ変わることを許す. $\Longrightarrow$ 表面項は Euler-Lagrange 方程式の導出に影響ないから.\\
+したがって, Lagrangian $\mathcal{L}$ は \eqref{2.9} のもとで, 4次元発散 (four-divergence) を除いて不変でなくてはならない：
+\begin{equation}
+\mathcal{L}(x) \to \mathcal{L}(x) + \alpha \partial_\mu \mathcal{J}^\mu(x),
+\tag{2.10}
+\end{equation}
+ここで，$\mathcal{J}^\mu$ は何らかの関数である(後で保存カレントとなるもの).
+場を変化させたとき, Lagrangian の変化 $\alpha \Delta \mathcal{L}$ は以下のように計算される：
+\begin{align}
+\alpha \Delta \mathcal{L} &= \frac{\partial \mathcal{L}}{\partial \phi} (\alpha \Delta \phi) + \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) \partial_\mu (\alpha \Delta \phi) \notag \\
+&= \alpha \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \Delta \phi \right) + \alpha \left[ \frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) \right] \Delta \phi.
+\label{2.11}\tag{2.11}
+\end{align}
+
+\color{blue}
+
+\begin{proof}\eqref{2.11}の導出.\\
+$\mathcal{L}(\phi, \partial_\mu \phi) \to \mathcal{L}(\phi + \alpha\Delta\phi, \partial_\mu \phi + \alpha\Delta\partial_\mu \phi)$ より,
+\begin{align*}
+    \alpha\Delta\mathcal{L} &= \mathcal{L}(\phi + \alpha\Delta\phi, \partial_\mu \phi + \alpha\Delta\partial_\mu \phi) - \mathcal{L}(\phi, \partial_\mu \phi) \tag{2-2.d1}\\
+    &= \mathcal{L}(\phi, \partial_\mu \phi) + \alpha\Delta\phi\frac{\partial \mathcal{L}}{\partial \phi} + \partial_\mu (\alpha\Delta\phi) \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} - \mathcal{L}(\phi, \partial_\mu \phi) \tag{2-2.d2}\\
+    &= \alpha\Delta\phi\frac{\partial \mathcal{L}}{\partial \phi} + \alpha\underline{\partial_\mu (\Delta\phi) \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)}} \tag{2-2.d3}\\
+    &\quad\hspace{1cm} \partial_\mu (\Delta\phi) \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} = \underline{\partial_\mu (\Delta\phi)\frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)} + \Delta\phi\partial_\mu \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)}} - \Delta\phi\partial_\mu \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)} \tag{2-2.d4}\\
+    &\quad\hspace{5.3cm} \partial_\mu \left( \Delta\phi \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)}\right) \tag{2-2.d5}\\
+    &= \alpha\Delta\phi\frac{\partial \mathcal{L}}{\partial \phi} + \alpha\left[ \partial_\mu \left( \Delta\phi \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)}\right) - \Delta\phi\partial_\mu \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)} \right] \tag{2-2.d6}\\
+    &= \alpha \partial_\mu \left( \Delta\phi \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)}\right) + \alpha\left[ \frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)} \right]\Delta\phi \tag{2-2.d7}
+\end{align*}
+\end{proof}
+
+\color{black}
+
+第2項は Euler-Lagrange 方程式 \eqref{2.3} により消える.\\
+残りの項を $\alpha \partial_\mu \left( \Delta\phi \dfrac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)}\right) \equiv \alpha \partial_\mu \mathcal{J}^\mu$ と置くと, 次の式を得る：
+\begin{equation}\label{2.12}
+\partial_\mu j^\mu(x) = 0, \quad \text{for} \quad j^\mu(x) = \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)} \Delta \phi - \mathcal{J}^\mu.
+\tag{2.12}
+\end{equation}
+
+\color{blue}
+
+\begin{proof}
+\eqref{2.12}の導出.\\
+\begin{align*}
+    \alpha \partial_\mu \left( \Delta\phi \dfrac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)}\right) &= \alpha \partial_\mu \mathcal{J}^\mu \tag{2-2.e1}\\
+    \partial_\mu \left( \Delta\phi \dfrac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)}\right) &= \partial_\mu \mathcal{J}^\mu \tag{2-2.e2}\\
+    \partial_\mu \left( \Delta\phi \dfrac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)}\right) &= \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)} \Delta \phi - j^\mu(x) \right) \tag{2-2.e3}\\
+    \partial_\mu \left( \Delta\phi \dfrac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)}\right) &= \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)} \Delta \phi \right) - \partial_\mu j^\mu(x) \tag{2-2.e4}\\
+    \therefore \partial_\mu j^\mu(x) &= 0 \tag{2-2.e5}
+\end{align*}
+
+\end{proof}
+
+\color{black}
+
+\noindent (もし対称変換が複数の場にまたがる場合, この式の最初の項は各場に対する和になる)
+
+この結果は, カレント $j^\mu(x)$ が保存されることを示している. Lagrangian $\mathcal{L}$ に対して各連続対称性が存在するごとに, このような保存則が存在する.
+
+保存則はまた，チャージ $Q$ を用いて次のように表現することもできる：
+\begin{equation}\label{2.13}
+Q \equiv \int_{\text{all space}} j^0 \, d^3x.
+\tag{2.13}
+\end{equation}
+これは時間に対して一定（保存）である.
+
+\color{blue}
+
+\begin{proof}
+チャージが時間に対して一定であることを示す.\\
+保存則より, 
+
+\begin{align*}
+    \partial_\mu j^\mu &= 0 \tag{2-2.f1}\\
+    \frac{\partial j^0}{\partial t} - \nabla \cdot \boldsymbol{j} &= 0 \tag{2-2.f2}\\
+    \frac{\partial j^0}{\partial t} &= \nabla \cdot \boldsymbol{j} \tag{2-2.f3}
+\end{align*}
+
+チャージの時間変化を計算する.
+
+\begin{align*}
+    \frac{\partial Q}{\partial t} &= \int_{\text{all space}} \frac{\partial j^0}{\partial t} \, d^3x \tag{2-2.f4}\\
+    &= \int_{\text{all space}} \nabla \cdot \boldsymbol{j} \, d^3x \tag{2-2.f5}\\
+    &= \int_{\text{surface}} \boldsymbol{j} \cdot d\boldsymbol{S} \hspace{0.5cm} (\because \text{Gauss の定理}) \label{2-2.f6}\tag{2-2.f6}\\
+    &= 0. \tag{2-2.f7}
+\end{align*}
+
+\eqref{2-2.f6} は表面積分となっており, 通常, 物理的に意味のある場 (ex. 電流密度, スカラー場など) については次の仮定をおく.
+\begin{center}
+    『場は無限遠で急速にゼロに近づく(少なくとも $1/r^2$ より速く減速する)』    
+\end{center}
+※場は物理的な「物質」や「エネルギー分布」を表している. それらは有限の領域に存在していて, 無限遠に行くとそれらの影響は感じなくなるのが普通である.\\
+よって, 『まともな場』は無限遠ではゼロになるべきだと考えられる.
+\vskip\baselineskip
+ではなぜ $1/r^2$ より速くなのか？$\Longrightarrow$ 積分を考えるとき重要な基準となる.
+\vskip\baselineskip
+空間の体積積分を考えたとき, 例えば, 今回のようにカレント密度 $\boldsymbol{j}$ の発散 $\nabla \cdot \boldsymbol{j}$ を\\空間積分すると, Gauss の定理によって境界の表面積分に変換される.
+\vskip\baselineskip
+ここで問題となるのが, 無限遠の表面積の大きさである.
+\vskip\baselineskip
+3次元空間では半径 $r$ の球の表面積 $\boldsymbol{S}$ は, $\boldsymbol{S} = 4\pi r^2$.\\
+つまり無限遠に行くと表面積は $r^2$ に比例して急激に大きくなる. \par
+$\Longrightarrow$ $1/r^2$ より速く減衰してくれると, 無限遠で安全に表面積分がゼロになる.
+
+\end{proof}
+
+\color{black}
+
+ただし注意すべきは, 局所ラグランジアン密度（local Lagrangian density）を用いた場の理論の定式化が, この局所的な保存則の形 \eqref{2.12} を直接導くということである。
+
+\bigskip
+
+\section*{保存則の具体例}
+
+最も簡単な保存則の例は，次のようなラグランジアンから生じる：
+\begin{equation}
+\mathcal{L} = \frac{1}{2} (\partial_\mu \phi)^2.
+\end{equation}
+
+この場合，変換 $\phi \to \phi + \alpha$ （$\alpha$ は定数）に対してラグランジアン $\mathcal{L}$ は不変である。したがって，電流
+\[
+j^\mu = \partial^\mu \phi
+\]
+が保存されると結論できる。
+
+\bigskip
+
+より非自明な例として，次のラグランジアンを考える：
+\begin{equation}\label{2.14}
+\mathcal{L} = |\partial_\mu \phi|^2 - m^2 |\phi|^2,
+\tag{2.14}
+\end{equation}
+ここで，$\phi$ は複素数値の場である。
+
+このラグランジアンに対する運動方程式が，再びクライン＝ゴルドン方程式 (2.7) であることは容易に示すことができる。
+
+このラグランジアンは変換
+\[
+\phi \to e^{i\alpha} \phi
+\]
+に対して不変であり，無限小変換では次のようになる：
+\begin{equation}\label{2.15}
+\alpha \Delta \phi = i\alpha \phi, \quad \alpha \Delta \phi^* = -i\alpha \phi^*.
+\tag{2.15}
+\end{equation}
+
+（ここでは $\phi$ と $\phi^*$ を独立な場として扱っている。または，$\phi$ の実部と虚部に分けて議論することも可能である。）
+
+この場合，保存されるノーター電流は次のように求められる：
+\begin{equation}\label{2.16}
+j^\mu = i \left[ (\partial^\mu \phi^*) \phi - \phi^* (\partial^\mu \phi) \right].
+\tag{2.16}
+\end{equation}
+
+（この式における全体の定数は恣意的に選んでいる。）
+
+この電流の発散が，クライン＝ゴルドン方程式を用いてゼロになることは直接確認できる。
+
+\bigskip
+
+後にこのラグランジアンに電磁場との結合項を追加し，$j^\mu$ を場によって運ばれる電流として解釈する予定である。この場合，$j^0$ は電荷密度に対応し，空間全体で積分した $Q$ は場が持つ総電荷となる。\par
+Noether の定理は並進や回転などの時空変換にも適応できる. 無限小の平行移動
+
+\begin{equation*}
+    x^\mu \to x^\mu + a^\mu
+\end{equation*}
+
+を場の構成の変換として表現することができる：
+
+\begin{equation*}
+    \phi(x) \to \phi(x+a) = \phi(x) + a^\mu \partial_\mu \phi(x).
+\end{equation*}
 
 
 
