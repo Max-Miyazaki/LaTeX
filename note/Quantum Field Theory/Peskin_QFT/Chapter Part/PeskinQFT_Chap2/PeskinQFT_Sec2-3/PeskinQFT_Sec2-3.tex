@@ -1,0 +1,117 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{Chapter 2. The Klein-Gordon Field\\
+2-3. The Klein-Gordon Field as Harmonic Oscillators}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートはPeskin\&Schroederの``An Introduction to Quantum Field Theory''の第2章の3節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+
+
+
+\end{abstract}
+    
+    
+
+\newpage
+\section*{2-3. The Klein-Gordon Field as Harmonic Oscillators}
+これから場の量子論の議論を単純な場であるKlein-Gordon 場から形式的に始める.
+\vskip\baselineskip
+
+\color{blue}
+概要
+\begin{itemize}
+    \item 古典スカラー場の理論を量子化することで, 量子スカラー場の理論を得る.
+    \item 量子化：力学変数を演算子に置き換えて正準交換関係を課す.
+    \item この理論を解くために Hamiltonian の固有値と固有状態を求める.
+    \item その際に調和振動子のアナロジーを用いる.
+\end{itemize}
+
+\color{black}
+
+\noindent 実 Klein-Gordon 場の古典理論は前節で十分議論した. 関連する式は以下の通りである.
+\begin{align*}
+    \mathcal{L} &= \frac{1}{2}\dot{\phi}^2 - \frac{1}{2}(\nabla \phi)^2 - \frac{1}{2}m^2\phi^2, \\
+    &= \frac{1}{2} (\partial_\mu \phi)^2 - \frac{1}{2} m^2 \phi^2. \tag{2-6}\\
+    \left( \frac{\partial^2}{\partial t^2} - \nabla^2 + m^2 \right) \phi &= 0 \hspace{0.5cm}\text{or}\hspace{0.5cm} (\partial^\mu \partial_\mu + m^2) \phi = 0 \tag{2-7}\\
+    H = \int d^3 x \, \mathcal{H} &= \int d^3 x \left( \frac{1}{2}\pi^2 + \frac{1}{2}(\nabla \phi)^2 + \frac{1}{2}m^2\phi^2 \right) \tag{2-8}
+\end{align*}
+
+量子化するために, 力学変数 $\phi$ と $\pi$ を演算子に置き換え, 交換関係を課す.\\
+離散的な粒子系については, 正準交換関係は次のように与えられる.
+\begin{align*}
+    [q_i, p_j] &= i\hbar \delta_{ij};\\
+    [q_i, q_j] &= [p_i, p_j] = 0.
+\end{align*}
+
+連続系に対しては $\pi(\boldsymbol{x})$ が運動量密度であるので, クロネッカーのデルタの代わりにディラックのデルタ関数が出てくる.
+\begin{align*}
+    [\phi(\boldsymbol{x}), \pi(\boldsymbol{y})] &= i\hbar \delta^3(\boldsymbol{x} - \boldsymbol{y});\\
+    [\phi(\boldsymbol{x}), \phi(\boldsymbol{y})] &= [\pi(\boldsymbol{x}), \pi(\boldsymbol{y})] = 0.\tag{2-20}
+\end{align*}
+
+
+ 
+
+
+
+
+
+
+\end{document}
