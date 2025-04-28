@@ -314,7 +314,7 @@ Euler-Lagrange 方程式 \eqref{2.3} に \eqref{2.6} の Lagrangian を入れて
 
 そうすれば Hamiltonian も構成できる：
 
-\begin{equation*}
+\begin{equation*}\label{2.8}
 H = \int d^3x\, \mathcal{H} = \int d^3x \left[ \frac{1}{2} \pi^2 + \frac{1}{2} (\nabla \phi)^2 + \frac{1}{2} m^2 \phi^2 \right]. \tag{2.8}
 \end{equation*}
 
@@ -630,7 +630,7 @@ Lagrangian $\mathcal{L}$ もスカラーであるため, 次のように変換�
 これを考慮すると, Noether の定理を適用して4つの独立に保存されるカレントを得られる：
 
 \begin{equation*}\label{2.17}
-{T^\mu}_{\nu} \equiv \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \partial_\nu \phi - \mathcal{L} \delta^\mu_{\;\nu}.
+{T^\mu}_{\nu} \equiv \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \partial_\nu \phi - \mathcal{L} {\delta^\mu}_{\nu}.
 \tag{2.17}
 \end{equation*}
 
@@ -675,22 +675,58 @@ Lagrangian $\mathcal{L}$ もスカラーであるため, 次のように変換�
 \color{black}
 
 時間並進に対応する保存電荷はハミルトニアンとなる：
-\begin{equation}
+\begin{equation*}\label{2.18}
 H = \int T^{00} d^3x = \int \mathcal{H} d^3x.
 \tag{2.18}
-\end{equation}
+\end{equation*}
+
+\color{blue}
+
+\begin{proof}
+\eqref{2.18} での $T^{00}$ の計算.
+\begin{align*}
+    T^{\mu\nu} &= g^{\nu\rho} {T^\mu}_{\rho} \tag{2-2.j1}\\
+    &= g^{\nu\rho} \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \partial_\rho \phi - \mathcal{L} {\delta^\mu}_\rho \right) \tag{2-2.j2}\\
+    &= \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \partial^\nu \phi - \mathcal{L} \delta^{\mu\nu} \tag{2-2.j3}\\
+    T^{00} &= \frac{\partial \mathcal{L}}{\partial (\partial_0 \phi)} \partial^0 \phi - \mathcal{L} \tag{2-2.j4}\\
+    &= \frac{\partial \mathcal{L}}{\partial \dot{\phi}} \dot{\phi} - \mathcal{L} \tag{2-2.j5}\\
+    &= \frac{\partial}{\partial \dot{\phi}} \left( \frac{1}{2} \dot{\phi}^2 -\frac{1}{2} (\nabla \phi)^2 - \frac{1}{2} m^2 \phi^2 \right) \dot{\phi} - \left( \frac{1}{2} \dot{\phi}^2 -\frac{1}{2} (\nabla \phi)^2 - \frac{1}{2} m^2 \phi^2 \right) \tag{2-2.j6}\\
+    &= \frac{1}{2} \dot{\phi}^2 - \frac{1}{2} (\nabla \phi)^2 - \frac{1}{2} m^2 \phi^2 \tag{2-2.j7}\\
+    &= \frac{1}{2}\pi^2 + \frac{1}{2} (\nabla \phi)^2 + \frac{1}{2} m^2 \phi^2 \tag{2-2.j8}\\
+    &= \mathcal{H} \tag{2-2.j9}
+\end{align*}
+
+\end{proof}
+
+\color{black}
 
 Klein-Gordon 場についてこの量を計算すれば, \eqref{2.8} で得られた結果が回収できる.
 
 空間並進に対応する保存電荷は次のように与えられる：
-\begin{equation}
+\begin{equation*}\label{2.19}
 P^i = \int T^{0i} d^3x = -\int \pi \partial_i \phi \, d^3x.
 \tag{2.19}
-\end{equation}
+\end{equation*}
 
-ここで, $\pi$ は場 $\phi$ に共役な正準運動量密度を表す.
+\color{blue}    
 
-我々はこの $P^i$ を, 場によって運ばれる（物理的な）運動量と自然に解釈する (ただし, 正準運動量とは混同しないことに注意).
+\begin{proof}
+\eqref{2.19} での $T^{0i}$ の計算($i = 1,2,3$).
+\begin{align*}
+    T^{\mu\nu} &= \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \partial^\nu \phi - \mathcal{L} \delta^{\mu\nu} \tag{2-2.k1}\\
+    T^{0i} &= -\frac{\partial \mathcal{L}}{\partial (\partial_0 \phi)} \partial^i \phi - \mathcal{L} \delta^{0i} \tag{2-2.k2}\\
+    &= -\frac{\partial \mathcal{L}}{\partial \dot{\phi}} \partial^i \phi \tag{2-2.k3}\\
+    &= -\frac{\partial}{\partial \dot{\phi}} \left( \frac{1}{2} \dot{\phi}^2 -\frac{1}{2} (\nabla \phi)^2 - \frac{1}{2} m^2 \phi^2 \right) \partial^i \phi \tag{2-2.k4}\\
+    &= -\dot{\phi} \partial^i \phi \tag{2-2.k5}\\
+    &= -\pi \partial^i \phi \tag{2-2.k6}
+\end{align*}
+\end{proof}
+
+\color{black}
+
+ここで, $\pi$ は場 $\phi$ に共役な正準運動量密度を表す.\\
+この $P^i$ を, 場によって運ばれる（物理的な）運動量と自然に解釈する.\\
+(ただし, 正準運動量とは混同しないことに注意).
 
 
 \end{document}

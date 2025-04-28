@@ -100,11 +100,69 @@
     [q_i, q_j] &= [p_i, p_j] = 0.
 \end{align*}
 
-連続系に対しては $\pi(\boldsymbol{x})$ が運動量密度であるので, クロネッカーのデルタの代わりにディラックのデルタ関数が出てくる.
+連続系に対しては $\pi(\boldsymbol{x})$ が運動量密度であるので, Kronecker delta の代わりに Dirac delta が出てくる.
 \begin{align*}
     [\phi(\boldsymbol{x}), \pi(\boldsymbol{y})] &= i\hbar \delta^3(\boldsymbol{x} - \boldsymbol{y});\\
     [\phi(\boldsymbol{x}), \phi(\boldsymbol{y})] &= [\pi(\boldsymbol{x}), \pi(\boldsymbol{y})] = 0.\tag{2-20}
 \end{align*}
+(※時間に依存しない Schr\"odinger 描像で議論している. 次節で Heisenberg 描像に移行するときも, 両方の演算子が同時刻に評価される限り, 同時刻交換関係は保持される.)
+\vskip\baselineskip
+Hamiltonianは、$\phi$と$\pi$の関数なので, それ自体も演算子となる.
+よって, 次の仕事は Hamiltonian からスペクトル（固有値群）を見つけることである.
+
+これを直接的に行う明らかな方法はないので, フーリエ空間でKlein-Gordon方程式を書くことでヒントを得ることにします。
+
+古典的なKlein-Gordon場をフーリエ展開すると：
+\begin{equation}
+\phi(\mathbf{x}, t) = \int \frac{d^3 p}{(2\pi)^3} \, e^{i\mathbf{p}\cdot\mathbf{x}} \phi(\mathbf{p}, t)
+\end{equation}
+
+ここで、$\phi^*(\mathbf{p}) = \phi(-\mathbf{p})$ とすることで、$\phi(\mathbf{x})$が実数になることを保証します。
+
+このとき、Klein-Gordon方程式 (2.7) は次のようになります：
+\begin{equation}
+\left[
+\frac{\partial^2}{\partial t^2} + (|\mathbf{p}|^2 + m^2)
+\right] \phi(\mathbf{p}, t) = 0
+\end{equation}
+
+これは、単純な調和振動子（simple harmonic oscillator）の運動方程式と同じ形をしており、対応する周波数は
+\begin{equation}
+\omega_{\mathbf{p}} = \sqrt{|\mathbf{p}|^2 + m^2}
+\end{equation}
+となります。
+
+
+
+今度は、Klein-Gordonハミルトニアンのスペクトルを見つけるために、同じ手法を使います。
+
+ただし今回は、場の各フーリエモードが、それぞれ独立した調和振動子として振る舞うことになります。
+それぞれ独自の$a$と$a^\dagger$を持つ、というわけです。
+
+式 (2.23) を参考にして、次のように書きます：
+\begin{equation}
+\phi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}} + a^\dagger_{\mathbf{p}} e^{-i\mathbf{p}\cdot\mathbf{x}} \right)
+\tag{2.25}
+\end{equation}
+
+\begin{equation}
+\pi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \left( -i \right) \sqrt{\frac{\omega_{\mathbf{p}}}{2}} \left( a_{\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}} - a^\dagger_{\mathbf{p}} e^{-i\mathbf{p}\cdot\mathbf{x}} \right)
+\tag{2.26}
+\end{equation}
+
+$a_{\mathbf{p}}$と$a^\dagger_{\mathbf{p}}$を$\phi$と$\pi$を使って逆に表す式も簡単に導出できますが、実際の計算ではほとんど必要になりません。
+
+以下の計算では、(2.25)と(2.26)を次のように並び替えた形が役に立ちます：
+
+\begin{equation}
+\phi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}}) e^{i\mathbf{p}\cdot\mathbf{x}}
+\tag{2.27}
+\end{equation}
+
+\begin{equation}
+\pi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \left( -i \right) \sqrt{\frac{\omega_{\mathbf{p}}}{2}} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}}) e^{i\mathbf{p}\cdot\mathbf{x}}
+\tag{2.28}
+\end{equation}
 
 
  
