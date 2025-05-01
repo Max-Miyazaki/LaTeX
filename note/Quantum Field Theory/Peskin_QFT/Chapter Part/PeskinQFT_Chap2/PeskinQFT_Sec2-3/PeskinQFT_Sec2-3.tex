@@ -85,11 +85,11 @@
 
 \color{black}
 
-\noindent 実 Klein-Gordon 場の古典理論は前節で十分議論した. 関連する式は以下の通りである.
+\noindent 実 Klein-Gordon 場の古典論は前節で十分議論した. 関連する式は以下の通りである.
 \begin{align*}
     \mathcal{L} &= \frac{1}{2}\dot{\phi}^2 - \frac{1}{2}(\nabla \phi)^2 - \frac{1}{2}m^2\phi^2, \\
     &= \frac{1}{2} (\partial_\mu \phi)^2 - \frac{1}{2} m^2 \phi^2. \tag{2-6}\\
-    \left( \frac{\partial^2}{\partial t^2} - \nabla^2 + m^2 \right) \phi &= 0 \hspace{0.5cm}\text{or}\hspace{0.5cm} (\partial^\mu \partial_\mu + m^2) \phi = 0 \tag{2-7}\\
+    \left( \frac{\partial^2}{\partial t^2} - \nabla^2 + m^2 \right) \phi &= 0 \hspace{0.5cm}\text{or}\hspace{0.5cm} (\partial^\mu \partial_\mu + m^2) \phi = 0 \label{2-7} \tag{2-7}\\
     H = \int d^3 x \, \mathcal{H} &= \int d^3 x \left( \frac{1}{2}\pi^2 + \frac{1}{2}(\nabla \phi)^2 + \frac{1}{2}m^2\phi^2 \right) \tag{2-8}
 \end{align*}
 
@@ -100,59 +100,371 @@
     [q_i, q_j] &= [p_i, p_j] = 0.
 \end{align*}
 
-連続系に対しては $\pi(\boldsymbol{x})$ が運動量密度であるので, Kronecker delta の代わりに Dirac delta が出てくる.
+連続系に対しては $\pi(\mathbf{x})$ が運動量密度なので, Kronecker delta の代わりに Dirac delta (デルタ関数) が出てくる.
 \begin{align*}
-    [\phi(\boldsymbol{x}), \pi(\boldsymbol{y})] &= i\hbar \delta^3(\boldsymbol{x} - \boldsymbol{y});\\
-    [\phi(\boldsymbol{x}), \phi(\boldsymbol{y})] &= [\pi(\boldsymbol{x}), \pi(\boldsymbol{y})] = 0.\tag{2-20}
+    [\phi(\mathbf{x}), \pi(\mathbf{y})] &= i\hbar \delta^3(\mathbf{x} - \mathbf{y});\\
+    [\phi(\mathbf{x}), \phi(\mathbf{y})] &= [\pi(\mathbf{x}), \pi(\mathbf{y})] = 0.\tag{2-20}
 \end{align*}
 (※時間に依存しない Schr\"odinger 描像で議論している. 次節で Heisenberg 描像に移行するときも, 両方の演算子が同時刻に評価される限り, 同時刻交換関係は保持される.)
 \vskip\baselineskip
 Hamiltonianは、$\phi$と$\pi$の関数なので, それ自体も演算子となる.
 よって, 次の仕事は Hamiltonian からスペクトル（固有値群）を見つけることである.
 
-これを直接的に行う明らかな方法はないので, フーリエ空間でKlein-Gordon方程式を書くことでヒントを得ることにします。
+\color{blue}
+※ここでのスペクトルとは？\\
+一言で言えば Hamiltonian のエネルギー固有状態に対応する固有値の集合である.\\
+数式では, 以下のように固有値 $E$ と固有状態 $\ket{\psi}$ の組である.
+\begin{equation*}
+    H \ket{\psi} = E \ket{\psi} \tag{2-3.a1}
+\end{equation*}
 
-古典的なKlein-Gordon場をフーリエ展開すると：
-\begin{equation}
-\phi(\mathbf{x}, t) = \int \frac{d^3 p}{(2\pi)^3} \, e^{i\mathbf{p}\cdot\mathbf{x}} \phi(\mathbf{p}, t)
-\end{equation}
+\color{black}
 
-ここで、$\phi^*(\mathbf{p}) = \phi(-\mathbf{p})$ とすることで、$\phi(\mathbf{x})$が実数になることを保証します。
+これを直接的に見つける方法はないので, Fourier 空間で Klein-Gordon 方程式を書くことでヒントを得ることにする.
 
-このとき、Klein-Gordon方程式 (2.7) は次のようになります：
-\begin{equation}
-\left[
-\frac{\partial^2}{\partial t^2} + (|\mathbf{p}|^2 + m^2)
-\right] \phi(\mathbf{p}, t) = 0
-\end{equation}
+\color{blue}
 
-これは、単純な調和振動子（simple harmonic oscillator）の運動方程式と同じ形をしており、対応する周波数は
-\begin{equation}
-\omega_{\mathbf{p}} = \sqrt{|\mathbf{p}|^2 + m^2}
-\end{equation}
-となります。
+※Hamiltonian のスペクトルを直接的に見つけられない理由.
+\begin{center}
+    『Hamiltonian が無限次元の演算子であるため』
+\end{center}
+Klein-Gordon 場の Hamiltonian は, 
+\begin{equation*}
+    H = \int d^3 x \left( \frac{1}{2}\pi^2 + \frac{1}{2}(\nabla \phi)^2 + \frac{1}{2}m^2\phi^2 \right). \tag{2-3.a2}
+\end{equation*}
+$\phi(\mathbf{x})$, $\pi(\mathbf{x})$ は無限個の自由度を持つ演算子である.
+\begin{itemize}
+    \item 無限次元空間に作用する演算子となる.\\
+    $\Longrightarrow$ Hamiltonian に対して行列のように直接固有値を求めるのは通常不可能.
+    \item Hamiltonian が依存する場 $\phi(\mathbf{x})$, $\pi(\mathbf{x})$ は無限個の自由度を持つ.\\ $\Longrightarrow$ $\mathbf{x}$ にわたる積分が含まれるので, 固有値方程式の形にならない.
+    \item 演算子の作用する空間が複雑\\
+    通常の固有値問題：\\
+    $\Longrightarrow$ あるベクトル空間で, 線形演算子を作用させてスカラー倍いなる状態を求める.\\
+    場の量子論：\\
+    $\Longrightarrow$ 関数空間上の演算子に対するスペクトルを知りたいが, 空間が複雑で難しい.
+\end{itemize}
+具体的には状態空間が無限次元であることが根本的な問題である.
+\vskip\baselineskip
+量子力学では(ex. 1粒子系).\\
+状態空間は $L^2(\mathbb{R}^3)$ のような可積分系で, 一般的に Hilbert 空間である. 内積は,
+\begin{equation*}
+    \braket{\psi}{\phi} = \int d^3 x \, \psi^*(\mathbf{x}) \phi(\mathbf{x}). \tag{2-3.a3}
+\end{equation*}
+場の理論では,
+\begin{equation*}
+    \braket{\Psi_1}{\Phi_2} = \int \mathcal{D}\phi \, {\Psi^*}_{1}[\phi] {\Phi}_{2}[\phi]. \tag{2-3.a4}
+\end{equation*}
+$\mathcal{D}\phi$ は関数 $\phi$ 全体にわたる積分測度. これは無限次元積分で数学的に厳密に定義するのは非常に困難である ( Riemann 積分や Lebesgue 積分の拡張では扱えない).
+\vskip\baselineskip
+まぁ, そんなこともありどうやってスペクトルを求めるかというと, Fourier変換を用いて間接的にスペクトルを構築する.
+
+\color{black}
+\vskip\baselineskip
+古典的なKlein-Gordon場を Fourier 展開すると：
+\begin{equation*}
+\phi(\mathbf{x}, t) = \int \frac{d^3 p}{(2\pi)^3} \, e^{i\mathbf{p}\cdot\mathbf{x}} \phi(\mathbf{p}, t).
+\end{equation*}
+ここで, $\phi^*(\mathbf{p}) = \phi(-\mathbf{p})$ とすることで, $\phi(\mathbf{x})$が実数になることを保証する.
+
+\color{blue}
+
+\begin{proof}
+$\phi^*(\mathbf{p}) = \phi(-\mathbf{p})$ という条件で $\phi(\mathbf{x})$が実数になることを確認する.\\
+まず考えているのは『古典的な場 $\phi(\mathbf{x}, t)$ が実関数である』という物理的要請である.\\
+このとき Fourier 変換した右辺が実数関数になるようにしたい.
+\begin{equation*}\label{2-3.a5}
+    \phi(\mathbf{x}, t) = \int \frac{d^3 p}{(2\pi)^3} \, e^{i\mathbf{p}\cdot\mathbf{x}} \phi(\mathbf{p}, t) \tag{2-3.a5}
+\end{equation*}
+$e^{i\mathbf{p}\cdot\mathbf{x}}$ は複素数で $\phi(\mathbf{x}, t)$ も一般的には複素関数になる可能性がある. そこで $\phi(\mathbf{x}, t)$ を実関数にしたいとき必要な条件が $\phi^*(\mathbf{p}) = \phi(-\mathbf{p})$ となる. \eqref{2-3.a5} の複素共役をとると,
+\begin{equation*}
+    \phi^*(\mathbf{x}, t) = \int \frac{d^3 p}{(2\pi)^3} \, e^{-i\mathbf{p}\cdot\mathbf{x}} \phi^*(\mathbf{p}, t). \tag{2-3.a6}
+\end{equation*}
+積分変数を置き換えて, $\mathbf{p} \to -\mathbf{p}$, $dp^3 \to dp^3$, $e^{i\mathbf{p}\cdot\mathbf{x}} \to e^{-i\mathbf{p}\cdot\mathbf{x}}$, $\phi^*(\mathbf{p}) \to \phi^*(-\mathbf{p})$ とすると,
+\begin{equation*}
+    \phi^*(\mathbf{x}, t) = \int \frac{d^3 p}{(2\pi)^3} \, e^{i\mathbf{p}\cdot\mathbf{x}} \phi^*(-\mathbf{p}, t). \tag{2-3.a7}
+\end{equation*}
+これらの式を比較すると, $\phi^*(-\mathbf{p}, t) = \phi(\mathbf{p}, t) \Longleftrightarrow \phi^*(\mathbf{p}) = \phi(-\mathbf{p})$.\\
+このような条件が課されれば $\phi(\mathbf{x}, t)$ は実関数になることが保証される.
+
+\end{proof}
+
+\color{black}
+
+このとき, Klein-Gordon方程式 \eqref{2-7} は次のようになる.
+\begin{equation*}\label{2-21}
+\left[\frac{\partial^2}{\partial t^2} + (|\mathbf{p}|^2 + m^2)\right] \phi(\mathbf{p}, t) = 0 \tag{2-21}
+\end{equation*}
+
+これは, 単純な調和振動子（simple harmonic oscillator）の運動方程式と同じ形をしており, 対応する角振動数は以下となる.
+\begin{equation*}
+\omega_{\mathbf{p}} = \sqrt{|\mathbf{p}|^2 + m^2} \tag{2-22}
+\end{equation*}
+\vskip\baselineskip
+
+\color{blue}
+
+\eqref{2-21} は, モードごとに異なる調和振動子の式となる. 運動量モードごとに見ると, 場のダイナミクスが独立に分離されるため, 全体の場を解析する代わりに各モードについて個別で解析できる. つまり, 「場をモードごとに分解する」ということは「無限個の調和振動子に分ける」ということである.
+\vskip\baselineskip
+ここで『モード』とは, ある波動関数や場を Fourier 変換したときの1つの平面波成分 (運動量固有状態) のこと. 物理的には,「特定の運動量・エネルギーを持つ粒子の状態」を表す. $\displaystyle \phi(\mathbf{x}, t) = \int \frac{d^3 p}{(2\pi)^3} \, e^{i\mathbf{p}\cdot\mathbf{x}} \phi(\mathbf{p}, t)$ について,
+\begin{itemize}
+    \item $e^{i\mathbf{p}\cdot\mathbf{x}}$：運動量 $\mathbf{p}$ を持つ平面波(波の形) $\Longleftrightarrow$ $\mathbf{p}$ モード
+    \item $\phi(\mathbf{p}, t)$：その $\mathbf{p}$ モードの「振幅」や「係数」
+\end{itemize}
+なので, モード $=$ 波の「形」, 振幅 (係数) $=$ 波の形の「重み」というイメージ.\\
+僕が少しピアノ齧ってるので, ピアノの音の例で表してみると,
+\begin{itemize}
+    \item モード $=$ ピアノの「特定の音の高さ」や「音階」($= \mathbf{p}$)
+    \item 振幅 $=$ その音の「音量」や「強さ」($= \phi(\mathbf{p}, t)$)
+\end{itemize}
+というイメージになるが, ピンとこない人は無視してもらって構わない.\\
+周りくどい説明をしてしまったが, 場の量子論で重要な構図は以下のことである.
+\begin{itemize}
+    \item 場をモードごとに分解, $\mathbf{p}$ モード $\Longrightarrow$ 運動量 $\mathbf{p}$ を持つ1粒子状態.
+    \item 各モードが独立に振動する $\Longrightarrow$ 「独立した調和振動子」として量子化される.
+\end{itemize}
+
+\color{black}
+\vskip\baselineskip
+単純調和振動子（simple harmonic oscillator）は, 私たちがすでにスペクトルをよく知っている系.
+ここで, その手順を簡単に思い出しておく.
+
+Hamiltonianは次のように書かれる.
+\begin{equation*}
+H_{\text{SHO}} = \frac{1}{2} p^2 + \frac{1}{2} \omega^2 \phi^2
+\end{equation*}
+
+$H_{\text{SHO}}$ の固有値を求めるために, $\phi$と$p$ を昇降演算子を使って表現する.
+\begin{equation*}\label{2-23}
+\phi = \frac{1}{\sqrt{2\omega}} (a + a^\dagger), \quad
+p = -i \sqrt{\frac{\omega}{2}} (a - a^\dagger) \tag{2-23}
+\end{equation*}
+ここで, 正準交換関係 $[\phi, p] = i$ は, 昇降演算子に対して
+\begin{equation*}
+[a, a^\dagger] = 1 \tag{2-24}
+\end{equation*}
+という関係に対応する.
+
+\color{blue}
+\vskip\baselineskip
+\noindent $H_{\text{SHO}}$ を昇降演算子を使って表すと, エネルギースペクトル (固有値) が簡単に得られる.\\
+昇降演算子は次のように定義される演算子である：
+\begin{align*}
+    a &= \sqrt{\frac{\omega}{2}}\phi + i\frac{1}{\sqrt{2\omega}}p, \tag{2-3.b1} \\
+    a^\dagger &= \sqrt{\frac{\omega}{2}}\phi - i\frac{1}{\sqrt{2\omega}}p. \tag{2-3.b2}
+\end{align*}
+この定義の意図は,
+\begin{itemize}
+    \item $a$：励起状態を1つ作る.
+    \item $a^\dagger$：励起状態を1つ減らす.
+\end{itemize}
+つまり, 1次元調和振動子のエネルギー固有値を構成するための演算子である.
+\vskip\baselineskip
+※ここでの $\phi$ は「場」ではなく, 「位置演算子」である. そして $p$ はその「共役運動量演算子」であるので, 通常の量子力学の正準交換関係を満たす. 最終的には場 $\phi$ のモードに対応することを見越してあえて $\phi$ を使っているので勘違いしないように.
+\vskip\baselineskip
+昇降演算子 $a$ と $a^\dagger$ の係数は, 交換関係 $[a, a^\dagger] = 1$ を満たすように選ばれている.\\
+実際に確認してみると,
+\begin{align*}
+    [a, a^\dagger] &= \left( \sqrt{\frac{\omega}{2}}\phi + i\frac{1}{\sqrt{2\omega}}p \right) \left( \sqrt{\frac{\omega}{2}}\phi - i\frac{1}{\sqrt{2\omega}}p \right) - \left( \sqrt{\frac{\omega}{2}}\phi - i\frac{1}{\sqrt{2\omega}}p \right) \left( \sqrt{\frac{\omega}{2}}\phi + i\frac{1}{\sqrt{2\omega}}p \right) \tag{2-3.b3} \\
+    &= \frac{\omega}{2}\phi^2 - i\frac{1}{2}\phi p - i\frac{1}{2}p\phi + \frac{1}{2\omega}p^2 - \left( \frac{\omega}{2}\phi^2 + i\frac{1}{2}\phi p - i\frac{1}{2}p\phi + \frac{1}{2\omega}p^2 \right) \tag{2-3.b4} \\
+    &= i(-\phi p + p\phi) \tag{2-3.b5} \\
+    &= i(-[\phi, p]) \tag{2-3.b6} \\
+    &= i(-i) \tag{2-3.b7} \\
+    &= 1 \tag{2-3.b8}
+\end{align*}
+$[a, a^\dagger] = 1$ は量子力学の正準交換関係 $[\phi, p] = i$ を保ちながら, のちに計算する $H = \omega\left(a^\dagger a + \dfrac{1}{2}\right)$ のようにエネルギー準位が簡単に表現され, $a^\dagger a$ が「粒子数」を表す自然な形になるようにできており, 非常に都合が良い.
+
+\color{black}
+\vskip\baselineskip
+このとき, Hamiltonian は次のように書き直すことができる.
+\begin{equation*}
+H_{\text{SHO}} = \omega \left( a^\dagger a + \frac{1}{2} \right).
+\end{equation*}
+
+\color{blue}
+
+\begin{proof}
+\begin{align*}
+    H_{\text{SHO}} &= \frac{1}{2} p^2 + \frac{1}{2} \omega^2 \phi^2 \tag{2-3.c1} \\
+    &= \frac{1}{2} \left( -i \sqrt{\frac{\omega}{2}} (a - a^\dagger) \right)^2 + \frac{1}{2} \omega^2 \left( \frac{1}{\sqrt{2\omega}} (a + a^\dagger) \right)^2 \tag{2-3.c2} \\
+    &= -\frac{\omega}{4} (a - a^\dagger)^2 + \frac{\omega}{4} (a + a^\dagger)^2 \tag{2-3.c3} \\
+    &= \frac{\omega}{4} \left\{ (a + a^\dagger)^2 - (a - a^\dagger)^2 \right\} \tag{2-3.c4} \\
+    &= \frac{\omega}{2} (\underline{a a^\dagger} + a^\dagger a) \tag{2-3.c5} \\
+    &\quad [a, a^\dagger] = 1 \Longleftrightarrow a a^\dagger = a^\dagger a + 1 \tag{2-3.c6} \\
+    &= \frac{\omega}{2} (a^\dagger a + 1 + a^\dagger a) \tag{2-3.c7} \\
+    &= \omega \left( a^\dagger a + \frac{1}{2} \right) \tag{2-3.c8}
+\end{align*}
+\end{proof}
+
+\color{black}
+
+基底状態$\lvert 0 \rangle$は, $a \lvert 0 \rangle = 0$ を満たし, エネルギー固有値 $\dfrac{1}{2}\omega$ を持つ.
+
+\color{blue}
+\begin{proof}
+基底状態の定義は, 
+\begin{equation*}
+    a \lvert 0 \rangle = 0 \tag{2-3.d1}
+\end{equation*}
+を満たす状態で定義される. つまり, 「一番エネルギーが低い状態」ということ.\\
+Hamiltonian を基底状態に作用させると,
+\begin{align*}
+    H_{\text{SHO}} \lvert 0 \rangle &= \omega \left( a^\dagger a + \frac{1}{2} \right) \lvert 0 \rangle \tag{2-3.d2} \\
+    &= \omega \left( a^\dagger a \lvert 0 \rangle + \frac{1}{2} \lvert 0 \rangle \right) \tag{2-3.d3} \\
+    &= \omega \left( a^\dagger 0 + \frac{1}{2}\lvert 0 \rangle \right) \tag{2-3.d4} \\
+    &= \frac{1}{2}\omega \lvert 0 \rangle. \tag{2-3.d5}
+\end{align*}
+よって, 基底状態はエネルギー固有値 $\dfrac{1}{2}\omega$ を持つことが分かる.
+\end{proof}
+\color{black}
+
+さらに, 次の交換関係が成り立つ.
+\begin{equation*}
+[H_{\text{SHO}}, a^\dagger] = \omega a^\dagger, \quad [H_{\text{SHO}}, a] = -\omega a.
+\end{equation*}
+
+\color{blue}
+
+\begin{proof}
+\begin{align*}
+    [H_{\text{SHO}}, a^\dagger] &= \left[ \omega \left( a^\dagger a + \frac{1}{2} \right), a^\dagger \right] \tag{2-3.e1} \\
+    &= \omega \left[ a^\dagger a, a^\dagger \right] \hspace{0.3cm} (\because \text{定数との交換はゼロ}) \tag{2-3.e2} \\
+    &= \omega \left( a^\dagger \underline{[a, a^\dagger]} + \underline{[a^\dagger, a^\dagger]} a \right) \hspace{0.3cm} (\because \text{交換関係のライプニッツ則}) \tag{2-3.e3} \\
+    &\quad \hspace{0.5cm} [a, a^\dagger] = 1, \quad [a^\dagger, a^\dagger] = 0 \tag{2-3.e4} \\
+    &= \omega a^\dagger \tag{2-3.e5}
+\end{align*}
+同様に,
+\begin{align*}
+    [H_{\text{SHO}}, a] &= \left[ \omega \left( a^\dagger a + \frac{1}{2} \right), a \right] \tag{2-3.e6} \\
+    &= \omega \left[ a^\dagger a, a \right] \tag{2-3.e7} \\
+    &= \omega \left( a^\dagger \underline{[a, a]} + \underline{[a^\dagger, a]} a \right) \tag{2-3.e8} \\
+    &\quad \hspace{0.5cm} [a, a] = 0, \quad [a^\dagger, a] = -1 \tag{2-3.e9} \\
+    &= -\omega a \tag{2-3.e10}
+\end{align*}
+
+\end{proof}
+
+\color{black}
+
+これにより, 以下の状態
+\begin{equation*}
+\lvert n \rangle \equiv (a^\dagger)^n \lvert 0 \rangle
+\end{equation*}
+が$H_{\text{SHO}}$の固有状態であり, 固有値$\left(n + \dfrac{1}{2}\right)\omega$を持つことが簡単に確認できる.
+
+\color{blue}
+
+\begin{proof}
+$\lvert n \rangle \equiv (a^\dagger)^n \lvert 0 \rangle$ は調和振動子の $n$ 番目の励起状態. ここで数演算子 $\hat{N} = a^\dagger a$ が
+\begin{align*}
+    \hat{N} \lvert n \rangle &= \hat{N} (a^\dagger)^n \lvert 0 \rangle \tag{2-3.f1} \\
+    &= a^\dagger \underline{a (a^\dagger)^n \lvert} 0 \rangle \tag{2-3.f2} \\
+    &\quad \hspace{0.5cm} a(a^\dagger)^n = n(a^\dagger)^{n-1} + (a^\dagger)^n a \label{2-3.f3} \tag{2-3.f3} \\
+    &= a^\dagger \left( n(a^\dagger)^{n-1} \lvert 0 \rangle + (a^\dagger)^n \underline{a \lvert 0 \rangle} \right) \tag{2-3.f4} \\
+    &\quad \hspace{4cm} a \lvert 0 \rangle = 0 \tag{2-3.f5}\\
+    &= a^\dagger n (a^\dagger)^{n-1} \lvert 0 \rangle \tag{2-3.f6} \\
+    &= n (a^\dagger)^n \lvert 0 \rangle \tag{2-3.f7}\\
+    &= n \lvert n \rangle \tag{2-3.f8}
+\end{align*}
+を満たすので,
+\begin{align*}
+    H_{\text{SHO}} \lvert n \rangle &= \omega \left( a^\dagger a + \frac{1}{2} \right) \lvert n \rangle \tag{2-3.f9} \\
+    &= \omega \left( \hat{N} + \frac{1}{2} \right) \lvert n \rangle \tag{2-3.f10} \\
+    &= \omega \left( n + \frac{1}{2} \right) \lvert n \rangle \tag{2-3.f11}
+\end{align*}
+したがって, $\lvert n \rangle$ は $H_{\text{SHO}}$ の固有状態であり, 固有値 $\left(n + \dfrac{1}{2}\right)\omega$ を持つことが分かる.
+
+\end{proof}
+
+※ \eqref{2-3.f3} の恒等式は数学的帰納法を用いることで証明できる:\\
+$n=1$ のとき,
+\begin{align*}
+    a(a^\dagger)^1 &= a a^\dagger \tag{2-3.f12} \\
+    &= a^\dagger a + 1 \tag{2-3.f13} \\
+    &= 1 \cdot (a^\dagger)^0 + (a^\dagger)^1 a \tag{2-3.f14}
+\end{align*}
+となり, 恒等式が成り立つ.\\
+ある $n$ について, 以下の恒等式が成り立つと仮定する：
+\begin{equation*}
+    a(a^\dagger)^n = n (a^\dagger)^{n-1} + (a^\dagger)^n a. \tag{2-3.f15}
+\end{equation*}
+$n+1$ のとき,
+\begin{align*}
+    \text{LHS} &= a(a^\dagger)^{n+1} \tag{2-3.f16} \\
+    &= a[(a^\dagger)^n a^\dagger] \tag{2-3.f17} \\
+    &= [\underline{a(a^\dagger)^n}] a^\dagger \tag{2-3.f18} \hspace{0.5cm} (\because \text{結合則}\quad A(BC) = (AB)C) \\
+    &\quad a(a^\dagger)^n = n (a^\dagger)^{n-1} + (a^\dagger)^n a \tag{2-3.f19} \\
+    &= n (a^\dagger)^{n-1} a^\dagger + (a^\dagger)^n \underline{a a^\dagger} \tag{2-3.f20} \\
+    &\quad \hspace{3cm} a a^\dagger = a^\dagger a + 1 \tag{2-3.f21} \\
+    &= n (a^\dagger)^n + (a^\dagger)^n (a^\dagger a + 1) \tag{2-3.f22} \\
+    &= n (a^\dagger)^n + (a^\dagger)^{n+1} a + (a^\dagger)^n \tag{2-3.f23} \\
+    &= (n+1) (a^\dagger)^n + (a^\dagger)^{n+1} a \tag{2-3.f24} \\
+\end{align*}
+よって, $n+1$ のときも恒等式が成り立つ. 数学的帰納法により, すべての $n\in \mathbb{N}$ について
+\begin{equation*}
+    a(a^\dagger)^n = n (a^\dagger)^{n-1} + (a^\dagger)^n a \tag{2-3.f25}
+\end{equation*}
+が成り立つことが示された.
+\vskip\baselineskip
+
+\color{black}
+これらの状態がスペクトル全体を形成する. Klein-Gordon Hamiltonian のスペクトルを見つけるため同じ手法を使う. つまり, 場の各 Fourier モードがそれぞれ独立した調和振動子として振る舞うことになり, それぞれ独自の$a$と$a^\dagger$を持つ.\\
+\eqref{2-23} を参考にして, 次のように書く.
+\begin{align*}
+\phi(\mathbf{x}) &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}} + a^\dagger_{\mathbf{p}} e^{-i\mathbf{p}\cdot\mathbf{x}} \right)
+\label{2.25} \tag{2.25} \\
+\pi(\mathbf{x}) &= \int \frac{d^3p}{(2\pi)^3} \left( -i \right) \sqrt{\frac{\omega_{\mathbf{p}}}{2}} \left( a_{\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}} - a^\dagger_{\mathbf{p}} e^{-i\mathbf{p}\cdot\mathbf{x}} \right) \label{2.26} \tag{2.26}
+\end{align*}
+
+\color{blue}
+
+\begin{proof}
+\eqref{2.25}, \eqref{2.26} は理論的背景により導出される結果なので, それを示す.\\
+正確には, Klein-Gordon 場 $\phi(\mathbf{x})$ の量子化をするにあたり, Fourier モードごとに場を分解(無限個の調和振動子としてみる), そのモードを量子化して, 最終的に場を $a_{\mathbf{p}}$ と $a^\dagger_{\mathbf{p}}$ を用いて表すという流れになる.
+\vskip\baselineskip
+まず古典場 $\phi(\mathbf{x}, t)$ を空間について Fourier 展開する：
+\begin{equation*}\label{2-3.g1}
+    \phi(\mathbf{x}, t) = \int \frac{d^3p}{(2\pi)^3} \left( f_{\mathbf{p}}(t) e^{i\mathbf{p}\cdot\mathbf{x}} + f_{\mathbf{p}}^*(t) e^{-i\mathbf{p}\cdot\mathbf{x}} \right) \tag{2-3.g1}
+\end{equation*}
+ここで $f_{\mathbf{p}}(t)$ は時間に依存するモード成分であり, 明確な形は決まってない.\\
+次に Klein-Gordon 方程式に \eqref{2-3.g1} を代入すると,
+\begin{align*}
+    &(\partial_t^2 - \nabla^2 + m^2) \phi(\mathbf{x}, t) = 0 \tag{2-3.g2} \\
+    &(\partial_t^2 - \nabla^2 + m^2) \int \frac{d^3p}{(2\pi)^3} \left( f_{\mathbf{p}}(t) e^{i\mathbf{p}\cdot\mathbf{x}} + f_{\mathbf{p}}^*(t) e^{-i\mathbf{p}\cdot\mathbf{x}} \right) = 0 \tag{2-3.g3}\\
+    &\int \frac{d^3p}{(2\pi)^3} \left[ \left( \ddot{f}_{\mathbf{p}}(t) + \mathbf{p}^2 f_{\mathbf{p}}(t) + m^2 f_{\mathbf{p}}(t) \right) e^{i\mathbf{p}\cdot\mathbf{x}} + \left( \ddot{f}_{\mathbf{p}}^*(t) + \mathbf{p}^2 f_{\mathbf{p}}^*(t) + m^2 f_{\mathbf{p}}^*(t) \right) e^{-i\mathbf{p}\cdot\mathbf{x}} \right] = 0 \tag{2-3.g4}
+\end{align*}
+指数関数 $e^{i\mathbf{p}\cdot\mathbf{x}}$ は各 $\mathbf{p}$ ごとに異なる関数であり, 互いに重ねて表すことができない(線型独立). (※$e^{i\mathbf{p}\cdot\mathbf{x}}$ が線型独立であるから, 各 $\mathbf{p}$ ごとに独立した運動方程式を持ち, 各モードが独立した自由度(調和振動子)として量子化できる構造となっている.)
+\vskip\baselineskip
+よって, それぞれの係数がゼロになる必要がある：
+\begin{equation*}
+    \ddot{f}_{\mathbf{p}}(t) + \mathbf{p}^2 f_{\mathbf{p}}(t) + m^2 f_{\mathbf{p}}(t) = 0 \tag{2-3.g5} \\
+\end{equation*}
+ここで, 
+\begin{equation*}
+    \omega_{\mathbf{p}} = \sqrt{\mathbf{p}^2 + m^2} \tag{2-3.g6}
+\end{equation*}
+とおくと, 
+\begin{equation*}\label{2-3.g7}
+    \left( \frac{d^2}{dt^2} + \omega_{\mathbf{p}}^2 \right) f_{\mathbf{p}}(t) = 0 \tag{2-3.g7}
+\end{equation*}
+となる. これは調和振動子の運動方程式である. これ一般解は,
+\begin{equation*}
+    f_{\mathbf{p}}(t) = A_{\mathbf{p}} e^{-i\omega_{\mathbf{p}}t} + B_{\mathbf{p}} e^{i\omega_{\mathbf{p}}t} \tag{2-3.g9}
+\end{equation*}
+ここで実場条件 $B_{\mathbf{p}} = A_{\mathbf{p}}^*$ を満たすように選ぶ必要があり, のちに $\phi$ と $\pi$ の正準交換関係 $[\phi(\mathbf{x}), \pi(\mathbf{x}')] = i\delta^{(3)}(\mathbf{x} - \mathbf{x}')$ を満たすように規格化定数を選ぶと次のようになる：
+\begin{equation*}
+    f_{\mathbf{p}}(t) = \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{-i\omega_{\mathbf{p}}t} + a^\dagger_{\mathbf{p}} e^{i\omega_{\mathbf{p}}t} \right). \tag{2-3.g10}
+\end{equation*}
 
 
 
-今度は、Klein-Gordonハミルトニアンのスペクトルを見つけるために、同じ手法を使います。
 
-ただし今回は、場の各フーリエモードが、それぞれ独立した調和振動子として振る舞うことになります。
-それぞれ独自の$a$と$a^\dagger$を持つ、というわけです。
+\end{proof}
 
-式 (2.23) を参考にして、次のように書きます：
-\begin{equation}
-\phi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}} + a^\dagger_{\mathbf{p}} e^{-i\mathbf{p}\cdot\mathbf{x}} \right)
-\tag{2.25}
-\end{equation}
+\color{black}
 
-\begin{equation}
-\pi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \left( -i \right) \sqrt{\frac{\omega_{\mathbf{p}}}{2}} \left( a_{\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}} - a^\dagger_{\mathbf{p}} e^{-i\mathbf{p}\cdot\mathbf{x}} \right)
-\tag{2.26}
-\end{equation}
+$a_{\mathbf{p}}$と$a^\dagger_{\mathbf{p}}$を$\phi$と$\pi$を使って逆に表す式も簡単に導出できるが、実際の計算ではほとんど必要にならない.
 
-$a_{\mathbf{p}}$と$a^\dagger_{\mathbf{p}}$を$\phi$と$\pi$を使って逆に表す式も簡単に導出できますが、実際の計算ではほとんど必要になりません。
-
-以下の計算では、(2.25)と(2.26)を次のように並び替えた形が役に立ちます：
+以下の計算では, \eqref{2.25} と \eqref{2.26} を次のように並び替えた形が役に立つ：
 
 \begin{equation}
 \phi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}}) e^{i\mathbf{p}\cdot\mathbf{x}}
@@ -163,6 +475,117 @@ $a_{\mathbf{p}}$と$a^\dagger_{\mathbf{p}}$を$\phi$と$\pi$を使って逆に�
 \pi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \left( -i \right) \sqrt{\frac{\omega_{\mathbf{p}}}{2}} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}}) e^{i\mathbf{p}\cdot\mathbf{x}}
 \tag{2.28}
 \end{equation}
+
+交換関係 (2.24) は次のようになります：
+\begin{equation*}
+[a_{\mathbf{p}}, a^\dagger_{\mathbf{p}'}] = (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{p}') ,
+\end{equation*}
+
+これにより, $\phi$と$\pi$の交換子が正しく再現されることが確認できます：
+\begin{align*}
+[\phi(\mathbf{x}), \pi(\mathbf{x}')] &= \int \frac{d^3p\, d^3p'}{(2\pi)^6} \left( -\frac{i}{2} \right) \sqrt{\frac{\omega_{\mathbf{p}'}}{\omega_{\mathbf{p}}}}
+\left( [a^\dagger_{\mathbf{p}}, a_{\mathbf{p}'}] - [a_{\mathbf{p}}, a^\dagger_{\mathbf{p}'}] \right)
+e^{i(\mathbf{p}\cdot\mathbf{x} + \mathbf{p}'\cdot\mathbf{x}')} \\
+&= i\delta^{(3)}(\mathbf{x} - \mathbf{x}') .
+\end{align*}
+
+(もしこの種の計算や次に続く計算に不慣れであれば, ぜひ丁寧に手を動かして確認してください.  
+少し練習すれば, すぐに簡単にできるようになりますし, 次章以降の基礎にもなります.)
+
+\vspace{0.5em}
+
+さて, ラダー演算子 $a_{\mathbf{p}}$, $a^\dagger_{\mathbf{p}}$ を使ってハミルトニアンを表現します.  
+式 (2.8) から出発して,
+\begin{align*}
+H &= \int d^3x \int \frac{d^3p\, d^3p'}{(2\pi)^6} e^{i(\mathbf{p}+\mathbf{p}')\cdot\mathbf{x}} \\
+&\quad \times \left\{ -\frac{\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}}{4} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} - a^\dagger_{-\mathbf{p}'})
++ \frac{\mathbf{p}\cdot\mathbf{p}' + m^2}{4\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}} (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} + a^\dagger_{-\mathbf{p}'}) \right\} .
+\end{align*}
+
+これを整理すると,
+\begin{equation*}
+H = \int \frac{d^3p}{(2\pi)^3} \omega_{\mathbf{p}} \left( a^\dagger_{\mathbf{p}} a_{\mathbf{p}} + \frac{1}{2} [a_{\mathbf{p}}, a^\dagger_{\mathbf{p}}] \right) .
+\end{equation*}
+
+第2項は $\delta(0)$ に比例する無限大の $c$-数です.  
+これは全モードに渡るゼロ点エネルギー $\omega_{\mathbf{p}}/2$ の和に過ぎず, 自然に現れるものです.
+
+\vspace{0.5em}
+
+この無限大の定数項によるエネルギーシフトは実験で検出できません.  
+実験では常に基底状態とのエネルギー差のみが測定されるからです.  
+したがって, 今後すべての計算ではこの無限大定数を無視します.
+
+\vspace{0.5em}
+
+このハミルトニアンを使うと, 交換子は簡単に求められます：
+\begin{equation*}
+[H, a^\dagger_{\mathbf{p}}] = \omega_{\mathbf{p}} a^\dagger_{\mathbf{p}} , \quad
+[H, a_{\mathbf{p}}] = -\omega_{\mathbf{p}} a_{\mathbf{p}} .
+\end{equation*}
+
+これにより, 調和振動子と同様に理論のスペクトルを書くことができます.  
+基底状態 $\lvert 0 \rangle$ は
+\begin{equation*}
+a_{\mathbf{p}} \lvert 0 \rangle = 0
+\end{equation*}
+をすべての$\mathbf{p}$について満たす状態であり, ゼロ点エネルギーを除いた $E=0$ を持ちます.
+
+他のすべての励起状態は, $\lvert 0 \rangle$ に生成演算子を作用させて構成されます.  
+一般に,
+\begin{equation*}
+a^\dagger_{\mathbf{p}} a^\dagger_{\mathbf{q}} \cdots \lvert 0 \rangle
+\end{equation*}
+はエネルギー $\omega_{\mathbf{p}} + \omega_{\mathbf{q}} + \cdots$ を持つ固有状態です.
+
+\vspace{0.5em}
+
+次に, 固有状態の運動量について考えます.  
+式 (2.19) と (2.31) を使って全運動量演算子は：
+\begin{equation*}
+\mathbf{P} = -\int d^3x\, \pi(\mathbf{x}) \nabla \phi(\mathbf{x})
+= \int \frac{d^3p}{(2\pi)^3} \mathbf{p} \, a^\dagger_{\mathbf{p}} a_{\mathbf{p}}
+\end{equation*}
+と書けます.
+
+\vspace{0.5em}
+
+この式から,
+$a^\dagger_{\mathbf{p}}$ は運動量 $\mathbf{p}$ を持ち, エネルギー $\omega_{\mathbf{p}} = \sqrt{|\mathbf{p}|^2 + m^2}$ を持つ励起を作ることがわかります.  
+また,
+$a^\dagger_{\mathbf{p}} a^\dagger_{\mathbf{q}} \cdots \lvert 0 \rangle$
+は運動量 $\mathbf{p} + \mathbf{q} + \cdots$ を持つ状態になります.
+
+\vspace{0.5em}
+
+これらの励起は離散的であり, 適切な相対論的エネルギー運動量関係に従うので,
+粒子 (particles) と呼ぶのが自然です.
+
+なお, $a^\dagger_{\mathbf{p}}$ が作るのは運動量空間の粒子であり, 空間局所化されたものではありません.
+
+\vspace{0.5em}
+
+今後, $\omega_{\mathbf{p}}$ を粒子エネルギー $E_{\mathbf{p}}$ と呼ぶことにし,
+\begin{equation*}
+E_{\mathbf{p}} = \sqrt{|\mathbf{p}|^2 + m^2}
+\end{equation*}
+で与えます.
+
+エネルギーは常に正の値を取ります.
+
+\vspace{0.5em}
+
+この形式論は, 粒子の統計も決定します.
+
+たとえば, 二粒子状態
+\begin{equation*}
+a^\dagger_{\mathbf{p}} a^\dagger_{\mathbf{q}} \lvert 0 \rangle
+\end{equation*}
+を考えると, $a^\dagger_{\mathbf{p}}$ と $a^\dagger_{\mathbf{q}}$ は交換可能なので,
+粒子を入れ替えても状態は変わりません.
+
+したがって, Klein-Gordon粒子は
+\textbf{ボース＝アインシュタイン統計} (Bose-Einstein statistics) に従います.
 
 
  
