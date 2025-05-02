@@ -423,18 +423,16 @@ $n+1$ のとき,
 \vskip\baselineskip
 まず古典場 $\phi(\mathbf{x}, t)$ を空間について Fourier 展開する：
 \begin{equation*}\label{2-3.g1}
-    \phi(\mathbf{x}, t) = \int \frac{d^3p}{(2\pi)^3} \left( f_{\mathbf{p}}(t) e^{i\mathbf{p}\cdot\mathbf{x}} + f_{\mathbf{p}}^*(t) e^{-i\mathbf{p}\cdot\mathbf{x}} \right) \tag{2-3.g1}
+    \phi(\mathbf{x}, t) = \int \frac{d^3p}{(2\pi)^3} f_{\mathbf{p}}(t) e^{i\mathbf{p}\cdot\mathbf{x}} \tag{2-3.g1}
 \end{equation*}
-ここで $f_{\mathbf{p}}(t)$ は時間に依存するモード成分であり, 明確な形は決まってない.\\
+ここで $f_{\mathbf{p}}(t)$ は時間に依存するモード成分であり, 実場条件 $f_{\mathbf{p}}^*(t) = f_{-\mathbf{p}}(t)$ を満たす.\\
 次に Klein-Gordon 方程式に \eqref{2-3.g1} を代入すると,
 \begin{align*}
     &(\partial_t^2 - \nabla^2 + m^2) \phi(\mathbf{x}, t) = 0 \tag{2-3.g2} \\
-    &(\partial_t^2 - \nabla^2 + m^2) \int \frac{d^3p}{(2\pi)^3} \left( f_{\mathbf{p}}(t) e^{i\mathbf{p}\cdot\mathbf{x}} + f_{\mathbf{p}}^*(t) e^{-i\mathbf{p}\cdot\mathbf{x}} \right) = 0 \tag{2-3.g3}\\
-    &\int \frac{d^3p}{(2\pi)^3} \left[ \left( \ddot{f}_{\mathbf{p}}(t) + \mathbf{p}^2 f_{\mathbf{p}}(t) + m^2 f_{\mathbf{p}}(t) \right) e^{i\mathbf{p}\cdot\mathbf{x}} + \left( \ddot{f}_{\mathbf{p}}^*(t) + \mathbf{p}^2 f_{\mathbf{p}}^*(t) + m^2 f_{\mathbf{p}}^*(t) \right) e^{-i\mathbf{p}\cdot\mathbf{x}} \right] = 0 \tag{2-3.g4}
+    &(\partial_t^2 - \nabla^2 + m^2) \int \frac{d^3p}{(2\pi)^3} f_{\mathbf{p}}(t) e^{i\mathbf{p}\cdot\mathbf{x}} = 0 \tag{2-3.g3}\\
+    &\int \frac{d^3p}{(2\pi)^3} \left[ \left( \ddot{f}_{\mathbf{p}}(t) + \mathbf{p}^2 f_{\mathbf{p}}(t) + m^2 f_{\mathbf{p}}(t) \right) e^{i\mathbf{p}\cdot\mathbf{x}} \right] = 0 \tag{2-3.g4}
 \end{align*}
-指数関数 $e^{i\mathbf{p}\cdot\mathbf{x}}$ は各 $\mathbf{p}$ ごとに異なる関数であり, 互いに重ねて表すことができない(線型独立). (※$e^{i\mathbf{p}\cdot\mathbf{x}}$ が線型独立であるから, 各 $\mathbf{p}$ ごとに独立した運動方程式を持ち, 各モードが独立した自由度(調和振動子)として量子化できる構造となっている.)
-\vskip\baselineskip
-よって, それぞれの係数がゼロになる必要がある：
+よって, 括弧内の係数がゼロになる：
 \begin{equation*}
     \ddot{f}_{\mathbf{p}}(t) + \mathbf{p}^2 f_{\mathbf{p}}(t) + m^2 f_{\mathbf{p}}(t) = 0 \tag{2-3.g5} \\
 \end{equation*}
@@ -448,21 +446,41 @@ $n+1$ のとき,
 \end{equation*}
 となる. これは調和振動子の運動方程式である. これ一般解は,
 \begin{equation*}
-    f_{\mathbf{p}}(t) = A_{\mathbf{p}} e^{-i\omega_{\mathbf{p}}t} + B_{\mathbf{p}} e^{i\omega_{\mathbf{p}}t} \tag{2-3.g9}
+    f_{\mathbf{p}}(t) = A_{\mathbf{p}} e^{-i\omega_{\mathbf{p}}t} + B_{\mathbf{p}} e^{i\omega_{\mathbf{p}}t} \tag{2-3.g8}
 \end{equation*}
 ここで実場条件 $B_{\mathbf{p}} = A_{\mathbf{p}}^*$ を満たすように選ぶ必要があり, のちに $\phi$ と $\pi$ の正準交換関係 $[\phi(\mathbf{x}), \pi(\mathbf{x}')] = i\delta^{(3)}(\mathbf{x} - \mathbf{x}')$ を満たすように規格化定数を選ぶと次のようになる：
 \begin{equation*}
-    f_{\mathbf{p}}(t) = \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{-i\omega_{\mathbf{p}}t} + a^\dagger_{\mathbf{p}} e^{i\omega_{\mathbf{p}}t} \right). \tag{2-3.g10}
+    f_{\mathbf{p}}(t) = \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{-i\omega_{\mathbf{p}}t} + a^\dagger_{-\mathbf{p}} e^{i\omega_{\mathbf{p}}t} \right) \tag{2-3.g9}
 \end{equation*}
-
-
-
+\eqref{2-3.g1} に代入すると,
+\begin{align*}
+    \phi(\mathbf{x}, t) &= \int \frac{d^3p}{(2\pi)^3} \left( \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{-i\omega_{\mathbf{p}}t} + a^\dagger_{-\mathbf{p}} e^{i\omega_{\mathbf{p}}t} \right) e^{i\mathbf{p}\cdot\mathbf{x}} \right) \tag{2-3.g10}\\
+    &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{i(\mathbf{p}\cdot\mathbf{x} - \omega_{\mathbf{p}}t)} + a^\dagger_{-\mathbf{p}} e^{i(\mathbf{p}\cdot\mathbf{x} + \omega_{\mathbf{p}}t)} \right) \tag{2-3.g11}\\
+    \phi(\mathbf{x}) &= \phi(\mathbf{x}, t = 0) \tag{2-3.g12} \\
+    &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}} + a^\dagger_{-\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}} \right), \tag{2-3.g13}
+\end{align*}
+ここで変数変換 $\mathbf{p} \to -\mathbf{p}$ を行うと, $a_{-\mathbf{p}} e^{-i\mathbf{p}\cdot\mathbf{x}} \to a_{\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}}$, $a^\dagger_{-\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}} \to a^\dagger_{\mathbf{p}} e^{-i\mathbf{p}\cdot\mathbf{x}}$, $dp^3$ は積分範囲が変わらないので, 符号は変わらない. よって,
+\begin{equation*}
+    \phi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}} + a^\dagger_{\mathbf{p}} e^{-i\mathbf{p}\cdot\mathbf{x}} \right) \tag{2-3.g14}
+\end{equation*}
+となる. これで \eqref{2.25} が示されたので, 次に \eqref{2.26} を示す.\\
+共役運動量 $\pi(\mathbf{x}, t)$ の定義は
+\begin{equation*}
+    \pi(\mathbf{x}, t) = \frac{\partial \mathcal{L}}{\partial \dot{\phi}} = \dot{\phi}(\mathbf{x}, t) \tag{2-3.g15}
+\end{equation*}
+である. よってこれを計算すると,
+\begin{align*}
+    \pi(\mathbf{x}, t) &= \frac{\partial}{\partial t} \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{i(\mathbf{p}\cdot\mathbf{x} - \omega_{\mathbf{p}}t)} + a^\dagger_{\mathbf{p}} e^{i(\mathbf{p}\cdot\mathbf{x} + \omega_{\mathbf{p}}t)} \right) \tag{2-3.g16} \\
+    &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( -i\omega_{\mathbf{p}} a_{\mathbf{p}} e^{-i\omega_{\mathbf{p}}t} + i\omega_{\mathbf{p}} a^\dagger_{\mathbf{p}} e^{i\omega_{\mathbf{p}}t} \right) \tag{2-3.g17}\\
+    &= \int \frac{d^3p}{(2\pi)^3} (-i) \sqrt{\frac{\omega_{\mathbf{p}}}{2}} \left( a_{\mathbf{p}} e^{-i\omega_{\mathbf{p}}t} - a^\dagger_{\mathbf{p}} e^{i\omega_{\mathbf{p}}t} \right) \tag{2-3.g18}
+\end{align*}
+となる. これで \eqref{2.26} が示された.
 
 \end{proof}
 
 \color{black}
 
-$a_{\mathbf{p}}$と$a^\dagger_{\mathbf{p}}$を$\phi$と$\pi$を使って逆に表す式も簡単に導出できるが、実際の計算ではほとんど必要にならない.
+$a_{\mathbf{p}}$と$a^\dagger_{\mathbf{p}}$を$\phi$と$\pi$を使って逆に表す式も簡単に導出できるが, 実際の計算ではほとんど必要にならない.
 
 以下の計算では, \eqref{2.25} と \eqref{2.26} を次のように並び替えた形が役に立つ：
 
