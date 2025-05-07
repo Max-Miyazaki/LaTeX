@@ -1,9 +1,9 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.11)  7 MAY 2025 13:07
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.11)  7 MAY 2025 18:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**Matsubara_co-evo_Sec3-2.tex
-(./Matsubara_co-evo_Sec3-2.tex
+**Matsubara_co-evo_Sec3-3.tex
+(./Matsubara_co-evo_Sec3-3.tex
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -651,8 +651,8 @@ File: l3backend-dvips.def 2024-05-08 L3 backend support: dvips
 \g__pdf_backend_annotation_int=\count339
 \g__pdf_backend_link_int=\count340
 \g__pdf_backend_link_sf_int=\count341
-) (./Matsubara_co-evo_Sec3-2.aux)
-\openout1 = `Matsubara_co-evo_Sec3-2.aux'.
+) (./Matsubara_co-evo_Sec3-3.aux)
+\openout1 = `Matsubara_co-evo_Sec3-3.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
 LaTeX Font Info:    ... okay on input line 59.
@@ -678,9 +678,9 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 59.
 LaTeX Font Info:    ... okay on input line 59.
 \c@lstlisting=\count342
 Package hyperref Info: Link coloring ON on input line 59.
- (./Matsubara_co-evo_Sec3-2.out) (./Matsubara_co-evo_Sec3-2.out)
+ (./Matsubara_co-evo_Sec3-3.out) (./Matsubara_co-evo_Sec3-3.out)
 \@outlinefile=\write4
-\openout4 = `Matsubara_co-evo_Sec3-2.out'.
+\openout4 = `Matsubara_co-evo_Sec3-3.out'.
 
 LaTeX Font Info:    Trying to load font information for U+msa on input line 61.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -703,53 +703,33 @@ LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 75.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 75.
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 78.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 78.
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <17.28> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 100.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <17.28> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 100.
 
 
 [2]
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <17.28> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 174.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <17.28> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 174.
+
 
 [3]
-LaTeX Font Info:    Kanji font shape `JY1/mc/m/it' undefined
-(Font)              No change on input line 247.
 
-
-[4]
-
-[5]
-LaTeX Font Info:    Kanji font shape `JY1/mc/m/it' undefined
-(Font)              No change on input line 319.
-
-
-[6]
-LaTeX Font Info:    Kanji font shape `JY1/mc/m/it' undefined
-(Font)              No change on input line 368.
-
-
-[7]
-
-[8] (./Matsubara_co-evo_Sec3-2.aux)
+[4] (./Matsubara_co-evo_Sec3-3.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-Package rerunfilecheck Info: File `Matsubara_co-evo_Sec3-2.out' has not changed.
+Package rerunfilecheck Info: File `Matsubara_co-evo_Sec3-3.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 28209 strings out of 473836
- 577771 string characters out of 5731189
- 1012504 words of memory out of 5000000
- 50980 multiletter control sequences out of 15000+600000
- 585359 words of font info for 139 fonts, out of 8000000 for 9000
+ 28177 strings out of 473836
+ 577425 string characters out of 5731189
+ 1006023 words of memory out of 5000000
+ 50954 multiletter control sequences out of 15000+600000
+ 583451 words of font info for 132 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 84i,13n,96p,560b,566s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,10n,96p,560b,463s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Matsubara_co-evo_Sec3-2.dvi (8 pages, 45244 bytes).
+Output written on Matsubara_co-evo_Sec3-3.dvi (4 pages, 24808 bytes).
