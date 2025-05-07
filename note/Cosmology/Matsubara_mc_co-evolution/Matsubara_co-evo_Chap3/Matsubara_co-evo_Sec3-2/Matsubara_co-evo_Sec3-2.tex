@@ -1,0 +1,366 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{第3章 膨張宇宙の力学\\
+3.2. エネルギー成分}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートは松原隆彦の``現代宇宙論ー時空と物質の共進化ー''の第3章の2節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+
+
+
+\end{abstract}
+    
+    
+
+\newpage
+
+\color{blue}
+\subsection*{概要}
+宇宙を構成するエネルギー成分は以下の2種類に分類される：
+\begin{itemize}
+    \item \textbf{非相対論的成分}（matter, dust）：運動エネルギーが質量エネルギーより小さい.
+    \item \textbf{相対論的成分}（radiation）：運動エネルギーが質量エネルギーと同等またはそれ以上.
+\end{itemize}
+
+\subsection*{状態方程式とエネルギー密度の関係}
+
+\begin{itemize}
+  \item 状態方程式はエネルギー密度 $\rho$ と圧力 $p$ の関係を与える.
+  \item 物質成分（非相対論的）では
+  \begin{equation*}
+    p = 0.
+  \end{equation*}
+  \item 放射成分（相対論的）では
+  \begin{equation*}
+    p = \frac{1}{3}\rho.
+  \end{equation*}
+  \item 一般的には状態方程式パラメータ $w$ を用いて
+  \begin{equation*}
+    p = w \rho.
+  \end{equation*}
+\end{itemize}
+
+\section*{エネルギー密度のスケール因子依存性}
+
+\begin{itemize}
+  \item 各成分のエネルギー密度はスケール因子 $a$ に依存し, 以下でスケーリングされる：
+  \begin{align*}
+    \rho_m &\propto a^{-3} \quad \text{(物質)} \\
+    \rho_r &\propto a^{-4} \quad \text{(放射)} \\
+    \rho_\Lambda &= \text{const.} \quad \text{(宇宙定数)}
+  \end{align*}
+  \item 一般化された形式として
+  \begin{equation*}
+    \rho \propto a^{-3(1 + w)}.
+  \end{equation*}
+\end{itemize}
+
+\section*{混合流体系とエネルギー保存則}
+
+\begin{itemize}
+  \item 複数成分が共存する宇宙では，保存則が成分ごとに次のように与えられる：
+  \begin{equation*}
+    T^{\mu\nu}_{A\ ;\nu} = Q_A^\mu
+  \end{equation*}
+  \item 全体として保存されるためには
+  \begin{equation*}
+    \sum_A Q_A^\mu = 0
+  \end{equation*}
+\end{itemize}
+
+\section*{成分ごとのエネルギー収支方程式}
+
+\begin{itemize}
+  \item エネルギー保存則により，次の式が得られる：
+  \begin{equation*}
+    \frac{d}{dt} (\rho_A a^3) = a^3 Q_A^0 - p_A \frac{d}{dt} a^3
+  \end{equation*}
+  \item $Q_A^0 = q_A \rho_A$ と置くと, 積分により成分 $A$ のエネルギー密度が得られる:
+  \begin{equation*}
+    \rho_A = \rho_{A0} \exp \left[ -3 \int_{a_0}^{a} \left(1 + w_A + \frac{q_A}{1 + w_A} \right) \frac{da}{a} \right].
+  \end{equation*}
+\end{itemize}
+
+\section*{代表的なエネルギー成分のスケーリング}
+
+\begin{itemize}
+  \item 特定のエネルギー成分における $w_A$ の値：
+  \begin{align*}
+    w_m &= 0 \quad \text{(物質)} \\
+    w_r &= \frac{1}{3} \quad \text{(放射)} \\
+    w_\Lambda &= -1 \quad \text{(宇宙定数)}
+  \end{align*}
+  \item それぞれのエネルギー密度のスケーリング：
+  \begin{align*}
+    \rho_m &= \rho_{m0} a^{-3} \\
+    \rho_r &= \rho_{r0} a^{-4} \\
+    \rho_\Lambda &= \rho_{\Lambda 0}
+  \end{align*}
+  \item $w_A$ が時間依存する場合にも, 一般には
+  \begin{equation*}
+    \rho_A = \rho_{A0} \exp \left[ -3 \int_{a_0}^{a} (1 + w_A(a)) \frac{da}{a} \right]
+  \end{equation*}
+\end{itemize}
+
+\color{black}
+
+\section*{3.2. エネルギー成分}
+
+一様宇宙の Einstein 方程式を解くためには状態方程式を与えて, 独立変数を減らす必要があった. そのためには, 宇宙のエネルギー成分を特定する必要がある. そのエネルギー成分が宇宙で支配的であるとき, その成分の状態方程式を用いて Einstein 方程式を解くことができる. エネルギー成分としては, 非相対論的成分 (matter, dust) と相対論的成分 (radiation) の2種類が考えられ, 非相対論的成分のことを Matter component, 相対論的成分のことを Radiation component と呼ぶ.
+\vskip\baselineskip
+Matter component の場合, 圧力はエネルギー密度に比べて無視できるほど小さい.\\
+理想気体を例に, 圧力とエネルギー密度の関係を考える. 理想気体の圧力 $p$ は, 粒子数密度 $n$ と温度 $T$ によって
+\begin{equation*}\label{3.28}
+  p = nk_{\text{B}}T \tag{3.28}
+\end{equation*}
+と表される. ここで $k_{\text{B}}$ はボルツマン定数である. 
+
+\color{blue}
+
+※熱力学の復習\\
+$m$ [mol] の標準状態 ($T = 273.15$ K, $p = 1.013 \times 10^5$ Pa, $V = m \times 22.4 \times 10^{-3}$ m$^3$) を Combined Gas Law に代入すると,
+\begin{align*}
+    \frac{PV}{T} &= \frac{1.013 \times 10^5 \times m \times 22.4 \times 10^{-3}}{273.15} \tag{3-2.a1}\\
+    &= 8.314 \times m \tag{3-2.a2}\\
+    &= mR \hspace{0.5cm}(\because 8.314 \text{ J/(mol$\cdot$K)} \equiv R) \tag{3-2.a3}\\
+    PV &= mRT \label{3-2.a4} \tag{3-2.a4}
+\end{align*}
+Avogadro 数 $N_{\text{A}} = 6.022 \times 10^{23}$ mol$^{-1}$ を用いて粒子数 $N$ とすると,
+\begin{align*}
+    N &= mN_{\text{A}} \tag{3-2.a5}\\
+    m &= \frac{N}{N_{\text{A}}} \tag{3-2.a6}
+\end{align*}
+\eqref{3-2.a4} に代入すると,
+\begin{align*}
+    p &= \frac{N}{N_{\text{A}}}RT \tag{3-2.a7}
+\end{align*}
+となる. Boltzmann 定数 $k_{\text{B}} \equiv \dfrac{R}{N_{\text{A}}}$ を用いると,
+\begin{align*}
+    pV &= Nk_{\text{B}}T. \tag{3-2.a8}
+\end{align*}
+単位体積あたりの粒子数 $n$ を用いると,
+\begin{align*}
+    p &= nk_{\text{B}}T. \tag{3-2.a9}
+\end{align*}
+と表され, 求めたい式が得られる.
+
+\color{black}
+\vskip\baselineskip
+
+粒子の平均密度を $\mu$ とするとエネルギー密度は以下で与えられる：
+\begin{equation*}\label{3.29}
+  \rho = n\mu c^2 \tag{3.29}
+\end{equation*}
+\textcolor{blue}{※粒子1個あたりの静止エネルギー $\mu c^2$ に単位体積あたりの粒子数 $n$ をかけた.}
+\vskip\baselineskip
+\eqref{3.29} を \eqref{3.28} に代入すると,
+\begin{equation*}
+    p = \frac{k_{\text{B}}T}{\mu c^2} \rho \tag{3.30}
+\end{equation*}
+Matter component の場合, $p \ll \rho$ となるため, 非相対論的成分の状態方程式は近似的に
+\begin{equation*}
+    p = 0. \tag{3.31}
+\end{equation*}
+相対論的成分では, 統計力学により導かれるように断熱条件下の状態方程式は
+\begin{equation*}
+    p = \frac{1}{3} \rho. \tag{3.32}
+\end{equation*}
+
+\color{blue}
+断熱である理由など後で記載.
+
+\color{black}
+\vskip\baselineskip
+Matter, Radiation のそれぞれの状態方程式は以下のような形で表される：
+\begin{equation*}\label{3.33}
+    p = w \rho. \tag{3.33}
+\end{equation*}
+ここで $w$ は状態方程式パラメータで, 非相対論的成分は $w = 0$, 相対論的成分は $w = \dfrac{1}{3}$. また前節で述べたように, 宇宙定数の場合は $w = -1$ となる. しかし, $w$ が完全な非相対論的でなかったり, 多成分からなる混合状態では $w$ は定数でなくなるので注意.\par
+$w$ が定数である場合, 保存則の式
+\begin{equation*}\label{3.15}
+    \dot{\rho} + 3 \frac{\dot{a}}{a} (\rho + p) = 0 \tag{3.15}
+\end{equation*}
+は簡単に積分できて以下のようになる：
+\begin{equation*}\label{3.34}
+    \rho \propto a^{-3(1 + w)}. \tag{3.34}
+\end{equation*}
+
+\color{blue}
+\begin{proof}
+\eqref{3.34} の導出.\\
+\eqref{3.15} に \eqref{3.33} を代入すると,
+\begin{align*}
+    \dot{\rho} + 3 \frac{\dot{a}}{a} (1 + w) \rho &= 0 \tag{3-2.b1}\\
+    \frac{1}{\rho} \frac{d\rho}{dt} &= -3(1 + w) \frac{1}{a} \frac{da}{dt} \tag{3-2.b2}\\
+    \int \frac{1}{\rho} \frac{d\rho}{dt} dt &= -3(1 + w) \int \frac{1}{a} \frac{da}{dt} dt \tag{3-2.b3}\\
+    \ln \rho &= -3(1 + w) \ln a + \text{const.} \tag{3-2.b4}\\
+    \rho &= \text{const.} \times a^{-3(1 + w)} \tag{3-2.b5}\\
+    \therefore \hspace{0.5cm} &\rho \propto a^{-3(1 + w)}. \tag{3-2.b6}
+\end{align*}
+
+\end{proof}
+
+\color{black}
+\begin{itemize}
+    \item 各成分のエネルギー密度はスケール因子 $a$ に依存する：
+    \begin{align*}
+      \rho_m &\propto a^{-3} \quad \text{(物質)} \\
+      \rho_r &\propto a^{-4} \quad \text{(放射)} \\
+      \rho_\Lambda &= \text{const.} \quad \text{(宇宙定数)}
+    \end{align*}    
+\end{itemize}
+$w$ が定数でない場合, 保存則の式 \eqref{3.15} は以下となる：
+\begin{equation*}
+    \rho \propto \exp \left[ -3 \int^{a}_{a_0} (1 + w(a)) \frac{da}{a} \right] \tag{3.35}
+\end{equation*}
+具体的に $w(a)$ が与えられないとこの積分は計算できない.
+\vskip\baselineskip
+混合流体 (複数の流体成分がエネルギー密度に寄与する) の場合を考える. 成分 $A$ のエネルギー運動量テンソルを ${{T_A}^{\mu}}_{\nu}$ とすると, 全体のエネルギー運動量テンソル ${{T}^{\mu}}_{\nu}$ は
+\begin{equation*}
+    {{T}^{\mu}}_{\nu} = \sum_A {{T_A}^{\mu}}_{\nu} \tag{3.36}
+\end{equation*}
+と表される. ここで ${{T_A}^{\mu}}_{\nu}$ は,
+\begin{equation*}
+    {{T_A}^{\mu}}_{\nu} =
+    \begin{pmatrix}
+        -\rho_A & 0 & 0 & 0 \\
+        0 & p_A & 0 & 0 \\
+        0 & 0 & p_A & 0 \\
+        0 & 0 & 0 & p_A
+    \end{pmatrix} \tag{3.37}
+\end{equation*}
+成分 $A$ の状態方程式パラメータ $w_A$ を
+\begin{equation*}
+    p_A = w_A \rho_A \tag{3.38}
+\end{equation*}
+と定義すると, 混合流体全体のエネルギー密度 $\rho$ と圧力 $p$ は
+\begin{equation*}
+    \rho = \sum_A \rho_A, \quad p = \sum_A p_A = \sum_A w_A \rho_A. \tag{3.39}
+\end{equation*}
+一般的に成分間の相互作用により成分ごとには断熱的に振る舞うと限らない. \\
+そこで混合流体全体として成り立つ
+\begin{equation*}\label{3.40}
+    {{T_A}^{\mu}}_{\nu ;\mu} = -Q_{A\nu} \tag{3.40}
+\end{equation*}
+というような保存則を考える.
+\vskip\baselineskip
+
+\color{blue}
+
+※ \eqref{3.40} の左辺は成分 $A$ のエネルギー運動量テンソルの局所的変化を表し, 右辺は他成分とのエネルギー運動量の交換項を表している. つまり, $-Q_{A\nu}$ は成分 $A$ が他の成分から受け取る (または渡す) エネルギー運動量の4元ベクトル. マイナスなのは「負の発散」が入ってくる方向 (供給項) を表すため.
+
+\color{black}
+\vskip\baselineskip
+
+ここで $Q_{A\nu}$ は成分 $A$ の流れの4元ベクトルで以下を満たす：
+\begin{equation*}\label{3.41}
+    \sum_A Q_{A\nu} = 0 \tag{3.41}
+\end{equation*}
+
+\color{blue}
+\begin{proof}
+\eqref{3.41} の導出.\\
+宇宙全体としてはエネルギー運動量の保存則が成り立つため, 
+\begin{equation*}
+    {T^{\mu}}_{\nu} = \sum_A {{T_A}^{\mu}}_{\nu} \Longrightarrow {{T_A}^{\mu}}_{\nu;\mu} = 0.\tag{3-2.c1}
+\end{equation*}
+ここで \eqref{3.40} を各成分に適用すると,
+\begin{equation*}
+    \sum_A {{T_A}^{\mu}}_{\nu ;\mu} = - \sum_A Q_{A\nu} \Longrightarrow \sum_A Q_{A\nu} = 0. \tag{3-2.c2}
+\end{equation*}
+\end{proof}
+
+\color{black}
+\vskip\baselineskip
+一様等方宇宙においては $Q_{A\nu}$ の空間成分は消えるので, 
+\begin{equation*}
+    Q_{A\nu} = \left(\frac{Q_{A0}}{c}, 0, 0, 0\right). \tag{3.42}
+\end{equation*}
+\textcolor{blue}{※ $Q_{A\nu}$ の空間成分は ($Q_{Ai}, i = 1, 2, 3$) が非ゼロであると, ある空間方向にエネルギー運動量フラックス (流れ) が存在する, つまり, どこかの方向にエネルギーが流れていることになるので宇宙の一様等方性を破ってしまう. よって, 一様等方性を仮定すると $Q_{A\nu}$ の空間成分はゼロである.}
+\vskip\baselineskip
+ここで $Q_A$ は時間のみの関数となるので, \eqref{3.41} より以下を満たす：
+\begin{equation*}
+    \sum_A Q_{A} = 0. \tag{3.43}
+\end{equation*}
+すると, 
+\begin{equation*}
+    \dot{\rho}_A -3\frac{\dot{a}}{a}(\rho_A + p_A) + Q_A. \tag{3.44}
+\end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
