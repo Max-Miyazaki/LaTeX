@@ -1,0 +1,77 @@
+\documentclass[12pt]{jsarticle}
+
+\title{Part 1 Special Relativity\\
+1. The Geometry of Special Relativity}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\usepackage{indentfirst}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{%
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\newcommand{\tcb}[2]{\begin{tcolorbox}[title={\textcolor{white}{#1}}, opacitybacktitle = 0, colframe=white!40!black]#2
+\end{tcolorbox}}
+
+
+
+\renewcommand{\arraystretch}{2.1}
+
+\numberwithin{equation}{section}
+
+
+\begin{document}
+\maketitle
+\vspace{1cm}
+\begin{abstract}
+    これは SIDNEY COLEMAN'S LECTURES ON RELATIVITY を各章でまとめたものです. メモ書き程度に色々追記がありますが、計算等に
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+\section{特殊相対性理論の幾何学}
+\subsection{古典的物理系}
+古典的な物理系は3つの部分で構成されている. 
+\begin{enumerate}
+    \item \textbf{四次元時空間}：古典物理学の舞台．時空間の点（\textbf{事象}）を座標で表す：
+    \begin{equation*}
+    x^{\mu} = (x^0, x^i) = (ct, \mathbf{x}), \tag{1.1}
+    \end{equation*}
+    ここで $x^0$ は時間を表し（$c = 1$ となる単位系を使う), $\mathbf{x}$ は位置を表す．ギリシャ文字のインデックス($\lambda, \mu, \nu, \ldots$) は $0$ から $3$ までの値を, ローマ字のインデックス ($i, j, k, \ldots$) は $1$ から $3$ までの値をとる．
+    
+    \item \textbf{粒子と場}：古典物理学の実体．
+    
+    \begin{enumerate}
+    \item \textbf{粒子}: 粒子は構造を持たない点状物体である．時間の関数としての粒子の\textit{位置}$\mathbf{x}(t)$は, 粒子について言及できることすべてを教えてくれます（質量や電荷などの固定された特性を除いて). 4元ベクトル表記では, 粒子の軌跡（\textbf{世界線}）を $x^{\mu}(s)$ で表します．ここで $s$ は曲線に沿った点を表すために使われるパラメータ（任意の単調関数 $f$ に対して $f(s)$ でも同様に機能する):
+    \item \textbf{場}:
+    \end{enumerate}
+    \end{enumerate}
+
+
+
+\end{document}

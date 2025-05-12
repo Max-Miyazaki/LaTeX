@@ -1,0 +1,80 @@
+\documentclass[12pt]{jsbook}
+
+\title{ Lectures on Quantum Mechanics\\
+Second Edition, Steven Weinberg }
+\date{各種SNS\\
+    X (旧 Twitter) : \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\usepackage{indentfirst}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{%
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue}
+
+
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\newcommand{\tcb}[2]{\begin{tcolorbox}[title={\textcolor{white}{#1}}, opacitybacktitle = 0, colframe=white!40!black]#2
+\end{tcolorbox}}
+
+\renewcommand{\arraystretch}{2.1}
+
+\numberwithin{equation}{section}
+
+
+\begin{document}
+\maketitle
+\vspace{1cm}
+\begin{abstract}
+    このノートは量子力学の講義をまとめたものです。
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+\chapter{歴史的紹介}
+量子力学の原理は通常の直観に反しているため, その前史を見るのがモチベーションになる. この章では20世紀初頭に物理学者が直面した問題のうち, 最終的に現代の量子力学に繋がった問題について考える.
+
+\section{光子}
+量子力学の始まりは黒体放射の研究にある. この輻射の周波数の普遍性は1859年から1862年にかけて, 
+
+\chapter{中心ポテンシャルにおける粒子状態}
+次章で量子力学の一般原理を説明する前に, 本章では波動力学の方法でいくつかの重要な物理問題を解くことによって, シュレディンガー方程式の意味を説明する. はじめに一般的な中心ポテンシャルの影響下で3次元空間を移動する単一粒子を考える. その後, クーロンポテンシャルの場合に特化し, 水素のスペクトルを計算する. もう一つの古典的な問題である調和振動子については, この章の最後で扱う.
+\section{中心ポテンシャルにおけるシュレディンガー方程式}
+距離 $r \equiv\sqrt{\bm{x}^2}$ のみに依存する中心ポテンシャル $V(r)$ 中を動く質量 $\mu$ の粒子を考える. この場合のハミルトニアンは
+\begin{equation*}
+    H = \frac{\bm{p}^2}{2\mu} + V(r) = - \frac{\hbar^2}{2\mu} \nabla^2 + V(r)\tag{2.1.1}
+\end{equation*}
+であり, $\nabla^2$はラプラシアン演算子で
+\begin{equation*}
+    \nabla^2 \equiv \frac{\partial^2}{\partial x_1^2} + \frac{\partial^2}{\partial x_2^2} + \frac{\partial^2}{\partial x_3^2}\tag{2.1.2}
+\end{equation*}
+である. シュレディンガー方程式において, 定常エネルギー $E$ を持つ状態を表す波動関数 $\psi(x)$ に対して次の関係が成り立つ:
+\begin{equation*}
+    E\psi = H\psi = - \frac{\hbar^2}{2\mu} \nabla^2 \psi + V(r)\psi \tag{2.1.3}
+\end{equation*}
+定常状態のエネルギー $E$ に対する波動関数と同様に, この $\psi$ は係数 $\exp(-iEt/\hbar)$ に含まれる単純な時間依存性を持つ. このような問題に直面した場合, エネルギーと共にどのような観測量が物理状態を特徴づけるのに使われるかを考えるのは良いアイディアである. 1.5章で説明したように, これらの変数はハミルトニアンと整合する作用素である.
+
+\end{document}
