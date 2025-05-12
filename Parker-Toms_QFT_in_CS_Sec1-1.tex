@@ -1,0 +1,186 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{Chapter 1. Quantum fields in Minkowski spacetime\\
+1-1. Canonical formulation}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートはParker\&Tomsの``Quantum Field Theory in Curved Spacetime''の第1章の1節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+
+
+
+\end{abstract}
+    
+    
+
+\newpage
+
+\section*{1. Quantum fields in Minkowski spacetime}
+
+曲がった時空における量子場の理論は, 平坦時空における量子場理論の定式化を一般化したものである. 大部分において, 曲がった時空での場のふるまいは, 対応する平坦時空理論から直接導かれる. 場の方程式や交換関係といった \textbf{局所的な構造} は, しばしば \textbf{一般共変性} および \textbf{等価原理} によって決定される. しかし, \textbf{大域的な性質} に関しては Minkowski 時空では一意に定まるが, 曲がった時空ではそのようにはならない. たとえば, Minkowski 時空における \textbf{真空状態} は Poincaré 不変性によって一意に定まるが, 曲がった時空では一意ではない. この曖昧さは, 宇宙膨張やブラックホール近傍のような重力場によって粒子が生成される現象と密接に関係している.\par
+したがって, 本章では平坦時空における場の理論の関連する側面を復習することで, 必要な背景を整え, 記法を固定し, 曲がった時空に拡張可能な構成要素とそうでない構成要素とを明確に区別する. 本章では簡潔に進め, 概念を強調し, 多くの導出は省略する. 後の章では曲がった時空での理論についてより詳しく論じる予定である.
+\vskip\baselineskip
+\noindent この初期の章では, 以下の事項について扱う:
+
+\begin{itemize}
+  \item カノニカル定式化（canonical formulation）
+  \item シュウィンガーの作用原理（Schwinger action principle）
+  \item 対称性変換と保存電流との関係
+  \item 時間発展の様々な記述（ヘイゼンベルク描像・シュレディンガー描像・相互作用描像）
+  \item フォック表現（粒子数による状態の記述）
+  \item シュレディンガー表現（場の構成に基づく状態の記述）
+  \item マクスウェル場とヤン–ミルズ場
+  \item ディラック場
+  \item スピンと角運動量の定義
+\end{itemize}
+
+\section*{1-1. Canonical formulation}
+
+\begin{itemize}
+
+    \item 最小作用の原理に基づいて粒子系の運動方程式を導出する.
+      \begin{equation*}
+      S = \int_{t_1}^{t_2} dt\, L(q, \dot{q}) \tag{1.1}
+      \end{equation*}
+    
+    \item Hamiltonian 形式では, 共役運動量と Hamiltonian を以下のように定義する:
+      \begin{align*}
+      p_i &= \frac{\partial L}{\partial \dot{q}_i} \tag{1.2} \\
+      H(q, p) &= \sum_i p_i \dot{q}_i - L 
+      \end{align*}
+    
+    \item この系を量子化するため, $q_i$ および $p_i$ を Hilbert 空間上のエルミート演算子とし, 次の正準交換関係を課す:
+      \begin{align*}
+      [q_i, q_j] &= 0 \\
+      [p_i, p_j] &= 0 \\
+      [q_i, p_j] &= i \delta_{ij} \tag{1.3}
+      \end{align*}
+    
+    \item 任意の演算子関数 $F(q, p)$ が $p$ に関してテイラー展開可能であれば, 以下が成り立つ:
+      \begin{equation*}
+      [q_i, F] = i\, \frac{\partial F}{\partial p_i} \tag{1.4}
+      \end{equation*}
+    この関係は $q_i$ が連続なスペクトルを持ち, 互いに可換な1組の観測可能量であり, その固有状態が完全系を成していることを示している. ただし, 無限に深いポテンシャルなどの特殊な例外を除く.
+
+    \color{blue}
+    \begin{proof}
+    $F(p)$ が次のような有限次の多項式で表されるとする:
+      \begin{equation*}
+      F(p) = \sum_{\bm{\alpha}} c_{\bm{\alpha}}\, p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_n^{\alpha_n} \tag{1-1.a1}
+      \end{equation*}
+
+    ここで $\bm{\alpha} = (\alpha_1, \ldots, \alpha_n)$ は多重指数, $c_{\bm{\alpha}}$ は（必要ならば）$q$ に依存するスカラーまたは演算子係数とする. ここでは $[q_i, c_{\bm{\alpha}}] = 0$ を仮定する.
+
+    このとき, $[q_i, F(p)]$ を計算する:
+    \begin{align*}
+        [q_i, F(p)] 
+        &= \left[ q_i, \sum_{\bm{\alpha}} c_{\bm{\alpha}}\, p_1^{\alpha_1} \cdots p_n^{\alpha_n} \right] \tag{1-1.a2} \\
+        &= \sum_{\bm{\alpha}} c_{\bm{\alpha}}\, [q_i, p_1^{\alpha_1} \cdots p_n^{\alpha_n}] \tag{1-1.a3}
+    \end{align*}
+
+    各項の交換子は, Leibniz の法則と $[q_i, p_j] = i \delta_{ij}$ を用いて, 以下のように計算される:
+
+    \begin{equation*}
+    [q_i, p_1^{\alpha_1} \cdots p_n^{\alpha_n}] = i\, \frac{\partial}{\partial p_i} \left( p_1^{\alpha_1} \cdots p_n^{\alpha_n} \right) \tag{1-1.a4}
+    \end{equation*}
+
+    これらの結果から, 結局
+
+    \begin{align*}
+    [q_i, F(p)] 
+    &= i\, \sum_{\bm{\alpha}} c_{\bm{\alpha}}\, \frac{\partial}{\partial p_i} \left( p_1^{\alpha_1} \cdots p_n^{\alpha_n} \right) \tag{1-1.a5} \\
+    &= i\, \frac{\partial F}{\partial p_i}. \tag{1-1.a6}
+    \end{align*}
+    よって, $F(q, p)$ が $p$ に関してテイラー展開可能であり, $q$ との順序に注意して演算子積が定義されているとき, 次の関係が成り立つ:
+
+    \begin{equation*}
+    [q_i, F(q, p)] = i\frac{\partial F}{\partial p_i} \tag{1-1.a7}
+    \end{equation*}
+    \end{proof}
+    \color{black}
+    同様に, $q_i$ についても同様な関係が成り立つ:
+    
+    \item $|q'\rangle$ を $q_i$ の固有状態とすると
+      \begin{align*}
+      q_i |q'\rangle &= q_i' |q'\rangle \\
+      \langle q'|q''\rangle &= \delta(q' - q'')
+      \end{align*}
+    
+    \item $p_i$ の作用は微分作用素として表される：
+      \begin{equation*}
+      \langle q'|p_i|q''\rangle = -i\, \frac{\partial}{\partial q'_i} \delta(q' - q'')
+      \end{equation*}
+    
+    \item $p$ の固有状態 $|p'\rangle$ の波動関数は：
+      \begin{equation*}
+      \langle q'|p'\rangle = (2\pi)^{-n/2} \exp\left(i \sum_i p_i' q_i'\right)
+      \end{equation*}
+    
+    \item 一般の演算子関数 $F(q, p)$ は、以下のように作用する：
+      \begin{equation*}
+      \langle q'|F(q, p)|q''\rangle = F\left(q', -i\, \frac{\partial}{\partial q'}\right) \delta(q' - q'') \tag{1.5}
+      \end{equation*}
+    
+    \end{itemize}
+    
+
+
+
+
+\end{document}
