@@ -1,0 +1,140 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{Chapter 2. The Klein-Gordon Field\\
+2-4. The Klein-Gordon Field in Space-Time}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートはPeskin\&Schroederの``An Introduction to Quantum Field Theory''の第2章の3節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+
+
+
+\end{abstract}
+    
+    
+
+\newpage
+\section*{2-4. The Klein-Gordon Field in Space-Time}
+前節では, Klein-Gordon 場を Schr\"{o}dinger 描像で量子化し, その理論を相対論的粒子の観点から解釈した. 本節では, Heisenberg 描像に切り替え, 時間依存量や因果性の問題を議論しやすくする. いくつかの準備の後, セクション2.1で提起された因果的伝播の問題に立ち返る. また, Feynman 則の重要な構成要素である Klein-Gordon 伝播子 の表式を導出する.
+
+Heisenberg 描像では, 演算子 $\phi$ および $\pi$ を次のように時間依存に定義する:
+
+\begin{equation*}
+\phi(x) = \phi(\mathbf{x}, t) = e^{iHt} \phi(\mathbf{x}) e^{-iHt}, \tag{2.43}
+\end{equation*}
+
+同様に $\pi(x) = \pi(\mathbf{x}, t)$. Heisenberg の運動方程式は,
+
+\begin{equation*}
+i \frac{\partial}{\partial t} O = [O, H] \tag{2.44}
+\end{equation*}
+
+これにより, $\phi$ および $\pi$ の時間依存性が次のように計算できる:
+
+\begin{align*}
+i \frac{\partial}{\partial t} \phi(\mathbf{x}, t) &= \left[ \phi(\mathbf{x}, t), H \right] \\
+&= \int d^3 x' \left[ i \delta^3(\mathbf{x} - \mathbf{x}') \pi(\mathbf{x}', t) \right] \\
+&= i \pi(\mathbf{x}, t) \\
+i \frac{\partial}{\partial t} \pi(\mathbf{x}, t) &= \left[ \pi(\mathbf{x}, t), H \right] \\
+&= -i (\nabla^2 - m^2) \phi(\mathbf{x}, t)
+\end{align*}
+これらを組み合わせると, 
+\begin{equation*}
+\frac{\partial^2}{\partial t^2} \phi = (\nabla^2 - m^2) \phi \tag{2.45}
+\end{equation*}
+これはまさに Klein-Gordon 方程式である.
+\bigskip
+次に, 生成および消滅演算子を用いて $\phi(x)$ および $\pi(x)$ の時間依存性を理解する. まず,
+\begin{align*}
+H a_{\mathbf{p}} &= a_{\mathbf{p}} (H - E_{\mathbf{p}}), \\
+H^n a_{\mathbf{p}} &= a_{\mathbf{p}} (H - E_{\mathbf{p}})^n
+\end{align*}
+類似の関係が $a_{\mathbf{p}}^\dagger$ にも成り立つ. したがって,
+\begin{equation*}
+e^{iHt} a_{\mathbf{p}} e^{-iHt} = a_{\mathbf{p}} e^{-iE_{\mathbf{p}} t}, \quad
+e^{iHt} a_{\mathbf{p}}^\dagger e^{-iHt} = a_{\mathbf{p}}^\dagger e^{iE_{\mathbf{p}} t} \tag{2.46}
+\end{equation*}
+これにより, Heisenberg 描像での $\phi(x, t)$ の表式は次のようになる:
+\begin{equation*}
+\phi(x, t) = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2 E_p}} \left( a_{\mathbf{p}} e^{-i p \cdot x} + a_{\mathbf{p}}^\dagger e^{i p \cdot x} \right) \tag{2.47}
+\end{equation*}
+
+ここで, $\pi(x, t) = \frac{\partial}{\partial t} \phi(x, t)$.
+
+\bigskip
+
+演算子 $H$ の代わりに運動量演算子 $\mathbf{P}$ を用いると, 以下が得られる:
+
+\begin{equation*}
+e^{-i \mathbf{P} \cdot \mathbf{x}} a_{\mathbf{p}} e^{i \mathbf{P} \cdot \mathbf{x}} = a_{\mathbf{p}} e^{-i \mathbf{p} \cdot \mathbf{x}}, \quad
+e^{-i \mathbf{P} \cdot \mathbf{x}} a_{\mathbf{p}}^\dagger e^{i \mathbf{P} \cdot \mathbf{x}} = a_{\mathbf{p}}^\dagger e^{i \mathbf{p} \cdot \mathbf{x}} \tag{2.48}
+\end{equation*}
+
+したがって,
+
+\begin{equation*}
+\phi(x) = e^{i(Ht - \mathbf{P} \cdot \mathbf{x})} \phi(0) e^{-i(Ht - \mathbf{P} \cdot \mathbf{x})} = e^{i P \cdot x} \phi(0) e^{-i P \cdot x} \tag{2.49}
+\end{equation*}
+
+ここで, $P^\mu = (H, \mathbf{P})$.\\
+式(2.47)は, 量子場 $\phi(x)$ の二重的な性質、すなわちヒルベルト空間上の演算子としての性質と波動関数としての性質の両方を明示する. 一方で $a^\dagger(\mathbf{p})$ は場の励起、すなわち粒子を生成する演算子であり、他方で $\phi(x)$ は $e^{ipx}$ および $e^{-ipx}$ の線形結合として表現される. これらの時間依存成分は、$e^{-i p^0 t}$ および $e^{i p^0 t}$ の両方を含んでおり、$p^0 > 0$ であるにもかかわらず、正・負周波数成分と呼ばれる.\par
+これらの周波数成分は, 場演算子における粒子の生成・消滅演算子と直接対応しており, 自由場においては常にこの対応が成立する. 正周波数解には粒子を破壊する演算子が、負周波数解には粒子を生成する演算子が係数として現れる. このことにより, 場方程式が正・負の周波数解を持つことと, 理にかなった量子理論が正のエネルギー励起のみを含むという要請が両立される.
+
+
+\end{document}
