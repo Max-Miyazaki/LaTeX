@@ -90,7 +90,7 @@
     \mathcal{L} &= \frac{1}{2}\dot{\phi}^2 - \frac{1}{2}(\nabla \phi)^2 - \frac{1}{2}m^2\phi^2, \\
     &= \frac{1}{2} (\partial_\mu \phi)^2 - \frac{1}{2} m^2 \phi^2. \tag{2-6}\\
     \left( \frac{\partial^2}{\partial t^2} - \nabla^2 + m^2 \right) \phi &= 0 \hspace{0.5cm}\text{or}\hspace{0.5cm} (\partial^\mu \partial_\mu + m^2) \phi = 0 \label{2-7} \tag{2-7}\\
-    H = \int d^3 x \, \mathcal{H} &= \int d^3 x \left( \frac{1}{2}\pi^2 + \frac{1}{2}(\nabla \phi)^2 + \frac{1}{2}m^2\phi^2 \right) \tag{2-8}
+    H = \int d^3 x \, \mathcal{H} &= \int d^3 x \left( \frac{1}{2}\pi^2 + \frac{1}{2}(\nabla \phi)^2 + \frac{1}{2}m^2\phi^2 \right) \label{2-8}\tag{2-8}
 \end{align*}
 
 量子化するために, 力学変数 $\phi$ と $\pi$ を演算子に置き換え, 交換関係を課す.\\
@@ -239,7 +239,7 @@ $H_{\text{SHO}}$ の固有値を求めるために, $\phi$と$p$ を昇降演算
 p = -i \sqrt{\frac{\omega}{2}} (a - a^\dagger) \tag{2-23}
 \end{equation*}
 ここで, 正準交換関係 $[\phi, p] = i$ は, 昇降演算子に対して
-\begin{equation*}
+\begin{equation*}\label{2-24}
 [a, a^\dagger] = 1 \tag{2-24}
 \end{equation*}
 という関係に対応する.
@@ -470,9 +470,11 @@ $n+1$ のとき,
 \end{equation*}
 である. よってこれを計算すると,
 \begin{align*}
-    \pi(\mathbf{x}, t) &= \frac{\partial}{\partial t} \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{i(\mathbf{p}\cdot\mathbf{x} - \omega_{\mathbf{p}}t)} + a^\dagger_{\mathbf{p}} e^{i(\mathbf{p}\cdot\mathbf{x} + \omega_{\mathbf{p}}t)} \right) \tag{2-3.g16} \\
-    &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( -i\omega_{\mathbf{p}} a_{\mathbf{p}} e^{-i\omega_{\mathbf{p}}t} + i\omega_{\mathbf{p}} a^\dagger_{\mathbf{p}} e^{i\omega_{\mathbf{p}}t} \right) \tag{2-3.g17}\\
-    &= \int \frac{d^3p}{(2\pi)^3} (-i) \sqrt{\frac{\omega_{\mathbf{p}}}{2}} \left( a_{\mathbf{p}} e^{-i\omega_{\mathbf{p}}t} - a^\dagger_{\mathbf{p}} e^{i\omega_{\mathbf{p}}t} \right) \tag{2-3.g18}
+    \pi(\mathbf{x}, t) &= \frac{\partial}{\partial t} \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{i(\mathbf{p}\cdot\mathbf{x} - \omega_{\mathbf{p}}t)} + a^\dagger_{\mathbf{p}} e^{-i(\mathbf{p}\cdot\mathbf{x} - \omega_{\mathbf{p}}t)} \right) \tag{2-3.g16} \\
+    &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( -i\omega_{\mathbf{p}} a_{\mathbf{p}} e^{i(\mathbf{p}\cdot\mathbf{x} - \omega_{\mathbf{p}}t)} + i\omega_{\mathbf{p}} a^\dagger_{\mathbf{p}} e^{-i(\mathbf{p}\cdot\mathbf{x} - \omega_{\mathbf{p}}t)} \right) \tag{2-3.g17} \\
+    \pi(\mathbf{x}) &= \pi(\mathbf{x}, t=0) \tag{2-3.g18}\\
+    &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( -i\omega_{\mathbf{p}} a_{\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}} + i\omega_{\mathbf{p}} a^\dagger_{\mathbf{p}} e^{-i\mathbf{p}\cdot\mathbf{x}} \right) \tag{2-3.g19}\\
+    &= \int \frac{d^3p}{(2\pi)^3} (-i) \sqrt{\frac{\omega_{\mathbf{p}}}{2}} \left( a_{\mathbf{p}} e^{i\mathbf{p}\cdot\mathbf{x}} - a^\dagger_{\mathbf{p}} e^{-i\mathbf{p}\cdot\mathbf{x}} \right) \tag{2-3.g20}
 \end{align*}
 となる. これで \eqref{2.26} が示された.
 
@@ -481,136 +483,585 @@ $n+1$ のとき,
 \color{black}
 
 $a_{\mathbf{p}}$と$a^\dagger_{\mathbf{p}}$を$\phi$と$\pi$を使って逆に表す式も簡単に導出できるが, 実際の計算ではほとんど必要にならない.
+\vskip\baselineskip
 
-以下の計算では, \eqref{2.25} と \eqref{2.26} を次のように並び替えた形が役に立つ：
+\color{blue}
 
-\begin{equation}
+$\phi(\mathbf{x})$ に $e^{-i\mathbf{p}\cdot\mathbf{x}}$ をかけて積分する.
+\begin{align*}
+    \int d^3x \, \phi(\mathbf{x}) &e^{-i\mathbf{p}\cdot\mathbf{x}} = \int d^3x \int \frac{d^3p'}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}'}}} \left( a_{\mathbf{p}'} e^{i\mathbf{p}'\cdot\mathbf{x}} + a^\dagger_{\mathbf{p}'} e^{-i\mathbf{p}'\cdot\mathbf{x}} \right) e^{-i\mathbf{p}\cdot\mathbf{x}} \tag{2-3.h1} \\
+    &= \int d^3x \int \frac{d^3p'}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}'}}} \left( a_{\mathbf{p}'} e^{i(\mathbf{p}'-\mathbf{p})\cdot\mathbf{x}} + a^\dagger_{\mathbf{p}'} e^{-i(\mathbf{p}'+\mathbf{p})\cdot\mathbf{x}} \right) \tag{2-3.h2} \\
+    &= \int \frac{d^3p'}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}'}}} \left( a_{\mathbf{p}'} (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{p}') + a^\dagger_{\mathbf{p}'} (2\pi)^3 \delta^{(3)}(\mathbf{p} + \mathbf{p}') \right) \tag{2-3.h3} \\
+    &= \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} a_{\mathbf{p}} + \frac{1}{\sqrt{2\omega_{-\mathbf{p}}}} a^\dagger_{-\mathbf{p}} \tag{2-3.h4} \\
+    &= \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}} \right) \hspace{0.5cm} (\because \omega_{-\mathbf{p}} = \omega_{\mathbf{p}}) \label{2-3.h5} \tag{2-3.h5}
+\end{align*}
+同様に, $\pi(\mathbf{x})$ に $e^{-i\mathbf{p}\cdot\mathbf{x}}$ をかけて積分すると,
+\begin{align*}
+    \int d^3x \, &\pi(\mathbf{x}) e^{-i\mathbf{p}\cdot\mathbf{x}} = \int d^3 x \, \int \frac{d^3p'}{(2\pi)^3} (-i) \sqrt{\frac{\omega_{\mathbf{p}'}}{2}} \left( a_{\mathbf{p}'} e^{i\mathbf{p}' \cdot\mathbf{x}} - a^\dagger_{\mathbf{p}'} e^{-i\mathbf{p}' \cdot\mathbf{x}} \right) e^{-i\mathbf{p}\cdot\mathbf{x}} \tag{2-3.h6} \\
+    &= \int d^3x \int \frac{d^3p'}{(2\pi)^3} (-i) \sqrt{\frac{\omega_{\mathbf{p}'}}{2}} \left( a_{\mathbf{p}'} e^{i(\mathbf{p}'-\mathbf{p})\cdot\mathbf{x}} - a^\dagger_{\mathbf{p}'} e^{-i(\mathbf{p}'+\mathbf{p})\cdot\mathbf{x}} \right) \tag{2-3.h7} \\
+    &= \int \frac{d^3p'}{(2\pi)^3} (-i) \sqrt{\frac{\omega_{\mathbf{p}'}}{2}} \left( a_{\mathbf{p}'} (2\pi)^3 \delta^{(3)}(\mathbf{p}' - \mathbf{p}) - a^\dagger_{\mathbf{p}'} (2\pi)^3 \delta^{(3)}(\mathbf{p}' + \mathbf{p}) \right) \tag{2-3.h8} \\
+    &= -i \sqrt{\frac{\omega_{\mathbf{p}}}{2}} a_{\mathbf{p}} + i \sqrt{\frac{\omega_{-\mathbf{p}}}{2}} a^\dagger_{-\mathbf{p}} \tag{2-3.h9} \\
+    &= -i \sqrt{\frac{\omega_{\mathbf{p}}}{2}} \left( a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}} \right) \hspace{0.5cm} (\because \omega_{-\mathbf{p}} = \omega_{\mathbf{p}}) \label{2-3.h10} \tag{2-3.h10}
+\end{align*}
+2つの式をまとめると,
+\begin{align*}
+    \int d^3x \, \phi(\mathbf{x}) e^{-i\mathbf{p}\cdot\mathbf{x}} &= \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}} \right), \label{2-3.h11}\tag{2-3.h11} \\
+    \int d^3x \, \pi(\mathbf{x}) e^{-i\mathbf{p}\cdot\mathbf{x}} &= -i \sqrt{\frac{\omega_{\mathbf{p}}}{2}} \left( a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}} \right). \label{2-3.h12}\tag{2-3.h12}
+\end{align*}
+連立方程式として解くと,
+\begin{align*}
+    \eqref{2-3.h11} + i \cdot \eqref{2-3.h12} &\to \int d^3 x \, e^{-i\mathbf{p}\cdot\mathbf{x}} \left( \phi(\mathbf{x}) + \frac{i}{\omega_{\mathbf{p}}} \pi(\mathbf{x}) \right) = \sqrt{\frac{2}{\omega_{\mathbf{p}}}} a_{\mathbf{p}} \tag{2-3.h13}\\
+    a_{\mathbf{p}} &= \int d^3 x \, \left[ \sqrt{\frac{\omega_{\mathbf{p}}}{2}} e^{i\mathbf{p}\cdot\mathbf{x}} \phi(\mathbf{x}) - \frac{i}{\sqrt{2\omega_{\mathbf{p}}}} e^{-i\mathbf{p}\cdot\mathbf{x}} \pi(\mathbf{x}) \right] \tag{2-3.h14}
+\end{align*}
+同様の手順で, 今後は $e^{i\mathbf{p}\cdot\mathbf{x}}$ をかけて積分すると, $a_{\mathbf{p}}^{\dagger}$ が得られる：
+\begin{equation*}
+    a_{\mathbf{p}}^{\dagger} = \int d^3 x \, \left[ \sqrt{\frac{\omega_{\mathbf{p}}}{2}} e^{+i\mathbf{p}\cdot\mathbf{x}} \phi(\mathbf{x}) + \frac{i}{\sqrt{2\omega_{\mathbf{p}}}} e^{+i\mathbf{p}\cdot\mathbf{x}} \pi(\mathbf{x}) \right]. \tag{2-3.h15}
+\end{equation*}
+とまぁ, こんな感じで計算可能だが, 多くの場の量子論の計算 (散乱振幅, 真空期待値, Wick展開など) では生成消滅演算子の交換関係を前提として構成されるため, $\phi$, $\pi$ を使うより $a_{\mathbf{p}}$, $a_{\mathbf{p}}^{\dagger}$ を基本変数として議論する方が自然である.
+
+\color{black}
+
+\vskip\baselineskip
+
+以下の計算では, \eqref{2.25} と \eqref{2.26} の共役パートを $\mathbf{p} \to -\mathbf{p}$ と並び替えた形が役に立つ：
+
+\begin{equation*}\label{2.27}
 \phi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}}) e^{i\mathbf{p}\cdot\mathbf{x}}
 \tag{2.27}
-\end{equation}
-
-\begin{equation}
-\pi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \left( -i \right) \sqrt{\frac{\omega_{\mathbf{p}}}{2}} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}}) e^{i\mathbf{p}\cdot\mathbf{x}}
-\tag{2.28}
-\end{equation}
-
-交換関係 (2.24) は次のようになります：
-\begin{equation*}
-[a_{\mathbf{p}}, a^\dagger_{\mathbf{p}'}] = (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{p}') ,
 \end{equation*}
 
-これにより, $\phi$と$\pi$の交換子が正しく再現されることが確認できます：
+\begin{equation*}\label{2.28}
+\pi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \left( -i \right) \sqrt{\frac{\omega_{\mathbf{p}}}{2}} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}}) e^{i\mathbf{p}\cdot\mathbf{x}}
+\tag{2.28}
+\end{equation*}
+
+交換関係 \eqref{2-24} は次のようになる：
+\begin{equation*}
+[a_{\mathbf{p}}, a^\dagger_{\mathbf{p}'}] = (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{p}'). \tag{2.29}
+\end{equation*}
+
+\color{blue}
+
+※係数に $(2\pi)^3$ がついているのは, $\phi$ と $\pi$ の交換関係を考えるときに, 積分の係数を上手く打ち消すため. これは場を展開するときの係数の置き方で変わる.
+\vskip\baselineskip
+\color{black}
+
+これにより, $\phi$と$\pi$の交換子が正しく再現されることが確認できる：
 \begin{align*}
 [\phi(\mathbf{x}), \pi(\mathbf{x}')] &= \int \frac{d^3p\, d^3p'}{(2\pi)^6} \left( -\frac{i}{2} \right) \sqrt{\frac{\omega_{\mathbf{p}'}}{\omega_{\mathbf{p}}}}
 \left( [a^\dagger_{\mathbf{p}}, a_{\mathbf{p}'}] - [a_{\mathbf{p}}, a^\dagger_{\mathbf{p}'}] \right)
 e^{i(\mathbf{p}\cdot\mathbf{x} + \mathbf{p}'\cdot\mathbf{x}')} \\
-&= i\delta^{(3)}(\mathbf{x} - \mathbf{x}') .
+&= i\delta^{(3)}(\mathbf{x} - \mathbf{x}'). \label{2.30}\tag{2.30}
 \end{align*}
 
-(もしこの種の計算や次に続く計算に不慣れであれば, ぜひ丁寧に手を動かして確認してください.  
-少し練習すれば, すぐに簡単にできるようになりますし, 次章以降の基礎にもなります.)
+(もしこの種の計算や次に続く計算に不慣れであれば, 丁寧に手を動かして確認するのが推奨. 少し練習すれば, すぐに簡単にできるようになるし, 次章以降の基礎にもなる.)
+
+\color{blue}
+\begin{proof}
+\eqref{2.30} の証明.
+\begin{align*}
+    [\phi(\mathbf{x}), \pi(\mathbf{x}')] &= \int \frac{d^3p\, d^3p'}{(2\pi)^6} \left( -\frac{i}{2} \right) \sqrt{\frac{\omega_{\mathbf{p}'}}{\omega_{\mathbf{p}}}}
+\left\{ \underline{[(a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}}), (a_{\mathbf{p}'} - a^\dagger_{-\mathbf{p}'})]} \right\}
+e^{i(\mathbf{p}\cdot\mathbf{x} + \mathbf{p}'\cdot\mathbf{x}')} \tag{2-3.i1}\\
+&\quad  \left\{ \cdots \right\} = (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} - a^\dagger_{-\mathbf{p}'}) - (a_{\mathbf{p}'} - a^\dagger_{-\mathbf{p}'})(a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}}) \tag{2-3.i2}\\
+&\quad \hspace{1.05cm} = a_{\mathbf{p}} a_{\mathbf{p}'} - a_{\mathbf{p}} a^\dagger_{-\mathbf{p}'} + a^\dagger_{-\mathbf{p}} a_{\mathbf{p}'} - a^\dagger_{-\mathbf{p}} a^\dagger_{-\mathbf{p}'} \notag\\
+&\quad \hspace{1.5cm} - (a_{\mathbf{p}'} a_{\mathbf{p}} + a_{\mathbf{p}'} a^\dagger_{-\mathbf{p}} - a^\dagger_{-\mathbf{p}'} a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}'} a^\dagger_{-\mathbf{p}}) \tag{2-3.i3}\\
+&\quad \hspace{1.05cm} = (a_{\mathbf{p}} a_{\mathbf{p}'} - a_{\mathbf{p}'} a_{\mathbf{p}}) - (a^\dagger_{-\mathbf{p}} a^\dagger_{-\mathbf{p}'} - a^\dagger_{-\mathbf{p}'} a^\dagger_{-\mathbf{p}}) \notag\\
+&\quad \hspace{1.5cm} - (a_{\mathbf{p}} a^\dagger_{-\mathbf{p}'} - a^\dagger_{-\mathbf{p}'} a_{\mathbf{p}}) + (a^\dagger_{-\mathbf{p}} a_{\mathbf{p}'} - a_{\mathbf{p}'} a^\dagger_{-\mathbf{p}}) \tag{2-3.i5}\\
+&\quad \hspace{1.05cm} = [a_{\mathbf{p}}, a_{\mathbf{p}'}] - [a^\dagger_{-\mathbf{p}}, a^\dagger_{-\mathbf{p}'}] - [a_{\mathbf{p}}, a^\dagger_{-\mathbf{p}'}] + [a^\dagger_{-\mathbf{p}}, a_{\mathbf{p}'}] \tag{2-3.i6}\\
+&\quad \hspace{1.05cm} = - [a_{\mathbf{p}}, a^\dagger_{-\mathbf{p}'}] + [a^\dagger_{-\mathbf{p}}, a_{\mathbf{p}'}] \hspace{0.5cm} (\because [a_{\mathbf{p}}, a_{\mathbf{p}'}] = [a^\dagger_{-\mathbf{p}}, a^\dagger_{-\mathbf{p}'}] = 0) \tag{2-3.i7}\\
+&\quad \hspace{1.05cm} = - (2\pi)^3 \delta^{(3)}(\mathbf{p} + \mathbf{p}') - (2\pi)^3 \delta^{(3)}(-\mathbf{p} - \mathbf{p}') \tag{2-3.i8}\\
+&\quad \hspace{1.05cm} = -2 (2\pi)^3 \delta^{(3)}(\mathbf{p} + \mathbf{p}') \hspace{0.5cm} (\because \delta^{(3)}(-\mathbf{p} - \mathbf{p}') = \delta^{(3)}(\mathbf{p} + \mathbf{p}')) \tag{2-3.i9}\\
+&= \int \frac{d^3p \, d^3p'}{(2\pi)^6} \left( -\frac{i}{2} \right) \sqrt{\frac{\omega_{\mathbf{p}'}}{\omega_{\mathbf{p}}}} (-2 (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{p}')) e^{i(\mathbf{p}\cdot\mathbf{x} + \mathbf{p}'\cdot\mathbf{x}')} \tag{2-3.i10}\\
+&= \int \frac{d^3p \, d^3p'}{(2\pi)^3} i \sqrt{\frac{\omega_{\mathbf{p}'}}{\omega_{\mathbf{p}}}} \delta^{(3)}(\mathbf{p} - \mathbf{p}') e^{i(\mathbf{p}\cdot\mathbf{x} + \mathbf{p}'\cdot\mathbf{x}')} \tag{2-3.i11}\\
+&= i \sqrt{\frac{\omega_{-\mathbf{p}}}{\omega_{\mathbf{p}}}} \int \frac{d^3 p}{(2\pi)^3} e^{i\mathbf{p}\cdot(\mathbf{x} - \mathbf{x}')} \tag{2-3.i12}\\
+&= i \sqrt{\frac{\omega_{-\mathbf{p}}}{\omega_{\mathbf{p}}}} \delta^{(3)}(\mathbf{x} - \mathbf{x}') \hspace{0.5cm} \left(\because \int \frac{d^3 p}{(2\pi)^3} e^{i\mathbf{p}\cdot(\mathbf{x} - \mathbf{x}')} = \delta^{(3)}(\mathbf{x} - \mathbf{x}')\right) \tag{2-3.i13}\\
+&= i \delta^{(3)}(\mathbf{x} - \mathbf{x}'). \hspace{0.5cm} (\because \omega_{-\mathbf{p}} = \omega_{\mathbf{p}}) \tag{2-3.i14}
+\end{align*}
+\end{proof}
+
+
+\color{black}
 
 \vspace{0.5em}
 
-さて, ラダー演算子 $a_{\mathbf{p}}$, $a^\dagger_{\mathbf{p}}$ を使ってハミルトニアンを表現します.  
-式 (2.8) から出発して,
+昇降演算子 $a_{\mathbf{p}}$, $a^\dagger_{\mathbf{p}}$ を使って Hamiltonianを表現する. \eqref{2-8} から出発して,
 \begin{align*}
 H &= \int d^3x \int \frac{d^3p\, d^3p'}{(2\pi)^6} e^{i(\mathbf{p}+\mathbf{p}')\cdot\mathbf{x}} \\
 &\quad \times \left\{ -\frac{\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}}{4} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} - a^\dagger_{-\mathbf{p}'})
-+ \frac{\mathbf{p}\cdot\mathbf{p}' + m^2}{4\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}} (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} + a^\dagger_{-\mathbf{p}'}) \right\} .
++ \frac{-\mathbf{p}\cdot\mathbf{p}' + m^2}{4\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}} (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} + a^\dagger_{-\mathbf{p}'}) \right\} .
 \end{align*}
 
 これを整理すると,
-\begin{equation*}
-H = \int \frac{d^3p}{(2\pi)^3} \omega_{\mathbf{p}} \left( a^\dagger_{\mathbf{p}} a_{\mathbf{p}} + \frac{1}{2} [a_{\mathbf{p}}, a^\dagger_{\mathbf{p}}] \right) .
+\begin{equation*}\label{2.31}
+H = \int \frac{d^3p}{(2\pi)^3} \omega_{\mathbf{p}} \left( a^\dagger_{\mathbf{p}} a_{\mathbf{p}} + \frac{1}{2} [a_{\mathbf{p}}, a^\dagger_{\mathbf{p}}] \right). \tag{2.31}
 \end{equation*}
 
-第2項は $\delta(0)$ に比例する無限大の $c$-数です.  
-これは全モードに渡るゼロ点エネルギー $\omega_{\mathbf{p}}/2$ の和に過ぎず, 自然に現れるものです.
+\color{blue}
+\begin{proof}
+\eqref{2.31} の証明.
+\begin{align*}
+H &= \int d^3x \mathcal{H}(\mathbf{x}) \tag{2-3.j1} \\
+&= \int d^3x \left( \frac{1}{2} \pi^2 + \frac{1}{2} (\nabla \phi)^2 + \frac{1}{2} m^2 \phi^2 \right) \tag{2-3.j2}
+\end{align*}
+\eqref{2.27} と \eqref{2.28}
+\begin{align*}
+    \phi (\mathbf{x}) &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}}  + a^\dagger_{-\mathbf{p}} \right) e^{i\mathbf{p}\cdot\mathbf{x}} \tag{2-3.j3}\\
+    \pi(\mathbf{x}) &= \int \frac{d^3p}{(2\pi)^3} \left( -i \right) \sqrt{\frac{\omega_{\mathbf{p}}}{2}} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}}) e^{i\mathbf{p}\cdot\mathbf{x}} \tag{2-3.j4}
+\end{align*}
+より, 各項を計算すると,
+\subsection*{$\dfrac{1}{2} \pi^2$ 項}
+\begin{align*}
+    \pi^2 &= \int \frac{d^3 p \, d^3 p'}{(2\pi)^3} (-i)^2 \sqrt{\frac{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}{4}} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} - a^\dagger_{-\mathbf{p}'}) e^{i(\mathbf{p}+\mathbf{p}')\cdot\mathbf{x}} \tag{2-3.j5}\\
+    \frac{1}{2} \pi^2 &= \int \frac{d^3 p \, d^3 p'}{(2\pi)^3} \left\{-\frac{1}{4} \sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} - a^\dagger_{-\mathbf{p}'})\right\} e^{i(\mathbf{p}+\mathbf{p}')\cdot\mathbf{x}} \tag{2-3.j6}
+\end{align*}
+\subsection*{$\dfrac{1}{2} (\nabla \phi)^2$ 項}
+\begin{align*}
+    \nabla \phi &= \int \frac{d^3 p}{(2\pi)^3} \frac{i\mathbf{p}}{\sqrt{2\omega_{\mathbf{p}}}} \left( a_{\mathbf{p}}  + a^\dagger_{-\mathbf{p}} \right) e^{i\mathbf{p}\cdot\mathbf{x}} \tag{2-3.j7}\\
+    (\nabla \phi)^2 &= \int \frac{d^3 p \, d^3 p'}{(2\pi)^6} \frac{-\mathbf{p}\cdot\mathbf{p}'}{2\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}} \left( a_{\mathbf{p}}  + a^\dagger_{-\mathbf{p}} \right) \left( a_{\mathbf{p}'}  + a^\dagger_{-\mathbf{p}'} \right) e^{i(\mathbf{p}+\mathbf{p}')\cdot\mathbf{x}} \tag{2-3.j8}\\
+    \frac{1}{2} (\nabla \phi)^2 &= \int \frac{d^3 p \, d^3 p'}{(2\pi)^6} \left\{-\frac{\mathbf{p}\cdot\mathbf{p}'}{4\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}} \left( a_{\mathbf{p}}  + a^\dagger_{-\mathbf{p}} \right) \left( a_{\mathbf{p}'}  + a^\dagger_{-\mathbf{p}'} \right)\right\} e^{i(\mathbf{p}+\mathbf{p}')\cdot\mathbf{x}} \tag{2-3.j9}
+\end{align*}
+\subsection*{$\dfrac{1}{2} m^2 \phi^2$ 項}
+\begin{align*}
+    \phi^2 &= \int \frac{d^3 p \, d^3 p'}{(2\pi)^6} \frac{1}{2\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}} \left( a_{\mathbf{p}}  + a^\dagger_{-\mathbf{p}} \right) \left( a_{\mathbf{p}'}  + a^\dagger_{-\mathbf{p}'} \right) e^{i(\mathbf{p}+\mathbf{p}')\cdot\mathbf{x}} \tag{2-3.j10}\\
+    \frac{1}{2} m^2 \phi^2 &= \int \frac{d^3 p \, d^3 p'}{(2\pi)^6} \left\{\frac{m^2}{4\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}} \left( a_{\mathbf{p}}  + a^\dagger_{-\mathbf{p}} \right) \left( a_{\mathbf{p}'}  + a^\dagger_{-\mathbf{p}'} \right)\right\} e^{i(\mathbf{p}+\mathbf{p}')\cdot\mathbf{x}} \tag{2-3.j11}
+\end{align*}
+よって Hamiltonian は,
+\begin{align*}
+    H &= \int d^3x \left( \frac{1}{2} \pi^2 + \frac{1}{2} (\nabla \phi)^2 + \frac{1}{2} m^2 \phi^2 \right) \tag{2-3.j12}\\
+    &= \int d^3x \int \frac{d^3 p \, d^3 p'}{(2\pi)^6} \left\{-\frac{1}{4} \sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} - a^\dagger_{-\mathbf{p}'}) \right. \\
+    &\quad \hspace{3.5cm} - \frac{\mathbf{p}\cdot\mathbf{p}'}{4\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}} (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} + a^\dagger_{-\mathbf{p}'}) \\
+    &\quad \hspace{3.5cm} \left. + \frac{m^2}{4\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}} (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} + a^\dagger_{-\mathbf{p}'})\right\} e^{i(\mathbf{p}+\mathbf{p}')\cdot\mathbf{x}} \tag{2-3.j13}\\
+    &= \int \frac{d^3 p \, d^3 p'}{(2\pi)^6} \left\{-\frac{1}{4} \sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} - a^\dagger_{-\mathbf{p}'}) \right. \\
+    &\quad \hspace{3.5cm} - \frac{\mathbf{p}\cdot\mathbf{p}'}{4\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}} (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} + a^\dagger_{-\mathbf{p}'}) \\
+    &\quad \hspace{3.5cm} \left. + \frac{m^2}{4\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}'}}} (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} + a^\dagger_{-\mathbf{p}'})\right\} (2\pi)^3 \delta^{(3)}(\mathbf{p}+\mathbf{p}') \tag{2-3.j14}\\
+    &= \int \frac{d^3 p \, d^3 p'}{(2\pi)^3} \left\{ -\frac{1}{4}\sqrt{\omega_{\mathbf{p}}\omega_{\mathbf{p}}'} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} - a^\dagger_{-\mathbf{p}'}) \right.\\
+    &\quad \hspace{3.5cm} \left.+ \frac{-\mathbf{p}\cdot\mathbf{p}' + m^2}{4} (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}})(a_{\mathbf{p}'} + a^\dagger_{-\mathbf{p}'}) \right\} \delta^{(3)}(\mathbf{p}+\mathbf{p}') \tag{2-3.j15}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \left\{ -\frac{1}{4}\sqrt{\omega_{\mathbf{p}}\omega_{-\mathbf{p}}} (a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}})(a_{-\mathbf{p}} - a^\dagger_{\mathbf{p}}) \right. \\
+    &\quad \hspace{3.5cm} \left.+ \frac{|\mathbf{p}|^2 + m^2}{4} (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}})(a_{-\mathbf{p}} + a^\dagger_{\mathbf{p}}) \right\} \tag{2-3.j16}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \frac{\omega_{\mathbf{p}}}{4} \left\{ -(a_{\mathbf{p}} - a^\dagger_{-\mathbf{p}})(a_{-\mathbf{p}} - a^\dagger_{\mathbf{p}}) + (a_{\mathbf{p}} + a^\dagger_{-\mathbf{p}})(a_{-\mathbf{p}} + a^\dagger_{\mathbf{p}}) \right\} \tag{2-3.j17}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \frac{\omega_{\mathbf{p}}}{4} \left( -a_{\mathbf{p}}a_{-\mathbf{p}} + a_{\mathbf{p}}a^\dagger_{\mathbf{p}} + a^\dagger_{-\mathbf{p}}a_{-\mathbf{p}} - a^\dagger_{-\mathbf{p}}a_{\mathbf{p}} + a_{\mathbf{p}}a_{-\mathbf{p}} + a_{\mathbf{p}}a^\dagger_{\mathbf{p}} + a^\dagger_{-\mathbf{p}}a_{-\mathbf{p}} + a^\dagger_{-\mathbf{p}}a^{\dagger}_{\mathbf{p}} \right) \tag{2-3.j18}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \frac{\omega_{\mathbf{p}}}{2} \left( \underline{a_{\mathbf{p}}a^\dagger_{\mathbf{p}}} + a^\dagger_{-\mathbf{p}}a_{-\mathbf{p}} \right) \tag{2-3.j19}\\
+    &\quad \hspace{1cm} [a_{\mathbf{p}}, a^\dagger_{\mathbf{p}}] = (2\pi)^3 \delta^{(3)}(0) \Longleftrightarrow a_{\mathbf{p}}a^\dagger_{\mathbf{p}} = a^\dagger_{\mathbf{p}}a_{\mathbf{p}} + (2\pi)^3 \delta^{(3)}(0) \tag{2-3.j20}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \frac{\omega_{\mathbf{p}}}{2} \left( a^\dagger_{\mathbf{p}}a_{\mathbf{p}} + (2\pi)^3 \delta^{(3)}(0) + a^\dagger_{-\mathbf{p}}a_{-\mathbf{p}} \right) \tag{2-3.j21}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \frac{\omega_{\mathbf{p}}}{2} \left( 2 a^\dagger_{\mathbf{p}}a_{\mathbf{p}} + [a_{\mathbf{p}}, a^\dagger_{\mathbf{p}}] \right) \tag{2-3.j22}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \omega_{\mathbf{p}} \left( a^\dagger_{\mathbf{p}}a_{\mathbf{p}} + \frac{1}{2} [a_{\mathbf{p}}, a^\dagger_{\mathbf{p}}] \right) \tag{2-3.j24}
+\end{align*}
 
-\vspace{0.5em}
+\end{proof}
 
-この無限大の定数項によるエネルギーシフトは実験で検出できません.  
-実験では常に基底状態とのエネルギー差のみが測定されるからです.  
-したがって, 今後すべての計算ではこの無限大定数を無視します.
+\color{black}
+第2項は $\delta(0)$ に比例する無限大の $c\, -$数である. これは全モードに渡るゼロ点エネルギー $\dfrac{1}{2}\omega_{\mathbf{p}}$ の和に過ぎず, 自然に現れる. この無限大の定数項によるエネルギーシフトは実験で検出できない.  
+実験では常に基底状態とのエネルギー差のみが測定されるから.  
+したがって, 今後すべての計算ではこの無限大定数を無視する.
 
-\vspace{0.5em}
+\color{blue}
 
-このハミルトニアンを使うと, 交換子は簡単に求められます：
+※量子力学での調和振動子は
+\begin{equation*}
+    H = \hbar \omega \left( a^\dagger a + \frac{1}{2} \right) \tag{2-3.k1}
+\end{equation*}
+であり, 基底状態はエネルギーがゼロではなく,
+\begin{equation*}
+    E_0 = \frac{1}{2} \hbar \omega \tag{2-3.k2}
+\end{equation*}
+と与えられる. 場の量子論では $[a_{\mathbf{p}}, a^\dagger_{\mathbf{p}}] = (2\pi)^3 \delta^{(3)}(0)$ が無限のモード数を表すので, $\omega_{\mathbf{p}}\cdot \dfrac{1}{2}[a_{\mathbf{p}}, a^\dagger_{\mathbf{p}}] = \dfrac{1}{2}\omega_{\mathbf{p}}\cdot (2\pi)^3 \delta^{(3)}(\mathbf{p})$ は, 各モード $\mathbf{p}$ におけるゼロ点エネルギーの和となる.\\
+後々, 正規順序積 (Normal ordering) を用いて無限大定数項を除去することが可能となる.
+\vskip\baselineskip
+\color{black}
+
+この Hamiltonian を使うと, 交換子は簡単に求められる：
 \begin{equation*}
 [H, a^\dagger_{\mathbf{p}}] = \omega_{\mathbf{p}} a^\dagger_{\mathbf{p}} , \quad
-[H, a_{\mathbf{p}}] = -\omega_{\mathbf{p}} a_{\mathbf{p}} .
+[H, a_{\mathbf{p}}] = -\omega_{\mathbf{p}} a_{\mathbf{p}}. \tag{2.32}
 \end{equation*}
 
-これにより, 調和振動子と同様に理論のスペクトルを書くことができます.  
+\color{blue}
+\begin{proof}
+\begin{align*}
+    [H, a_{\mathbf{p}}^{\dagger}] &= \left[ \int \frac{d^3 p'}{(2\pi)^3}\omega_{\mathbf{p}'}(a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}'}) + \frac{1}{2}[a_{\mathbf{p}'}, a_{\mathbf{p}'}^{\dagger}], a_{\mathbf{p}}^{\dagger} \right] \tag{2-3.l1}\\
+    &= \left[ \int \frac{d^3 p'}{(2\pi)^3}\omega_{\mathbf{p}'}(a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}'}), a_{\mathbf{p}}^{\dagger} \right] + \left[ \int \frac{d^3 p'}{(2\pi)^3}\omega_{\mathbf{p}'} \frac{1}{2}[a_{\mathbf{p}'}, a_{\mathbf{p}'}^{\dagger}], a_{\mathbf{p}}^{\dagger} \right] \tag{2-3.l2}\\
+    &= \left[ \int \frac{d^3 p'}{(2\pi)^3}\omega_{\mathbf{p}'}(a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}'}), a_{\mathbf{p}}^{\dagger} \right] \hspace{0.5cm}(\because [[a_{\mathbf{p}'}, a_{\mathbf{p}'}^{\dagger}], a_{\mathbf{p}}^{\dagger}] = 0) \tag{2-3.l3}\\
+    &= \int \frac{d^3 p'}{(2\pi)^3}\omega_{\mathbf{p}}[a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \tag{2-3.l4}\\
+    &= \int \frac{d^3 p'}{(2\pi)^3}\omega_{\mathbf{p}} \left( a_{\mathbf{p}'}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] + [a_{\mathbf{p}'}^{\dagger}, a_{\mathbf{p}}^{\dagger}] a_{\mathbf{p}'}\right) \tag{2-3.l5}\\
+    &= \int \frac{d^3 p'}{(2\pi)^3}\omega_{\mathbf{p}} a_{\mathbf{p}'}^{\dagger}[a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \hspace{0.5cm}(\because [a_{\mathbf{p}'}^{\dagger}, a_{\mathbf{p}}^{\dagger}] = 0) \tag{2-3.l6}\\
+    &= \int \frac{d^3 p'}{(2\pi)^3}\omega_{\mathbf{p}} a_{\mathbf{p}'}^{\dagger} (2\pi)^3 \delta^{(3)}(\mathbf{p}-\mathbf{p}') \tag{2-3.l7}\\
+    &= \int d^3 p' \omega_{\mathbf{p}} a_{\mathbf{p}'}^{\dagger} \delta^{(3)}(\mathbf{p}-\mathbf{p}') \tag{2-3.l8}\\
+    &= \omega_{\mathbf{p}} a_{\mathbf{p}}^{\dagger} \tag{2-3.l9}
+\end{align*}
+$[H, a_{\mathbf{p}}]$ についても同様の計算を行えば, $[H, a_{\mathbf{p}}] = -\omega_{\mathbf{p}} a_{\mathbf{p}}$ が示せる.
+
+
+\end{proof}
+
+\color{black}
+
+これより, 調和振動子と同様に理論のスペクトルを書くことができる.  
 基底状態 $\lvert 0 \rangle$ は
 \begin{equation*}
-a_{\mathbf{p}} \lvert 0 \rangle = 0
+a_{\mathbf{p}} \lvert 0 \rangle = 0,
 \end{equation*}
-をすべての$\mathbf{p}$について満たす状態であり, ゼロ点エネルギーを除いた $E=0$ を持ちます.
-
-他のすべての励起状態は, $\lvert 0 \rangle$ に生成演算子を作用させて構成されます.  
+をすべての$\mathbf{p}$について満たす状態であり, ゼロ点エネルギーを除いた $E=0$ を持つ. 他のすべての励起状態は, $\lvert 0 \rangle$ に生成演算子を作用させて構成される.  
 一般に,
 \begin{equation*}
 a^\dagger_{\mathbf{p}} a^\dagger_{\mathbf{q}} \cdots \lvert 0 \rangle
 \end{equation*}
-はエネルギー $\omega_{\mathbf{p}} + \omega_{\mathbf{q}} + \cdots$ を持つ固有状態です.
+はエネルギー $\omega_{\mathbf{p}} + \omega_{\mathbf{q}} + \cdots$ を持つ固有状態である.
+\vskip\baselineskip
+\color{blue}
+$H a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle = (\omega_{\mathbf{p}} + \omega_{\mathbf{q}}) a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle$ であることを示す.
+\begin{proof}
+\begin{equation*}
+    H a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle = \int \frac{d^3 p'}{(2\pi)^3} \omega_{\mathbf{p}'} \left( a^\dagger_{\mathbf{p}'}a_{\mathbf{p}'} + \frac{1}{2} [a_{\mathbf{p}'}, a^\dagger_{\mathbf{p}'}] \right) a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \tag{2-3.m1}
+\end{equation*}
+$\dfrac{1}{2}[a_{\mathbf{p}'}, a^\dagger_{\mathbf{p}'}] = \dfrac{1}{2}\delta^{(3)}(0)$ で無限大となるが, \eqref{2.31} を出した際に今後の計算では無視するという約束をしたので, ここでも無視していることに注意. 残りの項については交換関係を用いて式変形を行う.
+\begin{align*}
+    H a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle &= \int \frac{d^3 p'}{(2\pi)^3} \omega_{\mathbf{p}'} \underline{a^\dagger_{\mathbf{p}'}a_{\mathbf{p}'} a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle} \tag{2-3.m2}\\
+    &\quad \hspace{1cm} = a^\dagger_{\mathbf{p}'} \underline{a_{\mathbf{p}'} a_{\mathbf{p}}^{\dagger}} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \tag{2-3.m3}\\
+    &\quad \hspace{2cm} a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'} + [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \tag{2-3.m4}\\
+    &\quad \hspace{1cm} = a^\dagger_{\mathbf{p}'} (a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'} + [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}]) a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \tag{2-3.m5}\\
+    &\quad \hspace{1cm} = a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} \underline{a_{\mathbf{p}'}a_{\mathbf{q}}^{\dagger}} \lvert 0 \rangle + a_{\mathbf{p}'}^{\dagger} a_{\mathbf{q}}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \lvert 0 \rangle \tag{2-3.m6}\\
+    &\quad \hspace{2cm} a_{\mathbf{q}}^{\dagger} a_{\mathbf{p}'} + [a_{\mathbf{p}'}, a_{\mathbf{q}}^{\dagger}] \tag{2-3.m7}\\
+    &\quad \hspace{1cm} = a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} (a_{\mathbf{q}}^{\dagger} a_{\mathbf{p}'} + [a_{\mathbf{p}'}, a_{\mathbf{q}}^{\dagger}]) \lvert 0 \rangle + a_{\mathbf{p}'}^{\dagger} a_{\mathbf{q}}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \lvert 0 \rangle \tag{2-3.m8}\\
+    &\quad \hspace{1cm} = a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \underline{a_{\mathbf{p}'} \lvert 0 \rangle} + a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{q}}^{\dagger}] \lvert 0 \rangle + a_{\mathbf{p}'}^{\dagger} a_{\mathbf{q}}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \lvert 0 \rangle \tag{2-3.m9}\\
+    &\quad \hspace{3.5cm} a_{\mathbf{p}'} \lvert 0 \rangle = 0 \tag{2-3.m10}\\
+    &\quad \hspace{1cm} = a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{q}}^{\dagger}] \lvert 0 \rangle + a_{\mathbf{p}'}^{\dagger} a_{\mathbf{q}}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \lvert 0 \rangle \tag{2-3.m11}\\
+    &\quad \hspace{1cm} = (2\pi)^3 \delta^{(3)}(\mathbf{p}'-\mathbf{q}) a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} \lvert 0 \rangle + (2\pi)^3 \delta^{(3)}(\mathbf{p}'-\mathbf{p}) a_{\mathbf{p}'}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \tag{2-3.m12}\\
+    &= \int d^3 p' \omega_{\mathbf{p'}} \left\{ \delta^{(3)}(\mathbf{p}'-\mathbf{q}) a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} \lvert 0 \rangle + \delta^{(3)}(\mathbf{p}'-\mathbf{p}) a_{\mathbf{p}'}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \right\} \tag{2-3.m13}\\
+    &= \omega_{\mathbf{q}} a_{\mathbf{q}}^{\dagger} a_{\mathbf{p}}^{\dagger} \lvert 0 \rangle + \omega_{\mathbf{p}} a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \tag{2-3.m14}\\
+    &= (\omega_{\mathbf{p}} + \omega_{\mathbf{q}}) a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \hspace{0.5cm}(\because a_{\mathbf{q}}^{\dagger} a_{\mathbf{p}}^{\dagger} \lvert 0 \rangle = a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle) \tag{2-3.m15}
+\end{align*}
+\end{proof}
 
-\vspace{0.5em}
+\color{black}
 
-次に, 固有状態の運動量について考えます.  
-式 (2.19) と (2.31) を使って全運動量演算子は：
+次に運動量固有状態について考える.
+\begin{align*}
+    P^i = \int T^{0i} d^3x = -\int \pi \partial_i \phi d^3 x \tag{2.19} \\
+    H = \int \frac{d^3p}{(2\pi)^3} \omega_{\mathbf{p}} \left( a^\dagger_{\mathbf{p}} a_{\mathbf{p}} + \frac{1}{2} [a_{\mathbf{p}}, a^\dagger_{\mathbf{p}}] \right) \tag{2.31}
+\end{align*}
+を使って全運動量演算子は次のように書ける：
 \begin{equation*}
 \mathbf{P} = -\int d^3x\, \pi(\mathbf{x}) \nabla \phi(\mathbf{x})
 = \int \frac{d^3p}{(2\pi)^3} \mathbf{p} \, a^\dagger_{\mathbf{p}} a_{\mathbf{p}}
 \end{equation*}
-と書けます.
 
-\vspace{0.5em}
+\color{blue}
+\begin{proof}
+\begin{align*}
+    \mathbf{P} &= -\int d^3x\, \pi(\mathbf{x}) \nabla \phi(\mathbf{x}) \tag{2-3.n1}\\
+    &= -\int d^3 x\, \int \frac{d^3 p\, d^3 p'}{(2\pi)^6} (-i) \sqrt{\frac{\omega_{\mathbf{p}'}}{2}} (a_{\mathbf{p}} e^{i\mathbf{p} \cdot \mathbf{x}} - a_{\mathbf{p}}^{\dagger} e^{-i\mathbf{p} \cdot \mathbf{x}})\frac{i\mathbf{p}}{\sqrt{2\omega_{\mathbf{p}'}}} (a_{\mathbf{p}'} e^{i\mathbf{p}' \cdot \mathbf{x}} - a_{\mathbf{p}'}^{\dagger} e^{-i\mathbf{p}' \cdot \mathbf{x}}) \tag{2-3.n2}\\
+    &= -\underline{\int d^3 x}\, \int \frac{d^3 p\, d^3 p'}{(2\pi)^6}\sqrt{\frac{\omega_{\mathbf{p}}}{\omega_{\mathbf{p}}}'}\frac{\mathbf{p}'}{2} \underline{(a_{\mathbf{p}} e^{i\mathbf{p} \cdot \mathbf{x}} - a_{\mathbf{p}}^{\dagger} e^{-i\mathbf{p} \cdot \mathbf{x}})(a_{\mathbf{p}'} e^{i\mathbf{p}' \cdot \mathbf{x}} - a_{\mathbf{p}'}^{\dagger} e^{-i\mathbf{p}' \cdot \mathbf{x}})} \tag{2-3.n3}\\
+    &\quad \hspace{1cm} \int d^3 x\, (a_{\mathbf{p}} e^{i\mathbf{p} \cdot \mathbf{x}} - a_{\mathbf{p}}^{\dagger} e^{-i\mathbf{p} \cdot \mathbf{x}})(a_{\mathbf{p}'} e^{i\mathbf{p}' \cdot \mathbf{x}} - a_{\mathbf{p}'}^{\dagger} e^{-i\mathbf{p}' \cdot \mathbf{x}}) \tag{2-3.n4}\\
+    &\quad \hspace{1.5cm} = \int d^3 x\, (a_{\mathbf{p}} a_{\mathbf{p}'} e^{i(\mathbf{p}+\mathbf{p}') \cdot \mathbf{x}} - a_{\mathbf{p}} a_{\mathbf{p}'}^{\dagger} e^{i(\mathbf{p}-\mathbf{p}') \cdot \mathbf{x}}\\
+    &\quad \hspace{3.5cm} - a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'} e^{-i(\mathbf{p}-\mathbf{p}') \cdot \mathbf{x}} + a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'}^{\dagger} e^{-i(\mathbf{p}+\mathbf{p}') \cdot \mathbf{x}}) \tag{2-3.n5}\\
+    &\quad \hspace{1.5cm} =  a_{\mathbf{p}} a_{\mathbf{p}'} (2\pi)^3 \delta^{(3)}(\mathbf{p}+\mathbf{p}') - a_{\mathbf{p}} a_{\mathbf{p}'}^{\dagger} (2\pi)^3 \delta^{(3)}(\mathbf{p}-\mathbf{p}') \\
+    &\quad \hspace{2cm} - a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'} (2\pi)^3 \delta^{(3)}(\mathbf{p}-\mathbf{p}') + a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'}^{\dagger} (2\pi)^3 \delta^{(3)}(\mathbf{p}+\mathbf{p}') \tag{2-3.n6}\\
+    &= -\int \frac{d^3 p\, d^3 p'}{(2\pi)^6} \sqrt{\frac{\omega_{\mathbf{p}}}{\omega_{\mathbf{p}}}'}\frac{\mathbf{p}'}{2} \left\{ a_{\mathbf{p}} a_{\mathbf{p}'} (2\pi)^3 \delta^{(3)}(\mathbf{p}+\mathbf{p}') - a_{\mathbf{p}} a_{\mathbf{p}'}^{\dagger} (2\pi)^3 \delta^{(3)}(\mathbf{p}-\mathbf{p}') \right.\\
+    &\quad \hspace{4cm} \left. - a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'} (2\pi)^3 \delta^{(3)}(\mathbf{p}-\mathbf{p}') + a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'}^{\dagger} (2\pi)^3 \delta^{(3)}(\mathbf{p}+\mathbf{p}') \right\} \tag{2-3.n7}\\
+    &= -\int \frac{d^3 p\, d^3 p'}{(2\pi)^3} \sqrt{\frac{\omega_{\mathbf{p}}}{\omega_{\mathbf{p}}}'}\frac{\mathbf{p}'}{2} \left\{ a_{\mathbf{p}} a_{\mathbf{p}'} \delta^{(3)}(\mathbf{p}+\mathbf{p}') - a_{\mathbf{p}} a_{\mathbf{p}'}^{\dagger} \delta^{(3)}(\mathbf{p}-\mathbf{p}') \right.\\
+    &\quad \hspace{4cm} \left. - a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'} \delta^{(3)}(\mathbf{p}-\mathbf{p}') + a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'}^{\dagger} \delta^{(3)}(\mathbf{p}+\mathbf{p}') \right\} \tag{2-3.n8}\\
+    &= -\int \frac{d^3 p}{(2\pi)^3} \frac{\mathbf{p}}{2} \left( -a_{\mathbf{p}} a_{-\mathbf{p}} - a_{\mathbf{p}} a_{\mathbf{p}}^{\dagger} - a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}} - a_{\mathbf{p}}^{\dagger} a_{-\mathbf{p}} \right) \tag{2-3.n9}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \frac{\mathbf{p}}{2} \, \left( a_{\mathbf{p}} a_{-\mathbf{p}} + a_{\mathbf{p}} a_{\mathbf{p}}^{\dagger} + a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}} + a_{\mathbf{p}}^{\dagger} a_{-\mathbf{p}} \right) \tag{2-3.n10}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \frac{\mathbf{p}}{2} \, \left( a_{\mathbf{p}} a_{\mathbf{p}}^{\dagger} + a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}} \right) + \underline{\int \frac{d^3 p}{(2\pi)^3} \frac{\mathbf{p}}{2} \, \left( a_{\mathbf{p}} a_{-\mathbf{p}} + a_{\mathbf{p}}^{\dagger} a_{-\mathbf{p}}^{\dagger} \right)} \tag{2-3.n11}\\
+    &\quad \hspace{2cm} A = \int \frac{d^3 p}{(2\pi)^3} \frac{\mathbf{p}}{2} \, \left( a_{\mathbf{p}} a_{-\mathbf{p}} + a_{\mathbf{p}}^{\dagger} a_{-\mathbf{p}}^{\dagger} \right) \tag{2-3.n12}\\
+    &\quad \hspace{2.3cm} = \int \frac{d^3 p}{(2\pi)^3} \frac{-\mathbf{p}}{2} \, \left( a_{-\mathbf{p}} a_{\mathbf{p}} + a_{-\mathbf{p}}^{\dagger} a_{\mathbf{p}}^{\dagger} \right) \hspace{0.5cm}(\text{変数変換}\, \mathbf{p} \to -\mathbf{p}) \tag{2-3.n13}\\
+    &\quad \hspace{2.3cm} = -A \hspace{0.5cm}(\because [a_{\mathbf{p}}, a_{\mathbf{-p}}] = 0 \to a_{\mathbf{p}} a_{\mathbf{-p}} = a_{\mathbf{-p}} a_{\mathbf{p}}. \hspace{0.3cm} a_{\mathbf{p}}^{\dagger} a_{\mathbf{-p}}^{\dagger} \text{も同様}) \tag{2-3.n14}\\
+    &\quad \hspace{1.78cm} 2A = 0 \Longrightarrow A = 0 \tag{2-3.n15}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \frac{\mathbf{p}}{2} \, \left( a_{\mathbf{p}} a_{\mathbf{p}}^{\dagger} + a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}} \right) \tag{2-3.n16}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \frac{\mathbf{p}}{2} \, \left( a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}} + [a_{\mathbf{p}}, a_{\mathbf{p}}^{\dagger}] + a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}} \right) \tag{2-3.n17}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \mathbf{p} \, \left( a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}} + \frac{1}{2}[a_{\mathbf{p}}, a_{\mathbf{p}}^{\dagger}]  \right) \tag{2-3.n18}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \mathbf{p} \, a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}} \hspace{0.5cm}\left(\because \frac{1}{2}[a_{\mathbf{p}}, a_{\mathbf{p}}^{\dagger}] = \frac{1}{2}(2\pi)^3 \delta^{(3)}(0)\, \text{の無限大は同様に無視} \right) \tag{2-3.n19}
+\end{align*}
+\end{proof}
+
+
+
+\color{black}
 
 この式から,
-$a^\dagger_{\mathbf{p}}$ は運動量 $\mathbf{p}$ を持ち, エネルギー $\omega_{\mathbf{p}} = \sqrt{|\mathbf{p}|^2 + m^2}$ を持つ励起を作ることがわかります.  
-また,
+$a^\dagger_{\mathbf{p}}$ は運動量 $\mathbf{p}$ を持ち, エネルギー $\omega_{\mathbf{p}} = \sqrt{|\mathbf{p}|^2 + m^2}$ を持つ励起を作ることが分かる. また,
 $a^\dagger_{\mathbf{p}} a^\dagger_{\mathbf{q}} \cdots \lvert 0 \rangle$
-は運動量 $\mathbf{p} + \mathbf{q} + \cdots$ を持つ状態になります.
+は運動量 $\mathbf{p} + \mathbf{q} + \cdots$ を持つ状態になる.
+\vskip\baselineskip
+\color{blue}
+$H a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle = (\mathbf{p} + \mathbf{q}) a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle$ であることを示す.
+\begin{proof}
+    \begin{align*}
+        \mathbf{P} a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle &= \int \frac{d^3 p'}{(2\pi)^3} \mathbf{p}' \underline{a^\dagger_{\mathbf{p}'}a_{\mathbf{p}'} a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle} \tag{2-3.o1}\\
+        &\quad \hspace{1cm} = a^\dagger_{\mathbf{p}'} \underline{a_{\mathbf{p}'} a_{\mathbf{p}}^{\dagger}} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \tag{2-3.o2}\\
+        &\quad \hspace{2cm} a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'} + [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \tag{2-3.o3}\\
+        &\quad \hspace{1cm} = a^\dagger_{\mathbf{p}'} (a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'} + [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}]) a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \tag{2-3.o4}\\
+        &\quad \hspace{1cm} = a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} \underline{a_{\mathbf{p}'}a_{\mathbf{q}}^{\dagger}} \lvert 0 \rangle + a_{\mathbf{p}'}^{\dagger} a_{\mathbf{q}}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \lvert 0 \rangle \tag{2-3.o5}\\
+        &\quad \hspace{2cm} a_{\mathbf{q}}^{\dagger} a_{\mathbf{p}'} + [a_{\mathbf{p}'}, a_{\mathbf{q}}^{\dagger}] \tag{2-3.o6}\\
+        &\quad \hspace{1cm} = a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} (a_{\mathbf{q}}^{\dagger} a_{\mathbf{p}'} + [a_{\mathbf{p}'}, a_{\mathbf{q}}^{\dagger}]) \lvert 0 \rangle + a_{\mathbf{p}'}^{\dagger} a_{\mathbf{q}}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \lvert 0 \rangle \tag{2-3.o7}\\
+        &\quad \hspace{1cm} = a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \underline{a_{\mathbf{p}'} \lvert 0 \rangle} + a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{q}}^{\dagger}] \lvert 0 \rangle + a_{\mathbf{p}'}^{\dagger} a_{\mathbf{q}}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \lvert 0 \rangle \tag{2-3.o8}\\
+        &\quad \hspace{3.5cm} a_{\mathbf{p}'} \lvert 0 \rangle = 0 \tag{2-3.o9}\\
+        &\quad \hspace{1cm} = a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{q}}^{\dagger}] \lvert 0 \rangle + a_{\mathbf{p}'}^{\dagger} a_{\mathbf{q}}^{\dagger} [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \lvert 0 \rangle \tag{2-3.o10}\\
+        &\quad \hspace{1cm} = (2\pi)^3 \delta^{(3)}(\mathbf{p}'-\mathbf{q}) a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} \lvert 0 \rangle + (2\pi)^3 \delta^{(3)}(\mathbf{p}'-\mathbf{p}) a_{\mathbf{p}'}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \tag{2-3.o11}\\
+        &= \int d^3 p' \, \mathbf{p}' \left\{ \delta^{(3)}(\mathbf{p}'-\mathbf{q}) a_{\mathbf{p}'}^{\dagger} a_{\mathbf{p}}^{\dagger} \lvert 0 \rangle + \delta^{(3)}(\mathbf{p}'-\mathbf{p}) a_{\mathbf{p}'}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \right\} \tag{2-3.o12}\\
+        &= \mathbf{q} a_{\mathbf{q}}^{\dagger} a_{\mathbf{p}}^{\dagger} \lvert 0 \rangle + \mathbf{p} a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \tag{2-3.o13}\\
+        &= (\mathbf{p} + \mathbf{q}) a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle \hspace{0.5cm}(\because a_{\mathbf{q}}^{\dagger} a_{\mathbf{p}}^{\dagger} \lvert 0 \rangle = a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} \lvert 0 \rangle) \tag{2-3.o14}
+\end{align*}
+    
+\end{proof}
 
-\vspace{0.5em}
 
-これらの励起は離散的であり, 適切な相対論的エネルギー運動量関係に従うので,
-粒子 (particles) と呼ぶのが自然です.
+\color{black}
 
-なお, $a^\dagger_{\mathbf{p}}$ が作るのは運動量空間の粒子であり, 空間局所化されたものではありません.
-
-\vspace{0.5em}
-
-今後, $\omega_{\mathbf{p}}$ を粒子エネルギー $E_{\mathbf{p}}$ と呼ぶことにし,
+これらの励起は離散的であり, 適切な相対論的エネルギー運動量の関係に従うので, 粒子 (particles) と呼ぶのが自然である \textcolor{blue}{(離散的とは粒子数が整数で数えられて固有値が離散的であるということ. そして1粒子状態のエネルギーと運動量は,$\omega_{\mathbf{p}} = \sqrt{|p^2| + m^2}$. これは相対論的エネルギー $E^2 = \mathbf{p}^2 + m^2$ と一致するので物理的に粒子と見なすのが自然)}. なお, $a^\dagger_{\mathbf{p}}$ が作るのは運動量空間の粒子であり, 空間局所化されたものではない.
+\vskip\baselineskip
+\color{blue}※生成演算子 $a_{\mathbf{p}}^{\dagger}$ が作る状態 $\lvert \mathbf{p} \rangle = a_{\mathbf{p}}^{\dagger} \lvert 0 \rangle$ は運動量が $\mathbf{p}$ に定まった状態だが, $\lvert \mathbf{p} \rangle$ の空間(位置)表現をとると平面波になっており, 局在化してないことが分かる.\\
+1粒子状態 $\lvert \mathbf{p} \rangle = a_{\mathbf{p}}^{\dagger} \lvert 0 \rangle$ に対して, 位置空間での波動関数を $\psi_{\mathbf{p}}(\mathbf{x})$ とすると,
 \begin{equation*}
-E_{\mathbf{p}} = \sqrt{|\mathbf{p}|^2 + m^2}
+    \psi_{\mathbf{p}}(\mathbf{x}) \equiv \langle 0 \rvert \phi(\mathbf{x}) \rvert \mathbf{p} \rangle = \langle 0 \rvert \phi(\mathbf{x})a_{\mathbf{p}}^{\dagger} \rvert 0 \rangle \tag{2-3.p1}
 \end{equation*}
-で与えます.
+これは運動量 $\mathbf{p}$ を持つ粒子が空間 $\mathbf{x}$ に存在する振幅を表す. さらにいうと, 位置 $\mathbf{x}$ における場 (検出器) で粒子 $\lvert \mathbf{p} \rangle$ を検出したときに真空が残るという状況. 計算すると,
 
-エネルギーは常に正の値を取ります.
+\begin{align*}
+    \psi_{\mathbf{p}}(\mathbf{x}) &= \int \frac{d^3 p'}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}'}}} (\langle 0 \rvert \underline{a_{\mathbf{p}'}a_{\mathbf{p}}^{\dagger}} \rvert 0 \rangle e^{i\mathbf{p}' \cdot \mathbf{x}} + \underline{\langle 0 \rvert a_{\mathbf{p}'}^{\dagger}a_{\mathbf{p}}^{\dagger} \rvert 0 \rangle} e^{-i\mathbf{p}' \cdot \mathbf{x}})  \tag{2-3.p2}\\
+    &\quad \hspace{2cm} a_{\mathbf{p}'} a_{\mathbf{p}}^{\dagger} = a_{\mathbf{p}}^{\dagger} a_{\mathbf{p}'} + [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}], \quad \langle 0 \rvert a_{\mathbf{p}'}^{\dagger}a_{\mathbf{p}}^{\dagger} \rvert 0 \rangle = 0. \label{2-3.p3}\tag{2-3.p3}\\
+    &= \int \frac{d^3 p'}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}'}}} (\langle 0 \rvert a_{\mathbf{p}}^{\dagger} \underline{a_{\mathbf{p}'} \rvert 0 \rangle} e^{i\mathbf{p}' \cdot \mathbf{x}} + [a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \underline{\langle 0 \rvert 0 \rangle} e^{-i\mathbf{p}' \cdot \mathbf{x}}) \tag{2-3.p4}\\
+    &\quad \hspace{3cm} a_{\mathbf{p}'} \rvert 0 \rangle = 0, \hspace{0.5cm} \langle 0 \rvert 0 \rangle = 1 \quad(\because \text{真空の定義と期待値}) \tag{2-3.p5}\\
+    &= \int \frac{d^3 p'}{(2\pi)^3} \frac{1}{\sqrt{2\omega_{\mathbf{p}'}}} (2\pi)^3 \delta^{(3)}(\mathbf{p}'-\mathbf{p}) e^{i\mathbf{p}' \cdot \mathbf{x}}  \tag{2-3.p6}\\
+    &= \frac{1}{\sqrt{2\omega_{\mathbf{p}}}} e^{i\mathbf{p} \cdot \mathbf{x}} \tag{2-3.p7}
+\end{align*}
+よって $a_{\mathbf{p}}^{\dagger}$ が作る粒子は局在化されておらず, 運動量 $\mathbf{p}$ を持つ平面波であることが分かる.\\
+※ \eqref{2-3.p3} の $\langle 0 \rvert a_{\mathbf{p}'}^{\dagger}a_{\mathbf{p}}^{\dagger} \rvert 0 \rangle = 0$ は, 粒子数ゼロの真空状態と粒子数2の状態との内積であり, 異なる粒子数状態がFock空間において互いに直交することから成り立つ.
+Fock空間は, 各粒子数に対応するHilbert空間の直和として構成されており, このような粒子数による直交性が自然に保証される. 難しいから初学者はそんなに気にしないでいいよ笑
+\vskip\baselineskip
+\color{black}
 
-\vspace{0.5em}
-
-この形式論は, 粒子の統計も決定します.
-
-たとえば, 二粒子状態
+今後, $\omega_{\mathbf{p}}$ を粒子エネルギー $E_{\mathbf{p}}$ と呼び, 以下で与える：
 \begin{equation*}
-a^\dagger_{\mathbf{p}} a^\dagger_{\mathbf{q}} \lvert 0 \rangle
+E_{\mathbf{p}} = \sqrt{|\mathbf{p}|^2 + m^2}.
 \end{equation*}
-を考えると, $a^\dagger_{\mathbf{p}}$ と $a^\dagger_{\mathbf{q}}$ は交換可能なので,
-粒子を入れ替えても状態は変わりません.
+エネルギーは常に正の値を取る.\par
+この形式論は, 粒子の統計も決定する. 例えば, 二粒子状態 $a^\dagger_{\mathbf{p}} a^\dagger_{\mathbf{q}} \lvert 0 \rangle$ を考えると, $a^\dagger_{\mathbf{p}}$ と $a^\dagger_{\mathbf{q}}$ は交換可能なので,
+粒子を入れ替えても状態は変わらない. よって, Klein-Gordon粒子は
+\textbf{ボース＝アインシュタイン統計} (Bose-Einstein statistics) に従う.
+\vskip\baselineskip
+我々は自然に真空状態を以下のように規格化する：
+\begin{equation*}
+\langle 0 | 0 \rangle = 1.
+\end{equation*}
 
-したがって, Klein-Gordon粒子は
-\textbf{ボース＝アインシュタイン統計} (Bose-Einstein statistics) に従います.
+一粒子状態 \( |\mathbf{p}\rangle \propto a^\dagger_{\mathbf{p}} |0\rangle \) はしばしば現れるので, よくこの規格化を採用する.\\
+単純な規格化は多くの教科書で使われるが,
+\begin{equation*}
+\langle \mathbf{p} | \mathbf{q} \rangle = (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}),
+\end{equation*}
+これは Lorentz 不変でない. $z$ 軸方向への Lorentz Boost を考えると：
+\begin{align*}
+p_3' &= \gamma (p_3 + \beta E), \\
+E' &= \gamma (E + \beta p_3).
+\end{align*}
+デルタ関数の変換公式は、
+\begin{equation}
+\delta(f(x) - f(x_0)) = \frac{1}{|f'(x_0)|} \delta(x - x_0). \tag{2.34}
+\end{equation}
+これを用いて変換すると：
+\begin{align*}
+\delta^{(3)}(\mathbf{p} - \mathbf{q}) &= \delta^{(3)}(\mathbf{p}' - \mathbf{q}') \cdot \frac{dp_3'}{dp_3} \\
+&= \delta^{(3)}(\mathbf{p}' - \mathbf{q}') \cdot \gamma \left(1 + \beta \frac{dE}{dp_3} \right) \\
+&= \delta^{(3)}(\mathbf{p}' - \mathbf{q}') \cdot \frac{E'}{E}.
+\end{align*}
 
+\color{blue}
+\begin{proof}
+Lorentz Boost を $z$ 軸方向にかけると,
+\begin{align*}
+p_3' &= \gamma (p_3 + \beta E), \tag{2-3.q1 }\\
+E' &= \gamma (E + \beta p_3). \tag{2-3.q2}
+\end{align*}
+ここで, $E = \sqrt{|\mathbf{p}|^2 + m^2}$, $\gamma = \dfrac{1}{\sqrt{1-\beta^2}}$, $\beta = v$ である ($c=1$).\\
+デルタ関数の変換では, 測度 (微小体積) の変換を考える必要がある. 今回は $z$ 軸 ($p_3$) 方向についての変換なので,
+\begin{equation*}
+    \delta(p_3 - q_3) = \delta(p_3 - p_3') \left| \frac{dp_3'}{dp_3} \right|^{-1}. \tag{2-3.q3}
+\end{equation*}
+\begin{equation*}
+    p_3' = \gamma (p_3 + \beta E(\mathbf{p})) \Longrightarrow \frac{dp_3'}{dp_3} = \gamma \left( 1 + \beta\frac{dE}{dp_3} \right). \tag{2-3.q4}
+\end{equation*}
+ここで,
+\begin{equation*}
+    E = \sqrt{|\mathbf{p}|^2 + m^2} \Longrightarrow \frac{dE}{dp_3} = \frac{p_3}{E} \tag{2-3.q5}
+\end{equation*}
+より,
+\begin{equation*}
+    \frac{dp_3'}{dp_3} = \gamma \left( 1 + \beta\frac{p_3}{E} \right). \tag{2-3.q6}
+\end{equation*}
+よって,
+\begin{align*}
+    E' &= \gamma (E + \beta p_3) \tag{2-3.q7} \\
+    \frac{E'}{E} &= \gamma (1 + \beta \frac{p_3}{E}) \tag{2-3.q8}\\
+    &= \frac{dp_3'}{dp_3}. \tag{2-3.q9}
+\end{align*}
+元の3次元デルタ関数は,
+\begin{equation*}
+    \delta^{(3)}(\mathbf{p} - \mathbf{q}) = \delta(p_3 - q_3) \delta(p_1 - q_1) \delta(p_2 - q_2). \tag{2-3.q10}
+\end{equation*}
+このうち $z$ 軸方向が Lorentz Boost されるので,
+\begin{equation*}
+    \delta(p_3 - q_3) = \delta(p_3 - p_3') \left| \frac{dp_3'}{dp_3} \right|^{-1} = \delta(p_3 - p_3') \frac{E'}{E}. \tag{2-3.q11}
+\end{equation*}
+したがって, 全体としては
+\begin{equation*}
+    \delta^{(3)}(\mathbf{p} - \mathbf{q}) = \delta^{(3)}(\mathbf{p}' - \mathbf{q}') \frac{E'}{E}, \tag{2-3.q12}
+\end{equation*}
+となる. これは Lorentz 不変でない.
+\end{proof}
+\vskip\baselineskip
+\color{black}
 
- 
+このことから, \(\delta^{(3)}(\mathbf{p} - \mathbf{q})\) はローレンツ変換下で変化することがわかる.\\
+ 一方, \( E_{\mathbf{p}} \delta^{(3)}(\mathbf{p} - \mathbf{q}) \) はローレンツ不変である.\\
+そこで, 一粒子状態を次のように定義する：
+\begin{equation*}
+|\mathbf{p}\rangle = \sqrt{2E_{\mathbf{p}}} \, a^\dagger_{\mathbf{p}} |0\rangle \tag{2.35}
+\end{equation*}
 
+このとき, 内積は：
+\begin{equation*}
+\langle \mathbf{p} | \mathbf{q} \rangle = 2E_{\mathbf{p}} (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}). \tag{2.36}
+\end{equation*}
 
+\color{blue}
+\begin{align*}
+    \langle \mathbf{p} | \mathbf{q} \rangle &= (\sqrt{2E_{\mathbf{p}}} \langle 0 | a_{\mathbf{p}}) (\sqrt{2E_{\mathbf{q}}} a_{\mathbf{q}}^{\dagger} |0 \rangle) \tag{2-3.r1}\\
+    &= 2E_{\mathbf{p}} \langle 0 \rvert a_{\mathbf{p}} a_{\mathbf{q}}^{\dagger} \rvert 0 \rangle \tag{2-3.r2}\\
+    &= 2E_{\mathbf{p}} \langle 0 \rvert (a_{\mathbf{q}}^{\dagger}a_{\mathbf{p}} + [a_{\mathbf{p}}, a_{\mathbf{q}}^{\dagger}]) \rvert 0 \rangle \tag{2-3.r3}\\
+    &= 2E_{\mathbf{p}} \langle 0 \rvert a_{\mathbf{q}}^{\dagger} \underline{a_{\mathbf{p}} \rvert 0 \rangle} + 2E_{\mathbf{p}} \langle 0 \rvert [a_{\mathbf{p}}, a_{\mathbf{q}}^{\dagger}] \rvert 0 \rangle \tag{2-3.r4}\\
+    &\quad \hspace{1.7cm} a_{\mathbf{p}} = 0 \tag{2-3.r5}\\
+    &= 2E_{\mathbf{p}} [a_{\mathbf{q}}^{\dagger}, a_{\mathbf{p}}] \langle 0 \rvert 0 \rangle \tag{2-3.r6}\\
+    &= 2E_{\mathbf{p}} (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}) \tag{2-3.r7}
+\end{align*}
+\vskip\baselineskip
+\color{black}
 
+ローレンツ変換 \(\Lambda\) により, ユニタリー演算子 \(U(\Lambda)\) を介して状態は：
+\begin{equation*}
+U(\Lambda) |\mathbf{p}\rangle = |\Lambda \mathbf{p}\rangle \tag{2.37}
+\end{equation*}
 
+演算子に作用させる形式で書けば：
+\begin{equation*}
+U(\Lambda) a^\dagger_{\mathbf{p}} U^{-1}(\Lambda) = \sqrt{\frac{E_{\Lambda \mathbf{p}}}{E_{\mathbf{p}}}} a^\dagger_{\Lambda \mathbf{p}} \tag{2.38}
+\end{equation*}
 
+\color{blue}
+$U(\Lambda)$ は Lorentz 変換に対応するユニタリー演算子である. 真空状態は Lorentz 不変：
+\begin{equation*}
+    U(\Lambda) |0\rangle = |0\rangle. \tag{2-3.s1}
+\end{equation*}
+1粒子状態に Lorentz 変換を作用させると,
+\begin{align*}
+    U(\Lambda) |\mathbf{p}\rangle &= U(\Lambda) \sqrt{2E_{\mathbf{p}}} a^\dagger_{\mathbf{p}} |0\rangle\\
+    &= \sqrt{2E_{\mathbf{p}}} U(\Lambda) a^\dagger_{\mathbf{p}}U^{-1}(\Lambda)U(\Lambda) |0\rangle. \tag{2-3.s2}\\
+    &= \sqrt{2E_{\mathbf{p}}} U(\Lambda) a^\dagger_{\mathbf{p}}U^{-1}(\Lambda) \hspace{0.5cm} (\because U(\Lambda) |0\rangle = |0\rangle) \tag{2-3.s3}
+\end{align*}
+一方, $\rvert \Lambda \mathbf{p}\rangle$ は定義から,
+\begin{equation*}
+    \rvert \Lambda \mathbf{p}\rangle = \sqrt{2E_{\Lambda \mathbf{p}}} a^\dagger_{\Lambda \mathbf{p}} |0\rangle. \tag{2-3.s4}
+\end{equation*}
+この式と一致させるために先ほどの式と比較すると,
+\begin{equation*}
+    U(\Lambda) |\mathbf{p}\rangle = \rvert \Lambda \mathbf{p}\rangle = \sqrt{2E_{\Lambda \mathbf{p}}} a^\dagger_{\Lambda \mathbf{p}} |0\rangle. \tag{2-3.s5}
+\end{equation*}
+よって,
+\begin{align*}
+    \sqrt{2E_{\mathbf{p}}} U(\Lambda) a_{\mathbf{p}}^{\dagger} U^{-1}(\Lambda)\rvert 0 \rangle &= \sqrt{2E_{\Lambda \mathbf{p}}} a_{\Lambda \mathbf{p}}^{\dagger} \rvert 0 \rangle \tag{2-3.s6}\\
+    U(\Lambda) a_{\mathbf{p}}^{\dagger} U^{-1}(\Lambda)\rvert 0 \rangle &= \sqrt{\frac{E_{\Lambda \mathbf{p}}}{E_{\mathbf{p}}}} a_{\Lambda \mathbf{p}}^{\dagger} \rvert 0 \rangle \tag{2-3.s7}
+\end{align*}
+という演算子の変換法則が導かれる. 係数 $\sqrt{\dfrac{E_{\Lambda \mathbf{p}}}{E_{\mathbf{p}}}}$ は状態の Lorentz 不変な規格化を保つために必要な補正である.1粒子状態の内積 $\langle \mathbf{p} | \mathbf{q} \rangle = 2E_{\mathbf{p}} (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q})$ が Lorentz 不変であるためには, 演算子の変換法則にもエネルギーのスケーリングが必要である.
+\vskip\baselineskip
+\color{black}
+
+この規格化に基づく完備性関係は：
+\begin{equation*}
+(\mathbf{1})_{\text{1-particle}} = \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} |\mathbf{p}\rangle \langle \mathbf{p}| \tag{2.39}
+\end{equation*}
+
+これは Lorentz 不変な運動量測度であり, 次のようにも表せる：
+\begin{equation*}
+\int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}}
+= \int \frac{d^4p}{(2\pi)^4} (2\pi) \delta(p^2 - m^2) \theta(p^0) \tag{2.40}
+\end{equation*}
+
+\color{blue}
+3次元の測度 $\dfrac{d^3 p}{(2\pi)^3}\dfrac{1}{2E_{\mathbf{p}}}$ が4次元 Lorentz 不変な測度 $\dfrac{d^4p}{(2\pi)^4} (2\pi) \delta(p^2 - m^2) \theta(p^0)$ と等価であることを示す.
+\begin{proof}
+まず任意の関数 $f(p)$ 対して次の恒等式を考える：
+\begin{equation*}
+    \int \frac{d^4 p}{(2\pi)^4} f(p) \delta(p^2 - m^2) \theta(p^0) = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} f(E_{\mathbf{p}}, \mathbf{p}) \tag{2-3.t1}
+\end{equation*}
+この積分は4次元時空全体を走るが, デルタ関数によって On Shell $p^2 = m^2$ 上のみに制限され (On Shell 条件), さらに階段関数 $\theta(p^0)$ によって $p^0 > 0$ のみ選ばれる.\\
+On Shell 条件を用いて $p^0$ 積分を行う. デルタ関数の恒等式から,
+\begin{equation*}
+    \delta(f(x)) = \sum_i \frac{1}{|f'(x_i)|} \delta(x - x_i). \tag{2-3.t2}
+\end{equation*}
+これを用いると,
+\begin{equation*}
+    \delta(p^2 - m^2) = \delta((p^0)^2 - |\mathbf{p}|^2 - m^2) = \frac{1}{2E_{\mathbf{p}}} (\delta(p^0 - E_{\mathbf{p}}) + \delta(p^0 + E_{\mathbf{p}})) \tag{2-3.t3}
+\end{equation*}
+$\theta(p^0)$ は $p^0 > 0$ のみを選ぶので,
+\begin{equation*}
+    \delta(p^2 - m^2) \theta(p^0) = \frac{1}{2E_{\mathbf{p}}} \delta(p^0 - E_{\mathbf{p}}) \tag{2-3.t4}
+\end{equation*}
+となる. これを用いて $p^0$ 積分を行うと, デルタ関数から $p^0 = E_{\mathbf{p}}$ が代入される：
+\begin{align*}
+    \int \frac{d^4 p}{(2\pi)^4}(2\pi) \delta(p^2 - m^2) \theta(p^0) f(p) &= \int \frac{d^3 p\, dp^0}{(2\pi)^4} (2\pi) \frac{1}{2E_{\mathbf{p}}} \delta(p^0 - E_{\mathbf{p}}) f(p^0, \mathbf{p}) \tag{2-3.t5} \\
+    &= \int \frac{d^3 p}{(2\pi)^4} \frac{(2\pi)}{2E_{\mathbf{p}}}f(E_{\mathbf{p}}, \mathbf{p}) \tag{2-3.t6}\\
+    &= \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} f(E_{\mathbf{p}}, \mathbf{p}) \tag{2-3.t7}
+\end{align*}
+よって, 任意の関数 $f(p)$ に対して,
+\begin{equation*}
+    \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} f(E_{\mathbf{p}}, \mathbf{p}) = \int \frac{d^4 p}{(2\pi)^4} \delta(p^2 - m^2) \theta(p^0) f(p). \tag{2-3.t8}
+\end{equation*}
+$f(p) = 1$ を選べば,
+\begin{equation*}
+    \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} = \int \frac{d^4 p}{(2\pi)^4} \delta(p^2 - m^2) \theta(p^0) \tag{2-3.t9}
+\end{equation*}
+$d^4 p$ は明らかに Lorentz 不変. $\delta(p^2 - m^2) \theta(p^0)$ はスカラーであるから Lorentz 不変.\\
+よって, 右辺全体が Lorentz 不変量となるので, 左辺も Lorentz 不変量である.
+\end{proof}
+
+\vskip\baselineskip
+\color{black}
+
+場の演算子 \(\phi(\mathbf{x})\) を真空状態に作用させると：
+\begin{equation*}
+\phi(\mathbf{x}) \rvert 0\rangle = \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} e^{-i\mathbf{p} \cdot \mathbf{x}} |\mathbf{p}\rangle. \tag{2.41}
+\end{equation*}
+
+\color{blue}
+\begin{align*}
+    \phi(\mathbf{x}) \rvert 0\rangle &= \int \frac{d^3 p}{(2\pi)^3}\frac{1}{2E_{\mathbf{p}}}(a_{\mathbf{p}}e^{i\mathbf{p}\cdot \mathbf{x}} + a_{\mathbf{p}}^{\dagger} e^{-i\mathbf{p}\cdot \mathbf{x}}) \rvert 0\rangle \tag{2-3.u1}\\
+    &= \int \frac{d^3 p}{(2\pi)^3}\frac{1}{2E_{\mathbf{p}}} e^{-i\mathbf{p}\cdot \mathbf{x}} a_{\mathbf{p}}^{\dagger} \rvert 0\rangle \hspace{0.5cm} (\because a_{\mathbf{p}} \rvert 0\rangle = 0) \tag{2-3.u2}\\
+    &= \int \frac{d^3 p}{(2\pi)^3}\frac{1}{2E_{\mathbf{p}}} e^{-i\mathbf{p}\cdot \mathbf{x}} \rvert \mathbf{p}\rangle \tag{2-3.u3}
+\end{align*}
+
+\color{black}
+
+この式は, 運動量が明確に定義された1粒子状態の線形重ね合わせで, 係数 $\dfrac{1}{2E_{\mathbf{p}}}$ を除けば位置固有状態 $|\mathbf{x}\rangle$ に対応する非相対論的な波動関数の表現と同じである. よって我々は同じ解釈を採用して演算子 $\phi(\mathbf{x})$ は真空状態に作用することで位置 $\mathbf{x}$ に粒子を生成する演算子という解釈を持つ. この解釈は以下の計算によって裏付けられる：
+
+\begin{align*}\label{2.42}
+\langle 0 \rvert \phi(\mathbf{x}) \rvert \mathbf{p}\rangle &= \langle 0 \rvert \int \frac{d^3p'}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}'}}} \left( a_{\mathbf{p}'} e^{i\mathbf{p}' \cdot \mathbf{x}} + a^\dagger_{\mathbf{p}'} e^{-i\mathbf{p}' \cdot \mathbf{x}} \right) \sqrt{2E_{\mathbf{p}}} a^\dagger_{\mathbf{p}} \rvert 0\rangle \notag \\
+&= e^{i\mathbf{p} \cdot \mathbf{x}} \tag{2.42}
+\end{align*}
+
+これは運動量固有状態 $\rvert\mathbf{p}\rangle$ の位置空間における波動関数と解釈できる. ちょうど非相対論的量子力学において $\langle \mathbf{x} | \mathbf{p} \rangle \propto e^{i\mathbf{p} \cdot \mathbf{x}}$ が状態 $\rvert \mathbf{p}\rangle$ の波動関数となるのと同様である.
+\vskip\baselineskip
+\color{blue}
+\eqref{2.42} の計算.
+\begin{proof}
+\begin{align*}
+    \langle 0 \rvert \phi(\mathbf{x}) \rvert \mathbf{p}\rangle &= \langle 0 \rvert \int \frac{d^3p'}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}'}}} \left( a_{\mathbf{p}'} e^{i\mathbf{p}' \cdot \mathbf{x}} + a^\dagger_{\mathbf{p}'} e^{-i\mathbf{p}' \cdot \mathbf{x}} \right) \sqrt{2E_{\mathbf{p}}} a^\dagger_{\mathbf{p}} \rvert 0\rangle \tag{2-3.v1}\\
+    &= \sqrt{\frac{E_{\mathbf{p}}}{E_{\mathbf{p}'}}} \int \frac{d^3 p'}{(2\pi)^3}\left( e^{i\mathbf{p}' \cdot \mathbf{x}} \langle 0 \rvert a_{\mathbf{p}'}a_{\mathbf{p}}^{\dagger}\rvert 0 \rangle +  e^{-i\mathbf{p}' \cdot \mathbf{x}} \langle 0 \rvert a_{\mathbf{p}'}^{\dagger}a_{\mathbf{p}}^{\dagger} \rvert 0 \rangle \right) \tag{2-3.v2}\\
+    &= \sqrt{\frac{E_{\mathbf{p}}}{E_{\mathbf{p}'}}} \int \frac{d^3 p'}{(2\pi)^3}\left( e^{i\mathbf{p}' \cdot \mathbf{x}} \langle 0 \rvert a_{\mathbf{p}'}a_{\mathbf{p}}^{\dagger}\rvert 0 \rangle \right) \hspace{0.5cm} (\because \langle 0 \rvert a_{\mathbf{p}'}^{\dagger}a_{\mathbf{p}}^{\dagger} \rvert 0 \rangle = 0) \tag{2-3.v3}\\
+    &= \sqrt{\frac{E_{\mathbf{p}}}{E_{\mathbf{p}'}}} \int \frac{d^3 p'}{(2\pi)^3}\left( e^{i\mathbf{p}' \cdot \mathbf{x}} \langle 0 \rvert a_{\mathbf{p}}^{\dagger}a_{\mathbf{p}'}\rvert 0 \rangle + e^{-i\mathbf{p}' \cdot \mathbf{x}}[a_{\mathbf{p}'}, a_{\mathbf{p}}^{\dagger}] \langle 0 \rvert 0 \rangle \right) \tag{2-3.v4}\\
+    &= \sqrt{\frac{E_{\mathbf{p}}}{E_{\mathbf{p}'}}} \int \frac{d^3 p'}{(2\pi)^3} e^{-i\mathbf{p}' \cdot \mathbf{x}} (2\pi)^3 \delta^{(3)}(\mathbf{p}' - \mathbf{p}) \hspace{0.5cm} (\because a_{\mathbf{p}'}\rvert 0 \rangle = 0) \tag{2-3.v5}\\
+    &= e^{-i\mathbf{p}\cdot \mathbf{x}}
+\end{align*}
+\end{proof}
 
 \end{document}
