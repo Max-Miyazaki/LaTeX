@@ -136,5 +136,72 @@ e^{-i \mathbf{P} \cdot \mathbf{x}} a_{\mathbf{p}}^\dagger e^{i \mathbf{P} \cdot 
 式(2.47)は, 量子場 $\phi(x)$ の二重的な性質、すなわちヒルベルト空間上の演算子としての性質と波動関数としての性質の両方を明示する. 一方で $a^\dagger(\mathbf{p})$ は場の励起、すなわち粒子を生成する演算子であり、他方で $\phi(x)$ は $e^{ipx}$ および $e^{-ipx}$ の線形結合として表現される. これらの時間依存成分は、$e^{-i p^0 t}$ および $e^{i p^0 t}$ の両方を含んでおり、$p^0 > 0$ であるにもかかわらず、正・負周波数成分と呼ばれる.\par
 これらの周波数成分は, 場演算子における粒子の生成・消滅演算子と直接対応しており, 自由場においては常にこの対応が成立する. 正周波数解には粒子を破壊する演算子が、負周波数解には粒子を生成する演算子が係数として現れる. このことにより, 場方程式が正・負の周波数解を持つことと, 理にかなった量子理論が正のエネルギー励起のみを含むという要請が両立される.
 
+\subsection*{因果性（Causality）}
+
+本章の冒頭で述べた因果性の問題に, ここで立ち返る. 現在の形式（ハイゼンベルク描像）において, 粒子が点 $y$ から点 $x$ へ伝播する振幅は,
+\begin{equation*}
+D(x - y) = \langle 0 | \phi(x) \phi(y) | 0 \rangle
+\end{equation*}
+で与えられる. この量を $D(x - y)$ と呼ぶ. 各演算子 $\phi$ は生成演算子 $a^\dagger$ と消滅演算子 $a$ の和として表されるが, この表現で寄与するのは, $\langle 0 | a_{\mathbf{p}} a^\dagger_{\mathbf{q}} | 0 \rangle = (2\pi)^3 \delta^3(\mathbf{p} - \mathbf{q})$ の項のみである. したがって,
+
+\begin{equation*}
+D(x - y) = \langle 0 | \phi(x) \phi(y) | 0 \rangle = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_p} e^{-ip \cdot (x - y)} \tag{2.50}
+\end{equation*}
+すでに（式2.40）で述べたように, これらの積分はローレンツ不変である. ここでは, $x - y$ の特定の値に対してこの積分を評価する.
+\subsubsection*{時間的な場合：$x^0 - y^0 = t$, $\mathbf{x} - \mathbf{y} = 0$}
+まず, $x - y$ が純粋に時間方向の場合（$x^0 - y^0 = t$, $\mathbf{x} - \mathbf{y} = 0$）を考える. この場合, $x - y$ が時間様であれば, そのような慣性系が常に存在する. すると,
+\begin{align*}
+D(x - y) &= \frac{4\pi}{(2\pi)^3} \int_0^\infty dp \, \frac{p^2}{2\sqrt{p^2 + m^2}} e^{-i \sqrt{p^2 + m^2} t} \\
+&= \frac{1}{4\pi^2} \int_m^\infty dE \, \sqrt{E^2 - m^2} \, e^{-i E t} \tag{2.51} \\
+&\sim_{t \to \infty} e^{-imt}
+\end{align*}
+\subsubsection*{空間的な場合：$x^0 - y^0 = 0$, $\mathbf{x} - \mathbf{y} = \mathbf{r}$}
+次に, $x - y$ が純粋に空間方向（$x^0 - y^0 = 0$, $\mathbf{x} - \mathbf{y} = \mathbf{r}$）である場合を考える. このときの振幅は,
+\begin{align*}
+D(x - y) &= \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_p} e^{i \mathbf{p} \cdot \mathbf{r}} \\
+&= \frac{2\pi}{(2\pi)^3} \int_0^\infty dp \, \frac{p}{2E_p} \frac{e^{ipr} - e^{-ipr}}{ipr} \\
+&= -\frac{i}{2(2\pi)^2 r} \int_{-\infty}^\infty dp \, \frac{p e^{ipr}}{\sqrt{p^2 + m^2}}
+\end{align*}
+被積分関数は, 虚軸上の $\pm im$ に分枝点（branch cut）を持つ複素関数として解釈される（図2.3参照）. この積分を評価するためには, 積分経路を複素平面上で上部の分枝カットの周りに回す必要がある. $p = -i\rho$ と定義して積分を変数変換すると,
+\begin{equation*}
+D(x - y) = \frac{1}{4\pi^2 r} \int_m^\infty d\rho \, \frac{\rho e^{-\rho r}}{\sqrt{\rho^2 - m^2}} \sim_{r \to \infty} e^{-mr} \tag{2.52}
+\end{equation*}
+
+このように, $x - y$ が時間的であれ空間的であれ, 伝播振幅は指数的に減衰し, 場の因果的影響範囲が有限であることを示している.
+
+光円錐の外側では, 伝播の振幅は指数的に減衰するがゼロではないことが分かる.
+
+因果性を真に議論するためには, 「粒子が空間的間隔を越えて伝播できるかどうか」ではなく, 「一方の点での測定が, そこから空間的に隔たった別の点での測定に影響を与えるかどうか」を問う必要がある. 最も単純な例として, 場 $\phi(x)$ を測定することを考え, 可換子 $[\phi(x), \phi(y)]$ を計算する. この可換子がゼロであれば, 一方の測定は他方に影響を及ぼさない. 実際, $(x - y)^2 < 0$ のときにこの可換子が消えるなら, 因果性は一般的に保持される. これは $\pi(x) = \partial \phi / \partial t$ のような $\phi(x)$ の任意の関数に対する可換子もゼロになるべきであるからである. もちろん, 式(2.20) より $x^0 = y^0$ のときに可換子がゼロであることはすでに分かっている. ここでは, より一般の計算を行う:
+\begin{align*}
+[\phi(x), \phi(y)] &= \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \int \frac{d^3 q}{(2\pi)^3} \frac{1}{\sqrt{2E_q}} \\
+&\quad \times \left[ \left( a_p e^{-ip \cdot x} + a_p^\dagger e^{ip \cdot x} \right), \left( a_q e^{-iq \cdot y} + a_q^\dagger e^{iq \cdot y} \right) \right] \nonumber \\
+&= \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_p} \left( e^{-ip \cdot (x - y)} - e^{ip \cdot (x - y)} \right) \\
+&= D(x - y) - D(y - x) \tag{2.53}
+\end{align*}
+$(x - y)^2 < 0$ のとき, 第二項に Lorentz 変換を施すことができる. 各項はそれぞれ Lorentz 不変なので, $(x - y) \to -(x - y)$ を行うと, 図2.4に示すように, 二つの項が等しくなり, 打ち消し合ってゼロとなる. したがって因果性は保持される. ただし, $(x - y)^2 > 0$ のときには, $(x - y) \to -(x - y)$ という変換を行う連続な Lorentz 変換は存在しない. この場合, 式(2.51)に示されたように, 振幅はゼロではないが, 急速に減衰する（例えば $e^{-imt}$ や $e^{-imr}$ のように）. 特別な場合 $x = y$ においては, 可換子はゼロとなる. Klein-Gordon 理論では, 光円錐の外側においてある測定が別の測定に影響を与えることはない. 因果性は, セクション2.1の終わりで提案されたように, Klein-Gordon 理論においても保持されるが, これを正確に理解するためには \textbf{複素 Klein-Gordon 場} を導入する必要がある. これは粒子と反粒子の励起を区別できる場である. 式(2.15) の議論のように, 電荷保存則を導入するには, $\phi(x)$ を実数値ではなく複素数値の場として考える. 複素スカラー場理論を量子化すると（問題2.2を参照）, $\phi(x)$ は正電荷を持つ粒子を生成し, 負電荷の粒子を消滅させる. 一方, $\phi^\dagger(x)$ はその逆の操作を行う. この場合, 可換子 $[\phi(x), \phi^\dagger(y)]$ はゼロではないが, 光円錐の外で打ち消し合う必要がある. 式(2.53)の2項は, 同じ時空間的間隔を持つが電荷が逆である2つの過程を表している：
+\begin{itemize}
+\item 第1項：負電荷を持つ粒子が $y$ から $x$ に伝播する.
+\item 第2項：正電荷を持つ粒子が $x$ から $y$ に伝播する.
+\end{itemize}
+この2過程が打ち消し合うためには, 両方の粒子が存在し, 同じ質量を持っていなければならない. 量子場理論では, \textbf{すべての粒子には同じ質量で逆の量子数（この場合は電荷）を持つ対応する反粒子が存在する}。実数値の Klein-Gordon 場では, 粒子は自分自身が反粒子である.
+
+\subsection*{Klein-Gordon 伝播子}
+
+可換子 $[\phi(x), \phi(y)]$ をさらに調べてみよう. これは $c$-number（定数）なので,
+
+\begin{equation*}
+[\phi(x), \phi(y)] = \langle 0 | [\phi(x), \phi(y)] | 0 \rangle
+\end{equation*}
+
+と書ける. 次のような4次元積分として表すことができる. ただし, $x^0 > y^0$ を仮定する:
+\begin{align*}
+\langle 0 | [\phi(x), \phi(y)] | 0 \rangle &= \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_p} \left( e^{-ip \cdot (x - y)} - e^{ip \cdot (x - y)} \right) \\
+&= \int \frac{d^3 p}{(2\pi)^3} \left\{ \left.\frac{1}{2E_p} e^{-ip \cdot (x - y)}\right|_{p^0 = E_{\mathbf{p}}} - \left.\frac{1}{2E_p} e^{ip \cdot (x - y)}\right|_{p^0 = -E_{\mathbf{p}}} \right\}\\
+&= \int \frac{d^3 p}{(2\pi)^3} \int \frac{dp^0}{2\pi i}\frac{-1}{p^2 -m^2} e^{-ip \cdot (x - y)},\hspace{0.5cm} (x^0 > y^0) \tag{2.54}
+\end{align*}
+
+
+
+
 
 \end{document}
