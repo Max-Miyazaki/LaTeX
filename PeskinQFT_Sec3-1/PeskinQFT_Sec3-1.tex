@@ -1,0 +1,295 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{Chapter 3. The Dirac Field\\
+3-1. Lorentz Invariance in Wave Equations}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートはPeskin\&Schroederの``An Introduction to Quantum Field Theory''の第3章の1節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+\end{abstract}
+    
+    
+
+\newpage
+\color{blue}
+\section*{概要}
+\begin{itemize}
+  \item \textbf{Lorentz 不変性の定義}：\\
+  微分方程式 $\mathcal{D}\phi = 0$ が Lorentz 不変とは, $\phi(x)$ がこの方程式を満たすならば,Lorentz変換後の場 $\phi'(\Lambda x)$ も同じ方程式を満たすこと.
+
+  \item \textbf{アクティブ変換の立場を採用}：\\
+  座標系は変えずに, 物理系 (場) を Lorentz 変換する「アクティブ」な視点で議論.
+
+  \item \textbf{ Lagrangian による不変性の保証}：\\
+  方程式が Lorentz スカラーな Lagrangian から導かれるなら, Lorentz 不変性は自動的に満たされる.
+
+  \item \textbf{スカラー場の Lorentz 変換}：\\
+  スカラー場は以下のように変換される:
+  \begin{equation*}
+    \phi(x) \to \phi'(\Lambda x) = \phi(\Lambda^{-1}x)
+  \end{equation*}
+
+  \item \textbf{Klein-Gordon 場の例}：\\
+  Lagrangian
+  \begin{equation*}
+    \mathcal{L} = \frac{1}{2} \partial_\mu \phi\, \partial^\mu \phi - \frac{1}{2} m^2 \phi^2
+  \end{equation*}
+  は Lorentz スカラーであり, 対応する方程式も不変.
+
+  \item \textbf{多成分場の扱い}：\\
+  ベクトル場 (例: $j^\mu$, $A^\mu$) は方向性を持つため, Lorentz 変換には行列表現が必要:
+  \begin{equation*}
+    V^\mu(x) \to \Lambda^\mu_{\ \nu} V^\nu(\Lambda^{-1}x)
+  \end{equation*}
+
+  \item \textbf{Maxwell 方程式の Lorentz 不変性}：\\
+  方程式 $\partial^\nu F_{\mu\nu} = 0$ は, Lagrangian
+  \begin{equation*}
+    \mathcal{L}_\text{Maxwell} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu}
+  \end{equation*}
+  から導かれ, Lorentz 不変である.
+
+  \item \textbf{より一般の Lorentz 変換表現}：\\
+  多成分場 $\phi^a$ に対しては, Lorentz 変換行列 $M_{ab}(\Lambda)$ によって
+  \begin{equation*}
+    \phi^a(x) \to M_{ab}(\Lambda)\, \phi^b(\Lambda^{-1}x)
+  \end{equation*}
+  と変換される.
+
+  \item \textbf{スピノル場の導入準備}：\\
+  スピン1/2粒子の記述には, これらの一般化された表現 (特にディラック表現) を用いる必要がある.
+\end{itemize}
+\newpage
+\color{black}
+\section*{3.1 Lorentz Invariance in Wave Equations}
+「ある方程式が相対論的に不変 (Lorentz 不変) である」とはどういう意味か？\\
+$\phi$ が場 (あるいは場の集合体) であり, $\mathcal{D}$ が何らかの微分作用素であるとき, $\mathcal{D}\phi = 0$ が相対論的不変であるとは, 
+\begin{itemize}
+    \item『$\phi(x)$ がこの方程式を満たしているときに, 座標変換 (回転またはブースト) によって別の座標系に移ったとしても, 変換後の場 $\phi'(x)$ も同じ形の方程式を満たす』
+
+\hspace{2cm}$\Longleftrightarrow$
+
+    \item 物理的にすべての粒子・場を一様に回転またはブーストしても, もとの方程式 $\mathcal{D}\phi = 0$ は変わらず成り立つ.
+\end{itemize}
+この議論では「アクティブな」変換 (物理系自体を変化させる) という立場を採用する.\\
+\textcolor{blue}{つまり, 物理的な場の構成そのものを変換して, 同じ座標点 $x$ における場の新しい値 $\phi'(x)$ を考えるということ. 逆に物理系を固定したまま座標系を変換するパッシブ変換 (passive transformation) もあるが, ここではアクティブ変換を考えるのが自然である.}\\
+\textcolor{blue}{理由：場の理論では作用や Lagrangian を通して, その形が不変であるかどうかを調べるのが基本方針である. このとき,}
+\color{blue}
+  \begin{itemize}
+    \item 作用の変分 $\delta S[\phi] = 0$ は, $\phi$ を動かす (アクティブ変換をする) ことで変化を調べる.
+    \item Lorentz 変換に対して, 場そのものがどう変化するかを明示的にするため.
+  \end{itemize}
+\color{black}
+
+例として, Klein-Gordon理論を考える. 任意の Lorentz 変換は
+\begin{equation*}
+x^\mu \to x'^\mu = \Lambda^\mu_{\ \nu} x^\nu \tag{3.1}
+\end{equation*}
+スカラー場の最も単純な変換法則は
+\begin{equation*}
+\phi(x) \to \phi'(x) = \phi(\Lambda^{-1} x) \label{3.2}\tag{3.2}
+\end{equation*}
+\color{blue}
+\eqref{3.2} はアクティブ変換の立場での変換法則で,
+\begin{itemize}
+  \item $\phi'(x)$ は変換後の場 (ブーストや回転後の物理状態).
+  \item それは元の場 $\phi(x)$ を $\Lambda^{-1}$ で変換したものである.
+\end{itemize}
+これは「変換された物理量の新しい姿が, 座標 $x$ においてどう見えるか」を表しており, 場そのものを変化させているという意味でアクティブ変換である.\\
+もしパッシブ変換の立場での変換法則を考えると,
+\begin{equation*}
+\phi'(x') = \phi(x)
+\end{equation*}
+このように, 場は変化せず, 座標 $x \to x' = \Lambda x$ と観測者が変わるだけとなる.\\
+
+\color{black}
+この変換が Klein-Gordon の Lagrangian
+\begin{equation*}
+\mathcal{L} = \frac{1}{2} \partial_\mu \phi\, \partial^\mu \phi - \frac{1}{2} m^2 \phi^2
+\end{equation*}
+を不変に保つことは容易に確かめられ, 結果として運動方程式も Lorentz 不変となる.
+
+\color{blue}
+実際に証明する.
+
+\vskip\baselineskip
+\color{black}
+この変換法則 \eqref{3.2} は, 1成分の場に対して可能な最も単純なものであるが, 多成分場に対してはより複雑な変換法則が必要である. たとえば, 4元電流密度 $j^\mu(x)$ やベクトルポテンシャル $A^\mu(x)$ は, 単に空間的位置だけでなく「向き」も持っているので, 回転やブーストの際にその向きも変換されねばならない.
+
+3次元回転下では：
+\begin{equation*}
+V^i(x) \to R^i_{\ j} V^j(R^{-1}x),
+\end{equation*}
+Lorentz 変換下では：
+\begin{equation*}
+V^\mu(x) \to \Lambda^\mu_{\ \nu} V^\nu(\Lambda^{-1}x)
+\end{equation*}
+任意のランクのテンソル場もベクトルから構成でき, その変換法則にはより多くの $\Lambda$ の因子が現れる. 例えば Maxwell 方程式は次のように表せる:
+\begin{equation*}
+\partial^\nu F_{\mu\nu} = 0 \quad \text{または} \quad \Box A_\mu - \partial_\mu(\partial^\nu A_\nu) = 0. \tag{3.6}
+\end{equation*}
+
+これは Lagrangian
+\begin{equation*}
+\mathcal{L}_\text{Maxwell} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} \tag{3.7}
+\end{equation*}
+から導かれ, Lorentz 不変である.
+
+以上はテンソル記法による Lorentz 不変な方程式の一群を与えるが, それにとどまらず, さらに一般的な形式も存在する. たとえば, 多成分場 $\phi^a$ に対しては, Lorentz 変換を表す $n \times n$ の行列 $M_{ab}(\Lambda)$ を用いて,
+\begin{equation*}
+\phi^a(x) \to M_{ab}(\Lambda) \phi^b(\Lambda^{-1}x) \tag{3.8}
+\end{equation*}
+と定義することで, より一般的な Lorentz 不変理論を記述することができる.
+
+
+多成分場 $\Phi$ の Lorentz 変換は以下のように書ける：
+\begin{equation*}
+\Phi \rightarrow M(\Lambda)\Phi \tag{3.9}
+\end{equation*}
+
+この変換法則に対して、次の一貫性条件が課される：
+\begin{equation*}
+\Phi \rightarrow M(\Lambda')M(\Lambda)\Phi = M(\Lambda'\Lambda)\Phi \tag{3.10}
+\end{equation*}
+
+すなわち、$M(\Lambda)$ は Lorentz 群の表現（表現行列）でなければならない。
+
+\vspace{1em}
+\textbf{理解のためのステップ：}
+
+\begin{itemize}
+  \item \textbf{簡単な例：3次元回転群} \\
+  回転群は、スピンに応じて $n$ 次元の表現を持ち、スピン $s$ に対して $n = 2s + 1$。
+  \item \textbf{スピン1/2の表現}：\\
+  Pauli 行列 $\sigma^i$ を用いて、次のように回転行列を構成：
+  \begin{equation*}
+  U = e^{-i\theta^i \sigma^i/2} \tag{3.11}
+  \end{equation*}
+  \item \textbf{Lie代数と生成子}：\\
+  無限小回転に対応する生成子 $J^i$ は以下の交換関係を満たす：
+  \begin{equation*}
+  [J^i, J^j] = i\epsilon^{ijk}J^k \tag{3.12}
+  \end{equation*}
+  \item \textbf{指数関数化による群の構成}：
+  \begin{equation*}
+  R = \exp(-i\theta\, \hat{n} \cdot \vec{J}) \tag{3.13}
+  \end{equation*}
+\end{itemize}
+
+\vspace{1em}
+\textbf{Lorentz 変換の場合：}
+
+\begin{itemize}
+  \item 微分演算子で書ける生成子：
+  \begin{equation*}
+  J^{\mu\nu} = i(x^\mu \partial^\nu - x^\nu \partial^\mu) \tag{3.16}
+  \end{equation*}
+  \item Lorentz 代数の交換関係：
+  \begin{equation*}
+  [J^{\mu\nu}, J^{\rho\sigma}] = i(g^{\nu\rho} J^{\mu\sigma} - g^{\mu\rho} J^{\nu\sigma} - g^{\nu\sigma} J^{\mu\rho} + g^{\mu\sigma} J^{\nu\rho}) \tag{3.17}
+  \end{equation*}
+  \item $4 \times 4$ 行列表現の例：
+  \begin{equation*}
+  (J^{\mu\nu})_{\alpha\beta} = i(\delta^\mu_\alpha g^\nu_\beta - \delta^\nu_\alpha g^\mu_\beta) \tag{3.18}
+  \end{equation*}
+\end{itemize}
+
+\vspace{1em}
+\textbf{無限小 Lorentz 変換の表現}：
+
+Lorentz 4ベクトル $V^\alpha$ に対して、無限小変換は次のように書かれる：
+\begin{equation*}
+V^\alpha \rightarrow \left( \delta^\alpha_\beta - \frac{i}{2} \omega_{\mu\nu}(J^{\mu\nu})^\alpha_{\ \beta} \right)V^\beta \tag{3.19}
+\end{equation*}
+
+\begin{itemize}
+  \item 例1：$xy$ 平面内の回転 $\omega_{12} = -\omega_{21} = \theta$ の場合：
+  \begin{equation*}
+  V \rightarrow 
+  \begin{pmatrix}
+  1 & 0 & 0 & 0 \\
+  0 & 1 & -\theta & 0 \\
+  0 & \theta & 1 & 0 \\
+  0 & 0 & 0 & 1
+  \end{pmatrix}
+  V \tag{3.20}
+  \end{equation*}
+
+  \item 例2：$x$ 方向のブースト $\omega_{01} = -\omega_{10} = \beta$ の場合：
+  \begin{equation*}
+  V \rightarrow 
+  \begin{pmatrix}
+  1 & \beta & 0 & 0 \\
+  \beta & 1 & 0 & 0 \\
+  0 & 0 & 1 & 0 \\
+  0 & 0 & 0 & 1
+  \end{pmatrix}
+  V \tag{3.21}
+  \end{equation*}
+\end{itemize}
+
+これらの無限小変換は、全ての Lorentz 変換（回転とブースト）を生成するための基本である。
+
+
+
+
+
+
+
+\end{document}

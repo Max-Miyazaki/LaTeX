@@ -1,0 +1,127 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{Chapter 3. The Dirac Field\\
+3-4. Dirac Matrices and Dirac Fields Bilinears}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートはPeskin\&Schroederの``An Introduction to Quantum Field Theory''の第3章の4節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+\end{abstract}
+    
+    
+
+\newpage
+\color{blue}
+\section*{概要}
+\begin{itemize}
+  \item \textbf{Lorentz 不変性の定義}：\\
+  微分方程式 $\mathcal{D}\phi = 0$ が Lorentz 不変とは, $\phi(x)$ がこの方程式を満たすならば,Lorentz変換後の場 $\phi'(\Lambda x)$ も同じ方程式を満たすこと.
+
+  \item \textbf{アクティブ変換の立場を採用}：\\
+  座標系は変えずに, 物理系 (場) を Lorentz 変換する「アクティブ」な視点で議論.
+
+  \item \textbf{ Lagrangian による不変性の保証}：\\
+  方程式が Lorentz スカラーな Lagrangian から導かれるなら, Lorentz 不変性は自動的に満たされる.
+
+  \item \textbf{スカラー場の Lorentz 変換}：\\
+  スカラー場は以下のように変換される:
+  \begin{equation*}
+    \phi(x) \to \phi'(\Lambda x) = \phi(\Lambda^{-1}x)
+  \end{equation*}
+
+  \item \textbf{Klein-Gordon 場の例}：\\
+  Lagrangian
+  \begin{equation*}
+    \mathcal{L} = \frac{1}{2} \partial_\mu \phi\, \partial^\mu \phi - \frac{1}{2} m^2 \phi^2
+  \end{equation*}
+  は Lorentz スカラーであり, 対応する方程式も不変.
+
+  \item \textbf{多成分場の扱い}：\\
+  ベクトル場 (例: $j^\mu$, $A^\mu$) は方向性を持つため, Lorentz 変換には行列表現が必要:
+  \begin{equation*}
+    V^\mu(x) \to \Lambda^\mu_{\ \nu} V^\nu(\Lambda^{-1}x)
+  \end{equation*}
+
+  \item \textbf{Maxwell 方程式の Lorentz 不変性}：\\
+  方程式 $\partial^\nu F_{\mu\nu} = 0$ は, Lagrangian
+  \begin{equation*}
+    \mathcal{L}_\text{Maxwell} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu}
+  \end{equation*}
+  から導かれ, Lorentz 不変である.
+
+  \item \textbf{より一般の Lorentz 変換表現}：\\
+  多成分場 $\phi^a$ に対しては, Lorentz 変換行列 $M_{ab}(\Lambda)$ によって
+  \begin{equation*}
+    \phi^a(x) \to M_{ab}(\Lambda)\, \phi^b(\Lambda^{-1}x)
+  \end{equation*}
+  と変換される.
+
+  \item \textbf{スピノル場の導入準備}：\\
+  スピン1/2粒子の記述には, これらの一般化された表現 (特にディラック表現) を用いる必要がある.
+\end{itemize}
+\newpage
+\color{black}
+\section*{3.4 Dirac Matrices and Dirac Fields Bilinears}
+
+
+
+
+
+
+\end{document}
