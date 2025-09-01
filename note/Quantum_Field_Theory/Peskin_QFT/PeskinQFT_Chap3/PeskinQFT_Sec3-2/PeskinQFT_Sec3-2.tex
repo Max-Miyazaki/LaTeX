@@ -67,10 +67,281 @@
     
 
 \newpage
+\color{blue}
+\section*{概要}
+
+スピンを持つ相対論的粒子を記述するには, Klein-Gordon 方程式よりもさらに情報量の多い1階の微分方程式が必要である. Dirac 方程式はそのような要件を満たす.
+
+\subsection*{Dirac方程式}
+
+Dirac 方程式は以下の形で与えられる：
+\begin{equation*}
+(i \gamma^\mu \partial_\mu - m)\psi(x) = 0,
+\end{equation*}
+ここで $\psi(x)$ は4成分スピノル場であり, $\gamma^\mu$ は Dirac 行列である.
+
+\subsection*{Klein-Gordon方程式との関係}
+
+Dirac 方程式に $(i \gamma^\nu \partial_\nu + m)$ を左から作用させると, Klein-Gordon 方程式が得られる：
+\begin{align*}
+(i \gamma^\mu \partial_\mu - m)(i \gamma^\nu \partial_\nu + m)\psi(x)
+&= \left[ -\partial^\mu \partial_\mu + m^2 \right] \psi(x) \\
+&= (\Box + m^2)\psi(x) = 0.
+\end{align*}
+
+\subsection*{Lorentz不変性}
+
+Dirac 方程式は Lorentz 変換に対して不変である. スピノル場 $\psi(x)$ は Lorentz 変換 $\Lambda$ に対してスピノル表現 $S(\Lambda)$ に従って変換し,
+\begin{equation*}
+\psi(x) \rightarrow S(\Lambda)\psi(\Lambda^{-1}x),
+\end{equation*}
+Dirac 行列は以下を満たす必要がある：
+\begin{equation*}
+S^{-1}(\Lambda)\gamma^\mu S(\Lambda) = \Lambda^\mu_{\;\nu} \gamma^\nu.
+\end{equation*}
+
+\subsection*{Lorentz 不変なラグランジアン}
+
+共変に定義された Lagrangian 密度は次のようになる：
+\begin{equation*}
+\mathcal{L}_{\text{Dirac}} = \bar{\psi}(i \gamma^\mu \partial_\mu - m)\psi,
+\end{equation*}
+ここで共役スピノルは $\bar{\psi} = \psi^\dagger \gamma^0$ と定義される. この Lagrangian に対して Euler-Lagrange 方程式を適用すると, Dirac 方程式が導出される.
+\vskip\baselineskip
+Dirac 方程式の導出と Lorentz 不変性の確認, Lagrangian の構成という流れで, 理論的な整合性を保ちながら量子場としてのスピノル場の基礎を固める内容である. 
+
+\color{black}
+\newpage
+
 \section*{3.2 Dirac Equation}
-
-
-
+\begin{itemize}
+    \item スピン1/2に対応する有限次元表現を構築するため, Dirac 行列 $\gamma^\mu$ を用いる.
+    \item Dirac 代数の反交換関係：
+    \begin{equation*}
+      \{ \gamma^\mu, \gamma^\nu \} = 2g^{\mu\nu} \cdot \mathbf{1}_{n\times n}\quad (\text{Dirac 代数}) \label{3.22}\tag{3.22}
+    \end{equation*}
+    \item これにより Lorentz 代数の $n$ 次元表現が得られる：
+    \begin{equation*}
+      S^{\mu\nu} = \frac{i}{4}[\gamma^\mu, \gamma^\nu] \label{3.23}\tag{3.23}
+    \end{equation*}
+    \eqref{3.22}を用いて \eqref{3.23} が交換関係
+    \begin{equation*}
+        [J^{\mu\nu}, J^{\rho\sigma}] = i \left( g^{\nu\rho} J^{\mu\sigma}
+          - g^{\mu\rho} J^{\nu\sigma}
+          - g^{\nu\sigma} J^{\mu\rho}
+          + g^{\mu\sigma} J^{\nu\rho} \right) \label{3.17}\tag{3.17}
+    \end{equation*}
+    を満たすことが確認できる.
+    \color{red}
+    \vskip\baselineskip
+    \begin{proof}
+        \begin{align*}
+            [S^{\mu\nu}, S^{\rho\sigma}] &= \frac{i}{4}[\gamma^\mu, \gamma^\nu] \frac{i}{4}[\gamma^\rho, \gamma^\sigma] - \frac{i}{4}[\gamma^\rho, \gamma^\sigma] \frac{i}{4}[\gamma^\mu, \gamma^\nu] \\
+            &= \frac{i}{16} [\gamma^\mu, \gamma^\nu] [\gamma^\rho, \gamma^\sigma] - \frac{i}{16} [\gamma^\rho, \gamma^\sigma] [\gamma^\mu, \gamma^\nu] \\
+        \end{align*}
+    \end{proof}
+    \color{black}
+    \vskip\baselineskip
+    \item この構成は任意の次元, Lorentz または Euclid 計量で有効.
+    \item 3次元 Euclid 空間では以下のように Pauli 行列を用いて簡単に表現できる：
+    \begin{equation*}
+      \gamma^j = i \sigma^j,\quad \{ \gamma^i, \gamma^j \} = -2\delta^{ij}
+    \end{equation*}
+    ※ 1行目の $i$ と2行目のマイナス符号は利便性のために係数についている.
+    \vskip\baselineskip
+    これより, Lorentz 代数の表現は,
+    \begin{equation*}
+      S^{ij} = \frac{1}{2} \epsilon^{ijk} \sigma^k \label{3.24}\tag{3.24}
+    \end{equation*}
+    と表現できて, これは2次元の回転群と同じ構造を持つ.\textcolor{red}{これも示す}
+    \item 4次元 Minkowski 空間での Dirac 行列 (Weyl 表現)：
+    \begin{equation*}
+      \gamma^0 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad
+      \gamma^i = \begin{pmatrix} 0 & \sigma^i \\ -\sigma^i & 0 \end{pmatrix} \tag{3.25}
+    \end{equation*}
+    \item この表現は Weyl 表現 ( Chiral 表現) と呼ばれ, 本書ではこれを採用. 他書によっては $\gamma^0$ を対角化する表現や符号習慣が異なることがあるので注意.
+    \item この表現におけるブースト生成子：
+    \begin{equation*}
+      S^{0i} = \frac{i}{4}[\gamma^0, \gamma^i] = -\frac{i}{2} \begin{pmatrix} \sigma^i & 0 \\ 0 & -\sigma^i \end{pmatrix} \label{3.26}\tag{3.26}
+    \end{equation*}
+    \item この表現における回転生成子：
+    \begin{equation*}
+      S^{ij} = \frac{i}{4}[\gamma^i, \gamma^j] = \frac{1}{2} \epsilon^{ijk} \Sigma^k,\quad
+      \Sigma^k = \begin{pmatrix} \sigma^k & 0 \\ 0 & \sigma^k \end{pmatrix} \label{3.27}\tag{3.27}
+    \end{equation*}
+    上記の変換則に従う4成分場 $\psi$ は \textbf{Dirac スピノル} と呼ばれる. この表現における $S^{ij}$ は3次元スピノルの変換行列 \eqref{3.24} を2回繰り返した構造. また, $S^{0i}$ はエルミートでないため, ブーストは非ユニタリ変換となるが, Lorentz 群は非コンパクトなため, そもそも有限次元の忠実なユニタリ表現は存在しない. ただし $\psi$ は波動関数ではなく古典場なので, ユニタリ性は必要ない.
+\end{itemize}
+\color{blue}
+\vskip\baselineskip
+$S^{ij}$ は3次元スピノルの変換行列 \eqref{3.24} を2回繰り返した構造. また, $S^{0i}$ はエルミートでないため, ブーストは非ユニタリ変換となるが, Lorentz 群は非コンパクトなため, そもそも有限次元の忠実なユニタリ表現は存在しない. ただし $\psi$ は波動関数ではなく古典場なので, ユニタリ性は必要ない. \textcolor{red}{これの説明をする}
+\color{black}
+\vskip\baselineskip
+\begin{itemize}
+    \item スピノル場 $\psi$ の変換則を得たので, 対応する場の方程式を探す.\\
+    単純な候補は Klein-Gordon 方程式：
+    \begin{equation*}
+    (\partial^2 + m^2)\psi = 0 \tag{3.28}
+    \end{equation*}
+    スピノルの変換行列が内部空間にのみ作用するので, 微分演算子をすり抜けて方程式が成り立つ. しかし, より情報を含む一次の方程式 (Dirac 方程式) を構成できる.
+    \item そのためには, 次の関係を使う：
+    \begin{equation*}
+    [\gamma^\mu, S^{\rho\sigma}] = (\mathcal{J}^{\rho\sigma})^\mu_{\ \nu} \gamma^\nu
+    \end{equation*}
+    または：
+    \begin{equation*}
+    \left(1 + \frac{i}{2} \omega_{\rho\sigma} S^{\rho\sigma} \right) \gamma^\mu \left(1 - \frac{i}{2} \omega_{\rho\sigma} S^{\rho\sigma} \right)
+    = \left(1 - \frac{i}{2} \omega_{\rho\sigma} \mathcal{J}^{\rho\sigma} \right)^\mu_{\ \nu} \gamma^\nu
+    \end{equation*}
+    \item この式は次の無限小変換の形式：
+    \begin{equation*}
+    \Lambda^{-1/2} \gamma^\mu \Lambda_{1/2} = \Lambda^\mu_{\ \nu} \gamma^\nu \label{3.29}\tag{3.29}
+    \end{equation*}
+    ここで,
+    \begin{equation*}
+    \Lambda_{1/2} = \exp\left(-\frac{i}{2} \omega_{\mu\nu} S^{\mu\nu} \right) \tag{3.30}
+    \end{equation*}
+    は Lorentz 変換 $\Lambda$ に対応するスピノル表現で \eqref{3.29} は, ガンマ行列がベクトル添字およびスピノル添字の同時回転の下で不変であることを示している.\\
+    (パウリ行列 $\sigma^i$ が空間回転の下で不変であるのと同様である.)
+    \vskip\baselineskip
+    言い換えると, $\gamma^\mu$ のベクトル添字を「真剣に扱い」, $\gamma^\mu$ と $\partial_\mu$ の内積を取ることで Lorentz 不変な微分演算子が構成できる.
+    \item よって, Dirac 方程式は次のように書ける：
+    \begin{equation*}
+    (i \gamma^\mu \partial_\mu - m)\psi(x) = 0 \label{3.31}\tag{3.31}
+    \end{equation*}
+    これは Lorentz 変換下でも成り立ち, 不変性が計算で確認できる.
+    \begin{align*}
+        [i \gamma^\mu \partial_\mu - m] \psi(x)
+        &\rightarrow [i \gamma^\mu (\Lambda^{-1})^\nu_{\ \mu} \partial_\nu - m] \Lambda_{1/2} \psi(\Lambda^{-1} x) \\
+        &= \Lambda_{1/2} \Lambda^{-1}_{1/2} [i \gamma^\mu (\Lambda^{-1})^\nu_{\ \mu} \partial_\nu - m] \Lambda_{1/2} \psi(\Lambda^{-1} x) \\
+        &= \Lambda_{1/2} \left[i \Lambda^{-1/2} \gamma^\mu \Lambda_{1/2} (\Lambda^{-1})^\nu_{\ \mu} \partial_\nu - m\right] \psi(\Lambda^{-1} x) \\
+        &= \Lambda_{1/2} \left[i \Lambda^\mu_{\ \sigma} \gamma^\sigma (\Lambda^{-1})^\nu_{\ \mu} \partial_\nu - m\right] \psi(\Lambda^{-1} x) \\
+        &= \Lambda_{1/2} [i \gamma^\nu \partial_\nu - m] \psi(\Lambda^{-1} x) \\
+        &= 0
+        \end{align*}
+    
+    \item また, 左から $(i \gamma^\nu \partial_\nu + m)$ を作用させると, Klein-Gordon 方程式が得られる：
+    \begin{equation*}
+    0 = (-i \gamma^\nu \partial_\nu - m)(i \gamma^\mu \partial_\mu - m)\psi
+    = (\partial^2 + m^2)\psi
+    \end{equation*}
+    よって, Dirac 方程式は Klein-Gordon 方程式を含意することが分かる.
+    \item \textbf{Dirac Lagrangian とスピノルのスカラー化}\\
+    Dirac 理論の Lagrangian を書くには, 2つの Dirac スピノルをどのように掛けて Lorentz スカラーを作るかを考える必要がある.\\
+    $\psi^\dagger \psi$ は Lorentz ブーストが非ユニタリ変換であるため, スカラーにならない.
+    \begin{itemize}
+    \item 解決策：Dirac 共役スピノルを定義：
+    \begin{equation*}
+    \bar{\psi} \equiv \psi^\dagger \gamma^0 \tag{3.32}
+    \end{equation*}
+    無限小 Lorentz 変換 (パラメータ $\omega_{\mu\nu}$) のもとで, $\bar{\psi}$ は次のように変換する：
+     \begin{equation*}
+        \bar{\psi} \rightarrow \psi^\dagger \left(1 + \frac{i}{2} \omega_{\mu\nu} (S^{\mu\nu})^\dagger \right) \gamma^0
+     \end{equation*}
+     ここで, $\mu$, $\nu$ の和には6つの異なる項があることに注意.
+    \begin{itemize}
+        \item 回転のとき ($\mu$, $\nu$ とも $\neq 0$)：$(S^{\mu\nu})^\dagger = S^{\mu\nu}$, $S^{\mu\nu}$ は $\gamma^0$ と可換.
+        \item ブーストのとき ($\mu$, $\nu$ どちらかが $0$)：$(S^{\mu\nu})^\dagger = -S^{\mu\nu}$, $S^{\mu\nu}$ は $\gamma^0$ と反可換.
+    \end{itemize}
+    \item よって, $\gamma^0$ を左の通すことで共役を取り除けて, 変換則は次のようになる：
+    \begin{equation*}
+    \bar{\psi} \rightarrow \bar{\psi} \Lambda_{1/2}^{-1} \tag{3.33}
+    \end{equation*}
+    \end{itemize}
+    \item これにより,
+    \begin{itemize}
+      \item $\bar{\psi} \psi$ : Lorentz スカラー
+      \item $\bar{\psi} \gamma^\mu \psi$ : Lorentz ベクトル
+    \end{itemize}
+    であることが示しせる.
+    \item Lorentz 不変な Dirac Lagrangian は以下のように構成できる：
+    \begin{equation*}
+    \mathcal{L}_\text{Dirac} = \bar{\psi}(i \gamma^\mu \partial_\mu - m)\psi \tag{3.34}
+    \end{equation*}
+    \color{blue}
+    Lorentz 不変の確認.
+    \color{black}
+    \item Euler-Lagrange 方程式より：
+    \begin{itemize}
+      \item $\bar{\psi}$ に関して：Dirac 方程式 \eqref{3.31} が得られ,
+      \item $\psi$ に関して：随伴方程式 \eqref{3.35} が得られる.
+      \begin{equation*}
+      -i \partial_\mu \bar{\psi} \gamma^\mu - m \bar{\psi} = 0 \label{3.35}\tag{3.35}
+      \end{equation*}
+    \end{itemize}
+    \color{blue}
+    Euler-Lagrange 方程式の計算確認.
+    \color{black}
+  \end{itemize}
+  \subsection*{Weyl スピノル}
+  \begin{itemize}
+    \item \eqref{3.26} および \eqref{3.27} の生成子のブロック対角形式から, Lorentz 群の Dirac 表現は \textit{既約でない（reducible）} ことがわかる.
+    \item 各ブロックを別々に考えることで、2つの2次元表現を構成できる：
+    \begin{equation*}
+    \psi = \begin{pmatrix} \psi_L \\ \psi_R \end{pmatrix} \tag{3.36}
+    \end{equation*}
+    \item $\psi_L$ と $\psi_R$ は, それぞれ左手系および右手系の Weyl スピノルと呼ばれる.
+    \item 無限小回転 $\boldsymbol{\theta}$ およびブースト $\boldsymbol{\beta}$ に対する変換則：
+    \begin{equation*}
+    \psi_L \rightarrow \left(1 - i \frac{\boldsymbol{\theta} \cdot \boldsymbol{\sigma}}{2} - \frac{\boldsymbol{\beta} \cdot \boldsymbol{\sigma}}{2} \right) \psi_L
+    \end{equation*}
+    \begin{equation*}
+    \psi_R \rightarrow \left(1 - i \frac{\boldsymbol{\theta} \cdot \boldsymbol{\sigma}}{2} + \frac{\boldsymbol{\beta} \cdot \boldsymbol{\sigma}}{2} \right) \psi_R \tag{3.37}
+    \end{equation*}
+    \item これらの変換則は, 複素共役によって結び付けられていて, 恒等式：
+    \begin{equation*}
+    \sigma^2 \sigma^* = -\sigma \sigma^2 \tag{3.38}
+    \end{equation*}
+    を用いると, $\sigma^2 \psi_L^*$ は右手系スピノルのように変換することがわかる.
+    
+    \item Dirac 方程式を $\psi_L$, $\psi_R$ で書くと：
+    \begin{equation*}
+    (i \gamma^\mu \partial_\mu - m)\psi =
+    \begin{pmatrix}
+    -m & i(\partial_0 + \boldsymbol{\sigma} \cdot \boldsymbol{\nabla}) \\
+    i(\partial_0 - \boldsymbol{\sigma} \cdot \boldsymbol{\nabla}) & -m
+    \end{pmatrix}
+    \begin{pmatrix}
+    \psi_L \\ \psi_R
+    \end{pmatrix} = 0 \tag{3.39}
+    \end{equation*}
+    \item 質量項によって $\psi_L$, $\psi_R$ は混合されるが, $m = 0$ のときは次のように分離する：
+    \begin{equation*}
+    i(\partial_0 - \boldsymbol{\sigma} \cdot \boldsymbol{\nabla})\psi_L = 0, \quad
+    i(\partial_0 + \boldsymbol{\sigma} \cdot \boldsymbol{\nabla})\psi_R = 0 \tag{3.40}
+    \end{equation*}
+    \item これらは Weyl 方程式と呼ばれ, ニュートリノや弱い相互作用の理論で重要.
+    
+    \item 記法の整理として, 次を定義：
+    \begin{equation*}
+    \sigma^\mu \equiv (1, \boldsymbol{\sigma}), \quad
+    \bar{\sigma}^\mu \equiv (1, -\boldsymbol{\sigma}) \tag{3.41}
+    \end{equation*}
+    \item これによりガンマ行列は次のように書ける：
+    \begin{equation*}
+    \gamma^\mu =
+    \begin{pmatrix}
+    0 & \sigma^\mu \\
+    \bar{\sigma}^\mu & 0
+    \end{pmatrix} \tag{3.42}
+    \end{equation*}
+    ($\bar{\sigma}$ のバーは $\bar{\psi}$ のバーとは無関係)
+  
+    \item このとき Dirac 方程式は以下の形になる：
+    \begin{equation*}
+    \begin{pmatrix}
+    -m & i \sigma \cdot \partial \\
+    i \bar{\sigma} \cdot \partial & -m
+    \end{pmatrix}
+    \begin{pmatrix}
+    \psi_L \\ \psi_R
+    \end{pmatrix} = 0 \tag{3.43}
+    \end{equation*}
+    \item そして Weyl 方程式は次のように書ける：
+    \begin{equation*}
+    i \bar{\sigma} \cdot \partial \, \psi_L = 0, \quad
+    i \sigma \cdot \partial \, \psi_R = 0 \tag{3.44}
+    \end{equation*}
+  \end{itemize}
 
 
 \end{document}

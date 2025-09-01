@@ -21,6 +21,9 @@
 \usepackage{bm}
 \usepackage{here}
 
+% Define slashed notation
+\newcommand{\slashed}[1]{\not{#1}}
+
 \usepackage{abstract}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows.meta, positioning}
@@ -70,54 +73,405 @@
 \color{blue}
 \section*{概要}
 \begin{itemize}
-  \item \textbf{Lorentz 不変性の定義}：\\
-  微分方程式 $\mathcal{D}\phi = 0$ が Lorentz 不変とは, $\phi(x)$ がこの方程式を満たすならば,Lorentz変換後の場 $\phi'(\Lambda x)$ も同じ方程式を満たすこと.
-
-  \item \textbf{アクティブ変換の立場を採用}：\\
-  座標系は変えずに, 物理系 (場) を Lorentz 変換する「アクティブ」な視点で議論.
-
-  \item \textbf{ Lagrangian による不変性の保証}：\\
-  方程式が Lorentz スカラーな Lagrangian から導かれるなら, Lorentz 不変性は自動的に満たされる.
-
-  \item \textbf{スカラー場の Lorentz 変換}：\\
-  スカラー場は以下のように変換される:
+  \item Dirac 方程式の自由粒子解を構成するため, Klein-Gordon 方程式の解と同様に, 平面波解の形を仮定する：
   \begin{equation*}
-    \phi(x) \to \phi'(\Lambda x) = \phi(\Lambda^{-1}x)
+    \psi(x) = u(p) e^{-ip \cdot x}, \quad p^2 = m^2, \quad p^0 > 0
+  \end{equation*}
+  \item この形を Dirac 方程式に代入すると, スピノル $u(p)$ に対する代数方程式が得られる：
+  \begin{equation*}
+    (\not{p} - m) u(p) = 0
+  \end{equation*}
+  反粒子に対応する負エネルギー解は,
+  \begin{equation*}
+    \psi(x) = v(p) e^{+ip \cdot x}, \quad (\not{p} + m) v(p) = 0
   \end{equation*}
 
-  \item \textbf{Klein-Gordon 場の例}：\\
-  Lagrangian
+  \item 静止系 ($p^\mu = (m, \mathbf{0})$) における $u(p)$ の一般解は2成分スピノル $\xi$ を用いて次のように表される：
   \begin{equation*}
-    \mathcal{L} = \frac{1}{2} \partial_\mu \phi\, \partial^\mu \phi - \frac{1}{2} m^2 \phi^2
+    u(p) = \sqrt{m}
+    \begin{pmatrix}
+      \xi \\
+      \xi
+    \end{pmatrix}, \quad \text{with } \xi \in \mathbb{C}^2
   \end{equation*}
-  は Lorentz スカラーであり, 対応する方程式も不変.
+  $\xi$ の2自由度は, スピンの向きを表す.
 
-  \item \textbf{多成分場の扱い}：\\
-  ベクトル場 (例: $j^\mu$, $A^\mu$) は方向性を持つため, Lorentz 変換には行列表現が必要:
+  \item 運動量 $p$ が一般の値をとる場合には, Lorentz 変換により静止系の解から $u(p)$ を構成する. たとえば, $z$ 軸方向へのブーストでは：
   \begin{equation*}
-    V^\mu(x) \to \Lambda^\mu_{\ \nu} V^\nu(\Lambda^{-1}x)
+    u(p) =  \begin{pmatrix}
+      \sqrt{p \cdot \sigma}\xi \\
+      \sqrt{p \cdot \bar{\sigma}}\xi
+    \end{pmatrix}
   \end{equation*}
-
-  \item \textbf{Maxwell 方程式の Lorentz 不変性}：\\
-  方程式 $\partial^\nu F_{\mu\nu} = 0$ は, Lagrangian
   \begin{equation*}
-    \mathcal{L}_\text{Maxwell} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu}
+    u(p) =  \begin{pmatrix}
+      \sqrt{p \cdot \sigma}\eta \\
+      -\sqrt{p \cdot \bar{\sigma}}\eta
+    \end{pmatrix}
   \end{equation*}
-  から導かれ, Lorentz 不変である.
+  ここで $\sigma^\mu = (1, \boldsymbol{\sigma})$, $\bar{\sigma}^\mu = (1, -\boldsymbol{\sigma})$ はパウリ行列を含む記法である.
 
-  \item \textbf{より一般の Lorentz 変換表現}：\\
-  多成分場 $\phi^a$ に対しては, Lorentz 変換行列 $M_{ab}(\Lambda)$ によって
+  \item スピノル $\xi$ および $\eta$ は通常, ヘリシティ固有状態 (運動量方向に対するスピン) を表すように選ばれる. これによりスピンの向きを明示的に定義できる.
+
+  \item 質量ゼロの場合, $\psi$ は左右の Weyl スピノルに分解され, それぞれが Lorentz 群の独立な表現に属する：
   \begin{equation*}
-    \phi^a(x) \to M_{ab}(\Lambda)\, \phi^b(\Lambda^{-1}x)
+    \psi = 
+    \begin{pmatrix}
+      \chi_\alpha \\
+      \bar{\eta}^{\dot{\alpha}}
+    \end{pmatrix}, \quad \chi : (1/2, 0),\ \bar{\eta} : (0, 1/2)
   \end{equation*}
-  と変換される.
+  このとき, 左手系および右手系の場は独立な自由粒子として振る舞う (ヘリシティの保存).
 
-  \item \textbf{スピノル場の導入準備}：\\
-  スピン1/2粒子の記述には, これらの一般化された表現 (特にディラック表現) を用いる必要がある.
+  \item スピン和の恒等式は, 摂動計算でのスピノル積の簡約に不可欠であり, 以下のように与えられる：
+  \begin{equation*}
+    \sum_s u^s(p)\bar{u}^s(p) = \not{p} + m, \quad
+    \sum_s v^s(p)\bar{v}^s(p) = \not{p} - m
+  \end{equation*}
+  これらはフェルミオンの伝播関数 (プロパゲーター) を構成する上でも中心的役割を果たす.
+
+  \item 以上の構成により, フェルミオンの自由場は正エネルギー粒子と負エネルギー反粒子の4自由度 (スピン2種 $\times$ 粒子・反粒子) で記述され, 量子化へと進む準備が整う.
 \end{itemize}
+
 \newpage
 \color{black}
 \section*{3.3 Free-Perticle Solutions of the Dirac Equation}
+ Dirac 方程式の物理的意味を掴むために, 平面波解について議論する.
+\begin{itemize}
+  \item \textbf{平面波解の基本形}\\
+  Dirac 場 $\psi(x)$ は Klein-Gordon 方程式も満たすので, 平面波解の線型結合で書ける：
+  \begin{equation*}
+    \psi(x) = u(p) e^{-ip \cdot x}, \quad \text{ただし } p^2 = m^2. \tag{3.45}
+  \end{equation*}
+  \item \textbf{ディラック方程式によるスピノル $u(p)$ の制約}\\ 
+  ここでは正の周波数の解を考える. つまり, $p^0 > 0$ を持つ解に注目する. $\psi(x)$ を Dirac 方程式に代入すると, ベクトル $u(p)$ の満たすべき条件が得られる：
+  \begin{equation*}
+    (\not{p} - m) u(p) = 0, \quad \not{p} = \gamma^\mu p_\mu \label{3.46}\tag{3.46}
+  \end{equation*}
+
+  \item \textbf{静止系 ($p = (m, \mathbf{0})$) での解析}\\
+  任意の運動量 $p$ に対する解は $\Lambda_{\frac{1}{2}}$ でブーストすることで求められる.\\
+  \eqref{3.46} は静止系 ($p = p_0 = (m, \mathbf{0}) $) で解析するのが最も簡単で, 次のように解ける：
+  \begin{equation*}
+    (m \gamma^0 - m) u(p_0) = m \begin{pmatrix}
+      -1 & 1 \\
+      1 & -1
+    \end{pmatrix} u(p_0) = 0 \quad \Rightarrow \quad
+    u(p_0) = \sqrt{m}
+    \begin{pmatrix}
+    \xi \\
+    \xi
+    \end{pmatrix} \tag{3.47}
+  \end{equation*}
+  ここで $\xi$ は任意の2成分スピノルで, 規格化条件として $\xi^\dagger \xi = 1$ を取る. 解に $\sqrt{m}$ をかけているのは, ブーストによって解の規格化が変わることを防ぐためである.
+  \item \textbf{$\xi$ の物理的意味}\\
+  $\xi$ は回転群の普通の2成分スピノルと同様に回転するので, Dirac 場のスピンの向きを表す.
+  \item \textbf{独立な成分は2つのみ}  
+  Dirac 方程式の制約により, $u(p)$ の4成分のうち自由に指定できるのは2成分だけ. なぜならスピン1/2粒子の物理的状態はアップスピンとダウンスピンの2つの状態しかないため. このことは3.5章で詳しく議論する.
+
+  \item \textbf{Lorentz ブーストによる一般の運動量 $p$ への拡張}\\
+  静止系での $u(p)$ が分かったので, Lorentz ブーストで一般の運動量 $p$ への拡張する.\\
+  $z$ 方向のブーストでは無限小な場合に4運動量は以下のように変化する：
+  \begin{equation*}
+    \begin{pmatrix}
+    E \\
+    p^3
+    \end{pmatrix}
+    = \left[ 1 + \eta \begin{pmatrix}
+      0 & 1 \\
+      1 & 0
+      \end{pmatrix} \right]
+      \begin{pmatrix}
+      m \\
+      0
+      \end{pmatrix}
+  \end{equation*}
+  $eta$ は無限小のパラメータで有限の $\eta$ に対しては, 指数関数の形で書く必要がある.
+  \begin{align*}
+    \begin{pmatrix}
+    E \\
+    p^3
+    \end{pmatrix}
+    &= \exp \left[ \eta \begin{pmatrix}
+      0 & 1 \\
+      1 & 0
+      \end{pmatrix} \right]
+      \begin{pmatrix}
+      m \\
+      0
+      \end{pmatrix}\\
+    &= \left[ \cosh \eta \begin{pmatrix}
+      0 & 1 \\
+      1 & 0
+      \end{pmatrix} + \sinh \eta \begin{pmatrix}
+      0 & 1 \\
+      1 & 0
+      \end{pmatrix} \right]
+      \begin{pmatrix}
+      m \\
+      0
+      \end{pmatrix}\\
+    &= \begin{pmatrix}
+    m \cosh \eta \\
+    m \sinh \eta
+    \end{pmatrix} \tag{3.48}
+  \end{align*}
+  このパラメータ $\eta$ は「ラピディティ (rapidity) 」と呼ばれ, ブースト操作の際に加法的に扱える便利な量である.
+
+  \item \textbf{$u(p)$ のブーストされた表現}\\
+  同じブーストを $u(p)$ に適用させると,
+  \begin{align*}
+    u(p) &= \exp\left[
+      -\frac{1}{2} \eta
+      \begin{pmatrix}
+        \sigma^3 & 0 \\
+        0 & -\sigma^3
+      \end{pmatrix}
+    \right]
+    \sqrt{m}
+    \begin{pmatrix}
+      \xi \\
+      \xi
+    \end{pmatrix} \\
+    &=
+    \left[
+      \cosh\left( \frac{1}{2} \eta \right)
+      \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+      \end{pmatrix}
+      -
+      \sinh\left( \frac{1}{2} \eta \right)
+      \begin{pmatrix}
+        \sigma^3 & 0 \\
+        0 & -\sigma^3
+      \end{pmatrix}
+    \right]
+    \sqrt{m}
+    \begin{pmatrix}
+      \xi \\
+      \xi
+    \end{pmatrix} \\
+    &= \begin{pmatrix}
+        e^{\eta/2 \cdot \frac{1 - \sigma^3}{2}} + e^{-\eta/2 \cdot \frac{1 + \sigma^3}{2}} & 0\\
+        0 & e^{\eta/2 \cdot \frac{1 + \sigma^3}{2}} + e^{-\eta/2 \cdot \frac{1 - \sigma^3}{2}}
+      \end{pmatrix}
+    \sqrt{m}
+    \begin{pmatrix}
+      \xi \\
+      \xi
+    \end{pmatrix} \\
+    &= \begin{pmatrix}
+        \sqrt{E + p^3} \left( \frac{1 - \sigma^3}{2} \right)
+        + \sqrt{E - p^3} \left( \frac{1 + \sigma^3}{2} \right)\xi \\
+         \sqrt{E + p^3} \left( \frac{1 + \sigma^3}{2} \right)
+        + \sqrt{E - p^3} \left( \frac{1 - \sigma^3}{2} \right)\xi
+      \end{pmatrix} \tag{3.49}
+  \end{align*}
+  最後にこれを簡略化すると,
+  \begin{equation*}
+    u(p) =  \begin{pmatrix}
+      \sqrt{p \cdot \sigma}\xi \\
+      \sqrt{p \cdot \bar{\sigma}}\xi
+    \end{pmatrix} \tag{3.50}
+  \end{equation*}
+  ここで $\sigma^\mu = (1, \boldsymbol{\sigma})$, $\bar{\sigma}^\mu = (1, -\boldsymbol{\sigma})$, 行列の平方根は正の固有値平方根を取る.
+  \item \textbf{恒等式}  
+  \begin{equation*}
+    (p \cdot \sigma)(p \cdot \bar{\sigma}) = p^2 = m^2 \tag{3.51}
+  \end{equation*}
+  これは上の $u(p)$ が Dirac 方程式の解であることを確認できる.
+
+  \item \textbf{具体的スピノル例（$\sigma^3$ 固有状態）}\\
+  実際の計算では, $\xi$ を $\sigma^3$ の固有状態として選ぶことが便利である.
+  \item $\xi = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ (３軸方向にスピンが上向き) のとき,
+  \begin{equation*}
+    u(p) =
+    \begin{pmatrix}
+    \sqrt{E - p^3} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
+    \sqrt{E + p^3} \begin{pmatrix} 1 \\ 0 \end{pmatrix}
+    \end{pmatrix}
+    \xrightarrow{\text{large boost}}
+    \sqrt{2E}
+    \begin{pmatrix}
+    0 \\
+    \begin{pmatrix} 1 \\ 0 \end{pmatrix}
+    \end{pmatrix} \label{3.52}\tag{3.52}
+  \end{equation*}
+  \item $\xi = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$（3軸方向にスピンが下向き）のとき、$u(p)$ は以下のようになる：
+  \begin{equation*}
+    u(p) =
+    \begin{pmatrix}
+      \sqrt{E + p^3} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
+      \sqrt{E - p^3} \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+    \end{pmatrix} \label{3.53}\tag{3.53}
+    \xrightarrow{\text{large boost}}
+    \sqrt{2E}
+    \begin{pmatrix}
+      \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
+      0
+    \end{pmatrix}.
+  \end{equation*}
+
+  \item 極限 $\eta \to \infty$ では, 状態は質量ゼロ粒子の2成分スピノルに縮退する.
+  \item $\sqrt{m}$ の因子はこの質量ゼロ極限でもスピノル表現が有限に保たれるよう導入された.
+  \item $u(p)$ の解たち (\eqref{3.52}, \eqref{3.53}) はヘリシティ演算子の固有状態である：
+  \begin{equation*}
+    h \equiv \hat{\mathbf{p}} \cdot \mathbf{S}
+    = \frac{1}{2} \hat{p}_i
+    \begin{pmatrix}
+      \sigma^i & 0 \\
+      0 & \sigma^i
+    \end{pmatrix} \tag{3.54}
+  \end{equation*}
+
+  \item $h = +1/2$ の粒子は right-handed, $h = -1/2$ の粒子は left-handed と呼ばれる.
+  \item Massive 粒子のヘリシティは参照系に依存するが, Massless粒子では Lorentz 不変.\\
+  なぜなら, Massive 粒子は常に運動量の向きを逆にするブーストを行うと, ヘリシティの符号が変わるが, Massless 粒子ではそうならないから.
+  \item Massless 粒子における $u(p)$ の単純な形は, そのヘリシティ固有状態としての振る舞いを直感的に示す.
+  \item 第1章では, $e^+ e^- \to \mu^+ \mu^-$ の質量ゼロ極限をこの形から推測できた.
+  \item 今後の章でも, 高エネルギー極限でヘリシティ固有状態を見ることで結果の物理的意味を把握する.
+
+  \item Weyl スピノル $\psi_L$, $\psi_R$ の記法の起源はここにある.
+  \item Weyl 方程式の解はそれぞれ明確なヘリシティを持ち, 左手・右手系粒子に対応する.
+  \item Massless 粒子のヘリシティが Lorentz 不変であることは, Weyl スピノルが Lorentz 群の異なる表現に属することから明らか.
+
+  \item $u(p)$ の規格化条件は Lorentz 不変な形で与えるのが便利である.
+  \item $\psi^\dagger \psi$ は Lorentz 不変にならなかった. 同様に,
+  \begin{equation*}
+    u^\dagger u =
+    \left( \xi^\dagger \sqrt{p \cdot \sigma},\, \xi^\dagger \sqrt{p \cdot \bar{\sigma}} \right)
+    \begin{pmatrix}
+      \sqrt{p \cdot \sigma} \xi \\
+      \sqrt{p \cdot \bar{\sigma}} \xi
+    \end{pmatrix}
+    = 2E_p \, \xi^\dagger \xi \label{3.55}\tag{3.55}
+  \end{equation*}
+
+  \item よって, Lorentz 不変なスカラーを得るには次を定義する：
+  \begin{equation*}
+    \bar{u}(p) = u^\dagger(p) \gamma^0 \tag{3.56}
+  \end{equation*}
+
+  \item これにより得られる規格化条件は：
+  \begin{equation*}
+    \bar{u} u = 2m \, \xi^\dagger \xi \label{3.57}\tag{3.57}
+  \end{equation*}
+
+  \item 通常, 2成分スピノル $\xi$ は $\xi^\dagger \xi = 1$ で規格化する.
+  \item 基底スピノル $\xi^1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ と $\xi^2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$ は直交しており, よく使われる.
+
+  \item Massless 粒子に対しては, \eqref{3.57} は自明なので, 規格化条件は \eqref{3.55} の形で記述する必要がある.
+
+  \item Dirac 方程式の一般解は平面波の線形結合として書ける. 正の周波数成分は：
+  \begin{equation*}
+    \psi(x) = u(p)e^{-ip \cdot x}, \quad p^2 = m^2, \quad p^0 > 0. \tag{3.58}
+  \end{equation*}
+
+  \item $u(p)$ の線形独立な解は2つ存在し, 次のように表される：
+  \begin{equation*}
+    u^s(p) =
+    \begin{pmatrix}
+      \sqrt{p \cdot \sigma} \, \xi^s \\
+      \sqrt{p \cdot \bar{\sigma}} \, \xi^s
+    \end{pmatrix}, \quad s = 1, 2. \tag{3.59}
+  \end{equation*}
+
+  \item 規格化条件は以下のように定義される：
+  \begin{equation*}
+    \bar{u}^r(p) u^s(p) = 2m \delta^{rs}, \quad \text{または} \quad
+    u^{r\dagger}(p) u^s(p) = 2E_p \delta^{rs}. \tag{3.60}
+  \end{equation*}
+
+  \item 同様に, 負の周波数解も得られる：
+  \begin{equation*}
+    \psi(x) = v(p)e^{+ip \cdot x}, \quad p^2 = m^2, \quad p^0 > 0. \tag{3.61}
+  \end{equation*}
+  ※ここで $e^{+ip \cdot x}$ にプラス符号を選んでおり, $p^0 < 0$ とする代わりにそうしている.
+  \item $v(p)$ に対しても線形独立な解が2つあり, 次のように書ける：
+  \begin{equation*}
+    v^s(p) =
+    \begin{pmatrix}
+      \sqrt{p \cdot \sigma} \, \eta^s \\
+      -\sqrt{p \cdot \bar{\sigma}} \, \eta^s
+    \end{pmatrix}, \quad s = 1, 2. \tag{3.62}
+  \end{equation*}
+  ここで $\eta^s$ は別の2成分スピノルの基底である.\\
+  これらの規格化条件は以下の通りである：
+  \begin{equation*}
+    \bar{v}^r(p) v^s(p) = -2m \delta^{rs}, \quad
+    v^{r\dagger}(p) v^s(p) = +2E_p \delta^{rs}. \tag{3.63}
+  \end{equation*}
+
+  \item $u$ と $v$ は互いに直交している：
+  \begin{equation*}
+    \bar{u}^r(p) v^s(p) = \bar{v}^r(p) u^s(p) = 0. \tag{3.64}
+  \end{equation*}
+
+  \item ただし注意が必要で, $u^{r\dagger}(p) v^s(p) \ne 0$ および $v^{r\dagger}(p) u^s(p) \ne 0$ の場合がある.
+
+  \item しかし, 次は成立する：
+  \begin{equation*}
+    u^{r\dagger}(p) v^s(-p) = v^{r\dagger}(-p) u^s(p) = 0. \tag{3.65}
+  \end{equation*}
+  ここではスピノル積の片方で運動量の符号を変えている点に注意.
+  \item \textbf{スピン和}  
+  フェインマン図を評価する際には, フェルミオンの偏極状態（スピン状態）にわたる和を取ることがしばしばある.
+  完全性関係 (completeness relation) は以下の簡単な計算から導ける：
+  \begin{align*}
+    \sum_{s=1,2} u^s(p) \bar{u}^s(p)
+    &= \sum_s
+    \begin{pmatrix}
+      \sqrt{p \cdot \sigma} \, \xi^s \\
+      \sqrt{p \cdot \bar{\sigma}} \, \xi^s
+    \end{pmatrix}
+    \left(
+      \xi^{s\dagger} \sqrt{p \cdot \bar{\sigma}},\,
+      \xi^{s\dagger} \sqrt{p \cdot \sigma}
+    \right) \\
+    &=
+    \begin{pmatrix}
+      \sqrt{p \cdot \sigma} \sqrt{p \cdot \bar{\sigma}} &
+      \sqrt{p \cdot \sigma} \sqrt{p \cdot \sigma} \\
+      \sqrt{p \cdot \bar{\sigma}} \sqrt{p \cdot \bar{\sigma}} &
+      \sqrt{p \cdot \bar{\sigma}} \sqrt{p \cdot \sigma}
+    \end{pmatrix}
+  \end{align*}
+
+  \item ここで次の恒等式を用いた：
+  \begin{equation*}
+    \sum_{s=1,2} \xi^s \xi^{s\dagger} = 1 =
+    \begin{pmatrix}
+      1 & 0 \\
+      0 & 1
+    \end{pmatrix}
+  \end{equation*}
+
+  \item よって次のように計算できる：
+  \begin{equation*}
+    \sum_s u^s(p) \bar{u}^s(p)
+    =
+    \begin{pmatrix}
+      m & p \cdot \sigma \\
+      p \cdot \bar{\sigma} & m
+    \end{pmatrix}
+    = \gamma^\mu p_\mu + m. \tag{3.66}
+  \end{equation*}
+
+  \item 同様に, 反粒子については,
+  \begin{equation*}
+    \sum_s v^s(p) \bar{v}^s(p)
+    = \gamma^\mu p_\mu - m. \tag{3.67}
+  \end{equation*}
+
+  \item このように $\gamma^\mu p_\mu$ の組み合わせは非常によく現れるので, ファインマンは次の略記を導入した：
+  \begin{equation*}
+    \slashed{p} \equiv \gamma^\mu p_\mu.
+  \end{equation*}
+  今後この表記を頻繁に使用する.
+\end{itemize}
+
+
 
 
 

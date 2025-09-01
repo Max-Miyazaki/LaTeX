@@ -1,0 +1,637 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{Chapter 3. The Dirac Field\\
+3-5. Quantization of the Dirac Field}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+
+% Define slashed notation
+\newcommand{\slashed}[1]{\not{#1}}
+
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートはPeskin\&Schroederの``An Introduction to Quantum Field Theory''の第3章の5節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+\end{abstract}
+    
+    
+
+\newpage
+\color{blue}
+\section*{概要}
+
+\begin{itemize}
+  \item \textbf{Lagrangian と Hamiltonian}
+  \begin{align*}
+  \mathcal{L} &= \bar{\psi}(i\gamma^\mu \partial_\mu - m)\psi, \\
+  H &= \int d^3x \, \psi^\dagger(-i\gamma^0 \gamma\cdot\nabla + m\gamma^0)\psi .
+  \end{align*}
+
+  \item \textbf{交換関係の問題}
+  \begin{itemize}
+    \item Klein-Gordon 場と同様に交換関係を課すと負のエネルギー状態が現れる.
+    \item 光円錐外で交換子が消えず, 因果律が破れる.
+  \end{itemize}
+
+  \item \textbf{解決策：反交換関係}
+  \begin{align*}
+  \{\psi_a(x), \psi_b^\dagger(y)\} &= \delta^{(3)}(\mathbf{x}-\mathbf{y})\delta_{ab}, \\
+  \{\psi,\psi\} &= \{\psi^\dagger,\psi^\dagger\}=0 .
+  \end{align*}
+  \begin{itemize}
+    \item 因果律が成立.
+    \item エネルギーが正定値に保たれる.
+    \item Fermi-Dirac 統計（Pauli の排他原理）が自然に導かれる.
+  \end{itemize}
+
+  \item \textbf{粒子と反粒子}
+  \begin{itemize}
+    \item 負エネルギー解は反粒子の生成として解釈される.
+    \item 真空 $|0\rangle$ は $a^s_{\mathbf{p}}, b^s_{\mathbf{p}}$ によって消される状態:
+    \[
+    a^s_{\mathbf{p}}|0\rangle = b^s_{\mathbf{p}}|0\rangle = 0 .
+    \]
+  \end{itemize}
+
+  \item \textbf{量子化された Dirac 場}
+  \begin{align*}
+  \psi(x) &= \int \frac{d^3p}{(2\pi)^3}\frac{1}{\sqrt{2E_p}}
+    \sum_s \Big( a^s_{\mathbf{p}} u^s(p)e^{-ip\cdot x} 
+    + b^{s\dagger}_{\mathbf{p}} v^s(p)e^{+ip\cdot x} \Big), \\
+  H &= \int \frac{d^3p}{(2\pi)^3} \sum_s 
+    E_p \left( a^{s\dagger}_{\mathbf{p}} a^s_{\mathbf{p}} 
+    + b^{s\dagger}_{\mathbf{p}} b^s_{\mathbf{p}} \right).
+  \end{align*}
+
+  \item \textbf{保存量と性質}
+  \begin{itemize}
+    \item 電荷演算子:
+    \[
+    Q = \int \frac{d^3p}{(2\pi)^3} \sum_s 
+    \left( a^{s\dagger}_{\mathbf{p}} a^s_{\mathbf{p}} 
+    - b^{s\dagger}_{\mathbf{p}} b^s_{\mathbf{p}} \right).
+    \]
+    \item 角運動量:
+    \[
+    \mathbf{J} = \int d^3x \, 
+    \psi^\dagger \left( \mathbf{x}\times(-i\nabla) 
+    + \tfrac{1}{2}\boldsymbol{\Sigma} \right)\psi .
+    \]
+  \end{itemize}
+
+  \item \textbf{Dirac 伝播子}
+  \begin{align*}
+  S_F(x-y) &= \int \frac{d^4p}{(2\pi)^4} 
+  \frac{i(\not{p}+m)}{p^2-m^2+i\epsilon} e^{-ip\cdot(x-y)} , \\
+  S_F(x-y) &= \langle 0| T\psi(x)\bar{\psi}(y)|0\rangle .
+  \end{align*}
+  \begin{itemize}
+    \item Fermion の摂動論計算において基本的役割を果たす.
+  \end{itemize}
+\end{itemize}
+
+
+\newpage
+\color{black}
+\section*{3.5 Quantization of the Dirac Field}
+
+我々は今, 自由 Dirac 場の量子論を構築する準備が整った. Lagrangian から
+\begin{equation}
+\mathcal{L} = \bar{\psi}(i\!\not\!\partial - m)\psi 
+= \bar{\psi}(i\gamma^\mu \partial_\mu - m)\psi ,
+\tag{3.83}
+\end{equation}
+$\psi$ に共役な正準運動量は $i\psi^\dagger$ であることがわかり, したがって Hamiltonian は
+\begin{align}
+H &= \int d^3x \, \bar{\psi}(-i\gamma\cdot\nabla + m)\psi \\
+  &= \int d^3x \, \psi^\dagger \left[ -i\gamma^0 \gamma \cdot \nabla + m\gamma^0 \right]\psi .
+\tag{3.84}
+\end{align}
+
+ここで $\alpha = \gamma^0 \gamma$, $\beta = \gamma^0$ と定義すれば, 括弧内の量は一粒子系の量子力学における Dirac・Hamiltonian として認識できる:
+\begin{equation}
+h_D = -i \alpha \cdot \nabla + m \beta .
+\tag{3.85}
+\end{equation}
+
+\subsubsection*{Dirac 場を量子化してはいけない方法：スピンと統計に関する教訓}
+
+もし Dirac 場を Klein-Gordon 場と同様に量子化しようとすれば, 正準交換関係を課すことになる:
+\begin{equation}
+[\psi_a(x), \psi_b^\dagger(y)] = \delta^{(3)}(x-y)\delta_{ab}, 
+\qquad \text{(等時刻)} 
+\tag{3.86}
+\end{equation}
+このとき $a$ および $b$ は $\psi$ のスピノル成分を表す.  
+これはすでに奇妙に見える: もし $\psi(x)$ が実数値であれば, 左辺は $x \leftrightarrow y$ の交換で反対称であるべきだが, 右辺は対称である. しかし $\psi$ は複素なので矛盾はない. とはいえ, Dirac 場に通常の交換関係を課すとさらに深刻な問題が現れることがすぐにわかる.  
+スピンと統計の関係をよりよく理解するため, どこまで話を進められるかを見るのは有益だろう. 盲目的な路地に入ることを覚悟して, しばらくは進めてみよう.  
+
+我々の第一の課題は, $H$ を対角化する生成消滅演算子の形で交換関係を表現することである. Hamiltonian (3.84) から, $\psi(x)$ を $h_D$ の固有関数で展開するのが自然である. これらの固有関数はすでに 3.3 節で求めてある:
+\begin{equation}
+[i\gamma^0\partial_0 + i\gamma \cdot \nabla - m]u^s(p)e^{-ip\cdot x} = 0 ,
+\end{equation}
+よって $u^s(p)e^{-ip\cdot x}$ は $h_D$ の固有関数であり, 固有値は $E_p$. 同様に $v^s(p)e^{+ip\cdot x}$ は固有値 $-E_p$ の固有関数である. これらは完全系を成し, 各 $p$ ごとに 2つの $u$, 2つの $v$ があり, $h_D$ の $4\times4$ 行列の 4つの固有ベクトルを与える.
+
+したがって $\psi(x)$ の展開は
+\begin{equation}
+\psi(x) = \int \frac{d^3p}{(2\pi)^3}\frac{1}{\sqrt{2E_p}} e^{i\vec{p}\cdot\vec{x}} 
+\sum_{s=1,2} \left( a^s_{\mathbf{p}} u^s(p)e^{-iE_pt} + b^{s\dagger}_{\mathbf{p}} v^s(p)e^{+iE_pt} \right),
+\tag{3.87}
+\end{equation}
+となる. ここで $a^s_{\mathbf{p}}, b^s_{\mathbf{p}}$ は演算子係数である. (今は Schr\"odinger 描像で考えるので, $\psi$ 自身は時間に依存しない.)  
+
+交換関係として次を仮定する:
+\begin{equation}
+[a^r_{\mathbf{p}}, a^{s\dagger}_{\mathbf{q}}] = [b^r_{\mathbf{p}}, b^{s\dagger}_{\mathbf{q}}] 
+= (2\pi)^3 \delta^{(3)}(\mathbf{p}-\mathbf{q}) \delta^{rs}.
+\tag{3.88}
+\end{equation}
+
+これを用いると $\psi$ と $\psi^\dagger$ の交換関係 (3.86) を容易に計算できる:
+\begin{align}
+[\psi(x), \psi^\dagger(y)] &= \int \frac{d^3p}{(2\pi)^3}\frac{1}{2E_p} e^{i\vec{p}\cdot(\vec{x}-\vec{y})} \\
+&\quad \times \left[ (\not{p}+m)\gamma^0 e^{-iE_p(x^0-y^0)} 
++ (\not{p}-m)\gamma^0 e^{+iE_p(x^0-y^0)} \right].
+\end{align}
+
+等時刻 $x^0=y^0$ では
+\begin{equation}
+[\psi(x), \psi^\dagger(y)] = \delta^{(3)}(\vec{x}-\vec{y}) \, 1_{4\times4}.
+\tag{3.89}
+\end{equation}
+
+ここで Hamiltonianを $a,b$ 演算子の形に書き直すと
+\begin{equation}
+H = \int \frac{d^3p}{(2\pi)^3} \sum_s \left( E_p a^{s\dagger}_{\mathbf{p}} a^s_{\mathbf{p}}
+- E_p b^s_{\mathbf{p}} b^{s\dagger}_{\mathbf{p}} \right).
+\tag{3.90}
+\end{equation}
+
+第2項が深刻である. $b^\dagger$ でどんどん粒子を作ると, エネルギーは無限に下がってしまう.  
+
+この理論の因果律を調べるため, 我々は非等時刻で $\{\psi(x),\bar{\psi}(y)\}$ を調べる必要がある. まず $\psi,\bar{\psi}$ の時間依存性を復元するために Heisenberg 描像に戻す:
+\begin{equation}
+e^{iHt} a^s_{\mathbf{p}} e^{-iHt} = a^s_{\mathbf{p}} e^{-iE_pt}, 
+\qquad e^{iHt} b^s_{\mathbf{p}} e^{-iHt} = b^s_{\mathbf{p}} e^{+iE_pt}.
+\tag{3.91}
+\end{equation}
+
+したがって
+\begin{align}
+\psi(x) &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} 
+\sum_s \left( a^s_{\mathbf{p}} u^s(p)e^{-ip\cdot x} + b^{s\dagger}_{\mathbf{p}} v^s(p)e^{+ip\cdot x} \right), \\
+\bar{\psi}(x) &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} 
+\sum_s \left( a^{s\dagger}_{\mathbf{p}} \bar{u}^s(p)e^{+ip\cdot x} + b^s_{\mathbf{p}} \bar{v}^s(p)e^{-ip\cdot x} \right).
+\tag{3.92}
+\end{align}
+
+これを用いて交換子を計算すると
+\begin{align}
+[\psi_a(x), \bar{\psi}_b(y)] 
+&= \int \frac{d^3p}{(2\pi)^3}\frac{1}{2E_p} \left[ (i\not{p}+m)_{ab} \left(e^{-ip\cdot(x-y)} - e^{+ip\cdot(x-y)}\right) \right] \\
+&= (i\!\not\!\partial_x + m)_{ab} \, \Delta(x-y),
+\end{align}
+ここで $\Delta(x-y)$ は Klein-Gordon 場の交換子である.
+
+したがって因果律の問題は一見解決したかのように見えるが, 実は真空 $|0\rangle$ を $a, b$ で定義すると矛盾が残ることが後に明らかになる.
+
+
+$|0\rangle$ を $a^s_{\mathbf{p}}, b^s_{\mathbf{p}}$ によって消される真空状態
+\begin{equation}
+a^s_{\mathbf{p}}|0\rangle = b^s_{\mathbf{p}}|0\rangle = 0
+\end{equation}
+とすると,
+\begin{align}
+[\psi_a(x), \bar{\psi}_b(y)] 
+&= \langle 0| [\psi_a(x), \bar{\psi}_b(y)] |0\rangle \\
+&= \langle 0| \psi_a(x)\bar{\psi}_b(y)|0\rangle - \langle 0| \bar{\psi}_b(y)\psi_a(x)|0\rangle
+\end{align}
+となる.  
+
+これは Klein-Gordon 場の場合と似ている. Klein-Gordon 場の場合, 交換子は
+「粒子が $y$ から $x$ へ伝播する振幅」と「反粒子が $x$ から $y$ へ伝播する振幅」の二つの項に分かれる.  
+ここでも最初の項 $\langle 0|\psi(x)\bar{\psi}(y)|0\rangle$ が残り, 2番目はゼロとなる. したがってこれは正エネルギー粒子と負エネルギー粒子の打ち消しである.
+
+この観察から, 負エネルギー問題の解決の道筋が見える.  
+Dirac 場の量子化においては, 真空を $a^s_{\mathbf{p}}, b^s_{\mathbf{p}}$ によって消される状態と仮定することを忘れよう.  
+その代わりに, (3.92) の展開式を Heisenberg 演算子として用い, $\psi(x), \bar{\psi}(x)$ が Dirac 方程式を満たす限り, 正のエネルギー成分だけが寄与するように再解釈する.
+
+まず $\langle 0|\psi(x)\bar{\psi}(y)|0\rangle$ を考える.  
+これは「$y$ から $x$ へ伝播する正エネルギー粒子の振幅」を表す.  
+このとき, $\bar{\psi}(y)|0\rangle$ が負の周波数成分を含まないようにする必要がある. よって
+\begin{align}
+\langle 0|\psi(x)\bar{\psi}(y)|0\rangle
+&= \langle 0| \int \frac{d^3p}{(2\pi)^3}\frac{1}{\sqrt{2E_p}} a^s_{\mathbf{p}} u^s(p)e^{-ipx} \\
+&\quad \times \int \frac{d^3q}{(2\pi)^3}\frac{1}{\sqrt{2E_q}} a^{t\dagger}_{\mathbf{q}} \bar{u}^t(q)e^{iqy} |0\rangle
+\tag{3.93}
+\end{align}
+となる.
+
+行列要素 $\langle 0|a^r_{\mathbf{p}} a^{s\dagger}_{\mathbf{q}}|0\rangle$ を計算すると,
+\begin{equation}
+\langle 0| a^r_{\mathbf{p}} a^{s\dagger}_{\mathbf{q}} |0\rangle = (2\pi)^3 \delta^{(3)}(\mathbf{p}-\mathbf{q}) \delta^{rs}\, A(p),
+\end{equation}
+となり, $A(p)$ は正の定数である必要がある.
+
+したがって
+\begin{align}
+\langle 0|\psi(x)\bar{\psi}(y)|0\rangle
+&= \int \frac{d^3p}{(2\pi)^3}\frac{1}{2E_p} (\not{p}+m) A \, e^{-ip\cdot(x-y)},
+\end{align}
+が得られる. $A$ は定数とおけるので
+\begin{equation}
+\langle 0|\psi(x)\bar{\psi}(y)|0\rangle = (i\!\not\!\partial_x+m) \int \frac{d^3p}{(2\pi)^3}\frac{1}{2E_p} e^{-ip\cdot(x-y)} \, A .
+\end{equation}
+
+同様に,
+\begin{equation}
+\langle 0|\bar{\psi}(y)\psi(x)|0\rangle 
+= - (i\!\not\!\partial_x+m) \int \frac{d^3p}{(2\pi)^3}\frac{1}{2E_p} e^{+ip\cdot(x-y)} \, B ,
+\tag{3.95}
+\end{equation}
+が得られる. ここで $B$ も正の定数である.
+
+このとき $A=B=1$ と選ぶと,
+\begin{equation}
+\langle 0|[\psi(x),\bar{\psi}(y)]|0\rangle = - \langle 0|\bar{\psi}(y)\psi(x)|0\rangle ,
+\end{equation}
+すなわちスピノル場は空間的に \textbf{反交換}することがわかる.
+
+これこそが因果律を保存するための十分条件である. したがって, Dirac 場には反交換関係を課さねばならない.  
+
+最終的に, 等時刻反交換関係は以下のようになる：
+\begin{align}
+\{\psi_a(x), \psi_b^\dagger(y)\} &= \delta^{(3)}(\mathbf{x}-\mathbf{y})\delta_{ab}, \\
+\{\psi_a(x), \psi_b(y)\} &= \{\psi_a^\dagger(x), \psi_b^\dagger(y)\} = 0 ,
+\tag{3.96}
+\end{align}
+
+我々は $\psi(x)$ を $a^s_{\mathbf{p}}, b^s_{\mathbf{p}}$ を用いて (式 (3.87)) のように展開できる.  
+生成消滅演算子は次の反交換関係を満たさねばならない:
+\begin{equation}
+\{a^r_{\mathbf{p}}, a^{s\dagger}_{\mathbf{q}}\} = \{b^r_{\mathbf{p}}, b^{s\dagger}_{\mathbf{q}}\}
+= (2\pi)^3 \delta^{(3)}(\mathbf{p}-\mathbf{q})\delta^{rs},
+\tag{3.97}
+\end{equation}
+(その他の反交換子はすべてゼロ). これにより (3.96) が満たされる.  
+
+別の計算により Hamiltonian は
+\begin{equation}
+H = \int \frac{d^3p}{(2\pi)^3} \sum_s \left( E_p a^{s\dagger}_{\mathbf{p}} a^s_{\mathbf{p}}
+- E_p b^s_{\mathbf{p}} b^{s\dagger}_{\mathbf{p}} \right)
+\end{equation}
+となる. ここで再び $b^{s\dagger}$ が負のエネルギーを作り出す. しかし
+\begin{equation}
+\{b^r_{\mathbf{p}}, b^{s\dagger}_{\mathbf{q}}\} = (2\pi)^3 \delta^{(3)}(\mathbf{p}-\mathbf{q}) \delta^{rs}
+\end{equation}
+は $b^r_{\mathbf{p}}, b^{s\dagger}_{\mathbf{q}}$ の対称性を保証しているので, $b$ と $b^\dagger$ を入れ替えて
+\begin{equation}
+\tilde{b}^s_{\mathbf{p}} \equiv b^{s\dagger}_{\mathbf{p}}, \qquad \tilde{b}^{s\dagger}_{\mathbf{p}} \equiv b^s_{\mathbf{p}}
+\tag{3.98}
+\end{equation}
+と定義できる.  
+
+このとき交換関係は同じままだが, Hamiltonian の第2項は
+\begin{equation}
+- E_p b^s_{\mathbf{p}} b^{s\dagger}_{\mathbf{p}} = + E_p \tilde{b}^{s\dagger}_{\mathbf{p}} \tilde{b}^s_{\mathbf{p}} - (\text{定数})
+\end{equation}
+となる. したがって真空 $|0\rangle$ を $a^s_{\mathbf{p}}$ と $\tilde{b}^s_{\mathbf{p}}$ によって消される状態と定義すれば, 真空の励起はすべて正のエネルギーをもつ.
+
+このトリックを理解するため, より単純に $b, b^\dagger$ の1組だけを考えてみる.  
+もし $\{b, b^\dagger\}=1$ なら, 状態 $|0\rangle$ に対して $b|0\rangle=0$ とおく. このとき新しい状態 $|1\rangle = b^\dagger|0\rangle$ を作れる.  
+この $|0\rangle, |1\rangle$ は2次元ヒルベルト空間を張る. $|0\rangle$ を「空状態」, $b^\dagger$ が状態を「埋める」と解釈できる. 逆に $|1\rangle$ を空状態, $b^\dagger$ を正のエネルギー状態を作る演算子と解釈しても同じである.  
+違いは, 「より低いエネルギーの方を真空と呼ぶ」という選択にすぎない. これが我々が行ったことである.  
+
+注意すべきは, 反交換関係から $(b^\dagger)^2=0$ が従い, 状態は二重に占有できないことだ. したがって生成消滅演算子が反交換則を満たすとき, 粒子は Fermi-Dirac 統計に従うことになる.  
+
+このことから次が結論される.  
+真空において負のエネルギー励起が存在しないためには, Dirac 場を反交換関係で量子化しなければならない. この条件の下で, Dirac 場に対応する粒子は Fermi-Dirac 統計に従う.  
+これは, 「整数スピン粒子は Bose-Einstein 統計, 半整数スピン粒子は Fermi-Dirac 統計に従う」という一般結果の一部である.
+
+\subsection*{The Quantized Dirac Field}
+
+ここで量子化された Dirac 場の結果を整理してまとめよう.  
+記号を簡潔にするため, 以降 $b$ を $\tilde{b}$ と書く (すなわち低いエネルギーを消す演算子である).  
+
+場の演算子は
+\begin{align}
+\psi(x) &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \sum_s 
+\left( a^s_{\mathbf{p}} u^s(p)e^{-ip\cdot x} + b^{s\dagger}_{\mathbf{p}} v^s(p)e^{+ip\cdot x} \right),
+\tag{3.99} \\
+\bar{\psi}(x) &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \sum_s 
+\left( b^s_{\mathbf{p}} \bar{v}^s(p)e^{-ip\cdot x} + a^{s\dagger}_{\mathbf{p}} \bar{u}^s(p)e^{+ip\cdot x} \right).
+\tag{3.100}
+\end{align}
+
+生成消滅演算子は次の反交換関係を満たす:
+\begin{equation}
+\{a^r_{\mathbf{p}}, a^{s\dagger}_{\mathbf{q}}\} = \{b^r_{\mathbf{p}}, b^{s\dagger}_{\mathbf{q}}\} 
+= (2\pi)^3 \delta^{(3)}(\mathbf{p}-\mathbf{q})\delta^{rs},
+\tag{3.101}
+\end{equation}
+他はすべてゼロ.  
+
+場の等時刻反交換関係は
+\begin{align}
+\{\psi_a(x), \psi_b^\dagger(y)\} &= \delta^{(3)}(\mathbf{x}-\mathbf{y}) \delta_{ab}, \\
+\{\psi_a(x), \psi_b(y)\} &= \{\psi_a^\dagger(x), \psi_b^\dagger(y)\} = 0 .
+\tag{3.102}
+\end{align}
+
+真空は
+\begin{equation}
+a^s_{\mathbf{p}}|0\rangle = b^s_{\mathbf{p}}|0\rangle = 0
+\tag{3.103}
+\end{equation}
+で定義される.  
+
+Hamiltonian は
+\begin{equation}
+H = \int \frac{d^3p}{(2\pi)^3} \sum_s E_p \left( a^{s\dagger}_{\mathbf{p}} a^s_{\mathbf{p}} + b^{s\dagger}_{\mathbf{p}} b^s_{\mathbf{p}} \right),
+\tag{3.104}
+\end{equation}
+(定数項は落としてある).  
+
+運動量演算子は以下のようになる:
+\begin{equation}
+\mathbf{P} = \int d^3x \, \psi^\dagger (-i\nabla) \psi 
+= \int \frac{d^3p}{(2\pi)^3} \sum_s \mathbf{p} \left( a^{s\dagger}_{\mathbf{p}} a^s_{\mathbf{p}} + b^{s\dagger}_{\mathbf{p}} b^s_{\mathbf{p}} \right).
+\tag{3.105}
+\end{equation}
+
+したがって $a^{s\dagger}_{\mathbf{p}}$ および $b^{s\dagger}_{\mathbf{p}}$ は, エネルギー $+E_p$, 運動量 $\mathbf{p}$ をもつ粒子を生成する.  
+$a^{s\dagger}_{\mathbf{p}}$ によって生成される粒子を \textbf{Fermion},  
+$b^{s\dagger}_{\mathbf{p}}$ によって生成される粒子を \textbf{Anti-Fermion} と呼ぶことにする.  
+
+1粒子状態は
+\begin{equation}
+|\mathbf{p}, s\rangle \equiv \sqrt{2E_p}\, a^{s\dagger}_{\mathbf{p}}|0\rangle
+\tag{3.106}
+\end{equation}
+と定義され, その内積は
+\begin{equation}
+\langle \mathbf{p}, r|\mathbf{q}, s\rangle = 2E_p (2\pi)^3 \delta^{(3)}(\mathbf{p}-\mathbf{q})\delta^{rs}
+\tag{3.107}
+\end{equation}
+となる. これは Lorentz 不変である.  
+
+したがって, Lorentz 変換を実装する演算子 $U(\Lambda)$ はユニタリであり, 運動量の大きさ $E_p$ が不変であることを保証する.  
+次に, $U(\Lambda)$ が $\psi(x)$ に正しい変換を与えることを確認する.  
+
+\begin{equation}
+U \psi(x) U^{-1} = U \int \frac{d^3p}{(2\pi)^3}\frac{1}{\sqrt{2E_p}}
+\sum_s \left( a^s_{\mathbf{p}} u^s(p)e^{-ip\cdot x} + b^{s\dagger}_{\mathbf{p}} v^s(p)e^{ip\cdot x} \right) U^{-1}.
+\tag{3.108}
+\end{equation}
+
+第1項に注目すれば十分である (第2項は完全に同様). 式 (3.106) から $a^s_{\mathbf{p}}$ の変換は
+\begin{equation}
+U(\Lambda) a^s_{\mathbf{p}} U^{-1}(\Lambda) = \sqrt{\frac{E_{\Lambda p}}{E_p}}\, a^s_{\Lambda \mathbf{p}}.
+\tag{3.109}
+\end{equation}
+
+これを (3.108) に代入し, 積分の変数変換を行うと
+\begin{align}
+U(\Lambda)\psi(x)U^{-1}(\Lambda)
+&= \int \frac{d^3p}{(2\pi)^3}\frac{1}{\sqrt{2E_p}} 
+\sum_s u^s(p) e^{-ip\cdot x} \sqrt{2E_{\Lambda p}}\, a^s_{\Lambda \mathbf{p}} + \cdots \\
+&= \Lambda_{1/2} \psi(\Lambda x),
+\tag{3.110}
+\end{align}
+が得られる. ここで $\Lambda_{1/2}$ はスピノル表現における Lorentz 変換を表す.
+
+次に Dirac 粒子のスピンを考えよう. 我々は Dirac 粒子がスピン $1/2$ をもつことを期待している.  
+これを形式的に確かめるため, 角運動量演算子を導入する.  
+
+回転 (あるいは任意の Lorentz 変換) の下で, Dirac 場は
+\begin{equation}
+\psi(x) \;\to\; \psi'(x) = \Lambda_{1/2} \psi(\Lambda^{-1} x)
+\end{equation}
+と変換される.  
+
+Noether の定理を適用するには, 場の変分
+\begin{equation}
+\delta \psi = \psi'(x) - \psi(x) = \Lambda_{1/2}\psi(\Lambda^{-1}x) - \psi(x)
+\end{equation}
+を計算すればよい.  
+
+具体例として $z$ 軸まわりの微小回転を考えると, パラメータは $\omega_{12}=-\omega_{21}=\theta$ であり, 他はゼロ.  
+このとき
+\begin{equation}
+\Lambda_{1/2} \simeq 1 - \frac{i}{2}\omega_{\mu\nu}S^{\mu\nu}
+= 1 - \frac{i}{2}\theta \Sigma^3
+\end{equation}
+となる.  
+
+よって
+\begin{align}
+\delta \psi(x) &= \left(1 - \frac{i}{2}\theta \Sigma^3\right)\psi(t, x+\theta y, y-\theta x, z) - \psi(x) \\
+&= -\theta (x\partial_y - y\partial_x + \tfrac{i}{2}\Sigma^3)\psi(x),
+\end{align}
+となる.  
+
+このとき保存される Noether 電流の時間成分は
+\begin{equation}
+j^0 = \frac{\partial \mathcal{L}}{\partial (\partial_0 \psi)} \delta \psi 
+= - i \psi^\dagger \left( x\partial_y - y\partial_x + \tfrac{1}{2}\Sigma^3 \right)\psi.
+\end{equation}
+
+同様に $x, y$ 軸まわりの回転についても計算でき, 角運動量演算子は以下のようになる:
+\begin{equation}
+\mathbf{J} = \int d^3x \, \psi^\dagger \left[ \mathbf{x}\times(-i\nabla) + \tfrac{1}{2}\boldsymbol{\Sigma} \right]\psi.
+\tag{3.111}
+\end{equation}
+非相対論的 Fermion の場合, (3.111)の最初の項は軌道角運動量を与える. したがって, 第二項はスピン角運動量を与える.
+
+残念ながら, (3.111) の角運動量をスピン部分と軌道部分に分けることは,
+相対論的 Fermion においてはそれほど単純ではない.  
+したがってラダー演算子での一般的な表現を書くのは容易ではない.  
+
+Dirac 粒子がスピン $1/2$ をもつことを示すためには,
+$|\mathbf{0}\rangle$ 状態に角運動量演算子 $J_z$ を作用させ, 
+これが期待通りの固有値を与えることを確かめれば十分である.  
+$J_z$ は真空を消す必要があるので, $J_z a^{s\dagger}_{\mathbf{0}}|0\rangle = [J_z, a^{s\dagger}_{\mathbf{0}}]|0\rangle$ を計算すればよい.  
+
+$J_z$ の軌道角運動量部分は $p=0$ の演算子を含むため寄与せず, 
+残るはスピン部分のみである. よって, 展開式 (3.99), (3.100) を $t=0$ に代入すると
+\begin{align}
+J_z &= \int d^3x \int \frac{d^3p\, d^3p'}{(2\pi)^6}\frac{1}{\sqrt{2E_p 2E_{p'}}} 
+e^{-i\mathbf{p}\cdot \mathbf{x}} e^{i\mathbf{p'}\cdot \mathbf{x}} \\
+&\quad \times \sum_{r,r'} \left( a^r_{\mathbf{p}} u^r(p) + b^{r\dagger}_{\mathbf{p}} v^r(p)\right)^\dagger 
+\frac{\Sigma^3}{2} \left( a^{r'}_{\mathbf{p'}} u^{r'}(p') + b^{r'\dagger}_{\mathbf{p'}} v^{r'}(p') \right).
+\end{align}
+
+$a^{s\dagger}_{\mathbf{0}}$ との交換子を計算すると, 非ゼロの項は
+\begin{equation}
+[a^r_{\mathbf{p}}, a^{s\dagger}_{\mathbf{q}}] = (2\pi)^3\delta^{(3)}(\mathbf{p}-\mathbf{q})\delta^{rs}
+\end{equation}
+のみである. 他の項は消滅するか真空を消す. したがって
+\begin{equation}
+J_z a^{s\dagger}_{\mathbf{0}}|0\rangle = \frac{1}{2m} \sum_r u^{r\dagger}(0)\frac{\Sigma^3}{2}u^r(0)\, a^{s\dagger}_{\mathbf{0}}|0\rangle.
+\end{equation}
+
+スピノル $u^r$ を $\sigma^3$ の固有ベクトルに選べば,
+$u^r = \begin{pmatrix}1 \\ 0\end{pmatrix}$ のとき $+1/2$, 
+$u^r = \begin{pmatrix}0 \\ 1\end{pmatrix}$ のとき $-1/2$ が得られる.  
+これは電子に期待される結果と一致する.
+
+同様に, Anti-Fermion の場合も逆の固有値を与えることができる.  
+したがって $J_z$ の作用は
+\begin{align}
+J_z a^{s\dagger}_{\mathbf{0}}|0\rangle &= \pm \tfrac{1}{2} a^{s\dagger}_{\mathbf{0}}|0\rangle, \\
+J_z b^{s\dagger}_{\mathbf{0}}|0\rangle &= \mp \tfrac{1}{2} b^{s\dagger}_{\mathbf{0}}|0\rangle,
+\tag{3.112}
+\end{align}
+となる. 上符号は $\xi^s = \begin{pmatrix}1\\0\end{pmatrix}$ に対応し, 下符号は $\xi^s = \begin{pmatrix}0\\1\end{pmatrix}$ に対応する.
+
+Dirac 理論においてもうひとつ重要な保存量は電荷である.  
+3.4 節で $j^\mu = \bar{\psi}\gamma^\mu \psi$ が保存されることを見た.  
+その電荷は
+\begin{equation}
+Q = \int d^3x \, \psi^\dagger \psi 
+= \int \frac{d^3p}{(2\pi)^3} \sum_s \left( a^{s\dagger}_{\mathbf{p}}a^s_{\mathbf{p}} + b^{s\dagger}_{\mathbf{p}} b^s_{\mathbf{p}} \right),
+\end{equation}
+あるいは無限定数を落とすと
+\begin{equation}
+Q = \int \frac{d^3p}{(2\pi)^3} \sum_s \left( a^{s\dagger}_{\mathbf{p}}a^s_{\mathbf{p}} - b^{s\dagger}_{\mathbf{p}} b^s_{\mathbf{p}} \right).
+\tag{3.113}
+\end{equation}
+
+したがって $a^{s\dagger}_{\mathbf{p}}$ は電荷 $+1$ の Fermion を, 
+$b^{s\dagger}_{\mathbf{p}}$ は電荷 $-1$ の Anti-Fermion を作る.  
+
+量子電磁力学 (QED) では, $a^{s\dagger}_{\mathbf{p}}$ が電子, $b^{s\dagger}_{\mathbf{p}}$ が陽電子を生成する.  
+電子はエネルギー $E_p$, 運動量 $\mathbf{p}$, スピン $1/2$ で電荷 $-e$ をもつ.  
+陽電子はエネルギー $E_p$, 運動量 $\mathbf{p}$, スピン $1/2$ で電荷 $+e$ をもつ.  
+
+\subsection*{Dirac Propagator}
+
+Dirac 場の伝播振幅は
+\begin{align}
+\langle 0|\psi_a(x)\bar{\psi}_b(y)|0\rangle
+&= \int \frac{d^3p}{(2\pi)^3}\frac{1}{2E_p} u_a^s(p)\bar{u}_b^s(p) e^{-ip\cdot(x-y)} \\
+&= (i\!\not\!\partial_x+m)_{ab} \int \frac{d^3p}{(2\pi)^3}\frac{1}{2E_p} e^{-ip\cdot(x-y)} ,
+\tag{3.114}
+\end{align}
+また
+\begin{align}
+\langle 0|\bar{\psi}_b(y)\psi_a(x)|0\rangle
+&= \int \frac{d^3p}{(2\pi)^3}\frac{1}{2E_p} v_b^s(p)\bar{v}_a^s(p) e^{-ip\cdot(y-x)} \\
+&= -(i\!\not\!\partial_x+m)_{ab} \int \frac{d^3p}{(2\pi)^3}\frac{1}{2E_p} e^{+ip\cdot(x-y)} .
+\tag{3.115}
+\end{align}
+
+Klein-Gordon の場合と同様に, Dirac 方程式の Green 関数を構築できる.  
+例えば遅延 Green 関数は
+\begin{equation}
+S^R_{ab}(x-y) = \theta(x^0-y^0)\langle 0|\{\psi_a(x), \bar{\psi}_b(y)\}|0\rangle .
+\tag{3.116}
+\end{equation}
+
+次を確認するのは容易である:
+\begin{equation}
+S_R(x-y) = (i\!\not\!\partial_x + m) D_R(x-y),
+\tag{3.117}
+\end{equation}
+右辺の $\partial_0 \theta(x^0-y^0)$ を含む項は消えるので, $S_R$ は Dirac 演算子の Green 関数であることがわかる:
+\begin{equation}
+(i\!\not\!\partial_x - m) S_R(x-y) = i \delta^{(4)}(x-y)\cdot 1_{4\times4}.
+\tag{3.118}
+\end{equation}
+
+Dirac 演算子の Green 関数はフーリエ変換によっても求められる.  
+$S_R(x-y)$ を Fourier 積分で展開し, 両辺に $(i\!\not\!\partial_x - m)$ を作用させると
+\begin{equation}
+i\delta^{(4)}(x-y) = \int \frac{d^4p}{(2\pi)^4} (\not{p}-m) e^{-ip\cdot(x-y)} \tilde{S}_R(p),
+\tag{3.119}
+\end{equation}
+したがって
+\begin{equation}
+\tilde{S}_R(p) = \frac{i}{\not{p}-m} = \frac{i(\not{p}+m)}{p^2-m^2}.
+\tag{3.120}
+\end{equation}
+
+遅延 Green 関数を得るには $p^0$ の積分を適切に評価する必要がある.  
+$x^0>y^0$ の場合は下側の閉曲線をとり, (3.114), (3.115) の和を得る.  
+$x^0<y^0$ の場合は上側の閉曲線をとりゼロとなる.
+
+Feynman 境界条件をもつ Green 関数は
+\begin{equation}
+S_F(x-y) = \int \frac{d^4p}{(2\pi)^4} \frac{i(\not{p}+m)}{p^2-m^2+i\epsilon} e^{-ip\cdot(x-y)}
+\end{equation}
+で定義される. すなわち
+\begin{equation}
+S_F(x-y) =
+\begin{cases}
+\langle 0|\psi(x)\bar{\psi}(y)|0\rangle, & x^0>y^0 \quad (\text{下側で閉じる}) , \\
+-\langle 0|\bar{\psi}(y)\psi(x)|0\rangle, & x^0<y^0 \quad (\text{上側で閉じる}) ,
+\end{cases}
+\end{equation}
+すなわち
+\begin{equation}
+S_F(x-y) \equiv \langle 0| T\psi(x)\bar{\psi}(y)|0\rangle.
+\tag{3.121}
+\end{equation}
+
+ここで, スピノル場に対する時間順序積 $T$ は, 演算子の順序が入れ替わるときに追加のマイナス符号を伴うよう定義される.  
+この符号は Fermion の場の量子論において極めて重要であり, 4.7 節で再び現れる.  
+
+Klein-Gordon の場合と同様に, (3.121) の Feynman 伝播子がこの章での最も有用な結果である.  
+実際に摂動論的計算を行うとき, Fermion 線の各内部伝播子に $\tilde{S}_F(p)$ を対応させることになる.
+
+
+
+\end{document}

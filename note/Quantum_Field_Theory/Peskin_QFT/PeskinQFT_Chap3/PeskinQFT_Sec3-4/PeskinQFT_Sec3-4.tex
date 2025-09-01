@@ -70,54 +70,214 @@
 \color{blue}
 \section*{概要}
 \begin{itemize}
-  \item \textbf{Lorentz 不変性の定義}：\\
-  微分方程式 $\mathcal{D}\phi = 0$ が Lorentz 不変とは, $\phi(x)$ がこの方程式を満たすならば,Lorentz変換後の場 $\phi'(\Lambda x)$ も同じ方程式を満たすこと.
+  \item Dirac 場の双線形形式 $\bar{\psi} \Gamma \psi$ が Lorentz 変換の下でどのような性質を持つかを系統的に分類する. 双線形形式は$\psi$と$\bar{\psi}$を使って Lorentz 共変に構成される基本的な物理量のことで, Lorentz 不変な作用を構築するのに不可欠なものである.
 
-  \item \textbf{アクティブ変換の立場を採用}：\\
-  座標系は変えずに, 物理系 (場) を Lorentz 変換する「アクティブ」な視点で議論.
+  \item 任意の $4 \times 4$ 行列 $\Gamma$ は, 以下の16個の線形独立な行列の基底に展開できる：
+  \begin{itemize}
+    \item スカラー：$I$（単位行列） $\,\Rightarrow$ $\bar{\psi} \psi$
+    \item ベクトル：$\gamma^\mu$ $\,\Rightarrow$ $\bar{\psi} \gamma^\mu \psi$
+    \item テンソル：$\sigma^{\mu\nu} = \frac{i}{2} [\gamma^\mu, \gamma^\nu]$ $\,\Rightarrow$ $\bar{\psi} \sigma^{\mu\nu} \psi$
+    \item 偽ベクトル：$\gamma^\mu \gamma^5$ $\,\Rightarrow$ $\bar{\psi} \gamma^\mu \gamma^5 \psi$
+    \item 偽スカラー：$\gamma^5$ $\,\Rightarrow$ $\bar{\psi} \gamma^5 \psi$
+  \end{itemize}
 
-  \item \textbf{ Lagrangian による不変性の保証}：\\
-  方程式が Lorentz スカラーな Lagrangian から導かれるなら, Lorentz 不変性は自動的に満たされる.
+  \item これらの16成分は, スカラー、ベクトル、2階テンソル、擬ベクトル、擬スカラーとして Lorentz 変換する.
+  各成分は物理的意味を持ち, 相互作用項や保存カレントの構成に重要である.
 
-  \item \textbf{スカラー場の Lorentz 変換}：\\
-  スカラー場は以下のように変換される:
+  \item $\gamma^5$ は以下のように定義される：
+  \begin{align*}
+    \gamma^5 &= i \gamma^0 \gamma^1 \gamma^2 \gamma^3
+  \end{align*}
+  この行列は以下の性質を持つ：
+  \begin{align*}
+    (\gamma^5)^\dagger = \gamma^5,\quad (\gamma^5)^2 = 1,\quad \{ \gamma^5, \gamma^\mu \} = 0
+  \end{align*}
+
+  \item $\gamma^5$ によって Dirac スピノールは左手・右手成分に分離できる：
+  \begin{align*}
+    \psi_L = \frac{1 - \gamma^5}{2} \psi,\quad \psi_R = \frac{1 + \gamma^5}{2} \psi
+  \end{align*}
+  これは Chiral 対称性の理解に不可欠である.
+
+  \item Noether の定理により, 以下の保存カレントが得られる：
+  \begin{align*}
+    j^\mu &= \bar{\psi} \gamma^\mu \psi \quad \text{（電流）} \\
+    j_5^\mu &= \bar{\psi} \gamma^\mu \gamma^5 \psi \quad \text{（軸電流）}
+  \end{align*}
+  \begin{itemize}
+    \item $m \neq 0$ の場合：$j^\mu$ のみ保存.
+    \item $m = 0$ の場合：$j^\mu$, $j_5^\mu$ ともに保存.
+    \item $j^\mu_L = \bar{\psi}_L \gamma^\mu \psi_L$, $j^\mu_R = \bar{\psi}_R \gamma^\mu \psi_R$ も保存される.
+  \end{itemize}
+
+  \item 双線形形式の積には Fierz 恒等式が成立し, スピン構造の書き換えに使える.
   \begin{equation*}
-    \phi(x) \to \phi'(\Lambda x) = \phi(\Lambda^{-1}x)
+    (\sigma^\mu)_{\alpha\beta} (\sigma_\mu)_{\gamma\delta} = 2 \epsilon_{\alpha\gamma} \epsilon_{\beta\delta}
   \end{equation*}
-
-  \item \textbf{Klein-Gordon 場の例}：\\
-  Lagrangian
-  \begin{equation*}
-    \mathcal{L} = \frac{1}{2} \partial_\mu \phi\, \partial^\mu \phi - \frac{1}{2} m^2 \phi^2
-  \end{equation*}
-  は Lorentz スカラーであり, 対応する方程式も不変.
-
-  \item \textbf{多成分場の扱い}：\\
-  ベクトル場 (例: $j^\mu$, $A^\mu$) は方向性を持つため, Lorentz 変換には行列表現が必要:
-  \begin{equation*}
-    V^\mu(x) \to \Lambda^\mu_{\ \nu} V^\nu(\Lambda^{-1}x)
-  \end{equation*}
-
-  \item \textbf{Maxwell 方程式の Lorentz 不変性}：\\
-  方程式 $\partial^\nu F_{\mu\nu} = 0$ は, Lagrangian
-  \begin{equation*}
-    \mathcal{L}_\text{Maxwell} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu}
-  \end{equation*}
-  から導かれ, Lorentz 不変である.
-
-  \item \textbf{より一般の Lorentz 変換表現}：\\
-  多成分場 $\phi^a$ に対しては, Lorentz 変換行列 $M_{ab}(\Lambda)$ によって
-  \begin{equation*}
-    \phi^a(x) \to M_{ab}(\Lambda)\, \phi^b(\Lambda^{-1}x)
-  \end{equation*}
-  と変換される.
-
-  \item \textbf{スピノル場の導入準備}：\\
-  スピン1/2粒子の記述には, これらの一般化された表現 (特にディラック表現) を用いる必要がある.
 \end{itemize}
+
 \newpage
 \color{black}
 \section*{3.4 Dirac Matrices and Dirac Fields Bilinears}
+\begin{itemize}
+  \item セクション3.2で$\bar{\psi} \psi$ が Lorentz スカラーであることを確認した.\\
+  \color{blue}
+  $\psi^* \psi$ では Lorentz 不変にならなかったので Dirac 共役 $\bar{\psi} = \psi^{\dagger}\gamma^0$ を定義していた.
+  \color{black}
+  \item また, $\bar{\psi} \gamma^\mu \psi$ は4-ベクトルである (Dirac Lagrangian の構築に使用).
+  \item より一般的に, 任意の $4 \times 4$ 定数行列 $\Gamma$ に対して $\bar{\psi} \Gamma \psi$ の Lorentz 変換性を考える.
+  \item $\Gamma$ は次の16個の反対称な $\gamma$ 行列の組み合わせを基底とする空間に展開できる：
+  \begin{itemize}
+    \item スカラー：$1$ \hfill （1個）
+    \item ベクトル：$\gamma^\mu$ \hfill （4個）
+    \item テンソル：$\gamma^{\mu\nu} = \frac{1}{2}[\gamma^\mu, \gamma^\nu] = -i \sigma^{\mu\nu}$ \hfill （6個）
+    \item 3階テンソル：$\gamma^{\mu\nu\rho} = \gamma^{[\mu} \gamma^\nu \gamma^{\rho]}$ \hfill （4個）
+    \item 4階テンソル：$\gamma^{\mu\nu\rho\sigma} = \gamma^{[\mu} \gamma^\nu \gamma^\rho \gamma^{\sigma]}$ \hfill （1個）
+  \end{itemize}
+  \item 合計で16個の独立な双線形形式が存在する.
+
+  \item これらの行列の Lorentz 変換特性は計算しやすく, 例えば次のように変換される：
+  \begin{align*}
+    \bar{\psi} \gamma^{\mu\nu} \psi &\rightarrow \left( \bar{\psi} \Lambda^{-1}_{\frac{1}{2}} \right) \left( \tfrac{1}{2}[\gamma^\mu, \gamma^\nu] \right) \left( \Lambda_{\frac{1}{2}} \psi \right) \\
+    &= \tfrac{1}{2} \bar{\psi} \left( \Lambda^{-1}_{\frac{1}{2}} \gamma^\mu \Lambda_{\frac{1}{2}} \Lambda^{-1}_{\frac{1}{2}} \gamma^\nu \Lambda_{\frac{1}{2}} - \Lambda^{-1}_{\frac{1}{2}} \gamma^\nu \Lambda_{\frac{1}{2}} \Lambda^{-1}_{\frac{1}{2}} \gamma^\mu \Lambda_{\frac{1}{2}} \right) \psi \\
+    &= \Lambda^\mu_{\ \alpha} \Lambda^\nu_{\ \beta} \bar{\psi} \gamma^{\alpha\beta} \psi
+  \end{align*}
+  \color{blue}
+  式 (3.29) より $\Lambda^{-1}_{\frac{1}{2}} \gamma^\mu \Lambda_{\frac{1}{2}} = \Lambda^\mu_{\ \alpha}\gamma^{\alpha}$ を用いて計算している.
+  \color{black}
+  \item 各双線形形式は, Lorentz 群の下で各ランクに応じた反対称テンソルとして変換する.
+  \item 高階の $\gamma$ 行列 ($\gamma^{\mu\nu\rho}$, $\gamma^{\mu\nu\rho\sigma}$) は, 補助的な $\gamma^5$ を導入することで簡略化できる：
+  \begin{equation*}
+    \gamma^5 \equiv i\gamma^0 \gamma^1 \gamma^2 \gamma^3 = -\frac{i}{4!} \epsilon^{\mu\nu\rho\sigma} \gamma_\mu \gamma_\nu \gamma_\rho \gamma_\sigma \tag{3.68}
+  \end{equation*}
+
+  \item このとき, 次のような関係が成り立つ：
+  \begin{equation*}
+    \gamma^{\mu\nu\rho\sigma} = -i \epsilon^{\mu\nu\rho\sigma} \gamma^5, \quad
+    \gamma^{\mu\nu\rho} = +i \epsilon^{\mu\nu\rho\sigma} \gamma_\sigma \gamma^5
+  \end{equation*}
+
+  \item $\gamma^5$ の主な性質は以下の通り：
+  \begin{align*}
+    (\gamma^5)^\dagger &= \gamma^5 \tag{3.69}\\
+    (\gamma^5)^2 &= 1 \tag{3.70}\\
+    \{ \gamma^5, \gamma^\mu \} &= 0 \tag{3.71}
+  \end{align*}
+
+  \item 特に $\{ \gamma^5, \gamma^\mu \} = 0$ より, $[\gamma^5, S^{\mu\nu}] = 0$ が導かれ,
+        Dirac 表現が可約であることが示される (Schur's 補題により, 異なる固有値を持つ状態が混ざらない).
+
+  \item 我々の基底では, $\gamma^5$ は以下のブロック対角形で表される：
+  \begin{equation*}
+    \gamma^5 =
+    \begin{pmatrix}
+    -1 & 0 \\
+    0 & 1
+  \end{pmatrix} \tag{3.72}
+  \end{equation*}
+
+  \item したがって, $\gamma^5$ の固有値 $-1$（$+1$）を持つスピノールは,
+        左手（右手）成分に対応し, 混ざることなく独立に変換される.
+
+  \item $4 \times 4$ 行列の標準的な分類は次の通り：
+  \begin{itemize}
+    \item $1$：scalar（スカラー）・・・1個
+    \item $\gamma^\mu$：vector（ベクトル）・・・4個
+    \item $\sigma^{\mu\nu} = \frac{1}{2}[\gamma^\mu, \gamma^\nu]$：tensor（テンソル）・・・6個
+    \item $\gamma^\mu \gamma^5$：pseudo-vector（擬ベクトル）・・・4個
+    \item $\gamma^5$：pseudo-scalar（擬スカラー）・・・1個
+    \item 合計：16個.
+  \end{itemize}
+
+  \item 擬ベクトル・擬スカラーとは：
+  \begin{itemize}
+    \item 連続的な Lorentz 変換の下では, それぞれベクトル・スカラーとして変換する.
+    \item ただし, パリティ変換の下で符号が反転する (セクション3.6で詳述予定).
+  \end{itemize}
+
+  \item ベクトル・擬ベクトル双線形形式から以下の2つのカレントを構成できる：
+  \begin{align*}
+    j^\mu(x) &= \bar{\psi}(x) \gamma^\mu \psi(x) \\
+    j^{\mu5}(x) &= \bar{\psi}(x) \gamma^\mu \gamma^5 \psi(x) \tag{3.73}
+  \end{align*} 
+  \item Dirac カレント $j^\mu = \bar{\psi} \gamma^\mu \psi$ の保存は, Dirac 方程式を用いて確認できる：
+  \begin{align*}
+    \partial_\mu j^\mu &= (\partial_\mu \bar{\psi}) \gamma^\mu \psi + \bar{\psi} \gamma^\mu \partial_\mu \psi \\
+    &= (im\bar{\psi}) \psi + \bar{\psi}(-im\psi) = 0 \tag{3.74}
+  \end{align*}
+  よって $\psi(x)$ が Dirac 方程式を満たす限り, $j^\mu$ は常に保存される.
+
+  \item $\psi$ を電磁場と結合した場合, この $j^\mu$ は電流密度として働く.
+
+  \item 同様に $j^{\mu5} = \bar{\psi} \gamma^\mu \gamma^5 \psi$ に対して,
+  \begin{equation*}
+    \partial_\mu j^{\mu5} = 2im \bar{\psi} \gamma^5 \psi \tag{3.75}
+  \end{equation*}
+  $m = 0$ のとき, このカレント (軸ベクトルカレントと呼ばれる) も保存される.
+
+  \item このとき, $j^\mu_L$, $j^\mu_R$ を以下のように定義すると便利である：
+  \begin{equation*}
+    j^\mu_L = \bar{\psi} \gamma^\mu \left( \frac{1 - \gamma^5}{2} \right) \psi, \quad
+    j^\mu_R = \bar{\psi} \gamma^\mu \left( \frac{1 + \gamma^5}{2} \right) \psi \tag{3.76}
+  \end{equation*}
+
+  \item $m = 0$ のとき, これらは左手・右手粒子の電流密度となり, 互いに独立に保存される.
+
+  \item $j^\mu(x)$ および $j^{\mu5}(x)$ は, 以下の2つの変換に対応する Noether カレントである：
+  \begin{equation*}
+    \psi(x) \rightarrow e^{i\alpha} \psi(x), \qquad
+    \psi(x) \rightarrow e^{i\alpha \gamma^5} \psi(x)
+  \end{equation*}
+
+  \item 前者は質量項を含む Dirac Lagrangian の対称性. 後者はカイラル変換であり, Dirac Lagrangian の微分項のみに対称性を持ち, 質量項には対称性を持たない. よって, Noether の定理より, 軸ベクトルカレントの保存は $m = 0$ のときに限られる.
+
+  \item Dirac 場の双線形形式の積には交換関係が成り立ち, Fierz 恒等式と呼ばれる.
+
+  \item 本書では最も簡単な恒等式のみを使用し, 2成分 Weyl スピノールにより記述するのが簡単である (式(3.36) 参照).
+
+  \item 基本的な恒等式 ($2 \times 2$ 行列 $\sigma^\mu$ に対する) は以下(式(3.41) で定義)：
+  \begin{equation*}
+    (\sigma^\mu)_{\alpha\beta} (\sigma_\mu)_{\gamma\delta} = 2 \epsilon_{\alpha\gamma} \epsilon_{\beta\delta} \label{3.77}\tag{3.77}
+  \end{equation*}
+  ここで $\alpha, \beta, \gamma, \delta$ はスピノル添字, $\epsilon$ は反対称記号である. この関係は, $\alpha, \gamma$ が $\psi_L$ の Lorentz 表現に従って変換し, $\beta, \delta$ が $\psi_R$ の別の表現に従って変換することにより, 全体として Lorentz 不変量となることから理解できる. あるいは, \eqref{3.77} の全16成分を明示的に検証することもできる. この恒等式を, Dirac スピノール $u_1, u_2, u_3, u_4$ の右手成分 (つまり下側) に挿入することで, 以下の恒等式が得られる：
+  \begin{align*}
+    (\bar{u}_{1R} \sigma^\mu u_{2R})(\bar{u}_{3R} \sigma_\mu u_{4R}) &=
+    2\epsilon_{\alpha\gamma} \bar{u}_{1R\alpha} \bar{u}_{3R\gamma} \epsilon_{\beta\delta} u_{2R\beta} u_{4R\delta}\\
+    &= -(\bar{u}_{1R} \sigma^\mu u_{4R})(\bar{u}_{3R} \sigma_\mu u_{2R}) \label{3.78}\tag{3.78}
+  \end{align*}
+  \item \eqref{3.78} の非自明な関係は, 双線形形式の積がラベル $2 \leftrightarrow 4$ の交換に対して反対称であり, $1 \leftrightarrow 3$ の交換に対しても反対称であることを示す.
+
+  \item 恒等式 \eqref{3.77} は $\bar{\sigma}^\mu$ に対しても成り立つため, 次のような関係が得られる：
+  \begin{equation*}
+    (\bar{u}_{1L} \bar{\sigma}^\mu u_{2L})(\bar{u}_{3L} \bar{\sigma}_\mu u_{4L}) = -(\bar{u}_{1L} \bar{\sigma}^\mu u_{4L})(\bar{u}_{3L} \bar{\sigma}_\mu u_{2L}) \tag{3.79}
+  \end{equation*}
+
+  \item Fierz 恒等式 \eqref{3.78} を以下の $\sigma^\mu$ と $\bar{\sigma}^\mu$ を結ぶ恒等式と組み合わせると便利：
+  \begin{equation*}
+    \epsilon_{\alpha\beta} (\sigma^\mu)_{\beta\gamma} = (\bar{\sigma}^{\mu T})_{\alpha\beta} \epsilon_{\beta\gamma} \tag{3.80}
+  \end{equation*}
+
+  \item 次の恒等式も用いる：
+  \begin{equation*}
+    \bar{\sigma}^\mu \sigma_\mu = 4 \tag{3.81}
+  \end{equation*}
+
+  \item これらを用いて, 次のような複雑な双線形形式の積を簡単に整理できる：
+  \begin{align*}
+  (\bar{u}_{1L} \bar{\sigma}^\mu \sigma^\nu \bar{\sigma}^\lambda u_{2L})(\bar{u}_{3L} \bar{\sigma}_\mu \sigma_\nu \bar{\sigma}_\lambda u_{4L})&= 2 \epsilon_{\alpha\gamma} \bar{u}_{1L\alpha} \bar{u}_{3L\gamma} \epsilon_{\beta\delta} (\sigma^\nu \bar{\sigma}^\lambda u_{2L})_\beta (\sigma_\nu \bar{\sigma}_\lambda u_{4L})_\delta \\
+  &= 2 \epsilon_{\alpha\gamma} \bar{u}_{1L\alpha} \bar{u}_{3L\gamma} \epsilon_{\beta\delta}u_{2L\beta} (\sigma^\nu \bar{\sigma}^\lambda \sigma_\nu \bar{\sigma}_\lambda u_{4L})_\delta \\
+  &= 2 \cdot (4)^2 \cdot \epsilon_{\alpha\gamma} \bar{u}_{1L\alpha} \bar{u}_{3L\gamma} \epsilon_{\beta\delta} u_{2L\beta} u_{4L\delta} \\
+  &= 16 (\bar{u}_{1L} \bar{\sigma}^\mu u_{2L})(\bar{u}_{3L} \bar{\sigma}_\mu u_{4L}) \tag{3.82}
+  \end{align*}
+
+  \item Fierz 恒等式は, 4成分 Dirac スピノールと $4 \times 4$ Dirac 行列に対しても存在する.
+
+  \item これらの導出にはより体系的なアプローチが必要であり, 後続問題 (Problem 3.6) において一般的手法とその応用例が提示される.
+\end{itemize}
+
+
+
+
 
 
 

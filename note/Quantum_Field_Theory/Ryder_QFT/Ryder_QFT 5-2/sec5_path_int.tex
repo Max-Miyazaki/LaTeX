@@ -26,21 +26,76 @@
 \begin{document}
 \maketitle
 \section*{\textrm{5章　経路積分}}
+\color{blue}
+\section*{5.1 の概要}
+\begin{itemize}
+    \item 通常の量子力学では $q$ と $p$ はハイゼンベルグの交換関係に従う演算子に置き換えられ, ヒルベルト空間での演算子の数学に基づくが, 経路積分では伝搬関数 (プロパゲータ) $K(q_{F}t_{F}; q_{I}t_{I})$ を用いて波動関数の時間発展を記述する.
+    \item ホイヘンスの原理に従い,
+    \begin{equation*}
+        \psi(q_F, t_F) = \int dq_I\, K(q_{F}t_{F}; q_{I}t_{I})\psi(q_I, t_I).
+    \end{equation*}
+    \item このプロパゲータは $q_I$ から $q_F$ へ至る全ての経路を重ね合わせた遷移振幅であり,
+    \begin{equation*}
+        P(q_{F}t_{F}, q_{I}t_{I}) = |K(q_{F}t_{F}; q_{I}t_{I})|^2
+    \end{equation*}
+    によって確率が定まる.
+    \item プロパゲータはヒルベルト空間内の内積として表され,
+    \begin{equation*}
+        \braket{q_{F}t_{F}}{q_{I}t_{I}} = K(q_{F}t_{F}; q_{I}t_{I})
+    \end{equation*}
+    と書ける.
+    \item 時間を細分化してプロパゲータを逐次適用すると, 経路の積分表示を得る：
+    \begin{equation*}
+        \braket{q_{F}t_{F}}{q_{I}t_{I}} = \lim_{n \rightarrow \infty} \int \prod_{j=1}^{n} dq_{j} \prod_{j=0}^{n}\frac{dp_{j}}{h}\exp\left\{ \frac{i}{\hbar}\sum_{j=0}^{n} [p_{j}(q_{j+1} - q_{j}) - \tau H(p_{j}, \bar{q}_{j})]\right\}
+    \end{equation*}
+    \item これは連続極限で汎関数積分により, 次のようになる:
+    \begin{equation*}
+        \braket{q_{F}t_{F}}{q_{I}t_{I}} = \int \frac{\mathcal{D}q\mathcal{D}p}{h}\exp\left(\frac{i}{\hbar}\int_{t_{I}}^{t_{F}} dt [p\dot{q} - H(p, q)] \right)
+    \end{equation*}
+    \item $\displaystyle H=\frac{p^2}{2m}+V(q)$ のとき, $p$ の積分が可能で, ラグランジアン形式を得る:
+    \begin{equation*}
+        \braket{q_{F}t_{F}}{q_{I}t_{I}} = N\int \mathcal{D}q \exp\left( \frac{i}{\hbar}\int_{t_I}^{t_F} dt\, L(q, \dot{q}) \right)
+    \end{equation*}
+    \item これはファインマンの経路積分定式化である.
+    \item ただし, $L=\frac{1}{2}\dot{q}^2f(q)$ のような速度依存のポテンシャルを含む場合,
+    \begin{equation*}
+        H = \frac{p^2}{2f(q)}
+    \end{equation*}
+    となり標準形ではないため, $p$ 積分後に以下のような有効作用が現れる：
+    \begin{equation*}
+        S_{\mathrm{eff}} = \int dt \left[ L(q, \dot{q}) - \frac{i}{2}\delta(0)\ln f(q) \right]
+    \end{equation*}
+    \item このような有効作用は通常の作用 $S=\int L dt$ とは異なる.
+    \item 非可換ゲージ理論など, 場の理論においてもこのような注意が必要であり, 経路積分の厳密定式化が困難な場合がある.
+\end{itemize}
+
+\section*{物理的に重要な議論点}
+\begin{itemize}
+    \item 経路積分は量子状態の時間発展を全経路の重ね合わせとして捉える.
+    \item 二重スリットの干渉から, 量子論的粒子は単一経路を取ったとは言えないことが明示される.
+    \item フーリエ変換表現における $\hbar$ の導入は, 量子スケールにおける演算子と古典変数の関係を規定する.
+    \item 経路積分では演算子 (q-number) ではなく c-number として $q$ と $p$ を扱う.
+    \item 演算子論の代わりに古典的変数の積分を用いることで散乱理論など非摂動的解析に有利.
+    \item 標準形ハミルトニアン以外では, 量子補正を含む有効作用が現れる.
+    \item 非可換ゲージ理論などの場の理論では, 経路積分の形式をそのまま適用できない場合があり, 発見的・近似的な手法が必要となる.
+\end{itemize}
+\color{black}
+
+
 \subsection*{\textrm{5.1 量子力学の経路積分}}
 通常の量子力学では $q$ と $p$ はハイゼンベルグの交換関係に従う演算子に置き換えられる.\\
-ここで求められる数学はヒルベルト空間における演算子の数学である. 一方, 量子力学で経路積分の定式化は伝搬関数（プロパゲータ） $K(q_{f}t_{f}; q_{i}t_{i})$ の表記法に直接基づいている. 時間 $t_{i}$ における波動関数 $\psi(q_i, t_i)$ が与えられると, ホイヘンスの原理から大きな時間 $t_f$ において対応する波動関数を与える:
+ここで求められる数学はヒルベルト空間における演算子の数学である. 一方, 量子力学で経路積分の定式化は伝搬関数 (プロパゲータ) $K(q_{F}t_{F}; q_{I}t_{I})$ の表記法に直接基づいている. 時間 $t_{I}$ における波動関数 $\psi(q_I, t_I)$ が与えられると, ホイヘンスの原理から大きな時間 $t_F$ において対応する波動関数を与える:
 \begin{equation*}
-    \psi(q_f, t_f) = \int K(q_{f}t_{f}; q_{i}t_{i})\psi(q_i, t_i)dq_i. \tag{5.1}
+    \psi(q_F, t_F) = \int dq_I\, K(q_{F}t_{F}; q_{I}t_{I})\psi(q_I, t_I). \tag{5.1}
 \end{equation*}
-\textcolor{blue}{$K(q_{f}t_{f}; q_{i}t_{i})$ は $q_{f}$ に向かう全ての寄与, $\psi(q_{f}t_{f})$ と $\psi(q_{i}t_{i})$ を繋ぐ関係.}\\
+\textcolor{blue}{$K(q_{F}t_{F}; q_{I}t_{I})$ は $q_{F}$ に向かう全ての寄与, $\psi(q_{F}t_{F})$ と $\psi(q_{I}t_{I})$ を繋ぐ関係.}\\
 簡単のため, １次元で考えていく.\\
-この式は一般的なもので $f$ は因果関係を表している. 通常の量子力学の解釈によれば $\psi(q_f, t_f)$ は時間 $t_f$ に粒子が点 $q_f$ にある確率の振幅であり, $K(q_{f}t_{f}; q_{i}t_{i})$ は時間 $t_i$ の $q_i$ から $t_f$ の $q_f$ への遷移確率の振幅である.
-時刻 $t_f$ に $q_f$ で観測される確率は,
+この式は一般的なもので, 単に因果関係を表している. 通常の量子力学の解釈によれば $\psi(q_F, t_F)$ は時間 $t_F$ に粒子が点 $q_F$ にある確率の振幅であり, $K(q_{F}t_{F}; q_{I}t_{I})$ は時間 $t_I$ の $q_I$ から $t_F$ の $q_F$ への遷移確率の振幅である.
+時刻 $t_F$ に $q_F$ で観測される確率は,
 \begin{equation*}
-    P(q_{f}t_{f}, q_{i}t_{i}) = \lvert K(q_{f}t_{f}; q_{i}t_{i}) \rvert^2.
+    P(q_{F}t_{F}, q_{I}t_{I}) = \lvert K(q_{F}t_{F}; q_{I}t_{I}) \rvert^2.
 \end{equation*}
-これは学生がよく知っている量子力学の基本原理である.\par
-図5.1が示すように, $t_i$ と$t_f$ の間の時間間隔を2つに分割し, $t$ を中間時間, $q$ を空間内の中間点とする.
+図5.1が示すように, $t_I$ と$t_F$ の間の時間間隔を2つに分割し, $t$ を中間時間, $q$ を空間内の中間点とする.
 
 \begin{figure}[H]
     \centering
@@ -49,13 +104,13 @@
 
 (5.1) を繰り返し適応すると,
 \begin{equation*}
-    \psi(q_f, t_f) = \int\int K(q_{f}t_{f}; qt)K(qt; q_{i}t_{i})\psi(q_i, t_i)dq_{i}dq,
+    \psi(q_F, t_F) = \int dq_I\, \int dq\, K(q_{F}t_{F}; qt)K(qt; q_{I}t_{I})\psi(q_I, t_I),
 \end{equation*}
 が得られ, そこから
 \begin{equation*}
-    K(q_{f}t_{f}; q_{i}t_{i}) = \int K(q_{f}t_{f}; qt)K(qt; q_{i}t_{i}) dq \tag{5.2}
+    K(q_{F}t_{F}; q_{I}t_{I}) = \int dq\, K(q_{F}t_{F}; qt)K(qt; q_{I}t_{I}) \tag{5.2}
 \end{equation*}
-が導かれるので, $(q_i, t_i)$ から $(q_f, t_f)$ への遷移は, $(q_i, t_i)$ から利用可能なすべての中間点 $q$ への遷移に続いて, $(q, t)$ から $(q_f, t_f)$ への遷移が行われた結果とみなすことができる.\par
+が導かれるので, $(q_I, t_I)$ から $(q_F, t_F)$ への遷移は, $(q_I, t_I)$ から利用可能なすべての中間点 $q$ への遷移に続いて, $(q, t)$ から $(q_F, t_F)$ への遷移が行われた結果とみなすことができる.\par
 図5.2に示す2重スリット実験を考えてみる. 
 
 \begin{figure}[H]
@@ -69,15 +124,16 @@ $K(2A; 1)$ は電子が光源 1 からホール 2A を通過する確率振幅�
 \end{equation*}
 であり, スクリーン3の強度パターンは確率 $P(3; 1) = |K(3; 1)|^2$ で与えられるので, 量子論に特徴的な干渉項を含むことは明白. つまり電子はA, Bのホールどちらかを通過したとは言えないことに注意.\\
 この全ての可能な経路という概念は, 経路積分の定式化において重要となる.\par
-プロパゲータ $K$ が $\braket{q_{f}t_{f}}{q_{i}t_{i}}$ であることを示す. 波動関数 $\psi(q, t)$ は\\
+プロパゲータ $K$ が $\braket{q_{F}t_{F}}{q_{I}t_{I}}$ であることを示す. 波動関数 $\psi(q, t)$ は\\
 \begin{equation*}
     \psi(q, t) = \braket{q}{\psi t}_{S}
 \end{equation*}
-であり, Schr\"{o}dinger描像の状態ベクトル $\ket{\psi t}_{S}$ は Hesenberg 描像の状態ベクトル $\ket{\psi}_{H}$ と以下で関係する.
+であり, Schr\"{o}dinger描像の状態ベクトル $\ket{\psi t}_{S}$ は Heisenberg 描像の状態ベクトル $\ket{\psi}_{H}$ と以下で関係する.
 \begin{equation*}
     \ket{\psi t}_{S} = e^{-iHt/\hbar}\ket{\psi}_{H}
 \end{equation*}
-明らかに「移動方向」と呼べるベクトルを定義する. \textcolor{blue}{$q$ に時間依存性を移す操作なので 'moving flame'}
+明らかに「移動方向」と呼べるベクトルを定義する.\\
+\textcolor{blue}{$q$ に時間依存性を移す操作なので 'moving flame'}
 \begin{equation*}
     \ket{qt} = e^{iHt/\hbar}\ket{q} \tag{5.3}
 \end{equation*}
@@ -85,20 +141,20 @@ $K(2A; 1)$ は電子が光源 1 からホール 2A を通過する確率振幅�
 \begin{equation*}
     \psi(q, t) = \braket{qt}{\psi}_{H} \tag{5.4}
 \end{equation*}
-となる. 状態ベクトルの完全性 $\displaystyle \left( \int \ket{q_i t_i}\bra{q_i t_i}dq_i = I \right) $ より
+となる. 状態ベクトルの完全性 $\displaystyle \left( \int \ket{q_I t_I}\bra{q_I t_I}dq_I = E_3 \right) $ より
 \begin{equation*}
-    \braket{q_{f}t_{f}}{\psi} = \int \braket{q_{f}t_{f}}{q_{i}t_{i}}\braket{q_{i}t_{i}}{\psi}dq_{i}
+    \braket{q_{F}t_{F}}{\psi} = \int \braket{q_{F}t_{F}}{q_{I}t_{I}}\braket{q_{I}t_{I}}{\psi}dq_{I}
 \end{equation*}
 と書くことができて, 式(5.4)を用いて次のように書くことができる.
 \begin{equation*}
-    \psi(q_{f}, t_{f}) = \int \braket{q_{f}t_{f}}{q_{i}t_{i}}\psi(q_{i}, t_{i})dq_{i}.
+    \psi(q_{F}, t_{F}) = \int \braket{q_{F}t_{F}}{q_{I}t_{I}}\psi(q_{I}, t_{I})dq_{I}.
 \end{equation*}
 式(5.1)と比較すると主張通り次の関係が得られる.
 \begin{equation*}
-    \braket{q_{f}t_{f}}{q_{i}t_{i}} = K(q_{f}t_{f}; q_{i}t_{i}) \tag{5.5}
+    \braket{q_{F}t_{F}}{q_{I}t_{I}} = K(q_{F}t_{F}; q_{I}t_{I}) \tag{5.5}
 \end{equation*}
-プロパゲータ $K$ は系の量子力学を要約する. 量子力学の通常の定式化では, 初期の波動関数が与えられれば時間依存のSchr\"{o}dinger方程式を解くことによって最終的な波動関数を求めることができる. しかし, この定式化ではプロパゲータが直接解を与える. ここで考えるのは, $\braket{q_{f}t_{f}}{q_{i}t_{i}}$ を経路積分として表現することである.\par
-図5.3のように $t_{i}$ と $t_{f}$ の間との時間間隔を (n + 1) 等分したものを $\tau$ とする.
+プロパゲータ $K$ は系の量子力学を要約する. 量子力学の通常の定式化では, 初期の波動関数が与えられれば時間依存のSchr\"{o}dinger方程式を解くことによって最終的な波動関数を求めることができる. しかし, この定式化ではプロパゲータが直接解を与える. ここで考えるのは, $\braket{q_{F}t_{F}}{q_{I}t_{I}}$ を経路積分として表現することである.\par
+図5.3のように $t_{I}$ と $t_{F}$ の間との時間間隔を (n + 1) 等分したものを $\tau$ とする.
 
 \begin{figure}[H]
     \centering
@@ -108,7 +164,7 @@ $K(2A; 1)$ は電子が光源 1 からホール 2A を通過する確率振幅�
 式(5.2)は
 
 \begin{equation*}
-    \braket{q_{f}t_{f}}{q_{i}t_{i}} = \int \cdots \int dq_{1}dq_{2} \cdots dq_{n} \braket{q_{f}t_{f}}{q_{n}t_{n}}\braket{q_{n}t_{n}}{q_{n-1}t_{n-1}} \cdots \braket{q_{1}t_{1}}{q_{i}t_{i}} \tag{5.6}
+    \braket{q_{F}t_{F}}{q_{I}t_{I}} = \int \cdots \int dq_{1}dq_{2} \cdots dq_{n} \braket{q_{F}t_{F}}{q_{n}t_{n}}\braket{q_{n}t_{n}}{q_{n-1}t_{n-1}} \cdots \braket{q_{1}t_{1}}{q_{I}t_{I}} \tag{5.6}
 \end{equation*}
 
 となり, 積分は全ての可能な「軌跡」に対して行われる. 各区分 $(q_{j}t_{j}; q_{j-1}t_{j-1})$ はより小さな区分に分割される可能性があるため, 通常の意味での軌跡ではなく, 導関数は存在しない. 経路とはマルコフ連鎖である.\\
@@ -123,7 +179,8 @@ $K(2A; 1)$ は電子が光源 1 からホール 2A を通過する確率振幅�
 \end{align*}
 \color{blue}
 一般的なデルタ関数の積分表現は $\displaystyle \delta(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty}dp e^{ipx}$. この式は古典的な物理系において単位系に特別な注意を払わずに使うことができるが, 量子系では位置 $q$ と運動量 $p$ が正準共役変数であり, これらはプランク定数 $\hbar$ でスケールされる. 交換関係 $[\hat{q}, \hat{p}] = i\hbar$ は特に運動量が $\hbar$ に依存してスケールされていることを示唆している. このスケールの違いから運動量と位置のフーリエ変換を扱うとき $\hbar$ が重要な役割を果たす.\\
-また,運動量空間の状態 $\ket{p}$ と位置空間の状態 $\ket{q}$ のフーリエ変換は $\displaystyle \braket{q}{p} = \frac{1}{2\pi\hbar}e^{\frac{i}{\hbar}pq}$. 運動量の次元は $[p] = [\textrm{位置}]^{-1} \times [\hbar]$ なので, 指数関数の引数を無次元にするために $\hbar$ を導入する必要がある.\\
+また,運動量空間の状態 $\ket{p}$ と位置空間の状態 $\ket{q}$ のフーリエ変換は $\displaystyle \braket{q}{p} = \frac{1}{2\pi\hbar}e^{\frac{i}{\hbar}pq}$. \\
+運動量の次元は, 不確定性原理 $\Delta x\,\Delta p \geq \dfrac{\hbar}{2}$ の次元を見れば $[p] = [\textrm{位置}]^{-1} \times [\hbar]$ なので, 指数関数の引数を無次元にするために $\hbar$ を導入する必要がある.\\
 デルタ関数の積分表現では
 \begin{equation*}
     \delta(q_{j+1} - q_{j}) = \frac{1}{2\pi\hbar}\int dp \exp\left[ \frac{i}{\hbar}p(q_{j+1} - q_{j}) \right]
@@ -183,28 +240,28 @@ $\displaystyle V\left( \frac{q_{j+1} + q_j}{2} \right)$としているのは $\b
 
 これで1つの可能な経路の区間上のプロパゲータが与えられる. これを式(5.6)に代入すると連続体極限($p_{j}$ は $q_{j}$ と $q_{j}$ と $q_{j+1}$ の間の経路に沿った運動量)では $q_{0} = q_{i}, q_{n+1} = q_{f}$ で次のようになる.
 \begin{equation*}
-    \braket{q_{f}t_{f}}{q_{i}t_{i}} = \lim_{n \rightarrow \infty} \int \prod_{j=1}^{n} dq_{j} \prod_{j=0}^{n}\frac{dp_{j}}{h}\exp\left\{ \frac{i}{\hbar}\sum_{j=0}^{n} [p_{j}(q_{j+1} - q_{j}) - \tau H(p_{j}, \bar{q}_{j})]\right\} \tag{5.12}
+    \braket{q_{F}t_{F}}{q_{I}t_{I}} = \lim_{n \rightarrow \infty} \int \prod_{j=1}^{n} dq_{j} \prod_{j=0}^{n}\frac{dp_{j}}{h}\exp\left\{ \frac{i}{\hbar}\sum_{j=0}^{n} [p_{j}(q_{j+1} - q_{j}) - \tau H(p_{j}, \bar{q}_{j})]\right\} \tag{5.12}
 \end{equation*}
-これは$q(t_i) = q_{i}, q(t_{f}) = q_{f}$ で
+これは$q(t_I) = q_{I}, q(t_{F}) = q_{F}$ で
 \begin{equation*}
-    \braket{q_{f}t_{f}}{q_{i}t_{i}} = \int \frac{\mathcal{D}q\mathcal{D}p}{h}\exp\frac{i}{\hbar}\left[ \int_{t_{i}}^{t_{f}} dt [p\dot{q} - H(p, q)] \right] \tag{5.13}
+    \braket{q_{F}t_{F}}{q_{I}t_{I}} = \int \frac{\mathcal{D}q\mathcal{D}p}{h}\exp\frac{i}{\hbar}\left[ \int_{t_{I}}^{t_{F}} dt [p\dot{q} - H(p, q)] \right] \tag{5.13}
 \end{equation*}
-という記号で書くことができる. 連続極限では $q$ は $t$ の関数になり\textcolor{blue}{($n \to \infty$ で $\tau \to dt$, 離散状態 $\ket{q}$ が連続 $q(t)$ になる)}, 積分は「汎関数積分」, つまり全ての関数にわたる積分で無次元. 式(5.13)は位相空間における $(q_{i}, t_{i})$ から $(q_{f}, t_{f})$ への遷移振幅に対する経路積分の表現である\color{blue}($\mathcal{D}q\mathcal{D}p$がその積分測度を表している)\color{black}. 各関数 $q(t)$ と $p(t)$ は位相空間の経路を定義する. 前述の通り量子力学に対する一般的なアプローチはSchr\"{o}dinger方程式 $i\hbar\dfrac{d\ket{\psi}}{dt} = \hat{H}\ket{\psi}$ を境界条件に従って解くこと. 経路積分の形式においては遷移振幅の明確な表現を持ち, これは散乱問題に非常に適している. 積分における $p$ と $q$ は古典的な量 (c-number) であり, 演算子 (q-number) ではない. しかし, 無次元積分が数学的定義可能か, つまり収束するかどうか自明でない.\\
+という記号で書くことができる. 連続極限では $q$ は $t$ の関数になり\textcolor{blue}{($n \to \infty$ で $\tau \to dt$, 離散状態 $\ket{q}$ が連続 $q(t)$ になる)}, 積分は「汎関数積分」つまり, 全ての関数にわたる積分で無次元. 式(5.13)は位相空間における $(q_{I}, t_{I})$ から $(q_{F}, t_{F})$ への遷移振幅に対する経路積分の表現である\color{blue}($\mathcal{D}q\mathcal{D}p$がその積分測度を表している)\color{black}. 各関数 $q(t)$ と $p(t)$ は位相空間の経路を定義する. 前述の通り量子力学に対する一般的なアプローチはSchr\"{o}dinger方程式 $i\hbar\dfrac{d\ket{\psi}}{dt} = \hat{H}\ket{\psi}$ を境界条件に従って解くこと. 経路積分の形式においては遷移振幅の明確な表現を持ち, これは散乱問題に非常に適している. 積分における $p$ と $q$ は古典的な量 (c-number) であり, 演算子 (q-number) ではない. しかし, 無次元積分が数学的定義可能か, つまり収束するかどうか自明でない.\\
 言い換えればそれらが存在するかどうかだが, ここでは存在すると仮定する.\\
 汎関数積分 $\rightarrow$ Gel'fand $\&$ Yaglom (1960), Kac (1959), Keller $\&$ McLaughlin (1975), Gudder (1979) 参照. \par
 遷移振幅には別の形式があり, $H$ が式(5.8)の形を持つ場合に適応される. その場合, $p$-積分を行え,\\
 式(5.12)は次のようになる.
 \begin{equation*}
-    \braket{q_{f}t_{f}}{q_{i}t_{i}} = \lim_{n \rightarrow \infty} \int \prod_{1}^{n}dq_{j}\prod_{0}^{n}\frac{dp_{j}}{h}\exp\left\{ \frac{i}{\hbar}\sum_{0}^{n}\left[ p_{j}(q_{j+1} - q_{j}) - \frac{p^{2}_{j}}{2m}\tau - V(\bar{q}_{j})\tau \right] \right\}
+    \braket{q_{F}t_{F}}{q_{I}t_{I}} = \lim_{n \rightarrow \infty} \int \prod_{1}^{n}dq_{j}\prod_{0}^{n}\frac{dp_{j}}{h}\exp\left\{ \frac{i}{\hbar}\sum_{0}^{n}\left[ p_{j}(q_{j+1} - q_{j}) - \frac{p^{2}_{j}}{2m}\tau - V(\bar{q}_{j})\tau \right] \right\}
 \end{equation*}
 $p_{j}$ 積分に
 関する限り, これは式(5A.3)と同じ形式であるため(Appendix参照),
 \begin{equation*}
-    \braket{q_{f}t_{f}}{q_{i}t_{i}} = \lim_{n \rightarrow \infty} \left( \frac{m}{iht} \right)^{(n+1)/2} \int \prod_{1}^{n}dq_{j}\exp\left\{ \frac{i\tau}{\hbar}\sum_{0}^{n}\left[ \frac{m}{2} \left(\frac{q_{j+1} - q_{j}}{\tau}\right)^2 -V \right] \right\}\tag{5.14}
+    \braket{q_{F}t_{F}}{q_{I}t_{I}} = \lim_{n \rightarrow \infty} \left( \frac{m}{iht} \right)^{(n+1)/2} \int \prod_{1}^{n}dq_{j}\exp\left\{ \frac{i\tau}{\hbar}\sum_{0}^{n}\left[ \frac{m}{2} \left(\frac{q_{j+1} - q_{j}}{\tau}\right)^2 -V \right] \right\}\tag{5.14}
 \end{equation*}
 となるので, 連続体極限では
 \begin{equation*}
-    \braket{q_{f}t_{f}}{q_{i}t_{i}} = N\int \mathcal{D}q \exp\left[ \frac{i}{\hbar}\int_{t_i}^{t_f} L(q, \dot{q})dt \right] \tag{5.15}
+    \braket{q_{F}t_{F}}{q_{I}t_{I}} = N\int \mathcal{D}q \exp\left[ \frac{i}{\hbar}\int_{t_I}^{t_F} L(q, \dot{q})dt \right] \tag{5.15}
 \end{equation*}
 となり, $L = T - V$ は古典的なラグランジアンとなる. $n \rightarrow \infty$ では $N$ は無限になるが, これは問題ではない.\\
 \color{blue}
@@ -237,9 +294,9 @@ $N$ が無限大でも後で規格化して消すことができるという意�
 \subsection*{\textrm{5.2 摂動論と$S$行列}}
 本節では経路積分法が散乱過程の計算にどのように使われるのかを示す. 5.3節でラザフォード散乱を考察するが,本ゼミでは5.3節の議論は省略する. 散乱はポテンシャル $V(x)$を介して相互作用する一つの粒子の散乱で, 非相対論的に説明される (この節では座標 $q$ から $x$ への表記変換を行う). 遷移振幅の式は正確に計算できないので, 摂動論を用いる. これはポテンシャル $V(x, t)$ が小さい場合, 厳密に言えば $V(x, t)$ の時間積分が $\hbar$ に比べて小さい場合に有効で次のように書ける.
 \begin{equation*}
-    \exp\left[ \frac{-i}{\hbar} \int_{t_i}^{t_f} V(x, t)dt \right] = 1 - \frac{i}{\hbar} \int_{t_i}^{t_f} V(x, t)dt - \frac{1}{2!\hbar^2}\left[ \int_{t_i}^{t_f} V(x, t)dt \right]^2 + \cdots \tag{5.16}
+    \exp\left[ \frac{-i}{\hbar} \int_{t_I}^{t_F} V(x, t)dt \right] = 1 - \frac{i}{\hbar} \int_{t_I}^{t_F} V(x, t)dt - \frac{1}{2!\hbar^2}\left[ \int_{t_I}^{t_F} V(x, t)dt \right]^2 + \cdots \tag{5.16}
 \end{equation*} 
-これは摂動展開である. プロパゲータ $K(x_{f}t_{f}; x_{i}t_{i})$ の式(5.15)に代入すると (式(5.5)参照), 級数展開
+これは摂動展開である. プロパゲータ $K(x_{F}t_{F}; x_{I}t_{I})$ の式(5.15)に代入すると (式(5.5)参照), 級数展開
 \begin{equation*}
     K = K_0 + K_1 + K_2 + \cdots \tag{5.17}
 \end{equation*}
@@ -258,11 +315,11 @@ $N$ が無限大でも後で規格化して消すことができるという意�
 \end{equation*}
 と知られている. したがって, $(n + 1)\tau = t_{f} - t_{i}$ とおくと自由粒子のプロパゲータは次のようになる.
 \begin{equation*}
-    K_{0}(x_{f}t_{f}; x_{i}t_{i}) = \left( \frac{m}{ih(t_{f} - t_{i})} \right)^{1/2}\exp\left[ \frac{im(x_{f} - x_{i})^2 }{2\hbar(t_{f} - t_{i})} \right]\hspace{0.5cm} (t_{f} > t_i) \tag{5.18}
+    K_{0}(x_{F}t_{F}; x_{I}t_{I}) = \left( \frac{m}{ih(t_{F} - t_{I})} \right)^{1/2}\exp\left[ \frac{im(x_{F} - x_{I})^2 }{2\hbar(t_{F} - t_{I})} \right]\hspace{0.5cm} (t_{F} > t_I) \tag{5.18}
 \end{equation*}
-$t_{f} > t_i$ という条件はプロパゲータにとって非常に重要で, もし $t_{f} < t_i$ の場合, 因果関係によりこの条件は消滅するため次のように書ける. \textcolor{blue}{解けた！！！}
+$t_{F} > t_{I}$ という条件はプロパゲータにとって非常に重要で, もし $t_{F} < t_{I}$ の場合, 因果関係によりこの条件は消滅するため次のように書ける. \textcolor{blue}{解けた！！！}
 \begin{equation*}
-    K_{0}(x_{f}t_{f}; x_{i}t_{i}) = \Theta(t_{f} - t_{i})\left( \frac{m}{ih(t_{f} - t_{i})} \right)^{1/2} \exp\left[ \frac{im(x_{f} - x_{i})^2}{2\hbar(t_{f} - t_{i})} \right] \tag{5.19}
+    K_{0}(x_{F}t_{F}; x_{I}t_{I}) = \Theta(t_{F} - t_{I})\left( \frac{m}{ih(t_{F} - t_{I})} \right)^{1/2} \exp\left[ \frac{im(x_{F} - x_{I})^2}{2\hbar(t_{F} - t_{I})} \right] \tag{5.19}
 \end{equation*}
 $K_{1}$ を計算してみよう. 式(5.14)と式(5.16)から
 \begin{equation*}

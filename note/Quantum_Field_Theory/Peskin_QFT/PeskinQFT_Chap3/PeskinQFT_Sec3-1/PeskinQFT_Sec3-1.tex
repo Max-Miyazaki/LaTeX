@@ -73,9 +73,6 @@
   \item \textbf{Lorentz 不変性の定義}：\\
   微分方程式 $\mathcal{D}\phi = 0$ が Lorentz 不変とは, $\phi(x)$ がこの方程式を満たすならば,Lorentz変換後の場 $\phi'(\Lambda x)$ も同じ方程式を満たすこと.
 
-  \item \textbf{アクティブ変換の立場を採用}：\\
-  座標系は変えずに, 物理系 (場) を Lorentz 変換する「アクティブ」な視点で議論.
-
   \item \textbf{ Lagrangian による不変性の保証}：\\
   方程式が Lorentz スカラーな Lagrangian から導かれるなら, Lorentz 不変性は自動的に満たされる.
 
@@ -108,7 +105,7 @@
   \item \textbf{より一般の Lorentz 変換表現}：\\
   多成分場 $\phi^a$ に対しては, Lorentz 変換行列 $M_{ab}(\Lambda)$ によって
   \begin{equation*}
-    \phi^a(x) \to M_{ab}(\Lambda)\, \phi^b(\Lambda^{-1}x)
+    \Phi_a(x) \to M_{ab}(\Lambda)\, \Phi_b(\Lambda^{-1}x)
   \end{equation*}
   と変換される.
 
@@ -127,16 +124,6 @@ $\phi$ が場 (あるいは場の集合体) であり, $\mathcal{D}$ が何ら�
 
     \item 物理的にすべての粒子・場を一様に回転またはブーストしても, もとの方程式 $\mathcal{D}\phi = 0$ は変わらず成り立つ.
 \end{itemize}
-この議論では「アクティブな」変換 (物理系自体を変化させる) という立場を採用する.\\
-\textcolor{blue}{つまり, 物理的な場の構成そのものを変換して, 同じ座標点 $x$ における場の新しい値 $\phi'(x)$ を考えるということ. 逆に物理系を固定したまま座標系を変換するパッシブ変換 (passive transformation) もあるが, ここではアクティブ変換を考えるのが自然である.}\\
-\textcolor{blue}{理由：場の理論では作用や Lagrangian を通して, その形が不変であるかどうかを調べるのが基本方針である. このとき,}
-\color{blue}
-  \begin{itemize}
-    \item 作用の変分 $\delta S[\phi] = 0$ は, $\phi$ を動かす (アクティブ変換をする) ことで変化を調べる.
-    \item Lorentz 変換に対して, 場そのものがどう変化するかを明示的にするため.
-  \end{itemize}
-\color{black}
-
 例として, Klein-Gordon理論を考える. 任意の Lorentz 変換は
 \begin{equation*}
 x^\mu \to x'^\mu = \Lambda^\mu_{\ \nu} x^\nu \tag{3.1}
@@ -146,40 +133,103 @@ x^\mu \to x'^\mu = \Lambda^\mu_{\ \nu} x^\nu \tag{3.1}
 \phi(x) \to \phi'(x) = \phi(\Lambda^{-1} x) \label{3.2}\tag{3.2}
 \end{equation*}
 \color{blue}
-\eqref{3.2} はアクティブ変換の立場での変換法則で,
-\begin{itemize}
-  \item $\phi'(x)$ は変換後の場 (ブーストや回転後の物理状態).
-  \item それは元の場 $\phi(x)$ を $\Lambda^{-1}$ で変換したものである.
-\end{itemize}
-これは「変換された物理量の新しい姿が, 座標 $x$ においてどう見えるか」を表しており, 場そのものを変化させているという意味でアクティブ変換である.\\
-もしパッシブ変換の立場での変換法則を考えると,
+変換前の場の配位を $\phi(x)$, 変換後の場の配位を $\phi'(x)$ とする. 変換後の場の配位の $x'$ における値は変換前の場の配位の $x$ における値なので,
 \begin{equation*}
-\phi'(x') = \phi(x)
+  \phi'(x') = \phi(x). \tag{3-1.a1}
 \end{equation*}
-このように, 場は変化せず, 座標 $x \to x' = \Lambda x$ と観測者が変わるだけとなる.\\
+つまり,
+\begin{equation*}
+  \phi'(\Lambda x) = \phi(x). \tag{3-1.a2}
+\end{equation*}
+よって, $\Lambda x$ を新たに $y$ とおくと,
+\begin{equation*}
+  \phi'(y) = \phi(\Lambda^{-1}y). \tag{3-1.a3}
+\end{equation*}
+
+
+
+
 
 \color{black}
-この変換が Klein-Gordon の Lagrangian
+
+この変換が Klein-Gordon ラグランジアンの形を保つことを確認する.
 \begin{equation*}
-\mathcal{L} = \frac{1}{2} \partial_\mu \phi\, \partial^\mu \phi - \frac{1}{2} m^2 \phi^2
+  \mathcal{L} = \frac{1}{2}(\partial_\mu \phi(x))^2 + \frac{1}{2}m^2\phi(x)^2
 \end{equation*}
-を不変に保つことは容易に確かめられ, 結果として運動方程式も Lorentz 不変となる.
+式 \eqref{3.2} により, 質量項 $\frac{1}{2} m^2 \phi^2(x)$ は単に点 $\Lambda^{-1}x$ に移るだけである. $\partial_\mu \phi(x)$ の変換は
+\begin{equation*}
+\partial_\mu \phi(x) \rightarrow \partial{\textcolor{blue}{'}}_\mu \left( \phi(\Lambda^{-1}x) \right) = (\Lambda^{-1})^\nu_{\ \mu} (\partial_\nu \phi)(\Lambda^{-1}x). \label{3.3}\tag{3.3}
+\end{equation*}
 
 \color{blue}
-実際に証明する.
-
-\vskip\baselineskip
+\begin{proof}
+\eqref{3.3} の導出：
+\begin{equation*}
+  x'^\rho = \Lambda^\rho_{\ \nu} x^\nu  \to  x^{\nu} = {(\Lambda^{-1})^{\nu}}_{\rho} x'^{\rho} \tag{3-1.b1}
+\end{equation*}
+ここで, $\partial'_{\mu}$ を合成関数の微分として考える：
+\begin{align*}
+  \frac{\partial}{\partial x'^{\mu}} \phi(\Lambda^{-1}x) &= \frac{\partial}{\partial x'^{\mu}} \phi(\Lambda^{-1}x) \tag{3-1.b2} \\
+  &= \frac{\partial x^{\nu}}{\partial x'^{\mu}} \frac{\partial}{\partial x^{\nu}} \phi(\Lambda^{-1}x) \tag{3-1.b3} \\
+  &= {(\Lambda^{-1})^{\nu}}_{\rho} \frac{\partial x'^{\rho}}{\partial x'^{\mu}} \frac{\partial}{\partial x^{\nu}} \phi(\Lambda^{-1}x) \tag{3-1.b4} \\
+  &= {(\Lambda^{-1})^{\nu}}_{\rho} \delta^{\rho}_{\mu} \frac{\partial}{\partial x^{\nu}} \phi(\Lambda^{-1}x) \tag{3-1.b5} \\
+  &= {(\Lambda^{-1})^{\nu}}_{\mu} \frac{\partial}{\partial x^{\nu}} \phi(\Lambda^{-1}x) \tag{3-1.b6} \\
+  &= {(\Lambda^{-1})^{\nu}}_{\mu} \partial_\nu \phi(\Lambda^{-1}x) \tag{3-1.b7}
+\end{align*}
+\end{proof}
 \color{black}
-この変換法則 \eqref{3.2} は, 1成分の場に対して可能な最も単純なものであるが, 多成分場に対してはより複雑な変換法則が必要である. たとえば, 4元電流密度 $j^\mu(x)$ やベクトルポテンシャル $A^\mu(x)$ は, 単に空間的位置だけでなく「向き」も持っているので, 回転やブーストの際にその向きも変換されねばならない.
+計量テンソル $g^{\mu\nu}$ は Lorentz 不変なので, $\Lambda^{-1}$ の行列は以下の恒等式を満たす：
+\begin{equation*}
+(\Lambda^{-1})^\rho_{\ \mu} (\Lambda^{-1})^\sigma_{\ \nu} g^{\mu\nu} = g^{\rho\sigma}. \label{3.4}\tag{3.4}
+\end{equation*}
+この関係を用いて, Klein-Gordon ラグランジアンの運動項の変換を計算すると：
+\begin{align*}
+(\partial_\mu \phi(x))^2 &\rightarrow g^{\mu\nu} (\partial{\textcolor{blue}{'}}_\mu \phi'(x)) (\partial{\textcolor{blue}{'}}_\nu \phi'(x)) \\
+&= g^{\mu\nu} \left[ (\Lambda^{-1})^\rho_{\ \mu} \partial_\rho \phi \right] \left[ (\Lambda^{-1})^\sigma_{\ \nu} \partial_\sigma \phi \right](\Lambda^{-1}x) \\
+&= g^{\rho\sigma} (\partial_\rho \phi)(\partial_\sigma \phi)(\Lambda^{-1}x) \\
+&= (\partial_\mu \phi)^2(\Lambda^{-1}x).
+\end{align*}
+したがって, ラグランジアン全体はスカラーとして変換される：
+\begin{equation*}
+\mathcal{L}(x) \rightarrow \mathcal{L}(\Lambda^{-1}x). \tag{3.5}
+\end{equation*}
+
+ラグランジアン $\mathcal{L}$ を時空上で積分して得られる作用 $S$ は Lorentz 不変である.
+
+同様の計算により, 運動方程式も不変であることが示される：
+\begin{align*}
+(\partial\textcolor{blue}{'}^2 + m^2)\phi'(x) &= \left[ (\Lambda^{-1})^\nu_{\ \mu} \partial_\nu (\Lambda^{-1})^\sigma_{\ \mu} \partial_\sigma + m^2 \right] \phi(\Lambda^{-1}x) \\
+&= \left[ g^{\nu\sigma} \partial_\nu \partial_\sigma + m^2 \right] \phi(\Lambda^{-1}x) = 0.
+\end{align*}
+この変換法則 \eqref{3.2} は, 1成分の場に対して可能な最も単純なもので, 多成分場に対してはより複雑な変換法則が必要である. たとえば, 4元電流密度 $j^\mu(x)$ やベクトルポテンシャル $A^\mu(x)$ は, 単に空間的位置だけでなく「向き」も持っているので, 回転やブーストの際にその向きも変換されねばならない.
 
 3次元回転下では：
 \begin{equation*}
-V^i(x) \to R^i_{\ j} V^j(R^{-1}x),
+V^i(x) \to R^i_{\ j} V^j(R^{-1}x)
 \end{equation*}
+\color{blue}
+回転行列 $R \in \text{SO}(3)$ は空間座標 $x^i$ に対して：
+\begin{equation*}
+  x'^i = R^i_{\ j} x^j \to  x^j = (R^{-1})^j_{\ i} x'^i \tag{3-1.c1}
+\end{equation*}
+ベクトル場の「幾何学的な意味」から出発すると, 座標系が回転して観測点が $x \to x' = R x$ となったとき, ベクトルそのものも回転により変換される：
+\begin{equation*}
+  V'^i(x') = R^i_{\ j}V^j(x) \tag{3-1.c2}
+\end{equation*}
+これを「$x'$ における新しい場 $V'^i(x')$ を, 元の場 $V^j(x)$ を使って記述する」形式にすると：
+\begin{equation*}
+  V^i(x) \to V'^i(x') = R^i_{\ j}V^j(R^{-1}x') \tag{3-1.c3}
+\end{equation*}
+\color{black}
+
 Lorentz 変換下では：
 \begin{equation*}
-V^\mu(x) \to \Lambda^\mu_{\ \nu} V^\nu(\Lambda^{-1}x)
+V^\mu(x) \to \Lambda^\mu_{\ \nu} V^\nu(\Lambda^{-1}x).
 \end{equation*}
+\color{blue}
+※ローレンツ変換で4元ベクトル場 $V^\mu(x)$ もベクトルとして変換されるため.
+\vskip\baselineskip
+\color{black}
 任意のランクのテンソル場もベクトルから構成でき, その変換法則にはより多くの $\Lambda$ の因子が現れる. 例えば Maxwell 方程式は次のように表せる:
 \begin{equation*}
 \partial^\nu F_{\mu\nu} = 0 \quad \text{または} \quad \Box A_\mu - \partial_\mu(\partial^\nu A_\nu) = 0. \tag{3.6}
@@ -191,75 +241,152 @@ V^\mu(x) \to \Lambda^\mu_{\ \nu} V^\nu(\Lambda^{-1}x)
 \end{equation*}
 から導かれ, Lorentz 不変である.
 
-以上はテンソル記法による Lorentz 不変な方程式の一群を与えるが, それにとどまらず, さらに一般的な形式も存在する. たとえば, 多成分場 $\phi^a$ に対しては, Lorentz 変換を表す $n \times n$ の行列 $M_{ab}(\Lambda)$ を用いて,
-\begin{equation*}
-\phi^a(x) \to M_{ab}(\Lambda) \phi^b(\Lambda^{-1}x) \tag{3.8}
-\end{equation*}
-と定義することで, より一般的な Lorentz 不変理論を記述することができる.
+\color{blue}
+\begin{proof}
+$\partial^\nu F_{\mu\nu} = 0$ の Lorentz 不変性を示す.
+\begin{align*}
+  \partial'^\nu F'_{\mu\nu} &= (\Lambda^{-1})^\nu_{\ \rho} \partial^\rho (\Lambda^\sigma_{\ \mu} \Lambda^\lambda_{\ \nu} F_{\sigma\lambda}) \tag{3-1.d1} \\
+  &= (\Lambda^{-1})^\nu_{\ \rho} \Lambda^\sigma_{\ \mu} \Lambda^\lambda_{\ \nu} \partial^\rho F_{\sigma\lambda} \tag{3-1.d2} \\
+  &= \Lambda_\rho^{\ \nu} \Lambda^\sigma_{\ \mu} \Lambda^\lambda_{\ \nu} \partial^\rho F_{\sigma\lambda} \quad (\because (\Lambda^{-1})^\nu_{\ \rho} = \Lambda_\rho^{\ \nu}) \tag{3-1.d3} \\
+  &= \Lambda^\sigma_{\ \mu} \delta^{\lambda}_{\rho} \partial^\rho F_{\sigma\lambda} \quad (\because \Lambda_\rho^{\ \nu} \Lambda^\lambda_{\ \nu} = \delta^{\lambda}_{\rho}) \tag{3-1.d4} \\
+  &= \Lambda^\sigma_{\ \mu} (\partial^\lambda F_{\sigma\lambda}) = 0 \tag{3-1.d5} 
+\end{align*}
+\end{proof}
+この計算で $(\Lambda^{-1})^\nu_{\ \rho} = \Lambda_\rho^{\ \nu}$ を用いたが, 非自明な式なので証明する.\\
+\begin{proof}
+\eqref{3.4} より,
+\begin{align*}
+  (\Lambda^{-1})^\rho_{\ \mu} (\Lambda^{-1})^\sigma_{\ \nu} g^{\mu\nu} &= g^{\rho\sigma} \tag{3-1.e1} \\
+  g_{\lambda\rho}(\Lambda^{-1})^\rho_{\ \mu} (\Lambda^{-1})^\sigma_{\ \nu} g^{\mu\nu} &= g_{\lambda\rho}g^{\rho\sigma} \tag{3-1.e2}\\
+  (\Lambda^{-1})_\lambda^{\ \nu} (\Lambda^{-1})^\sigma_{\ \nu} &= \delta^\sigma_{\lambda} \tag{3-1.e3}\\
+  \Lambda_\lambda^{\ \nu} (\Lambda^{-1})_\lambda^{\ \nu} (\Lambda^{-1})^\sigma_{\ \nu} &= \Lambda_\lambda^{\ \nu} \delta^\sigma_{\lambda} \tag{3-1.e4}\\
+  (\Lambda^{-1})^\sigma_{\ \nu} &= \Lambda_\sigma^{\ \nu} \tag{3-1.e5}
+\end{align*}
+\end{proof}
 
-
-多成分場 $\Phi$ の Lorentz 変換は以下のように書ける：
-\begin{equation*}
-\Phi \rightarrow M(\Lambda)\Phi \tag{3.9}
-\end{equation*}
-
-この変換法則に対して、次の一貫性条件が課される：
-\begin{equation*}
-\Phi \rightarrow M(\Lambda')M(\Lambda)\Phi = M(\Lambda'\Lambda)\Phi \tag{3.10}
-\end{equation*}
-
-すなわち、$M(\Lambda)$ は Lorentz 群の表現（表現行列）でなければならない。
-
-\vspace{1em}
-\textbf{理解のためのステップ：}
+\color{black}
 
 \begin{itemize}
-  \item \textbf{簡単な例：3次元回転群} \\
-  回転群は、スピンに応じて $n$ 次元の表現を持ち、スピン $s$ に対して $n = 2s + 1$。
-  \item \textbf{スピン1/2の表現}：\\
-  Pauli 行列 $\sigma^i$ を用いて、次のように回転行列を構成：
+  \item Lorentz 不変な方程式の特徴として, 各項の Lorentz 添字の構造 (縮約の仕方など) が同じであれば, その方程式は自然に Lorentz 不変になる.
+  \item より一般的な Lorentz 不変な式を得るには, 場の変換則を体系的に調べるのが有効.
+  \item 具体的な変換則として線形な場合を考える. つまり, $\Phi_a$ が $n$ 成分の多重項であるとすると Lorentz 変換 $\Lambda$ は, $n \times n$ 行列 $M(\Lambda)$ を用いて次のように変換される.
   \begin{equation*}
-  U = e^{-i\theta^i \sigma^i/2} \tag{3.11}
-  \end{equation*}
-  \item \textbf{Lie代数と生成子}：\\
-  無限小回転に対応する生成子 $J^i$ は以下の交換関係を満たす：
-  \begin{equation*}
-  [J^i, J^j] = i\epsilon^{ijk}J^k \tag{3.12}
-  \end{equation*}
-  \item \textbf{指数関数化による群の構成}：
-  \begin{equation*}
-  R = \exp(-i\theta\, \hat{n} \cdot \vec{J}) \tag{3.13}
+    \Phi_a(x) \to \Phi_a'(x) = M_{ab}(\Lambda) \Phi_b(\Lambda^{-1}x) \label{3.8}\tag{3.8}
   \end{equation*}
 \end{itemize}
-
-\vspace{1em}
-\textbf{Lorentz 変換の場合：}
-
+つまり, Lorentz 不変な理論を構築するには, 場の変換法則を定めて, それに従って不変な Lagrangian や方程式を構成すればよい.
+\vskip\baselineskip
+一般的な非線形変換も, これらの線形変換を元に構成できることが知られており, \eqref{3.8} から一般の変換を考える必要はない.\\
+\color{blue}
+※一般的な非線形変換が線形変換を元に構成できるかどうか, 調べたがよく分からなかったのでここでは省略する. 九後ゲージ場の量子論 II 6章「対称性の自発的破れ」の非線形表現を参照すると該当しそうな内容がある. 確証はないけど\dots
+\vskip\baselineskip
+\color{black}
+よって, 以降の議論では場の引数の変化を省略し, 変換を以下のように表す：
+\begin{equation*}
+  \Phi \to M(\Lambda)\Phi \label{3.9}\tag{3.9}
+\end{equation*}
+ではこの行列 $M(\Lambda)$ のとりうる形は何か？\\
+基本的な制限は, 変換が群をなすこと. なので連続した2つの変換 $\Lambda$ と $\Lambda'$ に対し, 
+\begin{equation*}
+\Phi \rightarrow M(\Lambda')M(\Lambda)\Phi = M(\Lambda'')\Phi\quad (\Lambda'' = \Lambda'\Lambda) \tag{3.10}
+\end{equation*}
+が成り立つ必要がある. これは, 連続した2つの変換は1つの変換にまとめられることを意味する. このことから, $M(\Lambda)$ は Lorentz 群の表現（表現行列）でなければならない.\\
+つまり, 行列 $M$ は Lorentz 群の $n$ 次元表現でなければならず, 言い換えると,
+\begin{center}
+  \textbf{『Lorentz 群の有限次元の行列表現はどのようなものか？』}という問いに帰着する.
+\end{center}
+\color{blue}
+※無限次元でない理由：注目したいのはスカラー場・Dirac 場・ベクトル場などの「場」が物理的対象であり, それらは有限個の成分を持つため. これらの場が Lorentz 変換でどう変わるかは有限次元の表現で記述される. また, 有限次元表現は具体的な行列で書けるため, Lagrangian や作用を明示的に構成でき, 理論構築が容易になる. 無限次元を考える場合もあるが, それは状態空間そのものを議論したり高度な理論 (散乱理論や共形場理論など) を構築する場合に必要で, 基本的な場の変換法則の理解と構築には必要ない.
+\vskip\baselineskip
+\color{black}
+\textbf{理解のためのステップ：}
 \begin{itemize}
-  \item 微分演算子で書ける生成子：
+  \item \textbf{簡単な例：3次元回転群} \\
+  回転群はスピンに応じて $n$ 次元の表現を持ち, スピン $s$ に対して $n = 2s + 1$ である.
+  \vskip\baselineskip
+  \color{red}
+  そうなることを示す.
+  \vskip\baselineskip
+  \color{black}
+  \item \textbf{スピン1/2の表現}：\\
+  Pauli 行列 $\sigma^i$ を用いて, 次のように回転行列を構成：
   \begin{equation*}
-  J^{\mu\nu} = i(x^\mu \partial^\nu - x^\nu \partial^\mu) \tag{3.16}
+  U = e^{-i\theta^i \sigma^i/2} \label{3.11}\tag{3.11}
   \end{equation*}
-  \item Lorentz 代数の交換関係：
+  $U$ は行列式1の $2\times 2$ 行列. $\theta^i$ は任意の3つのパラメータ, $\sigma^i$ は Pauli 行列である.
+  \item \textbf{Lie代数と生成子} ※Lie代数の詳しい説明は省く：\\
+  回転群において, 無限小回転に対応する生成子 $J^i$ は以下の交換関係を満たす：
   \begin{equation*}
-  [J^{\mu\nu}, J^{\rho\sigma}] = i(g^{\nu\rho} J^{\mu\sigma} - g^{\mu\rho} J^{\nu\sigma} - g^{\nu\sigma} J^{\mu\rho} + g^{\mu\sigma} J^{\nu\rho}) \tag{3.17}
+  [J^i, J^j] = i\epsilon^{ijk}J^k \label{3.12}\tag{3.12}
   \end{equation*}
+  \item \textbf{この生成子使って有限回転操作を指数関数で構成}：
+  \begin{equation*}
+  R = \exp(-i\theta^i J^i) \tag{3.13}
+  \end{equation*}
+  これが $\hat{\theta}$ 軸まわりに $|\theta|$ だけ回転させる演算子になる. 演算子 $J^i$ の交換関係が, これらの回転の乗法則を決める.
+  \item \textbf{回転群の表現構築}：\\
+  回転群の交換関係 (\eqref{3.12}) を満たす演算子の集合から, 指数関数により群の表現を構成できる. 例えば, 角運動量演算子の表現として,
+  \begin{equation*}
+  J^i \to \frac{\sigma^i}{2} \tag{3.14}
+  \end{equation*}
+  を用いると, \eqref{3.11} の回転群の表現が得られる. \textcolor{red}{このことを示す}
+  \item \textbf{一般の連続群に対する原理：}\\
+  任意の連続群に対して,
+  \begin{itemize}
+    \item 適切な交換関係を満たす群の生成子の行列表現を見つける.
+    \item それを無限小変換の指数関数として構成すれば, 群の表現を構成できる.
+  \end{itemize} 
+  \item \textbf{Lorentz 群に対する適用：}\\
+  Lorentz 群の生成子の交換関係を知りたい.\par
+  $\Longrightarrow$回転群と同様に生成子を微分演算子として表現する.
+  \item 3次元空間では, 角運動量演算子は次のように書ける：
+  \begin{equation*}
+    \mathbf{J} = \mathbf{x} \times (-i\nabla) \tag{3.15}
+  \end{equation*}
+  \item より一般には, 反対称テンソルとして次のように書ける：
+  \begin{equation*}
+    J^{ij} = -i(x^i \nabla^j - x^j \nabla^i)
+  \end{equation*}
+  4次元 Lorentz 変換への自然な拡張をすると,
+  \begin{equation*}
+    J^{\mu\nu} = i(x^\mu \partial^\nu - x^\nu \partial^\mu). \tag{3.16}
+  \end{equation*}
+  \item これら $J^{\mu\nu}$ は, Lorentz 群の3つの回転と3つのブーストを生成する.
+  \item 微分演算子の交換子を計算すると, Lorentz 代数の交換関係が得られる：
+  \begin{equation*}
+    [J^{\mu\nu}, J^{\rho\sigma}] = i \left( g^{\nu\rho} J^{\mu\sigma}
+      - g^{\mu\rho} J^{\nu\sigma}
+      - g^{\nu\sigma} J^{\mu\rho}
+      + g^{\mu\sigma} J^{\nu\rho} \right) \label{3.17}\tag{3.17}
+  \end{equation*}
+  \item この交換関係を満たす行列が, Lorentz 群の表現となる. そしてこの代数を表現する全ての行列は, この交換関係を満たさなければならない. この理解が正しいかどうか確認するために特定の表現で確認する.
   \item $4 \times 4$ 行列表現の例：
   \begin{equation*}
-  (J^{\mu\nu})_{\alpha\beta} = i(\delta^\mu_\alpha g^\nu_\beta - \delta^\nu_\alpha g^\mu_\beta) \tag{3.18}
+  (J^{\mu\nu})_{\alpha\beta} = i(\delta^\mu_\alpha g^\nu_\beta - \delta^\nu_\alpha g^\mu_\beta) \label{3.18}\tag{3.18}
   \end{equation*}
+  $\mu$, $\nu$ はどの6つの行列を取るかを決める添字で, $\alpha$, $\beta$ はそれらの行列の成分を指定する添字である. \textcolor{red}{なぜ6つなのか記載する.}\\
+  \eqref{3.18} が \eqref{3.17} を満たすことは簡単に確認できる.
+  \color{blue}
+  \vskip\baselineskip
+  \begin{proof}
+  \begin{align*}
+    [J^{\mu\nu}, J^{\rho\sigma}] &= i \left( g^{\nu\rho} J^{\mu\sigma} - g^{\mu\rho} J^{\nu\sigma} - g^{\nu\sigma} J^{\mu\rho} + g^{\mu\sigma} J^{\nu\rho} \right) \\
+  \end{align*}
+  \end{proof}
+  \vskip\baselineskip
+  \color{black}
 \end{itemize}
 
 \vspace{1em}
 \textbf{無限小 Lorentz 変換の表現}：
 
-Lorentz 4ベクトル $V^\alpha$ に対して、無限小変換は次のように書かれる：
+4元ベクトル $V^\alpha$ に対して、無限小変換を次のようにパラメータ化する：
 \begin{equation*}
-V^\alpha \rightarrow \left( \delta^\alpha_\beta - \frac{i}{2} \omega_{\mu\nu}(J^{\mu\nu})^\alpha_{\ \beta} \right)V^\beta \tag{3.19}
+V^\alpha \rightarrow \left( \delta^\alpha_\beta - \frac{i}{2} \omega_{\mu\nu}(J^{\mu\nu})^\alpha_{\ \beta} \right)V^\beta \label{3.19}\tag{3.19}
 \end{equation*}
-
+$\omega_{\mu\nu}$ は反対称テンソルで, その成分は無限小変換のパラメータであり, 無限小角度を与える.
 \begin{itemize}
-  \item 例1：$xy$ 平面内の回転 $\omega_{12} = -\omega_{21} = \theta$ の場合：
+  \item 例1：$\omega_{12} = -\omega_{21} = \theta$ の場合 \eqref{3.19}は,
   \begin{equation*}
   V \rightarrow 
   \begin{pmatrix}
@@ -270,8 +397,9 @@ V^\alpha \rightarrow \left( \delta^\alpha_\beta - \frac{i}{2} \omega_{\mu\nu}(J^
   \end{pmatrix}
   V \tag{3.20}
   \end{equation*}
+  これは $xy$ 平面内での無限小回転を表す.
 
-  \item 例2：$x$ 方向のブースト $\omega_{01} = -\omega_{10} = \beta$ の場合：
+  \item 例2：$\omega_{01} = -\omega_{10} = \beta$ とすると,
   \begin{equation*}
   V \rightarrow 
   \begin{pmatrix}
@@ -282,6 +410,7 @@ V^\alpha \rightarrow \left( \delta^\alpha_\beta - \frac{i}{2} \omega_{\mu\nu}(J^
   \end{pmatrix}
   V \tag{3.21}
   \end{equation*}
+  これは $x$ 方向の無限小ブーストを表す. その他の $\omega_{\mu\nu}$ の組み合わせに対しても, ブーストや回転を同様の方法で生成できる.
 \end{itemize}
 
 これらの無限小変換は、全ての Lorentz 変換（回転とブースト）を生成するための基本である。
