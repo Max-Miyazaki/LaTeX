@@ -1,0 +1,188 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{Nonspherical Perturbations of Relativistic Gravitational Collapse.\\
+I. Scalar and Gravitational Perturbations}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートはPeskin\&Schroederの``An Introduction to Quantum Field Theory''の第3章の4節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+\end{abstract}
+
+\newpage
+
+\section*{Introduction}
+\subsection*{A. The problem and Its History}
+相対論的天体物理学において中心的な役割を果たすのは, シュワルツシルト幾何学と次の線素である:
+\begin{equation}
+    ds^2 = \left(1 - \frac{2M}{r} \right) dt^2 - \left(1 - \frac{2M}{r} \right)^{-1} dr^2 - r^2 \left( d\theta^2 + \sin^2 \theta\, d\phi^2 \right).
+\end{equation}
+
+（ここでは単位系として $c = 1$, $G = 1$ を用いる.）
+
+この線素のもっとも興味深く特徴的な性質は, 重力半径 $r = 2M$ における特異な振る舞いである. 一方では、$r = 2M$ の面が非常に重要な性質を持つことが分かっている. それは事象の地平面であり、閉じ込められた面の族の極限である.
+
+しかし一方で, この線素を自由落下座標系に変換すると, $r = 2M$ において局所的な病的挙動が存在しないことが明らかになる. 時空の幾何はそこでは非常に滑らかである. 
+
+$r = 2M$ の面がもつ最も重要な天体物理学的帰結は, 星がその重力半径内に入ると, 破滅的な重力崩壊が不可避になるという点である. シュワルツシルト幾何において $r = 2M$ に幾何学的な病的性質が存在しないということは, 星の内部に異常に大きな力が発生して重力半径への落下を防ぐようなことは起こらないことを意味する. この期待は, いくつかの計算によって完全に確認されている.
+
+重力崩壊が実在の天体物理的対象にとって可能な現象であるか否かは, 最近の論争の解決に依存している: すなわち, 「我々の重力崩壊の描像は, 完全な球対称性という特異な仮定に基づいたものなのか？」という問いである.
+
+この描像の正しさは, 初期の非球対称な摂動が重力半径を通過する際に小さいままであるべきだという議論によって支持されている. そこでは強い潮汐力が存在しないためである. もし天体の摂動が小さいままであれば, 幾何や崩壊過程全体の摂動も小さいままであるべきである.
+
+事象の地平面の性質から, 次のことが予想される:
+
+\begin{itemize}
+    \item[(i)] 事象の地平面の外側における重力場は, 大きな時刻 $t$ において漸近的に静的になるはずである.
+    \item[(ii)] 大きな $t$ において, 遠方の観測者は, 星が事象の地平面を通過する瞬間の姿を「見る」ことになる.
+\end{itemize}
+
+したがって, 星が残す幾何は, 非球対称摂動を伴った静的な幾何であると予想される. 
+
+しかしながら, そうした静的摂動は, 事象の地平面および空間無限遠点で良好に振る舞うことができないことが示されている. これは, もし我々の描像が正しいとすれば, 星は $r = 2M$ を通過する前にすべての「でこぼこ（摂動）」を取り除かねばならないことを意味する. しかし,それがすべての場合において真であるとすれば, 事象の地平面において病的に大きな力が存在する必要があり, これは我々の期待に反する.
+
+こうした困難は「$r = 2M$ の面が重要な\textbf{局所的}性質を持つ」とする見解を促している. 初期の小さな摂動が無限に大きくなり, 崩壊を停止させたり事象の地平面を破壊したりするという主張がなされてきた. これらの議論はすべて, 静的解に関する憶測に大きく依存している.
+
+これに反する立場は Doroshkevitch, Zel'dovich, Novikov によって最初に唱えられ, Novikov によっても支持された. この立場に対するもっとも決定的な証拠は, 「摂動を伴う崩壊は, 摂動なしの崩壊と定性的に同じである」とするものであり, de la Cruz, Chase, Israel の研究である. 彼らは, 摂動された薄い殻が崩壊する際の電磁的および重力的摂動を数値的に追跡した. その計算は, 特異点が発展して崩壊を止めることはなく, 外部の場における摂動は大きな時刻において消滅することを示している.
+
+本研究の目的は, 摂動場の発展をより一般的に解析し, 物理的な観点から特異性がいかにして回避されるかを説明することである.
+
+\subsection*{B. Outline and Conclusions}
+
+本論文では一次の摂動解析を用いて, 初期のわずかな非対称性が崩壊過程に大きな影響を与えるかどうかを調べる. このアプローチは問題の解決に十分である. もし摂動が際限なく増大するならば, 本研究の結果は無意味となるが, 我々の重力崩壊の現在の描像が誤っていることを結論できる. 一方、摂動が小さいままであるならば, このアプローチは正当化される. 特異な定常摂動のパラドックスは一次摂動においても (完全な理論と同様に) 現れるため, 非対称性が小さいままであれば, このパラドックスがどのように回避されるかを理解できるだろう.
+
+原理的には問題は単純であり, 崩壊する星に摂動を加えるというものである (たとえば, ThorneとCampolattaroが静的な星に対して行ったように). 実際には, 座標系, ゲージの自由度, 多数の計量成分の管理などの複雑さにより, このアプローチは極めて困難である. 
+
+このパラドックスは事象の地平面の性質に起因するものであり, 重力摂動に限らず, 多くの種類の摂動に対して現れると考える十分な理由がある. 実際, これと同様の困難は電磁気摂動, 他の整数スピンの質量のない場, およびスカラー場にも見られることが知られている. 本論文の大部分では, スカラー場の類似系の単純さを活用する.
+
+第II節では, そのような質量のないスカラー場類似系の定式化を行い, 静的摂動が特異であることを示す. このスカラー場をクライン＝ゴルドン場に修正することで, 特異性の本質に関する興味深い洞察が得られる.
+
+我々のスカラー場に関する研究は2つの主要部分に分かれる：(i) 「局所問題」すなわち, 初期に静止していた星が崩壊する過程におけるスカラー場の挙動の解析 (スカラー場のソースを含む構成),および(ii) Schwarzschild時空外部におけるスカラー場の進化. 第II節では, 局所問題を物理的に妥当な崩壊状況として共動座標を用いて詳細に計算し解析する. その結果得られる動力学方程式は, $r = 2M$ が場の進化に対して特別な局所的意味を持つことを示唆しない. その方程式を数値的に積分した結果もこれを確認し, 星の内部のスカラー場は, 星が重力半径を通過する間も有限のままである. 
+
+第III節では, 問題の第2部, すなわち外部における場とパラドックスの解決を扱う. Schwarzschild時間 $t$ およびReggeとWheelerによる $r^\ast$ 座標
+
+\begin{equation*}
+    r^\ast \equiv r + 2M \ln\left(\frac{r}{2M} - 1\right) + \text{定数}
+\end{equation*}
+
+を用いた動力学の記述により, Schwarzschild時空におけるスカラー波の伝播の単純な描像が得られる. この描像では, 時空の曲率がポテンシャル障壁を生じさせ, それは高周波の波には透明であるが, ゼロ周波数の波には不透過である. この不透過性こそがパラドックスを生じさせ, またそれを解決するものでもある.
+
+パラドックスの解決は次のように単純である. 星の表面上の場は, 外部における場のソースと見なすことができる. 表面と遠方の観測者との間の時間の遅れ（タイムダイレーション）により, 表面上の場はSchwarzschild時間で漸近的に定常でなければならない. 表面上の場は最終的にある定常的な最終値に近づくが,
+
+\emph{この最終値は外部解において現れることはできない}.
+
+この曲率ポテンシャルが, 遠方の観測者がそれを見るのを永遠に妨げるのである. 長時間が経過すると, 外部の場はソースを持たないものとなり, 場は放射によって自己消滅していき, $t \to \infty$ で消失する.
+
+場が自身を放射して消滅していくという過程の単純さは, 曲率ポテンシャルの複雑な詳細によってやや不明瞭となる.
+そのため, まず非常に理想化されたモデル障壁についてこれらのアイデアを提示する. この理想化により正確な計算が可能となり, 外部の場は長時間において指数関数的に消失することが示される.
+非理想的な問題（現実的な曲率ポテンシャル）では, 崩壊の開始を示す出力波面が部分的に後方散乱される. その結果として生じる内向きの放射は, 場の急速な指数関数的減衰を妨げる. 減衰率は波面の詳細, すなわち摂動場の初期条件に依存する.
+
+もし崩壊の開始以前に, 星の外部に静的な $l$ 極の場が存在していたならば, その場は
+\begin{equation*}
+    t^{-(2l+2)}
+\end{equation*}
+で減衰していく.
+一方, 崩壊の過程で $l$ 極の摂動が新たに形成された場合, それは
+\begin{equation*}
+    t^{-(2l+3)}
+\end{equation*}
+で減衰する.
+
+スカラーアナログの正当性の最終的な裏付けは第IV節にて与えられる.
+曲率タイプのポテンシャル方程式は, ReggeとWheelerによって奇パリティの重力摂動に対して導出されており(Regge and Wheelerによる結果), またZerilliによって偶パリティの摂動に対して導かれている(Zerilliによる結果).
+これらの重力方程式と我々のスカラー方程式の違いは, ポテンシャルの詳細のみである.
+第IV節では, Regge-WheelerおよびZerilli方程式が議論され, 長時間の解がスカラー場方程式の解と正確に一致することが示される.
+特に, 放射可能な重力的多極子 (multipoles) は, スカラー場と同様に定常解の特異性を
+\begin{equation*}
+    t^{-(2l+2)} \quad \text{または} \quad t^{-(2l+3)}
+\end{equation*}
+での消失により回避する.
+よって, スカラー問題を研究する動機は, 単なる類似モデルとしてよりも遥かに強力である.
+
+第IV節のいくつかの詳細は, 別の論文 (以下「ペーパーII」と呼ぶ) に譲られている.
+その論文では, 任意の整数スピン場の放射可能な多極子が曲率ポテンシャル型の方程式を満たし,
+\begin{equation*}
+    t^{-(2l+2)} \quad \text{または} \quad t^{-(2l+3)}
+\end{equation*}
+で減衰することも示されている.
+
+\bigskip
+
+\noindent\textbf{注：}
+本論文の初期バージョンはプレプリントとして配布されたが, 重要な誤りを含んでいた.
+付録に示されている波面展開に誤りがあり, 後方散乱の表式を誤って導出していた.
+その結果, 初期に静的な $l$ 極は
+\begin{equation*}
+\frac{\ln t}{t^{2l+3}}
+\end{equation*}
+のように減衰するという誤った主張がなされた. 実際には, 正しくは
+\begin{equation*}
+    t^{-(2l+2)}
+\end{equation*}
+である.
+
+
+
+
+
+
+
+
+
+
+\end{document}

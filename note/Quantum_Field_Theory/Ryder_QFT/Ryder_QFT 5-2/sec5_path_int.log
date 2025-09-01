@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.11)  13 APR 2025 15:04
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.11)  11 JUL 2025 13:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -256,70 +256,75 @@ LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <17.28> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 28.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <17.28> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 28.
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 29.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 29.
-File: figure/fig5-1.png Graphic file (type bmp)
-<figure/fig5-1.png>
 
 
 [1
 
 ]
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 85.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 85.
+File: figure/fig5-1.png Graphic file (type bmp)
+<figure/fig5-1.png>
+
+
+[2]
 File: figure/fig5-2.png Graphic file (type bmp)
 <figure/fig5-2.png>
 
 
-[2]
+[3]
 File: figure/fig5-3.png Graphic file (type bmp)
 <figure/fig5-3.png>
 
 
-[3]
-
 [4]
+
+[5]
 File: figure/fig5-4.png Graphic file (type bmp)
 <figure/fig5-4.png>
 
-
-[5]
 
 [6]
 
 [7]
 
 [8]
+
+[9]
 File: figure/fig5-5.png Graphic file (type bmp)
 <figure/fig5-5.png>
 
 
-[9]
-
 [10]
 
 [11]
+
+[12]
 File: figure/eq5-35.png Graphic file (type bmp)
 <figure/eq5-35.png>
+
+
+[13]
 File: figure/eq5-36.png Graphic file (type bmp)
 <figure/eq5-36.png>
 File: figure/eq5-37.png Graphic file (type bmp)
 <figure/eq5-37.png>
 
 
-[12]
+[14]
 
-[13]
+[15]
 File: figure/figB5-45.png Graphic file (type bmp)
 <figure/figB5-45.png>
-
-
-[14]
 File: figure/eq5-45.png Graphic file (type bmp)
 <figure/eq5-45.png>
 
 
-[15] (./sec5_path_int.aux)
+[16]
+
+[17] (./sec5_path_int.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
@@ -327,12 +332,12 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 3248 strings out of 473836
- 47980 string characters out of 5731189
- 458142 words of memory out of 5000000
- 26450 multiletter control sequences out of 15000+600000
- 579724 words of font info for 118 fonts, out of 8000000 for 9000
+ 3253 strings out of 473836
+ 48074 string characters out of 5731189
+ 461142 words of memory out of 5000000
+ 26454 multiletter control sequences out of 15000+600000
+ 580061 words of font info for 119 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  57i,11n,65p,883b,303s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on sec5_path_int.dvi (15 pages, 75616 bytes).
+Output written on sec5_path_int.dvi (17 pages, 82236 bytes).
