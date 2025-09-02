@@ -1,0 +1,282 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{6章.相対論的運動学\\
+6-1. 相対論的分布関数と巨視的変数}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートは松原さんの『宇宙論の物理【下】』の第6章の1節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+\end{abstract}
+    
+    
+
+\newpage
+\color{blue}
+\section*{概要}
+
+\begin{itemize}
+  \item \textbf{分布関数の定義}\\
+  各粒子種について, 位相空間 $(x^\mu, p^\mu)$ 上に分布関数 $f(x,P)$ を定義する.  
+  これは「位置 $x$ にいて運動量 $p$ を持つ粒子の確率密度」を表す。
+
+  \item \textbf{質量殻条件}\\ 
+  粒子の4元運動量は必ず
+  \begin{equation}
+    p_\mu p^\mu + m^2 = 0
+    \tag{6.1}
+  \end{equation}
+  を満たす. これにより位相空間は8次元から7次元に制限される.
+
+  \item \textbf{不変体積要素}\\  
+  運動量空間の3次元不変体積要素は
+  \begin{equation}
+    d\Pi \equiv \frac{\sqrt{-g}\, d^4P}{(2\pi)^3}\,\theta(p^0)\,\delta(p_\mu p^\mu + m^2)
+    \tag{6.2}
+  \end{equation}
+  で与えられる. ここで $\theta(p^0)$ によりエネルギーの正値条件を課す.
+
+  \item \textbf{粒子数密度}\\  
+  局所静止系での粒子数密度は,
+  \begin{equation}
+    n = \int d\Pi \, f(x,P)
+    \tag{6.6}
+  \end{equation}
+  によって定義される.
+
+  \item \textbf{粒子4元流束}\\  
+  一般座標系では粒子数保存を表すベクトルとして,
+  \begin{equation}
+    N^\mu(x) = \int d\Pi \, p^\mu f(x,P)
+    \tag{6.10}
+  \end{equation}
+  が定義される. $N^0$ は粒子数密度、$N^i$ は粒子流束を表す.
+
+  \item \textbf{エネルギー運動量テンソル}\\  
+  分布関数の運動量に関する二次モーメントとして,
+  \begin{equation}
+    T^{\mu\nu}(x) = \int d\Pi \, p^\mu p^\nu f(x,P)
+    \tag{6.17}
+  \end{equation}
+  が導入される. $T^{00}$ はエネルギー密度、$T^{0i}$ はエネルギー流、$T^{ij}$ は圧力・応力を表す.
+\end{itemize}
+
+\noindent
+以上により, $f(x,P)$ から巨視的変数 $n$, $N^\mu$, $T^{\mu\nu}$ が定義され, これらが後のボルツマン方程式と保存則に結びつく.
+
+\newpage
+\color{black}
+\section*{6.1 相対論的分布関数と巨視的変数}
+電子や光子など, 特定の粒子に着目する際に位相空間中での分布関数 $f(x^{\textcolor{blue}{\mu}},P^{\textcolor{blue}{\nu}})$ を考える. ここで $x^\mu$ は時空の4元座標, $P^\nu$ は運動量の4元運動量である. なので, 位相空間の次元は 8 次元となる. 時空計量 $g_{\mu\nu}$ を用いて, 位相空間の体積要素は以下のようになる:
+\begin{equation*}
+  d^4 X = \sqrt{-g}\, d^4 x
+\end{equation*}
+\color{blue}
+左辺の $d^4 X$ は Minkowski 時空での体積要素であり, この座標を基準にして一般座標変換を行うと, 右辺は変換によって値を変えない不変量になる.
+\begin{proof}
+\begin{align*}
+  d^4 X &= \frac{\partial (X)}{\partial (x)} d^4 x \tag{6-1.a1} \\
+  &= \det \left| \frac{\partial X^\mu}{\partial x^\nu} \right| d^4 x \label{6-1.a2}\tag{6-1.a2} \\
+\end{align*}
+ここで,
+\begin{equation*}
+    g^{\mu\nu} = \frac{\partial X^\mu}{\partial x^\rho} \frac{\partial X^\nu}{\partial x^\sigma} \eta^{\rho\sigma} \tag{6-1.a3}
+\end{equation*}
+より,
+\begin{align*}
+    g &= \det g^{\mu\nu} \tag{6-1.a4} \\
+    &= \det \left| \frac{\partial X^\mu}{\partial x^\rho} \frac{\partial X^\nu}{\partial x^\sigma} \eta^{\rho\sigma} \right| \tag{6-1.a5} \\
+    &= \det \left| {Y^\mu}_{\rho} {Y^\nu}_{\sigma} \eta^{\rho\sigma} \right| \quad \left( \because \frac{\partial X^\mu}{\partial x^\rho} = {Y^\mu}_{\rho}, \frac{\partial X^\nu}{\partial x^\sigma} = {Y^\nu}_{\sigma} \right) \tag{6-1.a6} \\
+    &= \det \left| {Y^\mu}_{\rho}\, \eta^{\rho\sigma} {(Y^{T})_\sigma}^{\rho}  \right| \tag{6-1.a7} \\
+    &= \det \left| {Y^\mu}_{\sigma} \right|^2 \det |\eta^{\rho\sigma}| \tag{6-1.a8} \\
+    &= - \det \left| {Y^\mu}_{\sigma} \right|^2 \tag{6-1.a9} \\
+    &= - \det \left| \frac{\partial X^\mu}{\partial x^\rho} \right|^2 \tag{6-1.a10}\\
+    -g &= \det \left| \frac{\partial X^\mu}{\partial x^\nu} \right|^2 \quad (\because \rho \to \nu) \tag{6-1.a11}
+\end{align*}
+したがって,
+\begin{equation*}
+    \det \left| \frac{\partial X^\mu}{\partial x^\nu} \right| = \sqrt{-g} \label{6-1.a12}\tag{6-1.a12}
+\end{equation*}
+\eqref{6-1.a2} に \eqref{6-1.a12} を代入すると,
+\begin{equation*}
+    d^4 X = \sqrt{-g}\, d^4 x \tag{6-1.a13}
+\end{equation*}
+となるので, 上の式を求めることができる.
+\end{proof}
+
+\color{black}
+
+4元運動量の場合も同様にすると,
+\begin{equation*}
+  d^4 p = \sqrt{-g}\, d^4 P.
+\end{equation*} 
+\textcolor{blue}{$p$ は Minkowski 時空での運動量であり, この座標を基準にして一般座標変換を行うと, 右辺は変換によって値を変えない不変量になる.}
+\vskip\baselineskip
+よって, 位相空間の体積要素は以下のようになる：
+\begin{equation*}
+    \sqrt{-g}\, d^4 x\, \sqrt{-g}\, d^4 P = -g\, d^4 x
+\end{equation*}
+対象とする粒子種の質量を $m$ とすると, 4元運動量は必ず以下を満たす：
+\begin{equation*}
+  P_\mu P^\mu + m^2 = 0. \label{6.1}\tag{6.1}
+\end{equation*}
+この条件を満たす3次元超曲面を Mass-Shell と呼ぶ (\textbf{Mass-Shell 条件}). 
+\vskip\baselineskip
+
+\color{blue}
+※ 場の量子論でよく聞くものとして\textbf{On-Shell 条件}があるが, 両者には違いがあるので紹介しておく.
+\color{black}
+\vskip\baselineskip
+
+この超曲面により自由度が一つ制限されるので, 物理的な位相空間の自由度は8次元から7次元になる. したがって, 分布関数 $f(x,P)$ は, 8 次元位相空間中に埋め込まれた 7 次元超曲面上の関数となる. また, 粒子のエネルギー $E = P^0$ が負になる領域は存在しないので, ステップ関数 $\Theta(p^0)$ によりエネルギーの正値条件を満たす. これらの条件を用いて, 運動量空間の物理的な一般座標変換に対して不変な 測度 (3 次元運動量体積要素) $d\textcolor{blue}{\widetilde{\textcolor{black}{\Pi}}}$ を定義する:
+\begin{equation*}
+  d\widetilde{\Pi} \equiv \frac{\sqrt{-g}\, d^4P}{(2\pi)^3}\,\Theta(P^0)\,\delta_D(P_\mu P^\mu + m^2). \label{6.2}\tag{6.2}
+\end{equation*}
+この量は一般座標変換について, 本義 Lorentz 変換でエネルギー $P^0$ の符号が変化しない範囲内で値が不変なスカラー量である. この $\widetilde{\Pi}$ はデルタ関数 $\delta_D(P_\mu P^\mu + m^2)$ により Mass-Shell 条件を満たすので, $P^0$ について積分が可能である. 一般の計量 $g_{\mu\nu}$ について, \eqref{6.1} を展開すると
+\begin{align*}
+    g_{00} (P^0)^2 + g_{0i} P^i P^0 + g_{i0} P^i P^0 + g_{ij} P^i P^j + m^2 &= 0 \\
+    g_{00} (P^0)^2 + 2g_{0i} P^i P^0 + g_{ij} P^i P^j + m^2 &= 0 \quad (\because g_{i0} = g_{0i}) \label{6.3}\tag{6.3}
+\end{align*}
+となり, 正エネルギー解 ($P^0 > 0$) について解が求まる：
+\begin{align*}
+    P^0 = \frac{g_{0i} P^i + \sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)}}{-g_{00}}. \label{6.4}\tag{6.4}
+\end{align*}
+
+\vskip\baselineskip
+\color{blue}
+\begin{proof}
+\eqref{6.4} の導出：\\
+\eqref{6.3} について, 二次方程式の偶数の解の公式を用いて解くと,
+\begin{align*}
+    P^0 &= \frac{-g_{0i} P^i \pm \sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)}}{g_{00}} \tag{6-1.b1} \\
+    &= \frac{g_{0i} P^i \mp \sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)}}{-g_{00}} \tag{6-1.b2} 
+\end{align*}
+ここでルートの中身について不等号評価をすると,
+\begin{align*}
+    \sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)} > \sqrt{(g_{0i} P^i)^2} &= |g_{0i} P^i| \tag{6-1.b3} \\
+    |g_{0i} P^i| - \sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)} &< 0 \tag{6-1.b4}
+\end{align*}
+となる. ここで, $g_{00} < 0$ としているが, これは正エネルギー解を一意に定めるための条件である. 実際にこの条件のもとで $\mp$ のマイナスについてを取ると,
+\begin{align*}
+    P^0_- &= \frac{g_{0i} P^i - \sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)}}{-g_{00}} < 0 \tag{6-1.b5} \\
+\end{align*}
+となり, $g_{0i}P^i$ が正負どちらになっても $P^0$ が負になってしまう.\\
+一方, $\mp$ のプラスを取ると,
+\begin{align*}
+    P^0_+ &= \frac{g_{0i} P^i + \sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)}}{-g_{00}} > 0 \tag{6-1.b6} 
+\end{align*}
+となり, 正のエネルギー解を $P^0_+$ と採用することで一意に定められる.
+\end{proof}
+\color{black}
+\vskip\baselineskip
+\eqref{6.4} の解を用いて, \eqref{6.2} を $P^0$ について積分すると,
+\begin{equation*}
+    d\Pi = \frac{\sqrt{-g}\, d^3P}{(2\pi)^3 2\sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)}} \label{6.5}\tag{6.5}
+\end{equation*}
+
+\color{blue}
+\begin{proof}
+\eqref{6.5} の導出：\\
+\begin{align*}
+    d\Pi &\equiv \int dP^0 d\widetilde{\Pi} \tag{6-1.c1}\\
+    &= \int \frac{\sqrt{-g}\, dP^0 d^3 P}{(2\pi)^3}\,\Theta(P^0)\,\delta_D(P_\mu P^\mu + m^2) \tag{6-1.c2}\\
+    &=\int \frac{\sqrt{-g}\, dP^0 d^3 P}{(2\pi)^3}\,\Theta(P^0)\,\delta_D(g_{00} (P^0)^2 + 2g_{0i} P^i P^0 + g_{ij} P^i P^j + m^2) \tag{6-1.c3}\\
+    &= \int \frac{\sqrt{-g}\, dP^0 d^3 P}{(2\pi)^3}\,\Theta(P^0)\,\delta_D(f(P^0)) \label{6-1.c4}\tag{6-1.c4}
+\end{align*}
+ここでデルタ関数 $\delta_D(f(P^0))$ の性質から,
+\begin{equation*}
+    \delta_D(f(P^0)) = \sum_i \frac{1}{|f'(P^0_i)|} \delta(P^0 - P^0_i) \tag{6-1.c5}
+\end{equation*}
+が成り立つので,
+\begin{equation*}
+    f'(P^0) = 2g_{00} P^0 + 2g_{0i} P^i, \tag{6-1.c6}
+\end{equation*}
+\begin{equation*}
+    f'(P^0_i)|_{P^0_i = E} = 0. \tag{6-1.c7}
+\end{equation*}
+これを満たす $E$ は,
+\begin{equation*}
+    E = \frac{-g_{0i} P^i + \sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)}}{-g_{00}} \tag{6-1.c8}
+\end{equation*}
+より,
+\begin{equation*}
+    \delta_D(f(P^0)) = \frac{1}{|2g_{00} E + 2g_{0i} P^i|} \delta(P^0 - E) \tag{6-1.c9}
+\end{equation*}
+\eqref{6-1.c4} にこれを代入すると,
+\begin{align*}
+    d\Pi &= \int \frac{\sqrt{-g}\, dP^0 d^3 P}{(2\pi)^3}\,\Theta(P^0)\,\frac{1}{|2g_{00} E + 2g_{0i} P^i|} \delta(P^0 - E) \tag{6-1.c10}\\
+    &= \int \frac{\sqrt{-g}\, dP^0 d^3 P}{(2\pi)^3}\,\Theta(P^0)\,\frac{1}{|2g_{00} \frac{-g_{0i} P^i + \sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)}}{-g_{00}} + 2g_{0i} P^i|}\\
+    &\quad \hspace{3cm} \times \delta\left(P^0 - \frac{-g_{0i} P^i + \sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)}}{-g_{00}}\right) \tag{6-1.c11}\\
+    &= \frac{\sqrt{-g}\, d^3P}{(2\pi)^3 2\sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)}} \quad \left(\because \int dP^0 \delta(P^0 - E) = 1\right) \tag{6-1.c12}
+\end{align*}
+\end{proof}
+\color{black}
+\vskip\baselineskip
+
+
+具体的な時空として Minkowski 時空や Friedmann-Lemaître-Robertson-Walker (FLRW) 時空を考えると, それぞれ以下のようになる：
+\begin{itemize}
+  \item Minkowski 時空：$g_{00} = -1,\, g_{ij} = \delta_{ij}$
+  \item FLRW 時空：$g_{00} = -1,\, g_{ij} = a(t)^2 \delta_{ij}$
+\end{itemize}
+
+
+
+
+\end{document}
+
