@@ -118,9 +118,10 @@ Dirac 方程式の導出と Lorentz 不変性の確認, Lagrangian の構成と�
     \item スピン1/2に対応する有限次元表現を構築するため, Dirac 行列 $\gamma^\mu$ を用いる.
     \item Dirac 代数の反交換関係：
     \begin{equation*}
-      \{ \gamma^\mu, \gamma^\nu \} = 2g^{\mu\nu} \cdot \mathbf{1}_{n\times n}\quad (\text{Dirac 代数}) \label{3.22}\tag{3.22}
+      \{ \gamma^\mu, \gamma^\nu \} = \gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = 2g^{\mu\nu} \cdot \mathbf{1}_{n\times n}\quad (\text{Dirac 代数}) \label{3.22}\tag{3.22}
     \end{equation*}
-    \item これにより Lorentz 代数の $n$ 次元表現が得られる：
+    この $\gamma^\mu$ の具体的な形はこれから構成していく.
+    \item これにより Lorentz 代数の $n\times n$ 表現行列を定義できる：
     \begin{equation*}
       S^{\mu\nu} = \frac{i}{4}[\gamma^\mu, \gamma^\nu] \label{3.23}\tag{3.23}
     \end{equation*}
@@ -274,7 +275,7 @@ $S^{ij}$ は3次元スピノルの変換行列 \eqref{3.24} を2回繰り返し�
   \end{itemize}
   \subsection*{Weyl スピノル}
   \begin{itemize}
-    \item \eqref{3.26} および \eqref{3.27} の生成子のブロック対角形式から, Lorentz 群の Dirac 表現は \textit{既約でない（reducible）} ことがわかる.
+    \item \eqref{3.26} および \eqref{3.27} の生成子のブロック対角形式から, Lorentz 群の Dirac 表現は \textit{既約でない (reducible)} ことがわかる.
     \item 各ブロックを別々に考えることで、2つの2次元表現を構成できる：
     \begin{equation*}
     \psi = \begin{pmatrix} \psi_L \\ \psi_R \end{pmatrix} \tag{3.36}

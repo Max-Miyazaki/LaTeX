@@ -1,0 +1,402 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{Chapter 4. Interacting Fields and Feynman Diagrams\\
+4-1. Perturbation Theory - Philosophy and Examples}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートはPeskin\&Schroederの``An Introduction to Quantum Field Theory''の第4章の1節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+\end{abstract}
+    
+    
+
+\newpage
+\color{blue}
+\section*{概要}
+\section*{4.1 摂動論 ― 哲学と例 の概要}
+
+\begin{itemize}
+  \item \textbf{自由場理論の限界}
+  \begin{itemize}
+    \item 自由場理論は粒子の近似的記述を与えるが, 相互作用や散乱を含まない.
+    \item 現実を記述するには Hamiltonian/Lagrangian に非線形な相互作用項を加える必要がある.
+  \end{itemize}
+
+  \item \textbf{因果律の要請}
+  \begin{itemize}
+    \item 相互作用項は同一点での場の積のみを含む必要がある.
+    \item 例: $\phi(x)^4$ は許されるが, $\phi(x)\phi(y)$ は許されない.
+  \end{itemize}
+
+  \item \textbf{三つの代表的な相互作用理論}
+  \begin{enumerate}
+    \item \textbf{$\phi^4$ 理論}
+    \begin{itemize}
+      \item 最も単純な相互作用量子論.
+      \item 教育的な例だが, 実際の物理（ヒッグス場の自己相互作用, 統計力学の模型）にも登場する.
+      \item 運動方程式:
+      \begin{equation*}
+        (\Box + m^2)\phi = -\frac{\lambda}{3!}\phi^3 .
+      \end{equation*}
+    \end{itemize}
+
+    \item \textbf{量子電磁力学 (QED)}
+    \begin{itemize}
+      \item ディラック場と電磁場の相互作用.
+      \item ラグランジアン:
+      \begin{equation*}
+        \mathcal{L} = \bar{\psi}(i\!\not\!\partial - m)\psi
+        - \frac{1}{4}F_{\mu\nu}^2
+        - e \bar{\psi}\gamma^\mu \psi A_\mu .
+      \end{equation*}
+      \item $U(1)$ 局所ゲージ対称性を持ち, 電磁相互作用を記述する.
+    \end{itemize}
+
+    \item \textbf{ユカワ理論 (Yukawa theory)}
+    \begin{itemize}
+      \item ディラック場とスカラー場の相互作用:
+      \begin{equation*}
+        \mathcal{L} = \bar{\psi}(i\!\not\!\partial - m)\psi
+        + \frac{1}{2}(\partial_\mu \phi)^2
+        - \frac{1}{2}m^2 \phi^2
+        - g \bar{\psi}\psi \phi .
+      \end{equation*}
+      \item 元々は核子とパイ中間子の相互作用を記述するために提案された.
+      \item 標準模型ではヒッグス場とクォーク・レプトンを結びつける Yukawa 相互作用として現れる.
+    \end{itemize}
+  \end{enumerate}
+
+  \item \textbf{再正則化可能性 (Renormalizability) の重要性}
+  \begin{itemize}
+    \item 任意の相互作用項は書けるが, 結合定数の次元により非再正則化的となる場合がある.
+    \item 作用 $S=\int d^4x \, \mathcal{L}$ が無次元であるためには, $\mathcal{L}$ は質量次元4を持つ必要がある.
+    \item 場の次元: スカラー $\phi$ およびベクトル $A_\mu$ は1, スピノル $\psi$ は $3/2$.
+    \item 再正則化可能な相互作用:
+    \begin{itemize}
+      \item スカラー場のみ: $\mu \phi^3$, $\lambda \phi^4$.
+      \item スピノルとの相互作用: Yukawa項 $g \bar{\psi}\psi\phi$.
+      \item ベクトル場との相互作用: 
+      \begin{equation*}
+        e \bar{\psi}\gamma^\mu \psi A_\mu, 
+        \qquad |D_\mu \phi|^2 - m^2|\phi|^2 .
+      \end{equation*}
+    \end{itemize}
+  \end{itemize}
+
+  \item \textbf{結論}
+  \begin{itemize}
+    \item これらの例が, 実際に自然界に存在する強・弱・電磁相互作用のすべての型を網羅している.
+    \item 摂動論の枠組みは, ファインマン図を通じて相互作用を体系的に扱う基盤となる.
+  \end{itemize}
+
+\end{itemize}
+
+\newpage
+\color{black}
+\section*{4.1 Perturbation Theory - Philosophy and Examples}
+我々はすでに, 自然界に存在する多くの粒子を近似的に記述する二つの自由場理論の量子化について詳しく議論してきた. 
+しかしここまでのところ, 自由粒子状態は Hamiltonian の固有状態であり, 相互作用も散乱も存在しなかった. 
+現実の世界をより正確に記述するためには, Hamiltonian（あるいは Lagrangian）に, 
+異なるフーリエ・モード（およびそれらを占有する粒子）を相互に結びつける新しい非線形項を加える必要がある. 
+因果律を保つために, 新しい項は同じ時空点での場の積のみを含むことを要請する. 
+すなわち $\phi(x)^4$ のような項は許されるが, $\phi(x)\phi(y)$ のような項は許されない. 
+したがって相互作用を記述する項は次の形になる:
+
+\begin{equation*}
+H_{\text{int}} = \int d^3x \, \mathcal{H}_{\text{int}}[\phi(x)] 
+= - \int d^3x \, \mathcal{L}_{\text{int}}[\phi(x)] .
+\end{equation*}
+
+当面は, $\mathcal{H}_{\text{int}} (= -\mathcal{L}_{\text{int}})$ が場の関数であって, その導関数を含まない理論に制限する.
+
+この章では, 相互作用場理論の三つの重要な例を議論する. 
+最初の例は「$\phi^4$ 理論」である:
+
+\begin{equation*}
+\mathcal{L} = \tfrac{1}{2} (\partial_\mu \phi)^2 - \tfrac{1}{2} m^2 \phi^2 - \tfrac{\lambda}{4!}\phi^4 ,
+\end{equation*}
+
+ここで $\lambda$ は無次元の\textbf{結合定数}である. 
+（$\phi^3$ 相互作用を加えることもできるが, その場合は正定値のエネルギーを保つために $\phi^6$ のようなさらに高次の項も加えなければならない.） 
+この理論を導入するのは純粋に教育的理由からである（最も単純な相互作用量子論だからだ）が, 
+実際の物理モデルの多くに $\phi^4$ 相互作用は含まれている. 
+素粒子物理学における最も重要な例は, 標準電弱理論のヒッグス場の自己相互作用である. 
+第II部では, 統計力学においても $\phi^4$ 理論が現れることを見るだろう. 
+$\phi^4$ 理論の運動方程式は次のようになる:
+
+\begin{equation*}
+(\Box + m^2)\phi = - \tfrac{\lambda}{3!} \phi^3 ,
+\end{equation*}
+
+これは自由 Klein--Gordon 方程式のようにフーリエ解析で解くことはできない.
+
+---
+
+我々の二つ目の例は, 相互作用場理論の中で量子電磁力学（QED）である:
+
+\begin{align*}
+\mathcal{L}_{\text{QED}} &= \mathcal{L}_{\text{Dirac}} + \mathcal{L}_{\text{Maxwell}} + \mathcal{L}_{\text{int}} \\
+&= \bar{\psi}(i\!\not\!\partial - m)\psi - \tfrac{1}{4}(F_{\mu\nu})^2 - e \bar{\psi}\gamma^\mu \psi A_\mu ,
+\end{align*}
+
+ここで $A_\mu$ は電磁ベクトルポテンシャル, $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$ は電磁場テンソルであり, 
+$e = -|e|$ は電子の電荷である. 
+電荷 $Q$ をもつフェルミ粒子を記述するためには, 単に $e$ を $Q$ に置き換えればよい. 
+もし複数の荷電粒子種を考慮するならば, 単純に各粒子に対して $\mathcal{L}_{\text{Dirac}}$ と $\mathcal{L}_{\text{int}}$ を加えればよい. 
+これほど単純なラグランジアンが, 巨視的スケールから $10^{-13}$ cm のスケールまでほぼすべての観測された現象を説明できるというのは驚くべきことである. 
+実際, QED ラグランジアンはより簡潔に次のように書ける:
+
+\begin{equation*}
+\mathcal{L}_{\text{QED}} = \bar{\psi}(i\!\not\!D - m)\psi - \tfrac{1}{4}(F_{\mu\nu})^2 ,
+\end{equation*}
+
+ここで $D_\mu$ は\textbf{ゲージ共変微分}である:
+
+\begin{equation*}
+D_\mu = \partial_\mu + i e A_\mu(x) .
+\end{equation*}
+
+QED ラグランジアンの重要な性質は, それが次のゲージ変換の下で不変であることである:
+
+\begin{equation*}
+\psi(x) \to e^{i\alpha(x)}\psi(x), \quad A_\mu \to A_\mu - \tfrac{1}{e}\partial_\mu \alpha(x) .
+\end{equation*}
+
+これはディラック場に対する\textbf{局所位相回転}として実現される. 
+このことはゲージ共変微分という用語を動機づける. 
+現在の目的にとっては, これを（上式）の対称性として認識するだけで十分である.
+
+運動方程式は, 上のラグランジアンから標準的手順によって導かれる. 
+ディラック場 $\psi$ に対するオイラー--ラグランジュ方程式は
+
+\begin{equation*}
+(i\!\not\!D - m)\psi(x) = 0 ,
+\end{equation*}
+
+であり, これは最小結合規則 $\partial_\mu \to D_\mu$ に従って電磁場に結合させれば, 
+電子に対するディラック方程式そのものである. 
+電磁場に対するオイラー--ラグランジュ方程式は
+
+\begin{equation*}
+\partial_\nu F^{\mu\nu} = e \bar{\psi}\gamma^\mu \psi \equiv e j^\mu ,
+\end{equation*}
+
+であり, これは保存電流 $j^\mu$ をソースとするマクスウェル方程式である.
+
+これらは非斉次マクスウェル方程式であり, 電流密度 
+$j^\mu = e \bar{\psi}\gamma^\mu \psi$ は対応するディラックベクトル電流によって与えられる (式 3.73). 
+$\phi^4$ 理論の場合と同様に, 演算子 $\psi(x)$ および $A_\mu(x)$ の運動方程式は
+ハイゼンベルクの方程式からも得られる. 
+これは演算子 $\phi(x)$ に対して検証するのと同じくらい容易である; 
+結果は自由理論の場合と同じである (式 4.2). 
+しかし我々はまだ電磁場の量子化について議論していない.
+
+実際のところ, 本書では電磁場の正準量子化はまったく議論しない. 
+それは扱いにくい主題であり, 本質的にはゲージ不変性が理由である. 
+$\mathcal{L}$ (式 4.3) には $A^0$ が現れないため, その正準共役変数はゼロである. 
+これは正準交換関係 $[A^0(x), \pi^0(y)] = i\delta(x-y)$ と矛盾する. 
+一つの解決法は, クーロンゲージで量子化することであり, 
+$\nabla \cdot \mathbf{A} = 0$ かつ $A^0$ が拘束変数となる. 
+しかしこの場合, ローレンツ不変性が犠牲になる. 
+あるいはローレンツゲージ $\partial_\mu A^\mu = 0$ で場を量子化することもできる. 
+この場合, 
+\begin{equation*}
+[A^\mu(x), A^\nu(y)] = -ig^{\mu\nu}D(x-y)
+\end{equation*}
+という交換関係を得て, これはクライン--ゴルドン場とほぼ同じである. 
+しかし $[A^0, A^0]$ の余分なマイナス符号は, 別の（克服可能な）困難を生み, 
+状態が負のノルムを持つことになる.
+
+光子の関わる散乱振幅を計算するファインマン則は, 
+場の汎関数積分形式（第9章で議論）から導出する方がはるかに容易である. 
+その形式は, 非可換ゲージ場の場合へも一般化できるという利点を持つ（第III部で扱う）. 
+本章では, 光子に対しては単にファインマン則を「推測」することにする. 
+これは, より単純な Yukawa 理論のファインマン則を導出した後なら比較的容易である:
+
+\begin{equation*}
+\mathcal{L}_{\text{Yukawa}} 
+= \mathcal{L}_{\text{Dirac}} + \mathcal{L}_{\text{Klein-Gordon}} - g \bar{\psi}\psi \phi .
+\end{equation*}
+
+これが三つ目の例である. QED と似ているが, 光子の代わりにスカラー粒子 $\phi$ が媒介する. 
+相互作用項には無次元の結合定数 $g$ が含まれ, これは電子電荷 $e$ に対応する. 
+ユカワは元々この理論を核子（$\psi$）と中間子（$\phi$）の相互作用を記述するために考案した. 
+現代素粒子理論では, 標準模型に含まれる Yukawa 相互作用が, 
+ヒッグス場とクォークやレプトンとの結合を与えており, 
+標準模型に含まれる自由パラメータのほとんどは Yukawa 結合定数である.
+
+この三つの標準的な相互作用を記したところで, 
+自然界で見つかる他の相互作用について少し考えてみよう. 
+最初は無限に多く存在するように思えるかもしれない. 
+たとえスカラー場だけでも, 任意の $n$ に対して $\phi^n$ 型の相互作用を書けるからだ. 
+しかし驚くべきことに, 単純で妥当な解析により可能な相互作用のごく一部だけが残る. 
+その結論は, それらの相互作用が「くりこみ可能（renormalizable）」であるということであり, 
+以下のように現れる. 
+摂動論の高次項（第1章でも触れた）には, 
+中間（「仮想」）粒子の4-運動量についての積分が含まれる. 
+これらの積分はしばしば形式的に発散し, 通常は何らかのカットオフ手続きで正則化される. 
+最も単純なのは, 積分を有限の運動量 $\Lambda$ で打ち切り, 
+計算の最後で $\Lambda \to \infty$ とする方法である. 
+このとき物理量が $\Lambda$ に依存しないことが期待される. 
+もしこれが正しければ, 理論は「再正則化可能」であるという. 
+しかし, もし結合定数が質量の負の次元を持つならば, 
+有次元散乱振幅を得るためにその結合定数は正の次元の量で補われなければならない. 
+そしてその量は $\Lambda$ 以外にない. 
+そのような項は $\Lambda \to \infty$ で発散するため, 
+その理論は非くりこみ可能（non-renormalizable）である.
+
+これらの問題については第10章で詳しく議論する. 
+ここでは, 負の質量次元をもつ結合定数を含む理論は非くりこみ可能であることだけを指摘する. 
+次元解析により, ほとんどの候補相互作用を棄却できる. 
+作用 $S = \int d^4x \, \mathcal{L}$ が無次元であるためには, 
+$\mathcal{L}$ は（質量）$^4$ の次元を持たなければならない. 
+各ラグランジアンの運動項から, スカラー場およびベクトル場 $A^\mu$ は次元1, 
+スピノル場 $\psi$ は次元 $3/2$ を持つことがわかる. 
+したがって, 再正則化可能な相互作用をすべて列挙できる.
+
+スカラーのみを含む場合, 許される相互作用は
+
+\begin{equation*}
+\mu \phi^3, \quad \lambda \phi^4 ,
+\end{equation*}
+
+である. 結合定数 $\mu$ は次元1, $\lambda$ は無次元である. 
+$n>4$ の $\phi^n$ 型項は許されない. 
+なぜなら結合定数が負の質量次元を持つからである. 
+より興味深い相互作用は, 実際には多くのスカラー場（実数や複素数）があるので, 
+そこから得られる（問題 4.3 を参照）.
+
+次にスピノル場を加えることができる. 
+スピノルの自己相互作用は, $\psi^3$ は次元 $9/2$ を持ち（ローレンツ不変性も破る）, 許されない. 
+したがって Yukawa 相互作用 $g \bar{\psi}\psi \phi$ のみが可能である. 
+ただし, ワイルスピノルやマヨラナスピノルを使えば, より単純な相互作用も構築可能である.
+
+さらにベクトル場を加えると, 多くの新しい相互作用が可能となる. 
+最もよく知られているのは, QED のベクトル--スピノル相互作用
+
+\begin{equation*}
+e \bar{\psi}\gamma^\mu \psi A_\mu
+\end{equation*}
+
+である. 
+同様の項はワイルスピノルやマヨラナスピノルでも構築できる. 
+重要性は低いが, スカラー QED のラグランジアン
+
+\begin{equation*}
+\mathcal{L} = |D_\mu \phi|^2 - m^2 |\phi|^2, 
+\end{equation*}
+
+ここで $D_\mu = \partial_\mu + ieA_\mu$, もまた存在する. 
+これが我々の相互作用の最初の例である. この理論の量子化は関数積分形式を用いる方がはるかに容易であるため, その議論は 9 章まで延期する.
+
+ローレンツ不変な項のうち, ベクトルを含む他の可能性としては次のようなものがある:
+
+\begin{equation*}
+A^2 (\partial_\mu A^\mu), \quad A^4 .
+\end{equation*}
+
+一見したところ明らかではないが, これらの項は結合定数が特殊な種類の対称性
+（特殊なベクトル場を基礎にした対称性）に基づかない限り矛盾をもたらす. 
+この対称性こそが \textbf{非アーベルゲージ理論} であり, これは第III部の主要なテーマとなる. 
+ベクトル場に対する質量項 $\tfrac{1}{2} m^2 A^2$ もまた不整合である（ただしQEDに追加する場合を除けば）. 
+いずれにしてもそれは（アーベルでも非アーベルでも）ゲージ不変性を破ってしまう.
+
+これで, スカラー・スピノル・ベクトル粒子を含む可能なラグランジアンのリストは尽きた. 
+興味深いのは, 現在受け入れられている強・弱・電磁相互作用のモデルが, 
+これらすべての型の相互作用を含んでいるという点である. 
+本章で取り上げた三つの代表的な相互作用は, 可能性のほとんどを網羅しており, 
+残りは本書の後半で検討することになる.
+
+現実的な理論がくりこみ可能でなければならないという仮定は, 確かに便利である. 
+非くりこみ可能な理論は予測力をほとんど持たないからだ. 
+しかし, 自然は親切にもくりこみ可能な相互作用しか与えないのだろうか？ 
+\textcolor{red}{自然がはるかに一般的な型の量子理論である可能性を排除することはできない. 
+だが示すことができるのは, どれほど複雑な基礎理論であっても, 高エネルギーで現れるその低エネルギー近似は, 
+我々が実験で見るもののようにくりこみ可能な量子場理論になる, ということである. 
+これを第12.1節で実証する.??}
+
+より実際的なレベルでは, これまでの分析から非相対論的量子力学と相対論的量子場理論との間に大きな違いが浮かび上がる. 
+シュレディンガー方程式に現れるポテンシャル $V(r)$ は完全に任意であり, 
+非相対論的量子力学は自然界にどのような相互作用が存在するかに制限を課さない. 
+しかし量子場理論は自然界にきわめて厳しい制約を課す（あるいは逆に, 自然界が量子場理論に適合している）ことを見た. 
+文字通りに取れば, 我々の議論は「素粒子物理学の唯一の任務は, 
+存在する素粒子を数え, その質量と結合定数を測定することである」と含意している. 
+これは単純化しすぎた見解かもしれないが, 少なくともそう考えることができるという事実自体が, 
+素粒子物理学者が基礎理論へ正しい方向に進んでいる兆しだと言える.
+
+粒子と結合定数の集合を与えられたとき, 相互作用場の量子力学から何を実験的に予測できるだろうか. 
+正確に解ける理論の例を少なくとも一つでも得られれば, 相互作用理論の性質をより深く理解できるだろう. 
+残念ながら, そのような完全に解ける場の理論は既知のものがほとんどない. 
+正確に解ける場の理論は, 特殊な対称性や相当の技術的困難を伴う特別な場合に限られる. 
+それらを調べるのは興味深いが, 現段階ではあまり有益ではない. 
+代わりに, より単純で一般的に適用可能なアプローチを取ることにする: 
+相互作用項 $H_{\text{int}}$ を摂動として扱い, 可能な限り高次まで展開してその効果を計算する. 
+結合定数が十分小さいと期待して, これが厳密解の妥当な近似を与えると望むわけである. 
+実際, 摂動展開は非常に単純な構造を持ち, \textbf{ファインマン図} を通して相互作用の効果を任意の次数まで視覚化できる.
+
+相対論的場理論における摂動展開の単純化は, 朝永・シュウィンガー・ファインマンによる大きな進歩であった. 
+彼らはそれぞれ独自に, 量子力学から時間の特殊な役割を取り除き, 
+その新しい観点から摂動展開を時空的な過程として再定式化した. 
+我々は, ファインマンの \textbf{汎関数積分} を用いた時空的視点で量子場理論を発展させる（第9章）. 
+本章ではより控えめな路線を取り, ダイソンによって最初に展開された手法を用いて, 
+量子力学の従来の枠組みから摂動論の時空的描像を導くことにする.
+
+
+
+\end{document}

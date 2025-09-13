@@ -1,0 +1,445 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{Chapter 4. Interacting Fields and Feynman Diagrams\\
+4-2. Perturbation Expansion of Correlation Functions}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートはPeskin\&Schroederの``An Introduction to Quantum Field Theory''の第4章の2節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+\end{abstract}
+    
+    
+
+\newpage
+\color{blue}
+\section*{概要}
+
+\begin{itemize}
+  \item \textbf{目標}
+  \begin{itemize}
+    \item 相互作用場の摂動論を, 時空的過程 (因果律) として視覚化できる形式で発展させる.
+    \item まず二点相関関数（グリーン関数）の計算から始める.
+  \end{itemize}
+
+  \item \textbf{二点相関関数の定義}
+  \begin{itemize}
+    \item $\phi^4$ 理論において基底状態 $\lvert \Omega \rangle$ の二点相関関数を考える:
+    \begin{equation*}
+      \langle \Omega | T\{\phi(x)\phi(y)\} | \Omega \rangle .
+    \end{equation*}
+    \item 自由理論ではこれはファインマン伝播子に一致する.
+  \end{itemize}
+
+  \item \textbf{相互作用の導入}
+  \begin{itemize}
+    \item Hamiltonian を $H = H_0 + H_{\text{int}}$ に分け, 相互作用を摂動として扱う.
+    \item 相互作用表示を用いて, 自由場 $\phi_I$ を基礎に展開する.
+  \end{itemize}
+
+  \item \textbf{時間発展演算子 $U(t,t_0)$}
+  \begin{itemize}
+    \item ハイゼンベルク場 $\phi$ は
+    \begin{equation*}
+      \phi(t,\mathbf{x}) = U^\dagger(t,t_0)\phi_I(t,\mathbf{x})U(t,t_0)
+    \end{equation*}
+    で表される.
+    \item $U(t,t_0)$ は Dyson 展開で表現される:
+    \begin{equation*}
+      U(t,t_0) = T \exp\left[ -i\int_{t_0}^t dt' \, H_I(t') \right].
+    \end{equation*}
+  \end{itemize}
+
+  \item \textbf{基底状態 $\lvert \Omega \rangle$ の構成}
+  \begin{itemize}
+    \item 相互作用を含む基底状態は, 自由理論の真空 $\lvert 0 \rangle$ を時間発展させることで得られる.
+    \item 大きな $T$ の極限をとることで, 基底状態 $n=0$ の項のみが残る.
+  \end{itemize}
+
+  \item \textbf{二点相関関数の最終式}
+  \begin{itemize}
+    \item 相関関数は真空期待値で表される:
+    \begin{equation*}
+      \langle \Omega | T\{\phi(x)\phi(y)\} | \Omega \rangle
+      = \lim_{T \to \infty (1-i\epsilon)}
+      \frac{\langle 0 | T \{ \phi_I(x)\phi_I(y)\exp[-i\int_{-T}^T dt\, H_I(t)] \} | 0 \rangle}
+      {\langle 0 | T \{ \exp[-i\int_{-T}^T dt\, H_I(t)] \} | 0 \rangle}.
+    \end{equation*}
+    \item これは \textbf{相互作用表示における Wick の定理} の基礎となる.
+  \end{itemize}
+
+  \item \textbf{意義}
+  \begin{itemize}
+    \item 時間順序積を導入することで, すべての相関関数を1つの $T$-積の中にまとめられる.
+    \item 高次相関関数にも容易に拡張可能.
+    \item 実際の計算では指数をテイラー展開し, 必要な次数まで項を残せば十分である.
+  \end{itemize}
+
+\end{itemize}
+\newpage
+\color{black}
+\section*{4.2 Perturbation Expansion of Correlation Functions}
+
+それでは相互作用場の摂動論の研究を始めよう. 
+目標は, 摂動級数を時空的過程として視覚化できる形式に到達することである. 
+量子力学を再定式化する必要はないが, ここでは時間依存の摂動論を, 我々の目的に便利な形で再導出する. 
+最終的には, 散乱断面積や崩壊率を計算したいわけだが, 
+まずはより抽象的で単純な量として, 二点相関関数, 
+すなわち二点グリーン関数を考えてみよう:
+
+\begin{equation*}
+\langle \Omega | T \phi(x)\phi(y) | \Omega \rangle ,
+\end{equation*}
+
+ここで $\phi^4$ 理論を考える. $\lvert \Omega \rangle$ は相互作用理論の基底状態を表し, 
+これは自由理論の真空 $\lvert 0 \rangle$ とは異なる. 
+記号 $T$ は時間順序積を意味する. 
+相関関数は, 粒子または励起が $y$ から $x$ へ伝搬する振幅として解釈できる.
+
+
+自由場の理論では, これは単にファインマン伝播子である:
+
+\begin{equation*}
+\langle 0 | T \phi(x)\phi(y) | 0 \rangle_{\text{free}}
+= D_F(x-y) = \int \frac{d^4p}{(2\pi)^4} \frac{i \, e^{-ip\cdot (x-y)}}{p^2 - m^2 + i\epsilon} .
+\end{equation*}
+
+我々が知りたいのは, この表現が相互作用のある理論でどのように変化するかである. 
+一度二点相関関数の一般的な形を解析すれば, 自由場以外の演算子を含む相関関数にも容易に拡張できる. 
+第4.3節と第4.4節では相関関数の解析を続け, ファインマン図式の形式を発展させて摂動的にそれらを評価する. 
+第4.5節と第4.6節では, 同じ手法を用いて断面積や崩壊率の計算方法を学ぶことになる.
+
+この問題に取り組むために, $\phi^4$ 理論の Hamiltonian を次のように書く:
+
+\begin{equation*}
+H = H_0 + H_{\text{int}}
+= H_{\text{Klein-Gordon}} + \int d^3x \, \frac{\lambda}{4!}\phi^4(x).
+\end{equation*}
+
+我々が求めるのは, 二点相関関数 (式 4.10) を $\lambda$ のべき級数として表すことである. 
+相互作用 Hamiltonian $H_{\text{int}}$ は二つの場所に現れる. 
+第一に, ハイゼンベルク場の定義の中で:
+
+\begin{equation*}
+\phi(x) = e^{iHt}\phi(\mathbf{x})e^{-iHt},
+\end{equation*}
+
+第二に, 真空状態 $\lvert \Omega \rangle$ の定義の中である. 
+我々は $\phi(x)$ と $\lvert \Omega \rangle$ の両方を, 既に知っている自由場演算子と自由理論の真空 $\lvert 0 \rangle$ で扱える形に表現しなければならない.
+
+最も簡単なのは $\phi(x)$ から始めることである. 
+任意の固定時刻 $t_0$ において, $\phi$ を生成消滅演算子の形に展開できる:
+
+\begin{equation*}
+\phi(t_0, \mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} 
+\left( a_{\mathbf{p}} e^{i\mathbf{p}\cdot \mathbf{x}} + a^\dagger_{\mathbf{p}} e^{-i\mathbf{p}\cdot \mathbf{x}} \right).
+\end{equation*}
+
+$t \neq t_0$ の場合の $\phi(t,\mathbf{x})$ を得るために, ハイゼンベルク表示に移る:
+
+\begin{equation*}
+\phi(t,\mathbf{x}) = e^{iH(t-t_0)} \phi(t_0,\mathbf{x}) e^{-iH(t-t_0)} .
+\end{equation*}
+
+$\lambda=0$ の場合, $H$ は $H_0$ となり, これは次に簡約される:
+
+\begin{equation*}
+\phi(t,\mathbf{x})\Big|_{\lambda=0} 
+= e^{iH_0(t-t_0)} \phi(t_0,\mathbf{x}) e^{-iH_0(t-t_0)}
+\equiv \phi_I(t,\mathbf{x}) .
+\end{equation*}
+
+$\lambda$ が小さいとき, この表現は依然として $\phi(x)$ の時間依存の主要部分を与える. 
+このため, この量に名前を与えるのが便利である: 
+\textbf{相互作用表示場} $\phi_I(t,\mathbf{x})$. 
+$H_0$ を対角化できるので, $\phi_I$ は次のように明示的に構築できる:
+
+\begin{equation*}
+\phi_I(t,\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}}
+\left( a_{\mathbf{p}} e^{-i\mathbf{p}\cdot \mathbf{x} - iE_p t} 
++ a^\dagger_{\mathbf{p}} e^{i\mathbf{p}\cdot \mathbf{x} + iE_p t} \right).
+\end{equation*}
+
+これは第2章の自由場の表現そのものである.
+
+---
+
+次の問題は, 完全なハイゼンベルク場 $\phi$ を $\phi_I$ の項で表すことである. 
+形式的には次のように書ける:
+
+\begin{align*}
+\phi(t,\mathbf{x}) 
+&= e^{iH(t-t_0)} \phi(t_0,\mathbf{x}) e^{-iH(t-t_0)} \\
+&= U^\dagger(t,t_0)\phi_I(t,\mathbf{x})U(t,t_0),
+\end{align*}
+
+ここで次を定義した:
+
+\begin{equation*}
+U(t,t_0) = e^{iH_0(t-t_0)} e^{-iH(t-t_0)},
+\end{equation*}
+
+これは相互作用表示の時間発展演算子として知られている. 
+我々は $U(t,t_0)$ を, 生成消滅演算子で明示的に表せる $\phi_I$ のみで表したい. 
+そのために, $U(t,t_0)$ が次の微分方程式（シュレディンガー方程式）を満たす唯一の解であることに注目する:
+
+\begin{equation*}
+i \frac{\partial}{\partial t} U(t,t_0) 
+= e^{iH_0(t-t_0)} (H-H_0)e^{-iH_0(t-t_0)} U(t,t_0)
+= H_I(t) U(t,t_0),
+\end{equation*}
+
+ここで
+
+\begin{equation*}
+H_I(t) = e^{iH_0(t-t_0)} H_{\text{int}} e^{-iH_0(t-t_0)}
+= \int d^3x \, \frac{\lambda}{4!} \phi_I^4 .
+\end{equation*}
+
+これは相互作用 Hamiltonian を相互作用表示に書き直したものである. 
+この微分方程式の解は $U \sim \exp(-iHt)$ のようになるはずである. 
+より正確には, 次のべき級数展開が解となることを示せる:
+
+\begin{align*}
+U(t,t_0) &= 1 + (-i)\int_{t_0}^t dt_1 H_I(t_1) 
++ (-i)^2 \int_{t_0}^t dt_1 \int_{t_0}^{t_1} dt_2 H_I(t_1)H_I(t_2) \\
+&\quad + (-i)^3 \int_{t_0}^t dt_1 \int_{t_0}^{t_1} dt_2 \int_{t_0}^{t_2} dt_3 
+H_I(t_1)H_I(t_2)H_I(t_3) + \cdots . \tag{4.20}
+\end{align*}
+
+これを検証するのは簡単である. 各項を微分すれば, 直前の項に $-iH_I(t)$ を掛けたものになる. 
+初期条件 $U(t_0,t_0)=1$ も自動的に満たされる. 
+この式の中の $H_I$ の順序は「時間順序」であることに注意せよ. 
+これにより表現を大幅に簡略化できる. 
+例えば $H_I^2$ の項は次のように書ける:
+
+\begin{equation*}
+\int_{t_0}^t dt_1 \int_{t_0}^{t_1} dt_2 H_I(t_1)H_I(t_2)
+= \frac{1}{2}\int_{t_0}^t dt_1 \int_{t_0}^t dt_2 \, T\{ H_I(t_1)H_I(t_2)\}. \tag{4.21}
+\end{equation*}
+
+右辺の二重積分は, 単にすべてを二度数えているだけである. なぜなら, $t_1 t_2$ 平面において, 被積分関数 $T\{H_I(t_1)H_I(t_2)\}$ は線 $t_1 = t_2$ に関して対称だからである（図 4.1 参照）.
+
+高次の項に対しても同様の恒等式が成り立つ:
+
+\begin{equation*}
+\int_{t_0}^t dt_1 \int_{t_0}^{t_1} dt_2 \cdots \int_{t_0}^{t_{n-1}} dt_n \,
+H_I(t_1)\cdots H_I(t_n)
+= \frac{1}{n!}\int_{t_0}^t dt_1 \cdots dt_n \, T\{H_I(t_1)\cdots H_I(t_n)\}.
+\end{equation*}
+
+この場合は少し視覚化しにくいが, それが正しいことを納得するのは難しくない. 
+この恒等式を使えば, $U(t,t_0)$ を非常にコンパクトに書ける:
+
+\begin{align*}
+U(t,t_0) &= 1 + (-i)\int_{t_0}^t dt_1 H_I(t_1)
++ \frac{(-i)^2}{2!}\int_{t_0}^t dt_1 \, dt_2 \, T\{H_I(t_1)H_I(t_2)\} + \cdots \\
+&\equiv T \left\{ \exp \left[ -i \int_{t_0}^t dt' \, H_I(t') \right] \right\}. \tag{4.22}
+\end{align*}
+
+ここで, 時間順序付き指数関数は, 各項が時間順序付きであることを除けば, テイラー級数の定義と全く同じである. 実際の計算では, 級数の最初のいくつかの項しか残さないが, 時間順序付き指数関数は正しい式を表現する簡便な書き方である. 我々はこれで $\phi(t,\mathbf{x})$ を制御できるようになった. 
+それを完全に $\phi_I$ の項で書き表したからである. 
+しかし $\lvert \Omega \rangle$ について議論する前に, $U$ の定義域を拡張して $t_0$ 以外の値をとれるようにするのが便利である. 
+正しい定義は次の通りである:
+
+\begin{equation*}
+U(t,t') \equiv T \left\{ \exp \left[ -i \int_{t'}^t dt'' \, H_I(t'') \right] \right\},
+\qquad (t \geq t'). \tag{4.23}
+\end{equation*}
+
+この定義からいくつかの性質が従い, それらを確認する必要がある. まず, $U(t,t')$ は同じ微分方程式 (4.18) を満たす:
+
+\begin{equation*}
+i \frac{\partial}{\partial t} U(t,t') = H_I(t) U(t,t'), \tag{4.24}
+\end{equation*}
+
+ただし初期条件は $U=1$ （$t=t'$ のとき）である. 
+この式から次を示すことができる:
+
+\begin{equation*}
+U(t,t') = e^{iH_0(t-t_0)} e^{-iH(t-t')} e^{-iH_0(t'-t_0)}, \tag{4.25}
+\end{equation*}
+
+これは $U$ がユニタリであることを証明している. 
+さらに $U(t,t')$ は次の恒等式を満たす（$t_1 \geq t_2 \geq t_3$ の場合）:
+
+\begin{equation*}
+U(t_1,t_2) U(t_2,t_3) = U(t_1,t_3), 
+\qquad U(t_1,t_3) U(t_2,t_3)^\dagger = U(t_1,t_2). \tag{4.26}
+\end{equation*}
+
+次に $\lvert \Omega \rangle$ について議論しよう. $\lvert \Omega \rangle$ は $H$ の基底状態なので, 
+次の手順でそれを孤立させることができる. 
+基底状態 $\lvert 0 \rangle$ から始め, $H$ に従って時間発展させる:
+
+\begin{equation*}
+e^{-iHT}\lvert 0 \rangle = \sum_n e^{-iE_n T} \lvert n \rangle \langle n|0\rangle,
+\end{equation*}
+
+ここで $E_n$ は $H$ の固有値である. 
+$\lvert \Omega \rangle$ が $\lvert 0 \rangle$ と重なりを持つと仮定しよう. 
+すなわち $\langle \Omega | 0 \rangle \neq 0$ （そうでなければ $H_I$ は小さな摂動とは言えない）. 
+このとき, 上の級数には $\lvert \Omega \rangle$ も含まれる. したがって
+
+\begin{equation*}
+e^{-iHT}\lvert 0 \rangle = e^{-iE_0 T}\lvert \Omega \rangle \langle \Omega | 0 \rangle
++ \sum_{n \neq 0} e^{-iE_n T} \lvert n \rangle \langle n | 0 \rangle,
+\end{equation*}
+
+ここで $E_0 \equiv \langle \Omega | H | \Omega \rangle$. 
+$E_n > E_0$ であるため, $n \neq 0$ の項は $T \to \infty (1-i\epsilon)$ と送ることで消去できる. 
+このとき $n=0$ の項だけが残り, 指数因子 $e^{-iE_0 T}$ が現れる. よって
+
+\begin{equation*}
+\lvert \Omega \rangle = \lim_{T \to \infty (1-i\epsilon)}
+\frac{e^{iE_0 T} e^{-iHT}\lvert 0 \rangle}{\langle \Omega | 0 \rangle}. \tag{4.27}
+\end{equation*}
+
+$T$ が非常に大きいので, 任意の有限の $t_0$ によってシフトできる:
+
+\begin{align*}
+\lvert \Omega \rangle &= \lim_{T \to \infty (1-i\epsilon)} 
+(e^{iE_0(T+t_0)} \langle \Omega | 0 \rangle)^{-1} e^{-iH(T+t_0)} \lvert 0 \rangle \\
+&= \lim_{T \to \infty (1-i\epsilon)} 
+(e^{iE_0(T-t_0)} \langle \Omega | 0 \rangle)^{-1} 
+e^{-iH(t_0-(-T))} e^{-iH_0(-T-t_0)} \lvert 0 \rangle. \tag{4.28}
+\end{align*}
+
+2行目では $H_0 \lvert 0 \rangle = 0$ を用いた. 前にある $c$-number 因子を無視すれば, 
+この式は, $-T$ から $t_0$ まで演算子 $U$ によって $\lvert 0 \rangle$ を発展させることで 
+$\lvert \Omega \rangle$ を得られることを意味している. 
+同様に, $\langle \Omega \lvert$ を次のように表せる:
+
+\begin{equation*}
+\langle \Omega \lvert 
+= \lim_{T \to \infty (1-i\epsilon)} 
+\langle 0 \lvert U(T,t_0) \left(e^{-iE_0 (T-t_0)} \langle 0 | \Omega \rangle \right)^{-1}.
+\tag{4.29}
+\end{equation*}
+
+二点相関関数の断片を組み合わせよう. 
+とりあえず $x^0 > y^0 > t_0$ と仮定する. すると
+
+\begin{align*}
+\langle \Omega \lvert \phi(x)\phi(y) \lvert \Omega \rangle 
+&= \lim_{T \to \infty (1-i\epsilon)} 
+\left( e^{-iE_0 (T-t_0)} \langle 0 | \Omega \rangle \right)^{-1} 
+\langle 0 \lvert U(T,t_0) \\
+&\quad \times \big[ U(x^0,t_0)\big] \phi_I(x) \big[U(x^0,t_0)U(y^0,t_0)^\dagger \big] \phi_I(y) U(y^0,t_0) \\
+&\quad \times U(t_0,-T)\lvert 0 \rangle 
+\left( e^{-iE_0 (t_0-(-T))} \langle \Omega | 0 \rangle \right)^{-1}.
+\end{align*}
+
+これを簡略化すると,
+
+\begin{align*}
+\langle \Omega \lvert \phi(x)\phi(y) \lvert \Omega \rangle 
+&= \lim_{T \to \infty (1-i\epsilon)} 
+\left( \lvert \langle 0 | \Omega \rangle \rvert^2 e^{-iE_0 (2T)} \right)^{-1} \\
+&\quad \times \langle 0 \lvert U(T,x^0)\phi_I(x)U(x^0,y^0)\phi_I(y)U(y^0,-T)\lvert 0 \rangle .
+\tag{4.30}
+\end{align*}
+
+これは十分に単純に見えるが, 前にある厄介な因子が残っている. 
+それを取り除くために, 次の恒等式を用いる:
+
+\begin{equation*}
+1 = \langle \Omega | \Omega \rangle 
+= \left( \lvert \langle 0 | \Omega \rangle \rvert^2 e^{-iE_0 (2T)} \right)^{-1} 
+\langle 0 \lvert U(T,t_0)U(t_0,-T)\lvert 0 \rangle .
+\end{equation*}
+
+したがって, まだ $x^0 > y^0$ の場合について, 我々の公式は次のようになる:
+
+\begin{equation*}
+\langle \Omega \lvert \phi(x)\phi(y) \lvert \Omega \rangle 
+= \lim_{T \to \infty (1-i\epsilon)} 
+\frac{ \langle 0 \lvert U(T,x^0)\phi_I(x)U(x^0,y^0)\phi_I(y)U(y^0,-T)\lvert 0 \rangle }
+{ \langle 0 \lvert U(T,-T)\lvert 0 \rangle } .
+\end{equation*}
+
+この式の両辺のすべての場が時間順序付きであることに注意せよ. 
+もし $y^0 > x^0$ の場合を考えても, 結果は同じになる. 
+したがって最終的に, 任意の $x^0, y^0$ に対して次の表現を得る:
+
+\begin{equation*}
+\langle \Omega \lvert T\{\phi(x)\phi(y)\} \lvert \Omega \rangle
+= \lim_{T \to \infty (1-i\epsilon)}
+\frac{ \langle 0 \lvert T \left\{ \phi_I(x)\phi_I(y)\exp\left[ -i \int_{-T}^T dt \, H_I(t)\right]\right\} \lvert 0 \rangle }
+{ \langle 0 \lvert T \left\{\exp\left[ -i \int_{-T}^T dt \, H_I(t)\right]\right\} \lvert 0 \rangle } .
+\tag{4.31}
+\end{equation*}
+
+時間順序積を考える利点は明らかである: 
+すべてを一つの大きな $T$-積の中にまとめられることである. 
+同様の公式は, 任意の数の場の相関関数にも成り立つ. 
+場 $\phi$ を一つ余分に含めるごとに, 右辺の $T$-積の中に $\phi_I$ を一つ余分に置けばよい. 
+ここまでの式は厳密である. 
+しかし実際には摂動計算を行うのが目的なので, 
+テイラー展開で必要なだけの項を残せば十分である.
+
+    
+
+
+
+
+
+
+
+
+\end{document}

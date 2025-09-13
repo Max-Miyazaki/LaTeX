@@ -157,19 +157,17 @@ U(\Lambda)\psi(x)U^{-1}(\Lambda) = \Lambda^{-1}_{1/2}\psi(\Lambda x)
 \end{equation}
 という正しい変換を誘導した.
 
-本節では, Dirac 場に対して種々の \textbf{離散対称性} を実装する演算子を議論する.  
+本節では, Dirac 場に対して \textbf{離散対称性} も議論する.
 
 連続 Lorentz 変換に加えて, Lagrangian の対称性である可能性をもつ時空操作が二つ存在する:  
 \textbf{空間反転 (Parity)} と \textbf{時間反転 (Time reversal)} である.  
 
-- Parity $P$: $(t,\mathbf{x}) \to (t,-\mathbf{x})$, 空間の向きを反転させる.  
-- 時間反転 $T$: $(t,\mathbf{x}) \to (-t,\mathbf{x})$, 光円錐の前向き・後向きを入れ替える.  
+Parity $P$: $(t,\mathbf{x}) \to (t,-\mathbf{x})$, 空間の向きを反転させる.\\ 
+時間反転 $T$: $(t,\mathbf{x}) \to (-t,\mathbf{x})$, 光円錐の前向き・後向きを入れ替える.  
 
-これらはいずれも恒等変換から連続 Lorentz 変換で実現することはできない.  
-しかし両者とも Minkowski 間隔 $x^2=t^2-\mathbf{x}^2$ を保存する.  
+これらはいずれも恒等変換から連続 Lorentz 変換で実現することはできないが, 両者とも Minkowski 間隔 $x^2=t^2-\mathbf{x}^2$ を保存する.  
 
-標準的な呼び方では, 連続 Lorentz 変換は「正の向きの直交 Lorentz 群」 $L_+^\uparrow$ と呼ばれる.  
-完全な Lorentz 群は, 以下のように不連続な部分群に分解される:
+Lorentz 変換を分類してみる\textcolor{blue}{$\det(\Lambda) = 1, \det(\Lambda) = -1, \det(\Lambda) = 0$ などの情報も追加して図を作成する}:
 
 \begin{figure}[H]
 \begin{center}
@@ -177,28 +175,24 @@ U(\Lambda)\psi(x)U^{-1}(\Lambda) = \Lambda^{-1}_{1/2}\psi(\Lambda x)
 \end{center}
 \end{figure}
 
-ここで, $L_+^\uparrow$ は「proper」, $L_-^\downarrow$ は「improper」と呼ばれる.
-
 $P$ や $T$ と同時に, 便宜上, 三つ目の（時空ではない）離散操作 \textbf{電荷共役 (charge conjugation)} $C$ を導入する.  
 この操作の下では粒子と反粒子が入れ替わる.
+\vskip\baselineskip
+実験により, 以下のような結果が得られている.
 
-一般に相対論的場の理論は $P$, $T$, $C$ に対して不変である必要はない.  
-実際の世界ではどうだろうか?  
-
-- 実験から, 自然界の4つの力のうち, 重力・電磁気力・強い相互作用は $P,C,T$ のすべてに対して対称であることが知られている.  
-- しかし弱い相互作用は $C$ と $P$ をそれぞれ破るが, $CP$ と $T$ は保存する.  
-- ところが希な過程（中性 $K$ 中間子に関わるもの）は $CP$ と $T$ の破れを示す.  
-- すべての観測は, 組み合わせ $CPT$ が完全な対称性であることを示している.
+\begin{itemize}
+  \item 自然界の4つの力のうち, 重力・電磁気力・強い相互作用は $P,C,T$ の対称性を持つことが知られている.  
+  \item しかし, 弱い相互作用は $C$ と $P$ をそれぞれ破るが, $CP$ と $T$ は保存する.  
+  \item ところが希な過程（中性 $K$ 中間子に関わるもの）は $CP$ と $T$ の破れを示す.  
+  \item $CPT$ については必ず対称性が保存される.
+\end{itemize}
 
 現在広く受け入れられている弱い相互作用の理論モデルは, Glashow-Weinberg-Salam model である.  
-この理論は $C$ と $P$ を最も強い形で破る.  
-驚くべきことに（偶然ではないかもしれないが）, $C$ と $P$ は最も観測しやすい過程ではよい対称性として現れる.  
-一方で, 本当に美しい $CP$ 対称を破る理論は未だ知られていない.  
-
-現在の理論では, Fermion 世代が3つ (またはそれ以上) ある場合, あるパラメータが非ゼロであれば $CP$ 破れが生じうる.  
-しかしこのパラメータの値は電子質量と同程度にしか理解されておらず, $CP$ 破れの物理的起源は依然として謎である.  
-
-この問題については第20.3節でさらに議論する.
+この理論は $C$ と $P$ を最も強い形で破る(20章でやるらしい).\\
+一方で, $CP$ 対称の破れを説明できる理論は未だ知られていない.\textcolor{blue}{※アクシオンはその候補.}
+\vskip\baselineskip
+現在の理論では, Fermion 世代が3つ (またはそれ以上) ある場合, あるパラメータ (CKM行列) が非ゼロであれば $CP$ 破れが生じうる.  
+しかし, このパラメータの値は電子質量と同程度にしか理解されておらず, $CP$ 破れの物理的起源は依然として謎である.  
 
 \subsubsection*{Parity}
 
@@ -267,14 +261,14 @@ i\bar{\psi}\gamma^5\psi, \quad
 \end{equation}
 である.
 
-- スカラー項:
+スカラー項:
 \begin{equation}
 P\bar{\psi}\psi P = \eta_a^2 \bar{\psi}(t,-\mathbf{x})\psi(t,-\mathbf{x})
 = +\bar{\psi}\psi(t,-\mathbf{x})
 \tag{3.129}
 \end{equation}
 
-- ベクトル項:
+ベクトル項:
 \begin{equation}
 P\bar{\psi}\gamma^\mu\psi P =
 \begin{cases}
@@ -285,7 +279,7 @@ P\bar{\psi}\gamma^\mu\psi P =
 \end{equation}
 空間成分に符号反転がかかる.
 
-- 擬スカラー・擬ベクトル項:
+擬スカラー・擬ベクトル項:
 \begin{align}
 P i\bar{\psi}\gamma^5\psi P &= -i\bar{\psi}\gamma^5\psi(t,-\mathbf{x}),
 \tag{3.131} \\
@@ -318,9 +312,9 @@ P\left(a^{s\dagger}_{\mathbf{p}} b^{t\dagger}_{\mathbf{q}}|0\rangle\right)
 - 空間波動関数が $\mathbf{x}\to-\mathbf{x}$ に対して反対称なら, 状態は \textbf{even parity} をもつ.  
 
 具体的には:  
-- $L=0$ の束縛状態は odd parity をもつ.  
-- $J=0$ の状態は擬スカラーとして変換する.  
-- $J=1$ の3つの状態はベクトルの空間成分として変換する.  
+$L=0$ の束縛状態は odd parity をもつ.\\
+$J=0$ の状態は擬スカラーとして変換する.\\ 
+$J=1$ の3つの状態はベクトルの空間成分として変換する.\\
 
 これらの性質は, 陽電子やクォーク–反クォーク系の崩壊における選択則に現れる (問題 3.8 参照).
 

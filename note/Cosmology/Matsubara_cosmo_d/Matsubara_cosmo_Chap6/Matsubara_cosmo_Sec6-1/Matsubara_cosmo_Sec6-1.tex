@@ -61,7 +61,7 @@
 
 \vspace{1cm}
 \begin{abstract}
-    このノートは松原さんの『宇宙論の物理【下】』の第6章の1節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+    このノートは松原『宇宙論の物理【下】』の第6章の1節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
 \end{abstract}
     
     
@@ -75,10 +75,10 @@
   各粒子種について, 位相空間 $(x^\mu, p^\mu)$ 上に分布関数 $f(x,P)$ を定義する.  
   これは「位置 $x$ にいて運動量 $p$ を持つ粒子の確率密度」を表す。
 
-  \item \textbf{質量殻条件}\\ 
+  \item \textbf{Mass-Shell条件}\\ 
   粒子の4元運動量は必ず
   \begin{equation}
-    p_\mu p^\mu + m^2 = 0
+    P_\mu P^\mu + m^2 = 0
     \tag{6.1}
   \end{equation}
   を満たす. これにより位相空間は8次元から7次元に制限される.
@@ -86,13 +86,13 @@
   \item \textbf{不変体積要素}\\  
   運動量空間の3次元不変体積要素は
   \begin{equation}
-    d\Pi \equiv \frac{\sqrt{-g}\, d^4P}{(2\pi)^3}\,\theta(p^0)\,\delta(p_\mu p^\mu + m^2)
+    d\Pi \equiv \frac{\sqrt{-g}\, d^4P}{(2\pi)^3}\,\theta(p^0)\,\delta(P_\mu P^\mu + m^2)
     \tag{6.2}
   \end{equation}
   で与えられる. ここで $\theta(p^0)$ によりエネルギーの正値条件を課す.
 
   \item \textbf{粒子数密度}\\  
-  局所静止系での粒子数密度は,
+  局所 Minkowski 時空での粒子数密度は,
   \begin{equation}
     n = \int d\Pi \, f(x,P)
     \tag{6.6}
@@ -108,16 +108,16 @@
   が定義される. $N^0$ は粒子数密度、$N^i$ は粒子流束を表す.
 
   \item \textbf{エネルギー運動量テンソル}\\  
-  分布関数の運動量に関する二次モーメントとして,
+  分布関数の運動量に関する二次モーメントとして以下が導入される：
   \begin{equation}
     T^{\mu\nu}(x) = \int d\Pi \, p^\mu p^\nu f(x,P)
     \tag{6.17}
   \end{equation}
-  が導入される. $T^{00}$ はエネルギー密度、$T^{0i}$ はエネルギー流、$T^{ij}$ は圧力・応力を表す.
+  ここで $T^{00}$ はエネルギー密度、$T^{0i}$ はエネルギー流、$T^{ij}$ は圧力・応力を表す.
 \end{itemize}
 
 \noindent
-以上により, $f(x,P)$ から巨視的変数 $n$, $N^\mu$, $T^{\mu\nu}$ が定義され, これらが後のボルツマン方程式と保存則に結びつく.
+以上により, $f(x,P)$ から巨視的変数 $n$, $N^\mu$, $T^{\mu\nu}$ が定義され, これらが後の Boltzmann 方程式と保存則に結びつく.
 
 \newpage
 \color{black}
@@ -127,11 +127,11 @@
   d^4 X = \sqrt{-g}\, d^4 x
 \end{equation*}
 \color{blue}
-左辺の $d^4 X$ は Minkowski 時空での体積要素であり, この座標を基準にして一般座標変換を行うと, 右辺は変換によって値を変えない不変量になる.
+左辺の $d^4 X$ は 局所慣性系 (局所 Minkowski 時空) での体積要素であり, この座標を基準にして一般座標変換を行うと, 右辺は変換によって値を変えない不変量になる.
 \begin{proof}
 \begin{align*}
   d^4 X &= \frac{\partial (X)}{\partial (x)} d^4 x \tag{6-1.a1} \\
-  &= \det \left| \frac{\partial X^\mu}{\partial x^\nu} \right| d^4 x \label{6-1.a2}\tag{6-1.a2} \\
+  &= \det \left( \frac{\partial X^\mu}{\partial x^\nu} \right) d^4 x \label{6-1.a2}\tag{6-1.a2} \\
 \end{align*}
 ここで,
 \begin{equation*}
@@ -140,12 +140,11 @@
 より,
 \begin{align*}
     g &= \det g^{\mu\nu} \tag{6-1.a4} \\
-    &= \det \left| \frac{\partial X^\mu}{\partial x^\rho} \frac{\partial X^\nu}{\partial x^\sigma} \eta^{\rho\sigma} \right| \tag{6-1.a5} \\
-    &= \det \left| {Y^\mu}_{\rho} {Y^\nu}_{\sigma} \eta^{\rho\sigma} \right| \quad \left( \because \frac{\partial X^\mu}{\partial x^\rho} = {Y^\mu}_{\rho}, \frac{\partial X^\nu}{\partial x^\sigma} = {Y^\nu}_{\sigma} \right) \tag{6-1.a6} \\
-    &= \det \left| {Y^\mu}_{\rho}\, \eta^{\rho\sigma} {(Y^{T})_\sigma}^{\rho}  \right| \tag{6-1.a7} \\
-    &= \det \left| {Y^\mu}_{\sigma} \right|^2 \det |\eta^{\rho\sigma}| \tag{6-1.a8} \\
-    &= - \det \left| {Y^\mu}_{\sigma} \right|^2 \tag{6-1.a9} \\
-    &= - \det \left| \frac{\partial X^\mu}{\partial x^\rho} \right|^2 \tag{6-1.a10}\\
+    &= \det \left( \frac{\partial X^\mu}{\partial x^\rho} \frac{\partial X^\nu}{\partial x^\sigma} \eta^{\rho\sigma} \right) \tag{6-1.a5} \\
+    &= \det \left( Y^2 \eta^{\rho\sigma} \right) \quad \left( \because  \frac{\partial X^\mu}{\partial x^\rho} = Y \right) \tag{6-1.a6} \\
+    &= \det \left| Y^2 \right| \det |\eta^{\rho\sigma}| \tag{6-1.a7} \\
+    &= - \det \left| Y^2 \right|, \quad (\because \det |\eta^{\rho\sigma}| = -1) \tag{6-1.a8} \\
+    &= - \det \left| \frac{\partial X^\mu}{\partial x^\rho} \right|^2 \tag{6-1.a9}\\
     -g &= \det \left| \frac{\partial X^\mu}{\partial x^\nu} \right|^2 \quad (\because \rho \to \nu) \tag{6-1.a11}
 \end{align*}
 したがって,
@@ -179,7 +178,7 @@
 \vskip\baselineskip
 
 \color{blue}
-※ 場の量子論でよく聞くものとして\textbf{On-Shell 条件}があるが, 両者には違いがあるので紹介しておく.
+※ 場の量子論でよく聞くものとして\textbf{On-Shell 条件}があるが, 両者には違いがあるので紹介しておく. 一応  On-Shell であるときの状態は古典的であり, 量子論的なスケールでは $P_\mu P^\mu + m^2 \neq 0$ となる \textbf{Off-Shell 状態}がある.
 \color{black}
 \vskip\baselineskip
 
@@ -269,11 +268,142 @@
 \vskip\baselineskip
 
 
-具体的な時空として Minkowski 時空や Friedmann-Lemaître-Robertson-Walker (FLRW) 時空を考えると, それぞれ以下のようになる：
+具体的な時空として Minkowski 時空についてみると,
 \begin{itemize}
-  \item Minkowski 時空：$g_{00} = -1,\, g_{ij} = \delta_{ij}$
-  \item FLRW 時空：$g_{00} = -1,\, g_{ij} = a(t)^2 \delta_{ij}$
+  \item Minkowski 時空：$g_{00} = g = -1,\, g_{ij} = \delta_{ij},\, g_{0i} = g_{i0} = 0$
 \end{itemize}
+なので, 以下のようになる：
+\begin{equation*}
+    d\Pi = \frac{d^3P}{(2\pi)^3 2P^0} \label{6.6}\tag{6.6}
+\end{equation*}
+
+\color{blue}
+\begin{proof}
+\eqref{6.6} の導出：\\
+\begin{align*}
+    d\Pi &= \frac{\sqrt{-g}\, d^3P}{(2\pi)^3 2\sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)}} \tag{6-1.d1}\\
+    &= \frac{\sqrt{-(-1)}\, d^3P}{(2\pi)^3 2\sqrt{0 - (-1) (\delta_{ij} P^i P^j + m^2)}} \tag{6-1.d2}\\
+    &= \frac{d^3P}{(2\pi)^3 \sqrt{|\mathbf{P}|^2 + m^2}} \tag{6-1.d3}\\
+    &= \frac{d^3P}{(2\pi)^3 2P^0}, \quad (\because P^0 = \sqrt{|\mathbf{P}|^2 + m^2}) \tag{6-1.d4}
+\end{align*}
+\end{proof}
+
+ちなみに, FLRW 時空の場合は (曲率0の場合),
+\begin{itemize}
+  \item FLRW 時空：$g_{00} = -1,\, g_{ij} = a(t)^2 \delta_{ij},\, g_{0i} = g_{i0} = 0, g = -a(t)^6$
+\end{itemize}
+\begin{align*}
+  d\Pi &= \frac{\sqrt{-g}\, d^3P}{(2\pi)^3 2\sqrt{(g_{0i} P^i)^2 - g_{00} (g_{ij} P^i P^j + m^2)}} \tag{6-1.d5}\\
+  &= \frac{\sqrt{-(-a(t)^6)}\, d^3P}{(2\pi)^3 2\sqrt{0 - (-1) (a(t)^2 \delta_{ij} P^i P^j + m^2)}} \tag{6-1.d6}\\
+  &= \frac{a(t)^3 d^3P}{(2\pi)^3 \sqrt{a(t)^2\mathbf{P}^2 + m^2}} \tag{6-1.d7}\\
+  &= \frac{d^3P_{\text{com}}}{(2\pi)^3 \sqrt{|\mathbf{P}_{\text{com}}|^2 + m^2}}, \quad (\because \mathbf{P} = a(t) \mathbf{P}_{\text{com}}) \tag{6-1.d8}\\
+  &= \frac{d^3P_{\text{com}}}{(2\pi)^3 2P^0_{\text{com}}}, \quad (\because P^0_{\text{com}} = \sqrt{|\mathbf{P}_{\text{com}}|^2 + m^2}) \tag{6-1.d9}
+\end{align*}
+$\mathbf{P}_{\text{com}}$ は共動座標系での運動量で, $P^0_{\text{com}}$ はそのエネルギーである. 
+\vskip\baselineskip
+\color{black}
+
+$P^0 = \sqrt{|\mathbf{P}|^2 + m^2}$ は3次元運動量の従属変数であることが分かる.\\
+\eqref{6.2} の $d\widetilde{\Pi}$ は, $P^0$ 積分が残っている. \eqref{6.5}, \eqref{6.6} では積分されているが, $P^0$ が Mass-Shell である限り両者の役割は等しい. よって, \eqref{6.2} の $d\widetilde{\Pi}$ も3次元積分体積要素になる.
+\vskip\baselineskip
+多粒子に対する巨視的変数 (密度, 圧力など) の平均量は分布関数で表せる.
+
+\color{blue}
+\begin{itemize}
+  \item 分布関数：位相空間における粒子数密度
+\end{itemize}
+
+\color{black}
+
+局所 Minkowski 時空では分布関数の運動量積分が数密度になるので,
+\begin{align*}
+  n(\mathbf{x}, t) &= \int \frac{d^3 p}{(2\pi)^3} f(x, P) \tag{6.7}\\
+  &= 2\int d\Pi P^0 f(x, P), \quad \left(\because d\Pi = \frac{d^3 p}{(2\pi)^3 2P^0} \right). \tag{6.8}
+\end{align*}
+
+この量を時間成分とする4元ベクトルを以下で定義する：
+
+\begin{equation*}
+  N^\mu (x) \equiv 2\int d\Pi P^\mu f(x. P) \tag{6.9}
+\end{equation*}
+ここで $N^\mu (x)$ は\textbf{粒子4元流束}といい, この成分を,
+\begin{equation*}
+  N^\mu (x) = (n, \mathbf{j}) \tag{6.10}
+\end{equation*}
+と表すと, 空間成分は以下となる：
+\begin{equation*}
+  \mathbf{j} = \int \frac{d^3 p}{(2\pi)^3} \frac{\mathbf{P}}{P^0} f(x, P). \label{6.11}\tag{6.11}
+\end{equation*}
+
+\color{blue}
+\begin{proof}
+\eqref{6.11} の導出：\\
+\begin{align*}
+  \mathbf{j}(\mathbf{x}, t) &= N^i \tag{6-1.e1}\\
+  &= 2\int d\Pi\, \mathbf{P} f(x, P) \tag{6-1.e2}\\
+  &= 2\int \frac{d^3 p}{(2\pi)^3} \frac{\mathbf{P}}{2P^0} f(x, P) \tag{6-1.e3}\\
+  &= \int \frac{d^3 p}{(2\pi)^3} \frac{\mathbf{P}}{P^0} f(x, P) \tag{6-1.e4}
+\end{align*}
+\end{proof}
+\color{black}
+
+ここで $\dfrac{\mathbf{P}}{P^0}$ は粒子の3次元速度である.
+\vskip\baselineskip
+\color{blue}
+特殊相対性理論を思い出すと,
+\begin{align*}
+  \mathbf{P} &= m \gamma v^i \tag{6-1.f1}\\
+  P^0 &= m \gamma \tag{6-1.f2}\\
+  \gamma &= \frac{1}{\sqrt{1 - v^2}} \tag{6-1.f3}
+\end{align*}
+であるので,
+\begin{equation*}
+  \frac{\mathbf{P}}{P^0} = v^i \tag{6-1.f4}
+\end{equation*}
+となって, 粒子の3次元速度になっていることが確認できる.
+\vskip\baselineskip
+\color{black}
+
+
+\noindent
+次にエネルギー・運動量テンソルと分布関数の関係をみる.\\
+\begin{itemize}
+  \item $T^{00}$ ：エネルギー密度に対応するので, 1粒子あたりのエネルギー $P^0$ を分布関数で平均した量となる.
+  \begin{equation*}
+    T^{00}(x) = \int \frac{d^3 p}{(2\pi)^3} P^0 f(x, P) \tag{6.12}
+  \end{equation*}
+  \item $T^{0i}$ ：エネルギー流 (エネルギーが $x^i$ 方向にどれくらい流れているか) を表すので,
+  \begin{equation*}
+    T^{0i}(x) = \int \frac{d^3 p}{(2\pi)^3} P^0 v^i f(x, P) \tag{6.13}
+  \end{equation*}
+  \color{blue}
+  時間方向 (エネルギーの時間発展) に対して, 空間運動量 $p^i$ がどう現れるか示す量.
+  \color{black}
+  \item $T^{i0}$ ：運動量密度 (運動量が $x^i$ 方向にどれくらい流れているか) を表すので,
+  \begin{equation*}
+    T^{i0}(x) = \int \frac{d^3 p}{(2\pi)^3} \mathbf{P} f(x, P) \tag{6.14}
+  \end{equation*}
+  \color{blue}
+  空間方向の流れに対して, 時間成分 $P^0$ がどう現れるか示す量.
+  \color{black}
+  \item $T^{ij}$ ：$x^j$方向の運動量が、$x^i$方向にどれくらい流れているかを表すので,\textcolor{red}{もっと他の説明を考える}
+  \begin{equation*}
+    T^{ij}(x) = \int \frac{d^3 p}{(2\pi)^3} \mathbf{P} v^j f(x, P) \tag{6.15}
+  \end{equation*}
+\end{itemize}
+これらを共変的にまとめると,
+\begin{equation*}
+  T^{\mu\nu}(x) = \int \frac{d^3 p}{(2\pi)^3} P^\mu P^\nu f(x, P) \tag{6.16}
+\end{equation*}
+となる.
+\begin{align*}
+  T^{\mu\nu}(x) &= \int \frac{d^3 p}{(2\pi)^3} P^\mu P^\nu f(x, P) \tag{6.17}\\
+  &= 2\int d\Pi P^\mu P^\nu f(x, P) \tag{6.18}
+\end{align*}
+
+
+
+
 
 
 

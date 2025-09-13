@@ -1,0 +1,343 @@
+\documentclass[a4paper,12pt]{article}
+
+\title{Chapter 4. Interacting Fields and Feynman Diagrams\\
+4-3. Wick's Theorem}
+\date{各種SNS\\
+    X (旧 Twitter): \href{https://x.com/miya_max_study}{@miya\_max\_study}\\
+    Instagram : \href{https://www.instagram.com/daily_life_of_miya/}{@daily\_life\_of\_miya}\\
+    YouTube : \href{https://www.youtube.com/@miya-max-active}{@miya-max-active}
+    }
+\author{Max Miyazaki}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{here}
+\usepackage{simpler-wick}
+\usepackage{abstract}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
+\usepackage{wrapfig}
+\pagenumbering{arabic}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage[dvipdfmx]{hyperref}
+\hypersetup{
+ setpagesize=false,
+ bookmarksnumbered=true,
+ colorlinks=true,
+ linkcolor=blue
+}
+
+% Define braket-like commands
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle}
+\newcommand{\brakets}[3]{\left\langle #1\middle| #2 \middle|#3 \right\rangle}
+
+\renewcommand{\arraystretch}{2.1}
+
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2cm}
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+\begin{abstract}
+    このノートはPeskin\&Schroederの``An Introduction to Quantum Field Theory''の第4章の3節をまとめたものである. 要点や個人的な追記, 計算ノート的なまとめを行っているが, それらはすべて原書の内容を出発点としている. 参考程度に使っていただきたいが, このノートは私の勉強ノートであり, そのままの内容をそのまま鵜呑みにすると間違った理解を招く可能性があることをご了承ください. ぜひ原著を手に取り, その内容をご自身で確認していただくことを推奨します. てへぺろ v$({\hat{\cdot}_\partial \hat{\cdot}})$v
+\end{abstract}
+    
+    
+
+\newpage
+\color{blue}
+\section*{概要}
+\begin{itemize}
+  \item \textbf{出発点}
+  \begin{itemize}
+    \item 相関関数の摂動展開では、自由場の時間順序積の真空期待値を計算する必要がある.
+    \item 例: $\langle 0| T\{\phi(x_1)\phi(x_2)\cdots \phi(x_n)\}|0\rangle$.
+  \end{itemize}
+
+  \item \textbf{場の分解}
+  \begin{itemize}
+    \item 自由場を正の周波数部分と負の周波数部分に分ける:
+    \[
+      \phi_I(x) = \phi_I^+(x) + \phi_I^-(x),
+    \]
+    \item 性質: $\phi_I^+(x)|0\rangle=0$, $\langle 0|\phi_I^-(x)=0$.
+  \end{itemize}
+
+  \item \textbf{縮約の定義}
+  \begin{itemize}
+    \item 二つの場 $\phi(x), \phi(y)$ の縮約を
+    \[
+      \wick{\c1 \phi(x)\, \c1 \phi(y)}
+      \equiv [\phi^+(x), \phi^-(y)]
+    \]
+    と定義する.
+    \item これはファインマン伝播子 $D_F(x-y)$ に等しい.
+  \end{itemize}
+
+  \item \textbf{時間順序と正規順序の関係}
+  \begin{itemize}
+    \item 二点の場合:
+    \[
+      T\{\phi(x)\phi(y)\} = N\{\phi(x)\phi(y)\} 
+      + \wick{\c1 \phi(x)\, \c1 \phi(y)}.
+    \]
+    \item 時間順序積 = 正規順序積 + 縮約.
+  \end{itemize}
+
+  \item \textbf{ウィックの定理（一般化）}
+  \begin{itemize}
+    \item 任意個の場に対して:
+    \[
+      T\{\phi(x_1)\phi(x_2)\cdots\phi(x_m)\}
+      = N\{\phi(x_1)\phi(x_2)\cdots\phi(x_m)\} 
+      + \text{すべての可能な縮約}.
+    \]
+    \item 「すべての可能な縮約」とは、場をペアに縮約するあらゆる組み合わせを含む.
+  \end{itemize}
+
+  \item \textbf{具体例 ($m=4$ の場合)}
+  \begin{itemize}
+    \item $T\{\phi_1\phi_2\phi_3\phi_4\}$ は正規順序項に加えて6通りの縮約を持つ.
+    \item 例:
+    \[
+      \wick{\c1 \phi_1 \c1 \phi_2}\phi_3\phi_4,\quad
+      \wick{\c1 \phi_1 \c1 \phi_3}\phi_2\phi_4,\quad
+      \wick{\c1 \phi_1 \c1 \phi_4}\phi_2\phi_3,\quad \dots
+    \]
+    \item 真空期待値をとると、縮約が残らない項は消え、完全に縮約された3通りの項だけが残る.
+  \end{itemize}
+
+  \item \textbf{結果（4点関数の真空期待値）}
+  \[
+    \langle 0|T\{\phi_1\phi_2\phi_3\phi_4\}|0\rangle
+    = D_F(x_1-x_2)D_F(x_3-x_4)
+    + D_F(x_1-x_3)D_F(x_2-x_4)
+    + D_F(x_1-x_4)D_F(x_2-x_3).
+  \]
+
+  \item \textbf{意義}
+  \begin{itemize}
+    \item 複雑な相関関数を、伝播子（ファインマン伝播子）の積の和として計算可能にする.
+    \item 後のファインマン図の構築の基礎となる.
+  \end{itemize}
+\end{itemize}
+
+
+\newpage
+\color{black}
+\section*{4.3 Wick's Theorem}
+
+我々は今や, 相関関数を計算する問題を次の形の評価へと帰着させた:
+
+\begin{equation*}
+\langle 0 | T\{\phi_I(x_1)\phi_I(x_2)\cdots \phi_I(x_n)\} | 0 \rangle ,
+\end{equation*}
+
+すなわち, 有限個（だが任意の数）の自由場演算子の時間順序積の真空期待値である.  
+$n=2$ の場合, この表現は単にファインマン伝播子になる.  
+$n$ がより大きい場合, はしご演算子を用いた $\phi_I$ の展開を代入して力任せに評価することもできるが,  
+以下と次節で見るように, 計算を大幅に単純化する方法が存在する.
+
+二つの場の場合を改めて考えよう.  
+\begin{equation*}
+\langle 0 | T\{\phi_I(x)\phi_I(y)\} | 0 \rangle .
+\end{equation*}
+我々はすでにこの量を計算する方法を知っているが,  
+ここでは評価しやすく, さらに二つ以上の場の場合にも一般化できる形に書き換えたい.  
+そのために, まず $\phi_I(x)$ を正の周波数部分と負の周波数部分に分解する:
+
+\begin{equation*}
+\phi_I(x) = \phi_I^+(x) + \phi_I^-(x),
+\tag{4.32}
+\end{equation*}
+
+ここで
+\begin{equation*}
+\phi_I^+(x) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \, a_{\mathbf{p}} e^{-ip\cdot x}, 
+\qquad 
+\phi_I^-(x) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \, a^\dagger_{\mathbf{p}} e^{+ip\cdot x}.
+\end{equation*}
+
+この分解は任意の自由場について可能である.  
+有用なのは次の性質である:
+\begin{equation*}
+\phi_I^+(x)|0\rangle = 0, 
+\qquad 
+\langle 0|\phi_I^-(x) = 0.
+\end{equation*}
+
+例えば $x^0 > y^0$ の場合を考える. このとき二つの場の時間順序積は
+
+\begin{align*}
+T\phi_I(x)\phi_I(y) \bigg|_{x^0 > y^0} 
+&= \phi_I^+(x)\phi_I^+(y) + \phi_I^+(x)\phi_I^-(y) 
++ \phi_I^-(x)\phi_I^+(y) + \phi_I^-(x)\phi_I^-(y) \\
+&= \phi_I^+(x)\phi_I^+(y) + \phi_I^-(y)\phi_I^+(x) 
++ \phi_I^-(x)\phi_I^+(y) + \phi_I^-(x)\phi_I^-(y) \\
+&\quad + [\phi_I^+(x),\phi_I^-(y)] .
+\tag{4.33}
+\end{align*}
+
+交換子以外のすべての項では, $a_{\mathbf{p}}$ はすべて $a^\dagger_{\mathbf{p}}$ の右にある.  
+このような項（例えば $a^\dagger_{\mathbf{p}} a^\dagger_{\mathbf{q}} a_{\mathbf{k}} a_{\mathbf{l}}$）は 
+\textbf{正規順序} (normal order) にあると言われ, 真空期待値はゼロになる.  
+
+ここで演算子を正規順序に配置する操作を $N(\cdot)$ で定義しよう. 例えば:
+
+\begin{equation*}
+N(a_{\mathbf{p}} a^\dagger_{\mathbf{k}} a_{\mathbf{q}}) \equiv a^\dagger_{\mathbf{k}} a_{\mathbf{p}} a_{\mathbf{q}} .
+\tag{4.34}
+\end{equation*}
+
+右辺では $a_{\mathbf{p}}$ と $a_{\mathbf{q}}$ の順序を入れ替えても構わない.  
+なぜならそれらは可換だからである.
+
+もし $y^0 > x^0$ の場合を考えれば, (4.33) と同じ4つの正規順序項を得るが, 
+最終的な交換子は $\wick{\c1\phi_I(y)\c1\phi_I(x)}$ となる.  
+そこで次の量を定義しよう: 二つの場の \textbf{縮約} (contraction)
+
+\begin{equation*}
+\wick{\c1\phi(x)\c1\phi(y)} \equiv
+\begin{cases}
+[\phi_I^+(x),\phi_I^-(y)], & x^0 > y^0 , \\
+[\phi_I^+(y),\phi_I^-(x)], & y^0 > x^0 .
+\end{cases}
+\tag{4.35}
+\end{equation*}
+
+この量はまさにファインマン伝播子である:
+\begin{equation*}
+\wick{\c1\phi(x)\c1\phi(y)} = D_F(x-y).
+\tag{4.36}
+\end{equation*}
+
+時間順序と正規順序の関係は, 少なくとも二つの場に対して次のように簡単に表せる:
+
+\begin{equation*}
+T\{\phi(x)\phi(y)\} 
+= N\{\phi(x)\phi(y)\} 
++ \wick{\c1\phi(x)\c1\phi(y)} .
+\tag{4.37}
+\end{equation*}
+
+一般の場合の拡張も同様に書ける:
+
+\begin{equation*}
+T\{\phi(x_1)\phi(x_2)\cdots \phi(x_m)\}
+= N\{\phi(x_1)\phi(x_2)\cdots \phi(x_m)\} 
++ \text{すべての可能な縮約}.
+\tag{4.38}
+\end{equation*}
+
+例えば $m=4$ の場合:
+
+\begin{align*}
+T\{\phi_1\phi_2\phi_3\phi_4\} 
+&= N\{\phi_1\phi_2\phi_3\phi_4\} 
++ \wick{\c1\phi_1\c1\phi_2}\phi_3\phi_4
++ \wick{\c1\phi_1\c1\phi_3}\phi_2\phi_4
++ \wick{\c1\phi_1\c1\phi_4}\phi_2\phi_3 \\
+&\quad + \wick{\c1\phi_2\c1\phi_3}\phi_1\phi_4
++ \wick{\c1\phi_2\c1\phi_4}\phi_1\phi_3
++ \wick{\c1\phi_3\c1\phi_4}\phi_1\phi_2 .
+\tag{4.39}
+\end{align*}
+
+このとき, 例えば
+\[
+N\{\wick{\c1\phi_1\c1\phi_3}\phi_2\phi_4\}
+\]
+は $D_F(x_1-x_3)\,N\{\phi_2\phi_4\}$ を意味する.
+
+真空期待値 (4.39) において、未収縮の演算子が残る項はゼロを与える (なぜなら \(\langle 0| N(\text{任意の演算子}) |0 \rangle = 0\) だからである).
+最後の行にある三つの完全収縮項のみが残り, それらはすべて \(c\)-数である.
+したがって次のようになる：
+
+\begin{align*}
+\langle 0|T\{\phi_1 \phi_2 \phi_3 \phi_4\}|0\rangle 
+&= D_F(x_1 - x_2)D_F(x_3 - x_4)\\
+&\quad+ D_F(x_1 - x_3)D_F(x_2 - x_4)\\
+&\quad+ D_F(x_1 - x_4)D_F(x_2 - x_3). \tag{4.40}
+\end{align*}
+
+さて、ウィックの定理を証明しよう。証明は自然に場の数 \(m\) に関する帰納法による。
+すでに \(m=2\) の場合は証明されている。したがって、定理が \(m-1\) 個の場に対して成り立つと仮定し、
+それを \(m\) 個の場に対して証明してみよう。一般性を失うことなく、我々は
+\(x_1^0 \geq x_2^0 \geq \cdots \geq x_m^0\) の場合に制限できる。
+もしそうでなければ、(4.38) のどちらの側にも影響を与えることなく点のラベルを入れ替えればよい。
+このとき \(\phi_2 \cdots \phi_m\) に対してウィックの定理を適用すると、次のようになる：
+
+\begin{align}
+T\{\phi_1 \cdots \phi_m\} 
+&= \phi_1 \cdots \phi_m \\
+&= \phi_1 N\Bigl\{\phi_2 \cdots \phi_m 
++ \bigl(\text{全ての収縮項（ただし }\phi_1\text{ を含まない）}\bigr)\Bigr\} \\
+&= (\phi_1^{+} + \phi_1^{-}) 
+N\Bigl\{\phi_2 \cdots \phi_m 
++ \bigl(\text{全ての収縮項（ただし }\phi_1\text{ を含まない）}\bigr)\Bigr\}.
+\tag{4.41}
+\end{align}
+
+我々は \(\phi_1^{+}\) および \(\phi_1^{-}\) を \(N\{\}\) の中に移動したい。
+\(\phi_1^{-}\) の項については簡単である。左にあるため、すでに正規順序にあるから、そのまま移動すればよい。
+一方、\(\phi_1^{+}\) を含む項は正規順序にするため、右側のすべての \(\phi\) と交換して移動しなければならない。
+例えば、収縮を含まない項を考えると：
+
+\begin{align}
+\phi_1^{+} N(\phi_2 \cdots \phi_m) 
+&= N(\phi_2 \cdots \phi_m)\phi_1^{+} + [\phi_1^{+}, N(\phi_2 \cdots \phi_m)] \\
+&= N(\phi_1^{+}\phi_2 \cdots \phi_m) 
++ N\Bigl(\wick{\c1{\phi_1^{+}}\c1{\phi_2}}\phi_3 \cdots \phi_m 
++ \phi_2 \,\wick{\c1{\phi_1^{+}}\c1{\phi_3}}\phi_4 \cdots \phi_m + \cdots \Bigr) \\
+&= N\Bigl(\phi_1^{+}\phi_2 \cdots \phi_m 
++ \wick{\c1{\phi_1}\c1{\phi_2}}\phi_3 \cdots \phi_m 
++ \phi_2 \wick{\c1{\phi_1}\c1{\phi_3}}\phi_4 \cdots \phi_m + \cdots \Bigr).
+\end{align}
+
+最後の行の第一項は (4.41) の \(\phi_1^{-}\) の項の一部と結合して
+\(N\{\phi_1\phi_2 \cdots \phi_m\}\) を与える。
+したがって右辺の最初の項を得るとともに、ウィックの定理に従い、
+\(\phi_1\) と他の場との単一の収縮を含むすべての可能な項を得る。
+同様に (4.41) の項のうち一つの収縮を含むものは、
+その収縮とさらに \(\phi_1\) と他の場との収縮を含むすべての可能な項を生じる。
+(4.41) のすべての項についてこの操作を行えば、結局、すべての場の可能な収縮を得る。
+\(\phi_1\) を含むものも同様である。
+したがって、帰納的証明は完了し、ウィックの定理が証明された。
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+\end{document}
